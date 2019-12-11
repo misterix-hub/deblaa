@@ -30,6 +30,27 @@ Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantControlle
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
 Route::get('universites/messages', 'Universite\MessageController@index')->name('uListeMessage');
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
-Route::get('universite/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
+Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
+
+/* STRUCTURE */
+
+Route::get('structures', 'Structure\MainController@index')->name('indexStructure');
+Route::get('structures/groupes', 'Structure\GroupeController@index')->name('sListeGroupe');
+Route::post('structures/groupes', 'Structure\GroupeController@store')->name('sAjouterGroupe');
+Route::get('structures/groupes/{id}/details', 'Structure\GroupeController@show')->name('sDetailsGroupe');
+Route::get('structures/groupes/{id}/modifier', 'Structure\GroupeController@edit')->name('sModifierGroupe');
+Route::post('structures/groupes/{id}/update', 'Structure\GroupeController@update')->name('sUpdateGroupe');
+Route::get('structures/groupes/{id}/supprimer', 'Structure\GroupeController@destroy')->name('sSupprimerGroupe');
+
+Route::post('structures/membres', 'Structure\MembreController@store')->name('sAjouterMembre');
+Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
+Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
+
+Route::get('structures/membres/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
+Route::get('structures/membres', 'Structure\MessageController@index')->name('sListeMessage');
+Route::get('structures/membres/bilan', 'Structure\MessageController@bilan')->name('sBilanMessage');
+Route::get('structures/membres/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
+
+Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('sCompte');

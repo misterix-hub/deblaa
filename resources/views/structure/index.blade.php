@@ -1,4 +1,4 @@
-@extends('layout.sideBarUniversite')
+@extends('layout.sideBarStructure')
 
 @section('content')
     <br />
@@ -9,10 +9,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card brown z-depth-1 mb-3" style="border-radius: 15px;">
                         <div class="card-body">
-                            <a href="{{ route('uListeFiliere') }}">
+                            <a href="">
                                 <h4 class="text-light" style="font-weight: 300;">
                                     <i class="icofont-bag-alt"></i>
-                                    Filières <span class="float-right">25</span>
+                                    Groupes <span class="float-right">25</span>
                                 </h4>
                                 <div class="white-text pt-2" style="font-weight: 300;">
                                     <i class="icofont-plus"></i>
@@ -25,10 +25,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card orange z-depth-1 mb-3" style="border-radius: 15px;">
                         <div class="card-body">
-                            <a href="{{ route('uListeEtudiant') }}">
+                            <a href="">
                                 <h4 class="text-light" style="font-weight: 300;">
                                     <i class="icofont-graduate-alt"></i>
-                                    Étudiants <span class="float-right">25</span>
+                                    Membres <span class="float-right">25</span>
                                 </h4>
                                 <div class="white-text pt-2" style="font-weight: 300;">
                                     <i class="icofont-plus"></i>
@@ -41,10 +41,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12">
                     <div class="card blue z-depth-1 mb-3" style="border-radius: 15px;">
                         <div class="card-body">
-                            <a href="{{ route('uListeMessage') }}">
+                            <a href="">
                                 <h4 class="text-light" style="font-weight: 300;">
                                     <i class="icofont-envelope"></i>
-                                    Messages <span class="float-right">25</span>
+                                    Détails <span class="float-right">25</span>
                                 </h4>
                                 <div class="white-text pt-2" style="font-weight: 300;">
                                     <i class="icofont-plus"></i>

@@ -1,4 +1,4 @@
-@extends('layout.sideBarUniversite')
+@extends('layout.sideBarStructure')
 
 @section('content')
     <br />
