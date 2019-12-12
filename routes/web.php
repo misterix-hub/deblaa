@@ -15,6 +15,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+
+Route::resource('universites', 'UniversiteController');
+
+Route::resource('filieres', 'FiliereController');
+
+Route::resource('niveaux', 'NiveauController');
+
+Route::resource('filiereNiveaus', 'FiliereNiveauController');
+
+Route::resource('structures', 'StructureController');
+
+Route::resource('departements', 'DepartementController');
+
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
 Route::post('universites/filieres', 'Universite\FiliereController@store')->name('uAjouterFiliere');
