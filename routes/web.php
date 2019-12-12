@@ -14,3 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+
+
+Route::resource('universites', 'UniversiteController');
+
+Route::resource('filieres', 'FiliereController');
+
+Route::resource('niveaux', 'NiveauController');
+
+Route::resource('filiereNiveaus', 'FiliereNiveauController');
+
+Route::resource('structures', 'StructureController');
+
+Route::resource('departements', 'DepartementController');
