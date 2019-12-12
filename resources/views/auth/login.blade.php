@@ -35,7 +35,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Déblaa -</b> Acces Restreint</a>
+        <a href="{{ url('/home') }}"><b>Déblaa </b><br> Acces Restreint</a>
     </div>
 
     <!-- /.login-logo -->

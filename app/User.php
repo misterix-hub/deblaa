@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Departement;
+use App\Models\Filiere;
+use App\Models\Niveau;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +39,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function filiere() {
+        return $this->belongsTo(Filiere::class);
+    }
+
+    public function departement() {
+        return $this->belongsTo(Departement::class);
+    }
+
+    public function niveau() {
+        return $this->belongsTo(Niveau::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -60,6 +61,10 @@ class Filiere extends Model
 
     public function niveaux() {
         return $this->belongsToMany(Niveau::class, 'filiere_niveaux');
+    }
+
+    public function user() {
+        return $this->hasMany(User::class);
     }
 
     

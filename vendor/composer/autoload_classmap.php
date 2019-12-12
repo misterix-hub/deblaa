@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\CibleMessageStructure' => $baseDir . '/app/CibleMessageStructure.php',
+    'App\\CibleMessageUniversite' => $baseDir . '/app/CibleMessageUniversite.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AppBaseController' => $baseDir . '/app/Http/Controllers/AppBaseController.php',
@@ -43,6 +45,9 @@ return array(
     'App\\Http\\Requests\\UpdateNiveauRequest' => $baseDir . '/app/Http/Requests/UpdateNiveauRequest.php',
     'App\\Http\\Requests\\UpdateStructureRequest' => $baseDir . '/app/Http/Requests/UpdateStructureRequest.php',
     'App\\Http\\Requests\\UpdateUniversiteRequest' => $baseDir . '/app/Http/Requests/UpdateUniversiteRequest.php',
+    'App\\MessageLu' => $baseDir . '/app/MessageLu.php',
+    'App\\MessageStructure' => $baseDir . '/app/MessageStructure.php',
+    'App\\MessageUniversite' => $baseDir . '/app/MessageUniversite.php',
     'App\\Models\\Departement' => $baseDir . '/app/Models/Departement.php',
     'App\\Models\\Filiere' => $baseDir . '/app/Models/Filiere.php',
     'App\\Models\\FiliereNiveau' => $baseDir . '/app/Models/FiliereNiveau.php',

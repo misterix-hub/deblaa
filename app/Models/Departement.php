@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -55,6 +56,10 @@ class Departement extends Model
 
     public function structure() {
         return $this->belongsTo(Structure::class);
+    }
+
+    public function user() {
+        return $this->hasMany(User::class);
     }
 
     
