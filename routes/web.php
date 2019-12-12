@@ -18,18 +18,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function () {
+
+
+    Route::get('/home', 'HomeController@index');
 
 
 
-Route::resource('universites', 'UniversiteController');
+    Route::resource('admin/universites', 'UniversiteController');
 
-Route::resource('filieres', 'FiliereController');
+    Route::resource('admin/filieres', 'FiliereController');
 
-Route::resource('niveaux', 'NiveauController');
+    Route::resource('admin/niveaux', 'NiveauController');
 
-Route::resource('filiereNiveaus', 'FiliereNiveauController');
+    Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 
-Route::resource('structures', 'StructureController');
+    Route::resource('admin/structures', 'StructureController');
 
-Route::resource('departements', 'DepartementController');
+    Route::resource('admin/departements', 'DepartementController');
+
+});

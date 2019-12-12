@@ -65,6 +65,7 @@
                 @endif
             </div>
 
+
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
                 <input type="password" class="form-control" name="password" placeholder="Mot de passe">
                 <i class="fa fa-lock form-control-feedback"></i>

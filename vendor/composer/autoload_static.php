@@ -447,6 +447,8 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
     );
 
     public static $classMap = array (
+        'App\\CibleMessageStructure' => __DIR__ . '/../..' . '/app/CibleMessageStructure.php',
+        'App\\CibleMessageUniversite' => __DIR__ . '/../..' . '/app/CibleMessageUniversite.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AppBaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/AppBaseController.php',
@@ -484,6 +486,9 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\Http\\Requests\\UpdateNiveauRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateNiveauRequest.php',
         'App\\Http\\Requests\\UpdateStructureRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateStructureRequest.php',
         'App\\Http\\Requests\\UpdateUniversiteRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateUniversiteRequest.php',
+        'App\\MessageLu' => __DIR__ . '/../..' . '/app/MessageLu.php',
+        'App\\MessageStructure' => __DIR__ . '/../..' . '/app/MessageStructure.php',
+        'App\\MessageUniversite' => __DIR__ . '/../..' . '/app/MessageUniversite.php',
         'App\\Models\\Departement' => __DIR__ . '/../..' . '/app/Models/Departement.php',
         'App\\Models\\Filiere' => __DIR__ . '/../..' . '/app/Models/Filiere.php',
         'App\\Models\\FiliereNiveau' => __DIR__ . '/../..' . '/app/Models/FiliereNiveau.php',
