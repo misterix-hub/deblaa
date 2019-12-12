@@ -8,27 +8,28 @@
                 <h3><i class="icofont-edit"></i> Détails filière</h3>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12"><br />
-                Nom de la filière<br />
-                <b class="font-weight-bold">Nom de filière ici à cet endroit</b><br /><br />
 
-                Niveaux de la filière<br />
-                <ul>
-                    <li>
-                        <b>Licence I</b>
-                    </li>
-                    <li>
-                        <b>Licence II</b>
-                    </li>
-                    <li>
-                        <b>Licence III</b>
-                    </li>
-                </ul>
-                <div>
-                    <a href="{{ route('uModifierFiliere', 1) }}" class="btn btn-md btn-indigo ml-0 rounded">
-                        Modifier
-                    </a>
-                </div>
-                
+                @foreach ($filieres as $filiere)    
+                    Nom de la filière<br />
+                    <b class="font-weight-bold">{{ $filiere->nom }}</b><br /><br />
+
+                    Niveaux de la filière<br />
+                    <ul>
+                        @foreach ($filiere_niveaux as $filiere_niveau)
+                            @if ($filiere_niveau->filiere_id == $filiere->id)    
+                                <li>
+                                    <b>{{ $filiere_niveau->nom }}</b>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                    <div>
+                        <a href="{{ route('uModifierFiliere', $filiere->id) }}" class="btn btn-md btn-indigo ml-0 rounded">
+                            Modifier
+                        </a>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </div>

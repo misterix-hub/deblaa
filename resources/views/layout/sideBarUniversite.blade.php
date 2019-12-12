@@ -4,7 +4,7 @@
     <div class="side-bar">
         <a href="{{ route('indexUniversite') }}">
             <div class="logo p-2">
-                <img src="{{ URL::asset('db/logos/universite/logo.jpg') }}" alt="logo-université" width="100%">
+                <img src="{{ URL::asset('db/logos/universite/' . session()->get('logo')) }}" alt="logo-université" width="100%">
             </div>
         </a>
 
@@ -165,7 +165,7 @@
                         </a>
                     </td>
                     <td class="text-right">
-                        <a href="" class="white-text">
+                        <a href="{{ route('logout') }}" class="white-text">
                             <i class="icofont-ui-power"></i>
                         </a>
                     </td>
@@ -176,7 +176,6 @@
         @yield('content')
 
     </div>
-
 
     <form action="{{ route('uAjouterFiliere') }}" method="post">
         <div class="modal fade" id="filiereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -195,19 +194,19 @@
                     <div class="modal-body font-size-14">
                         @csrf
                         <label class="" for="nom"><b>Nom de la filière</b></label>
-                        <input type="text" name="nom" id="nom" class="form-control" placeholder="Saisir la filière ..."><br  />
+                        <input type="text" required name="nom" id="nom" class="form-control" placeholder="Saisir la filière ..."><br  />
                         <div class="text-right">
                             <i class="icofont-sort-alt"></i>
                             <b>Sélectionner les niveaux</b><br />
                         </div>
 
-                        <input type="checkbox" name="allNiveaux" id="allNiveaux">
-                        <label for="allNiveaux"><b>Tous les niveaux</b></label><br />
+                        <input type="checkbox" id="allNiveaux0" class="allNiveaux0">
+                        <label for="allNiveaux0"><b>Tous les niveaux</b></label><br />
 
-                        @for ($i = 0; $i < 5; $i++)
-                            <input type="checkbox" name="{{ $i }}" id="niveau{{ $i }}">
-                            <label for="niveau{{ $i }}"><b>Licence {{ $i + 1 }}</b></label>&nbsp;&nbsp;&nbsp;
-                        @endfor
+                        @foreach ($niveaux as $niveau)
+                            <input type="checkbox" name="niveaux[]" class="niveauCheckBox0" id="niveau{{ $niveau->id }}" value="{{ $niveau->id }}">
+                            <label for="niveau{{ $niveau->id }}"><b>{{ $niveau->nom }}</b></label>&nbsp;&nbsp;&nbsp;
+                        @endforeach
 
                     </div>
                     <div class="modal-footer pt-2 pb-2">
@@ -236,27 +235,35 @@
                     <div class="modal-body font-size-14">
                         @csrf
                         <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
-                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
+                        <input type="text" required name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
                         <label class="" for="telephone"><b>Téléphone de l'étudiant</b></label>
-                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le téléphone ..."><br  />
+                        <input type="text" required name="telephone" id="telephone" class="form-control" placeholder="Saisir le téléphone ..."><br  />
                         
                         <table width="100%">
                             <tr>
                                 <td>
                                     <label for="filiere"><b>Filière</b></label>
-                                    <select name="filiere" id="filiere" class="form-control">
-                                        <option value="">
-                                            Le nom de la filière ici
-                                        </option>
+                                    <select required name="filiere" id="filiere" class="form-control">
+                                        @forelse ($filieres as $filiere)    
+                                            <option value="{{ $filiere->id }}">
+                                                {{ $filiere->nom }}
+                                            </option>
+                                        @empty
+                                            <option value="">Aucune filière</option>
+                                        @endforelse
                                     </select>
                                 </td>
                                 <td>
                                     <label for="filiere"><b>Niveau</b></label>
-                                    <select name="niveau" id="niveau" class="form-control">
-                                        <option value="">
-                                            Licence III
-                                        </option>
+                                    <select required name="niveau" id="niveau" class="form-control">
+                                        @forelse ($niveaux as $niveau)    
+                                            <option value="{{ $niveau->id }}">
+                                                {{ $niveau->nom }}
+                                            </option>
+                                        @empty
+                                            <option value="">Aucun niveau</option>
+                                        @endforelse
                                     </select>
                                 </td>
                             </tr>
@@ -277,6 +284,10 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable();
+
+            $('.allNiveaux0').change(function () {
+                $('.niveauCheckBox0').prop("checked", $(this).prop("checked"));
+            });
         });
     </script>
 @endsection

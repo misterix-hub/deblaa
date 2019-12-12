@@ -15,6 +15,12 @@
                     </div>
                 @endif
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @endif
+
                 <table class="table table-hover table-bordered" width="100%">
                     <thead>
                         <tr>
@@ -30,32 +36,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                Nom de la filière ici
-                            </td>
-                            <td>
-                                <ul class="m-0">
-                                    <li>
-                                        Licence II
-                                    </li>
-                                    <li>
-                                        Licence III
-                                    </li>
-                                </ul>
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('uDetailsFiliere', 1) }}" class="btn btn-sm btn-white">
-                                    <i class="icofont-plus"></i>
-                                </a>
-                                <a href="{{ route('uModifierFiliere', 1) }}" class="btn btn-sm btn-blue">
-                                    <i class="icofont-edit"></i>
-                                </a>
-                                <a href="{{ route('uSupprimerFiliere', 1) }}" class="btn btn-sm btn-danger">
-                                    <i class="icofont-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @forelse ($filieres as $filiere)
+                            <tr>
+                                <td>
+                                    <b>{{ $filiere->nom }}</b>
+                                </td>
+                                <td>
+                                    <ul class="m-0">
+                                        @foreach ($filiere_niveaux as $filiere_niveau)
+                                            @if ($filiere_niveau->filiere_id == $filiere->id)    
+                                                <li>
+                                                    {{ $filiere_niveau->nom }}
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('uDetailsFiliere', $filiere->id) }}" class="btn btn-sm btn-white">
+                                        <i class="icofont-plus"></i>
+                                    </a>
+                                    <a href="{{ route('uModifierFiliere', $filiere->id) }}" class="btn btn-sm btn-blue">
+                                        <i class="icofont-edit"></i>
+                                    </a>
+                                    <a href="{{ route('uSupprimerFiliere', $filiere->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ?')" class="btn btn-sm btn-danger">
+                                        <i class="icofont-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3" class="text-center">
+                                    <b>Aucune filière</b>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

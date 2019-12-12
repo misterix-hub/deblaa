@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Universite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Niveau;
+use App\Models\Filiere;
+use App\Models\FiliereNiveau;
+use App\User;
 
 class EtudiantController extends Controller
 {
@@ -14,7 +18,14 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        return view('universite.etudiant.liste');
+        if (!session()->has('id')) {
+            abort("404");
+        } else {
+            return view('universite.etudiant.liste', [
+                'niveaux' => Niveau::all(),
+                'filieres' => Filiere::where('universite_id', session()->get('id'))->get()
+            ]);
+        }
     }
 
     /**
@@ -35,7 +46,18 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
+        $ckech_filiere_niveau = FiliereNiveau::where('filiere_id', $request->filiere)
+                                                ->where('niveau_id', $request->niveau)
+                                                ->get();
+        if (count($ckech_filiere_niveau) == 0) {
+            return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
+        } else {
+            
+            #code here ...
+
+            return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
+        }
+        
     }
 
     /**

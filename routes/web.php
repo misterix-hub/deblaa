@@ -21,17 +21,19 @@ Route::get('/home', 'HomeController@index');
 
 
 
-Route::resource('universites', 'UniversiteController');
+Route::resource('admin/universites', 'UniversiteController');
 
-Route::resource('filieres', 'FiliereController');
+Route::resource('admin/filieres', 'FiliereController');
 
-Route::resource('niveaux', 'NiveauController');
+Route::resource('admin/niveaux', 'NiveauController');
 
-Route::resource('filiereNiveaus', 'FiliereNiveauController');
+Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 
-Route::resource('structures', 'StructureController');
+Route::resource('admin/structures', 'StructureController');
 
-Route::resource('departements', 'DepartementController');
+Route::resource('admin/departements', 'DepartementController');
+
+/* UNIVERSITE */
 
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
@@ -51,6 +53,9 @@ Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->
 Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
+Route::get('universites/login', 'Universite\MainController@login')->name('uLogin');
+Route::post('universites/login/processing', 'Universite\LoginController@loginProcessing')->name('uLoginProcessing');
+Route::get('logout', 'Universite\LoginController@logout')->name('logout');
 
 /* STRUCTURE */
 

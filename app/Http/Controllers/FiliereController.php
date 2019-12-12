@@ -62,10 +62,8 @@ class FiliereController extends AppBaseController
      */
     public function store(CreateFiliereRequest $request)
     {
-        $input = $request->all();
         $niveaux = $request->input('niveaux');
 
-        //$filiere = $this->filiereRepository->create($input);
         if(empty($niveaux)) {
             Flash::error('Sélectionnez au moins un niveau pour la filière !');
             return back();
@@ -75,7 +73,7 @@ class FiliereController extends AppBaseController
                 'universite_id' => $request->input('universite_id')
             ]);
 
-            if ( is_array($niveaux) || is_object($niveaux)){
+            if (is_array($niveaux) || is_object($niveaux)){
                 foreach ($niveaux as $niveau) {
                     $filiere_niveau = FiliereNiveau::create([
                         'filiere_id' => $filiere->id,

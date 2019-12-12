@@ -16,12 +16,12 @@
 </div>
 
 <div class="form-group col-sm-6">
-    <label for="niveaux">Niveau:</label>
-        @foreach($niveaux as $niveau)
-            <label class="checkbox-inline">
-                <input type="checkbox" value="{{ $niveau->id }}" name="niveaux[]" @foreach($filiere->niveaux as $niv) {{ $niveau->id == $niv->pivot->niveau_id ? 'checked' : '' }} @endforeach>{{ $niveau->nom }}
-            </label>
-        @endforeach
+    <label for="niveaux">Niveau:</label><br />
+    @foreach($niveaux as $niveau)
+        <label class="checkbox-inline">
+            <input type="checkbox" value="{{ $niveau->id }}" name="niveaux[]" @foreach($filiere->niveaux as $niv) {{ $niveau->id == $niv->pivot->niveau_id ? 'checked' : '' }} @endforeach>{{ $niveau->nom }}
+        </label>
+    @endforeach
 </div>
 
 <!-- Submit Field -->
