@@ -48,9 +48,14 @@ Route::post('structures/membres', 'Structure\MembreController@store')->name('sAj
 Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
 Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
 
-Route::get('structures/membres/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
-Route::get('structures/membres', 'Structure\MessageController@index')->name('sListeMessage');
-Route::get('structures/membres/bilan', 'Structure\MessageController@bilan')->name('sBilanMessage');
-Route::get('structures/membres/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
+Route::get('structures/messages/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
+Route::get('structures/messages', 'Structure\MessageController@index')->name('sListeMessage');
+Route::get('structures/messages/bilan', 'Structure\MessageController@bilan')->name('sBilanMessage');
+Route::get('structures/messages/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
 
 Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('sCompte');
+
+/* ETUDIANT */
+
+Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
+Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxEtudiants');

@@ -125,7 +125,31 @@
             <div>
                 <a href="{{ route('sBilanMessage') }}">
                     <div>
+                        <i class="icofont-chart-bar-graph"></i>
                         Bilan messages
+                    </div>
+                </a>
+            </div><br />
+            <span class="white-text">
+                <small><b>LIENS UTILES</b></small>
+            </span><br />
+            <div>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Primier lien
+                    </div>
+                </a>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Deuxième lien
+                    </div>
+                </a>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Troisième lien
                     </div>
                 </a>
             </div>
@@ -183,7 +207,7 @@
         </div>
     </form>
 
-    <form action="{{ route('uAjouterEtudiant') }}" method="post">
+    <form action="{{ route('sAjouterMembre') }}" method="post">
         <div class="modal fade" id="etudiantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -191,7 +215,7 @@
                     <div class="modal-header">
                         <h6 class="modal-title" id="exampleModalLabel">
                             <i class="icofont-graduate-alt"></i>
-                            Ajouter un étudiant
+                            Ajouter un membre
                         </h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -199,24 +223,27 @@
                     </div>
                     <div class="modal-body font-size-14">
                         @csrf
-                        <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
-                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir la nom complet ..."><br  />
+                        <label class="" for="nomComplet"><b>Nom du membre</b></label>
+                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
+
+                        <label class="" for="telephone"><b>Téléphone du membre</b></label>
+                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le nom complet ..."><br  />
                         
                         <table width="100%">
                             <tr>
                                 <td>
-                                    <label for="filiere"><b>Filière</b></label>
-                                    <select name="filiere" id="filiere" class="form-control">
+                                    <label for="groupe"><b>Groupe</b></label>
+                                    <select name="groupe" id="groupe" class="form-control">
                                         <option value="">
-                                            Le nom de la filière ici
+                                            Client
                                         </option>
                                     </select>
                                 </td>
                                 <td>
-                                    <label for="filiere"><b>Niveau</b></label>
-                                    <select name="niveau" id="niveau" class="form-control">
+                                    <label for="filiere"><b>Rôle</b></label>
+                                    <select name="role" id="role" class="form-control">
                                         <option value="">
-                                            Licence III
+                                            Particulier
                                         </option>
                                     </select>
                                 </td>

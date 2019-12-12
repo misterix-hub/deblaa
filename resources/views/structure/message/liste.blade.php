@@ -29,7 +29,7 @@
                                 <td>Le titre du message devrait être ici à cet endroit</td>
                                 <td>2019-05-02</td>
                                 <td class="text-center">
-                                    <a href="{{ route('uDetailsMessage', 1) }}" class="blue-text">
+                                    <a href="{{ route('sDetailsMessage', 1) }}" class="blue-text">
                                         <i class="icofont-plus"></i>
                                         Détails
                                     </a>

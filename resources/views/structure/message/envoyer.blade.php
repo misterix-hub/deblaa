@@ -27,20 +27,13 @@
                     <textarea name="message" id="editor"></textarea><br />
 
                     <input type="checkbox" name="filiere" id="all">
-                    <label for="all" class="font-weight-bold"><b>Envoyer à tous les étudiants</b></label><br /><br />
+                    <label for="all" class="font-weight-bold"><b>Envoyer à tous les membres</b></label><br /><br />
 
                     <div class="row">
                         @for ($i = 0; $i < 6; $i++)
                             <div class="col-lg-2 col-md-3 col-sm-12 text-left">
                                 <input type="checkbox" name="filiere" id="filiere{{ $i }}">
-                                <label for="filiere{{ $i }}"><b>IRT</b></label>
-
-                                <div class="ml-3">
-                                    @for ($j = 0; $j < 3; $j++)
-                                        <input type="checkbox" name="niveaux" id="niveaux{{ $i . $j }}">
-                                        <label for="niveaux{{ $i . $j }}"><b>Licence {{ $j + 1 }}</b></label><br />   
-                                    @endfor
-                                </div>
+                                <label for="filiere{{ $i }}"><b>Groupe {{ $i + 1 }}</b></label>
                             </div>
                         @endfor
                     </div><br />

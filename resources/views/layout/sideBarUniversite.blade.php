@@ -125,7 +125,31 @@
             <div>
                 <a href="{{ route('uBilanMessage') }}">
                     <div>
+                        <i class="icofont-chart-bar-graph"></i>
                         Bilan messages
+                    </div>
+                </a>
+            </div><br />
+            <span class="white-text">
+                <small><b>LIENS UTILES</b></small>
+            </span><br />
+            <div>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Primier lien
+                    </div>
+                </a>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Deuxième lien
+                    </div>
+                </a>
+                <a href="{{ route('sBilanMessage') }}">
+                    <div>
+                        <i class="icofont-link"></i>
+                        Troisième lien
                     </div>
                 </a>
             </div>
@@ -212,7 +236,10 @@
                     <div class="modal-body font-size-14">
                         @csrf
                         <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
-                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir la nom complet ..."><br  />
+                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
+
+                        <label class="" for="telephone"><b>Téléphone de l'étudiant</b></label>
+                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le téléphone ..."><br  />
                         
                         <table width="100%">
                             <tr>
