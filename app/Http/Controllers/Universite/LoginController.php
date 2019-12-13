@@ -20,10 +20,16 @@ class LoginController extends Controller
                 $password = $universites_mail->password;
                 session()->put('id', $universites_mail->id);
                 session()->put('logo', $universites_mail->logo);
+                $acces = $universites_mail->acces;
             }
 
             if (\Hash::check($request->password, $password)) {
-                return redirect(route('indexUniversite'));
+                if ($acces == "Banni") {
+                    abort("401");
+                } else {
+                    return redirect(route('indexUniversite'));
+                }
+                
             } else {
                 return back()->with('error', "Mot de passe incorrect !");
             }
@@ -34,6 +40,6 @@ class LoginController extends Controller
         session()->forget('id');
         session()->forget('logo');
 
-        return redirect(route('uLogin'));
+        return redirect(route('indexVisitors'));
     }
 }

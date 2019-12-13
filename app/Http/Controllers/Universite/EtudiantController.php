@@ -23,7 +23,11 @@ class EtudiantController extends Controller
         } else {
             return view('universite.etudiant.liste', [
                 'niveaux' => Niveau::all(),
-                'filieres' => Filiere::where('universite_id', session()->get('id'))->get()
+                'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                                ->where('universite_id', session()->get('id'))
+                                ->where('users.id', '<>', null)
+                                ->get()
             ]);
         }
     }
@@ -52,10 +56,25 @@ class EtudiantController extends Controller
         if (count($ckech_filiere_niveau) == 0) {
             return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
         } else {
-            
-            #code here ...
 
-            return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
+            if (count(User::where('telephone', $request->telephone)->get()) != 0) {
+                return back()->with('error', "Numéro de téléphone déjà utilisé !");
+            } else {
+                $password = "ET" . rand(0121201101, 32145999990);
+                
+                $user = new User;
+                $user->name = $request->nomComplet;
+                $user->email = $request->telephone . "@example.com";
+                $user->telephone = $request->telephone;
+                $user->filiere_id = $request->filiere;
+                $user->niveau_id = $request->niveau;
+                $user->password = bcrypt($password);
+                $user->save();
+    
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !" . $password);
+            }
+            
+
         }
         
     }
@@ -102,6 +121,8 @@ class EtudiantController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::findOrFail($id);
+        $user->delete();
         return redirect(route('uListeEtudiant'))->with('success', "Étudiant supprimé avec succès !");
     }
 }

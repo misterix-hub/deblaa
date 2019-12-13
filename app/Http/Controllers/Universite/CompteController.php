@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Universite;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Niveau;
+use App\Models\Filiere;
 
 class CompteController extends Controller
 {
@@ -57,7 +59,10 @@ class CompteController extends Controller
      */
     public function edit($id)
     {
-        return view('universite.compte.profil');
+        return view('universite.compte.profil', [
+            'niveaux' => Niveau::all(),
+            'filieres' => Filiere::where('universite_id', session()->get('id'))->get()
+        ]);
     }
 
     /**

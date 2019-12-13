@@ -171,7 +171,6 @@ class StructureController extends AppBaseController
             return redirect(route('structures.index'));
         }
 
-        //$structure = $this->structureRepository->update($request->all(), $id);
         $structure = $this->structureRepository->update([
             'nom' => $request->input('nom'),
             'sigle' => $request->input('sigle'),
@@ -185,7 +184,7 @@ class StructureController extends AppBaseController
 
             $target_dir = "db/logos/structure/";
 
-            $file_name = time() . "_" . basename(["logo"]["name"]);
+            $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
 
             $target_file = $target_dir . $file_name;
             $fileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
