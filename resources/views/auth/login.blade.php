@@ -35,11 +35,13 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><b>Déblaa </b><br> Acces Restreint</a>
+        <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" class="circle" width="120"><br>
+        <b>Déblaa </b>
+        <span style="font-size: 2rem; color: red;">Accès restreint</span>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="login-box-body" style="border-radius: 1.7rem;">
         <p class="login-box-msg"><i class="fa fa-sign-in  fa-3x" style="color: deepskyblue;"></i> </p>
 
         <form method="post" action="{{ url('/login') }}">

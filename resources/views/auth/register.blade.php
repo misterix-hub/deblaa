@@ -34,10 +34,11 @@
 <body class="hold-transition register-page">
 <div class="register-box">
     <div class="register-logo">
-        <a href="{{ url('/home') }}"><b>Déblaa </b> <br> Acces Restreint</a>
+        <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" class="circle" width="120"><br>
+        <b>Déblaa </b><span style="font-size: 2rem; color: #ff0000;">Acces restreint </span>
     </div>
 
-    <div class="register-box-body">
+    <div class="register-box-body" style="border-radius: 1.7rem;">
         <p class="login-box-msg"><i class="fa fa-lock fa-4x text-center" style="color: red;"></i></p>
 
         <form method="post" action="{{ url('/register') }}">

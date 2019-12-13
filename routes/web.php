@@ -32,6 +32,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/structures', 'StructureController');
 
     Route::resource('admin/departements', 'DepartementController');
+    
+});
+
+Route::get('admin/statistiques', function () {
+   return view('statistiques.index');
+});
+Route::get('admin/statistiques/show', function () {
+    return view('statistiques.show');
 });
 
 /* UNIVERSITE */
@@ -84,6 +92,7 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
 Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxEtudiants');
+
 
 Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');

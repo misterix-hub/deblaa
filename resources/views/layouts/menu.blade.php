@@ -22,3 +22,6 @@
     <a href="{{ route('departements.index') }}"><i class="fa fa-users"></i><span>Groupes</span></a>
 </li>
 
+<li>
+    <a href="{{ url('admin/statistiques') }}"><i class="fa fa-book"></i><span>Statistiques</span></a>
+</li>
