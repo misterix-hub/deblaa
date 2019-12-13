@@ -13,26 +13,26 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('indexVisitors');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/home', 'HomeController@index');
 
-Route::get('/home', 'HomeController@index');
+    Route::resource('admin/universites', 'UniversiteController');
 
-Route::resource('admin/universites', 'UniversiteController');
+    Route::resource('admin/filieres', 'FiliereController');
 
-Route::resource('admin/filieres', 'FiliereController');
+    Route::resource('admin/niveaux', 'NiveauController');
 
-Route::resource('admin/niveaux', 'NiveauController');
+    Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 
-Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
+    Route::resource('admin/structures', 'StructureController');
 
-Route::resource('admin/structures', 'StructureController');
-
-Route::resource('admin/departements', 'DepartementController');
+    Route::resource('admin/departements', 'DepartementController');
+});
 
 /* UNIVERSITE */
 
@@ -49,6 +49,7 @@ Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
+Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageFrom');
 Route::get('universites/messages', 'Universite\MessageController@index')->name('uListeMessage');
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
 Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
@@ -83,3 +84,6 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
 Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxEtudiants');
+
+Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
+Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');

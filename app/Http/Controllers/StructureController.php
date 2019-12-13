@@ -66,7 +66,9 @@ class StructureController extends AppBaseController
 
         $target_dir = "db/logos/structure/";
 
-        $target_file = $target_dir . time() . "_" . basename($_FILES["logo"]["name"]);
+        $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+
+        $target_file = $target_dir . $file_name;
         $fileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
 
         if($fileType != 'jpg' && $fileType != 'jpeg'  && $fileType != 'png'){
@@ -79,7 +81,7 @@ class StructureController extends AppBaseController
             $structure = $this->structureRepository->create([
                 'nom' => $request->input('nom'),
                 'sigle' => $request->input('sigle'),
-                'logo' => time() . "_" . basename($_FILES["logo"]["name"]),
+                'logo' => $file_name,
                 'telephone' => $request->input('telephone'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($password),
@@ -169,7 +171,6 @@ class StructureController extends AppBaseController
             return redirect(route('structures.index'));
         }
 
-        //$structure = $this->structureRepository->update($request->all(), $id);
         $structure = $this->structureRepository->update([
             'nom' => $request->input('nom'),
             'sigle' => $request->input('sigle'),
@@ -183,7 +184,9 @@ class StructureController extends AppBaseController
 
             $target_dir = "db/logos/structure/";
 
-            $target_file = $target_dir . time() . "_" . basename($_FILES["logo"]["name"]);
+            $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+
+            $target_file = $target_dir . $file_name;
             $fileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
 
             if ($fileType != 'jpg' && $fileType != 'jpeg' && $fileType != 'png') {
@@ -194,7 +197,7 @@ class StructureController extends AppBaseController
             } else {
 
                 $this->structureRepository->update([
-                    'logo' => time() . "_" . basename($_FILES["logo"]["name"])
+                    'logo' => $file_name
                 ], $id);
 
                 move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);

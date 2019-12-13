@@ -20,21 +20,23 @@
                         <thead>
                             <tr>
                                 <th>Titre message</th>
-                                <th width="100">Date</th>
+                                <th width="130">Date</th>
                                 <th width="100" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Le titre du message devrait être ici à cet endroit</td>
-                                <td>2019-05-02</td>
-                                <td class="text-center">
-                                    <a href="{{ route('uDetailsMessage', 1) }}" class="blue-text">
-                                        <i class="icofont-plus"></i>
-                                        Détails
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach ($messages as $message)    
+                                <tr>
+                                    <td>{{ $message->titre }}</td>
+                                    <td>{{ $message->created_at }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('uDetailsMessage', $message->id) }}" class="blue-text">
+                                            <i class="icofont-plus"></i>
+                                            Détails
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

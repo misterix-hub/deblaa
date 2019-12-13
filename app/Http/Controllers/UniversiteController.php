@@ -65,11 +65,11 @@ class UniversiteController extends AppBaseController
 
         $password = "UV".rand(18564124, 98985698);
 
-        //$universite = $this->universiteRepository->create($input);
-
         $target_dir = "db/logos/universite/";
 
-        $target_file = $target_dir . time() . "_" . basename($_FILES["logo"]["name"]);
+        $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+
+        $target_file = $target_dir . $file_name;
         $FileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
 
         if($FileType != "jpg" && $FileType != "jpeg" && $FileType != "png") {
@@ -88,22 +88,8 @@ class UniversiteController extends AppBaseController
                 'acces' => $request->input('acces'),
                 'sigle' => $request->input('sigle'),
                 'site_web' => $request->input('site_web'),
-                'logo' => time() . "_" . basename($_FILES["logo"]["name"]),
+                'logo' => $file_name,
             ]);
-
-//            $to_name = "Deblaa";
-//
-//            $to_email = $request->input('email');
-//            $data = array(
-//                "nom" => $request->input('sigle'),
-//                "email" => $request->input('email'),
-//                "motDePasse" => $password
-//            );
-//
-//            Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
-//                $message->to($to_email)
-//                        ->subject("Votre mot de passe de Deblaa");
-//            });
 
             Flash::success('Université ajoutée avec succès. '.$password);
 
@@ -185,7 +171,9 @@ class UniversiteController extends AppBaseController
 
             $target_dir = "db/logos/universite/";
 
-            $target_file = $target_dir . time() . "_" . basename($_FILES["logo"]["name"]);
+            $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+
+            $target_file = $target_dir . $file_name;
             $FileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
 
             if($FileType != "jpg" && $FileType != "jpeg" && $FileType != "png") {
@@ -197,7 +185,7 @@ class UniversiteController extends AppBaseController
             } else {
 
                $this->universiteRepository->update([
-                   'logo' =>  time() . "_" . basename($_FILES["logo"]["name"])
+                   'logo' =>  $file_name
                ], $id);
 
 

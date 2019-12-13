@@ -137,7 +137,7 @@
                 <a href="{{ route('sBilanMessage') }}">
                     <div>
                         <i class="icofont-link"></i>
-                        Primier lien
+                        Premier lien
                     </div>
                 </a>
                 <a href="{{ route('sBilanMessage') }}">
