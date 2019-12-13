@@ -33,6 +33,8 @@ Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 Route::resource('admin/structures', 'StructureController');
 
 Route::resource('admin/departements', 'DepartementController');
+    
+});
 
 /* UNIVERSITE */
 
