@@ -36,6 +36,13 @@ Route::resource('admin/departements', 'DepartementController');
     
 });
 
+Route::get('admin/statistiques', function () {
+   return view('statistiques.index');
+});
+Route::get('admin/statistiques/show', function () {
+    return view('statistiques.show');
+});
+
 /* UNIVERSITE */
 
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
@@ -85,3 +92,4 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
 Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxEtudiants');
+
