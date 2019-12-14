@@ -149,7 +149,9 @@ class MessageController extends Controller
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'cible_messages' => CibleMessageUniversite::where('message_universite_id', $id)->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
-                'users' => User::leftjoin('message_lus', 'users.id', 'user_id')->where('user_id', '<>', null)->get()
+                'users' => User::leftjoin('message_lus', 'users.id', 'user_id')
+                                ->where('message_universite_id', $id)
+                                ->where('user_id', '<>', null)->get()
             ]);
         }
     }

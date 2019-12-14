@@ -11,17 +11,60 @@ use App\MessageLu;
 class MessageController extends Controller
 {
     public function inbox() {
+        
         if (!session()->has('id')) {
             abort('404');
         } else {
-            return view('etudiant.inbox', [
-                'messages' => CibleMessageUniversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
-                                                        ->where('filiere_id', session()->get('filiere_id'))
-                                                        ->where('niveau_id', session()->get('niveau_id'))
-                                                        ->get()
-            ]);
+
+            return view('etudiant.inbox');
         }
         
+    }
+
+    public function messageFecting() {
+
+        $i = 0;
+        $tab_id = array();
+        $message_lus = MessageLu::where('user_id', session()->get('id'))->get();
+
+        foreach ($message_lus as $message_lu) {
+            $tab_id[$i] = $message_lu->message_universite_id;
+            $i += 1;
+        }
+
+        return view('ajaxViews.etudiant.message.sideBarEtudiant', [
+            'tab_id' => $tab_id,
+            'message_lus' => $message_lus,
+            'cible_message_universites' => CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
+                                            ->where('filiere_id', session()->get('filiere_id'))
+                                            ->where('niveau_id', session()->get('niveau_id'))
+                                            ->orderByDesc('message_universites.created_at')
+                                            ->get()
+        ]);
+    }
+
+    public function messageFectingS() {
+
+        $i = 0;
+        $tab_id = array();
+
+        $message_lus = MessageLu::where('user_id', session()->get('id'))->get();
+
+        foreach ($message_lus as $message_lu) {
+            $tab_id[$i] = $message_lu->message_universite_id;
+            $i += 1;
+        }
+
+
+        return view('ajaxViews.etudiant.message.inboxS', [
+            'tab_id' => $tab_id,
+            'message_lus' => $message_lus,
+            'cible_message_universites' => CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
+                                            ->where('filiere_id', session()->get('filiere_id'))
+                                            ->where('niveau_id', session()->get('niveau_id'))
+                                            ->orderByDesc('message_universites.created_at')
+                                            ->get()
+        ]);
     }
 
     public function inboxs() {
@@ -34,5 +77,34 @@ class MessageController extends Controller
                                                         ->get()
             ]);
         }
+    }
+
+    public function details(Request $request) {
+
+        if (count(MessageLu::where('user_id', session()->get('id'))->where('message_universite_id', $request->id)->get()) == 0) {
+            $message_lu = new MessageLu;
+            $message_lu->user_id = session()->get('id');
+            $message_lu->message_universite_id = $request->id;
+            $message_lu->save();
+        }
+
+        return view('ajaxViews.etudiant.message.details', [
+            'messages' => MessageUniversite::where('id', $request->id)->get()
+        ]);
+    }
+
+    public function sDetails($id) {
+
+        if (count(MessageLu::where('user_id', session()->get('id'))->where('message_universite_id', $id)->get()) == 0) {
+            $message_lu = new MessageLu;
+            $message_lu->user_id = session()->get('id');
+            $message_lu->message_universite_id = $id;
+            $message_lu->save();
+        }
+
+
+        return view('etudiant.detailsMessage', [
+            'messages' => MessageUniversite::where('id', $id)->get()
+        ]);
     }
 }

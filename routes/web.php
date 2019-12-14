@@ -91,8 +91,12 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 /* ETUDIANT */
 
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
-Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxEtudiants');
+Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxsEtudiant');
+Route::get('etudiants/message', 'Etudiant\MessageController@details')->name('eDetailsMessage');
+Route::get('etudiants/message/fetching', 'Etudiant\MessageController@messageFecting')->name('eMessageFecting');
+Route::get('etudiants/message/fetching/sScreen', 'Etudiant\MessageController@messageFectingS')->name('eMessageFectingS');
 
+Route::get('etudiants/message/{id}/details', 'Etudiant\MessageController@sDetails')->name('eSDetailsMessage');
 
 Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');
