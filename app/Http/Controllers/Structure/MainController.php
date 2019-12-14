@@ -10,4 +10,8 @@ class MainController extends Controller
     public function index() {
         return view('structure.index');
     }
+
+    public function login() {
+        return view('structure.login');
+    }
 }

@@ -29,15 +29,15 @@
                     <div>
                         <h5>
                             <span class="font-weight-bold">Connexion</span> -
-                            <span class="red-text">compte utilisateur</span>
+                            <span class="red-text">Accès restreint</span>
                         </h5>
                     </div><br />
 
-                    <form action="{{ route('eLoginProcessing') }}" method="post">
+                    <form action="{{ route('uLoginProcessing') }}" method="post">
                         @csrf
 
-                        <label for="telephone" class="font-size-14">Numéro de téléphone</label>
-                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Saisir dans le champs ...">
+                        <label for="email" class="font-size-14">Email</label>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
@@ -50,8 +50,9 @@
                             Mot de passe oublié ?
                         </a><hr />
 
-                        Si vous n'avez pas encore de compte, <a href="">cliquez ici</a>
-                        Pour vous informer de comment avoir un compte.
+                        Si vous êtes une structure et que vous n'avez pas encore de compte, 
+                        <a href="">faites votre demande.</a>
+
 
                     </form>
                 </div>

@@ -87,6 +87,7 @@ Route::get('structures/messages/bilan', 'Structure\MessageController@bilan')->na
 Route::get('structures/messages/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
 
 Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('sCompte');
+Route::get('structures/login', 'Structure\MainController@login')->name('sLogin');
 
 /* ETUDIANT */
 
