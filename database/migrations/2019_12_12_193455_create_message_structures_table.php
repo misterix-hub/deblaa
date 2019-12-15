@@ -16,7 +16,7 @@ class CreateMessageStructuresTable extends Migration
         Schema::create('message_structures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('titre');
-            $table->string('contenu')->nullable();
+            $table->text('contenu')->nullable();
             $table->string('taille')->nullable();
             $table->string('format')->nullable();
             $table->string('fichier')->nullable();

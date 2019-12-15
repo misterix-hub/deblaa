@@ -11,7 +11,7 @@
 </li>
 
 <li class="{{ Request::is('filiereNiveaus*') ? 'active' : '' }}">
-    <a href="{{ route('filiereNiveaus.index') }}"><i class="fa fa-bookmark"></i><span>Filiere_Niveaux</span></a>
+    <a href="{{ route('filiereNiveaus.index') }}"><i class="fa fa-bookmark"></i><span>Filiere niveaux</span></a>
 </li>
 
 <li class="{{ Request::is('structures*') ? 'active' : '' }}">
@@ -23,5 +23,8 @@
 </li>
 
 <li>
-    <a href="{{ url('admin/statistiques') }}"><i class="fa fa-book"></i><span>Statistiques</span></a>
+    <a href="{{ url('admin/statistiques/universites') }}"><i class="fa fa-bar-chart"></i><span>Statistiques universités</span></a>
+</li>
+<li>
+    <a href="{{ url('admin/statistiques/structures') }}"><i class="fa fa-bar-chart"></i><span>Statistiques structures</span></a>
 </li>

@@ -1,5 +1,14 @@
 <?php
 
+use App\Models\Universite;
+use App\Models\Structure;
+use App\FactureUniversite;
+use App\MessageUniversite;
+use App\CibleMessageUniversite;
+use App\User;
+
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,15 +41,62 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/structures', 'StructureController');
 
     Route::resource('admin/departements', 'DepartementController');
+
+    Route::get('admin/statistiques/universites/show/{id}/', function ($id) {
+
+        return view('statistiques.universite.show', [
+            'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
+                                        ->where('universites.id', $id)->orderByDesc('facture_universites.id')
+                                        ->limit(1)->get(),
+            'messages' => MessageUniversite::where('universite_id', $id)->get(),
+            'users' => User::all(),
+            'cible_message_universites' => CibleMessageUniversite::all(),
+            'numero_facture' => FactureUniversite::all()
+        ]);
+    });
+
+    Route::get('admin/statistiques/structures/show/{id}/', function ($id) {
+
+        /*return view('statistiques.structure.show', [
+            'universites' => FactureStructure::leftJoin('structures', 'structure_id', 'structures.id')
+                                        ->where('structures.id', $id)->orderByDesc('facture_structures.id')
+                                        ->limit(1)->get(),
+            'messages' => MessageUniversite::where('universite_id', $id)->get(),
+            'users' => User::all(),
+            'cible_message_universites' => CibleMessageUniversite::all(),
+            'numero_facture' => FactureUniversite::all()
+        ]);*/
+    });
+
+    Route::post('admin/factures/regler', function(Request $request) {
+        if ($request->montant == 0) {
+            return back()->with('error', "Impossible de régler une facture vide !");
+        } else {
+
+            $facture_universite = new FactureUniversite;
+            $facture_universite->numero = $request->numero;
+            $facture_universite->universite_id = $request->universite_id;
+            $facture_universite->montant = $request->montant;
+            $facture_universite->date = $request->date;
+            $facture_universite->save();
+            
+            return back()->with('success', "Facture réglée avec succès !");
+        }
+    })->name('reglerFacture');
     
+    Route::get('admin/statistiques/universites', function () {
+        return view('statistiques.universite.index', [
+            'universites' => Universite::all()
+        ]);
+    });
+
+    Route::get('admin/statistiques/structures', function () {
+        return view('statistiques.structure.index', [
+            'structures' => Structure::all()
+        ]);
+    });
 });
 
-Route::get('admin/statistiques', function () {
-   return view('statistiques.index');
-});
-Route::get('admin/statistiques/show', function () {
-    return view('statistiques.show');
-});
 
 /* UNIVERSITE */
 

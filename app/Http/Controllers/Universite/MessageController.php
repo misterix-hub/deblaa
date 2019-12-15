@@ -62,7 +62,7 @@ class MessageController extends Controller
             $message_universite->contenu = $request->message;
 
             if ($request->fichier != "") {
-                $target_dir = "db/messages/fichier/";
+                $target_dir = "db/messages/universites/fichier/";
 
                 $file_name = time() . "_" . basename($_FILES["fichier"]["name"]);
 

@@ -89,21 +89,21 @@ class StructureController extends AppBaseController
                 'acces' => $request->input('acces')
             ]);
 
-//            $to_name = "Deblaa";
-//
-//            $to_email = $request->input('email');
-//            $data = array(
-//                'nom' => $request->input('sigle'),
-//                'email' => $request->input('email'),
-//                'motDePasse' => $password
-//            );
-//
-//            Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
-//                $message->to($to_email)
-//                        ->subject("Votre mot de passe de Deblaa");
-//            });
+            $to_name = "Deblaa";
 
-            Flash::success('Structure saved successfully. '.$password);
+            $to_email = $request->input('email');
+            $data = array(
+                'nom' => $request->input('sigle'),
+                'email' => $request->input('email'),
+                'motDePasse' => $password
+            );
+
+            Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email)
+                        ->subject("Votre mot de passe de Deblaa");
+            });
+
+            Flash::success('Université ajoutée avec succès. '.$password);
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
 

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Mail;
 use Response;
+use App\FactureUniversite;
 
 class UniversiteController extends AppBaseController
 {
@@ -91,9 +92,29 @@ class UniversiteController extends AppBaseController
                 'logo' => $file_name,
             ]);
 
+            $to_name = "Deblaa";
+
+            $to_email = $request->input('email');
+            $data = array(
+                'nom' => $request->input('sigle'),
+                'email' => $request->input('email'),
+                'motDePasse' => $password
+            );
+
+            Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email)
+                ->subject("Votre mot de passe de Deblaa");
+            });
+
             Flash::success('Université ajoutée avec succès. '.$password);
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
+
+            $facture_universite = new FactureUniversite;
+            $facture_universite->universite_id = $universite->id;
+            $facture_universite->montant = "0";
+            $facture_universite->date = now();
+            $facture_universite->save();
 
             return redirect(route('universites.index'));
         }
