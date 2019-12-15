@@ -51,7 +51,7 @@ class MembreController extends Controller
         if (count(User::where('telephone', $request->telephone)->get()) != 0) {
             return back()->with('error', "Numéro de téléphone déjà utilisé !");
         } else {
-            $password = "PT" . rand(0121201101, 32145999990);
+            $password = "DB" . rand(1021, 9999);
 
             $user = new User;
             $user->name = $request->nomComplet;
@@ -61,8 +61,10 @@ class MembreController extends Controller
             $user->departement_id = $request->groupe;
             $user->password = bcrypt($password);
             $user->save();
+            session()->put('msg_tel', $request->telephone);
+            session()->put('msg_pwd', $password);
 
-            return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !".$password);
+            return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
         }
 
     }

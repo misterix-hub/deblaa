@@ -55,7 +55,7 @@
                 <div class="box-body">
                     <div class="row">
 
-                        @foreach ($universites as $universite)
+                        @foreach ($structures as $structure)
                             <div class="clearfix"></div>
 
                             <div class="form-group col-xs-6">
@@ -68,19 +68,19 @@
 
                             <div class="form-group col-xs-6">
                                 <h2 class="text-center" style="border: 3px solid #777; color: orange; padding: 7px 0; font-weight: 800;">
-                                    Facture n° {{ count($numero_facture) + 1 }}
+                                    Facture n° {{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}
                                 </h2>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-xs-6"><br /><br />
-                                <b>Référence du client : #CLT{{ $universite->id }}-UNIV</b><br />
+                                <b>Référence du client : #CLT{{ $structure->id }}-UNIV</b><br />
                                 <b>Date d'édition : {{ now() }}</b><br />
-                                <b>Dernier règlement : {{ $universite->date }}</b><br />
+                                <b>Dernier règlement : {{ $structure->date }}</b><br />
                             </div>
                             <div class="form-group col-xs-6 text-right"><br /><br />
-                                <div style="font-weight: 1000; font-size: 16px;">{{ $universite->nom }}</div>
-                                {{ $universite->email }}<br />
-                                Téléphone : {{ $universite->telephone }}<br />
+                                <div style="font-weight: 1000; font-size: 16px;">{{ $structure->nom }}</div>
+                                {{ $structure->email }}<br />
+                                Téléphone : {{ $structure->telephone }}<br />
                             </div>
                             <div class="clearfix"></div>
                             <br /><br />
@@ -96,16 +96,15 @@
                                     <tbody>
                                         <?php $nb_dest_global = 0; $nb_msg = 0; ?>
                                         @foreach ($messages as $message)
-                                            @if ($message->created_at >= $universite->date)    
+                                            @if ($message->created_at >= $structure->date)    
                                                 <?php $nb_dest = 0; ?>   
                                                 <tr>
                                                     <td>{{ $message->titre }}</td>
                                                     <td class="text-right" width="120">
-                                                        @foreach ($cible_message_universites as $cible_message_universite)
-                                                            @if ($cible_message_universite->message_universite_id == $message->id)
+                                                        @foreach ($cible_message_structures as $cible_message_structure)
+                                                            @if ($cible_message_structure->message_structure_id == $message->id)
                                                                 @foreach ($users as $user)
-                                                                    @if ($user->filiere_id == $cible_message_universite->filiere_id
-                                                                    && $user->niveau_id == $cible_message_universite->niveau_id)
+                                                                    @if ($user->departement_id == $cible_message_structure->departement_id)
                                                                         <?php $nb_dest += 1; ?>
                                                                     @endif
                                                                 @endforeach
@@ -151,7 +150,7 @@
                                     </tr>
                                     <tr>
                                         <td>Date debut des statistiques</td>
-                                        <td class="text-right"><b>{{ $universite->date }}</b></td>
+                                        <td class="text-right"><b>{{ $structure->date }}</b></td>
                                     </tr>
                                     <tr>
                                         <td>Date fin des statistiques</td>
@@ -176,9 +175,9 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="universite_id" value="{{ $universite->id }}">
+                            <input type="hidden" name="universite_id" value="{{ $structure->id }}">
                             <input type="hidden" name="montant" value="{{ $nb_dest_global * 5  }}">
-                            <input type="hidden" name="numero" value="{{ count($numero_facture) + 1 }}">
+                            <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
                         @endforeach
                     </div>
                 </div>

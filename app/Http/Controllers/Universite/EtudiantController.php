@@ -61,7 +61,7 @@ class EtudiantController extends Controller
             if (count(User::where('telephone', $request->telephone)->get()) != 0) {
                 return back()->with('error', "Numéro de téléphone déjà utilisé !");
             } else {
-                $password = "ET" . rand(0121201101, 32145999990);
+                $password = "DB" . rand(1021, 9999);
                 
                 $user = new User;
                 $user->name = $request->nomComplet;

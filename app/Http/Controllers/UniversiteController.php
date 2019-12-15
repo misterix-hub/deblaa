@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\Mail;
 use Response;
+
 use App\FactureUniversite;
 
 class UniversiteController extends AppBaseController
@@ -64,7 +65,7 @@ class UniversiteController extends AppBaseController
     {
         $input = $request->all();
 
-        $password = "UV".rand(18564124, 98985698);
+        $password = "DB".rand(1021, 9999);
 
         $target_dir = "db/logos/universite/";
 
@@ -106,7 +107,7 @@ class UniversiteController extends AppBaseController
                 ->subject("Votre mot de passe de Deblaa");
             });
 
-            Flash::success('Université ajoutée avec succès. '.$password);
+            Flash::success('Université ajoutée avec succès.');
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
 

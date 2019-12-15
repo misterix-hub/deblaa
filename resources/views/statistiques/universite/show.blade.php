@@ -68,7 +68,7 @@
 
                             <div class="form-group col-xs-6">
                                 <h2 class="text-center" style="border: 3px solid #777; color: orange; padding: 7px 0; font-weight: 800;">
-                                    Facture n° {{ count($numero_facture) + 1 }}
+                                    Facture n° {{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}
                                 </h2>
                             </div>
                             <div class="clearfix"></div>
@@ -178,7 +178,7 @@
 
                             <input type="hidden" name="universite_id" value="{{ $universite->id }}">
                             <input type="hidden" name="montant" value="{{ $nb_dest_global * 5  }}">
-                            <input type="hidden" name="numero" value="{{ count($numero_facture) + 1 }}">
+                            <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
                         @endforeach
                     </div>
                 </div>

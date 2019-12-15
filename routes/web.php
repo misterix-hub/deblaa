@@ -3,22 +3,14 @@
 use App\Models\Universite;
 use App\Models\Structure;
 use App\FactureUniversite;
+use App\FactureStructure;
 use App\MessageUniversite;
 use App\CibleMessageUniversite;
 use App\User;
+use App\MessageStructure;
+use App\CibleMessageStructure;
 
 use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -49,23 +41,25 @@ Route::group(['middleware' => 'auth'], function () {
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
                                         ->limit(1)->get(),
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
-            'users' => User::all(),
+            'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
-            'numero_facture' => FactureUniversite::all()
+            'numero_facture_universites' => FactureUniversite::all(),
+            'numero_facture_structures' => FactureStructure::all()
         ]);
     });
 
     Route::get('admin/statistiques/structures/show/{id}/', function ($id) {
 
-        /*return view('statistiques.structure.show', [
-            'universites' => FactureStructure::leftJoin('structures', 'structure_id', 'structures.id')
+        return view('statistiques.structure.show', [
+            'structures' => FactureStructure::leftJoin('structures', 'structure_id', 'structures.id')
                                         ->where('structures.id', $id)->orderByDesc('facture_structures.id')
                                         ->limit(1)->get(),
-            'messages' => MessageUniversite::where('universite_id', $id)->get(),
-            'users' => User::all(),
-            'cible_message_universites' => CibleMessageUniversite::all(),
-            'numero_facture' => FactureUniversite::all()
-        ]);*/
+            'messages' => MessageStructure::where('structure_id', $id)->get(),
+            'users' => User::where('departement_id', '<>', null)->get(),
+            'cible_message_structures' => CibleMessageStructure::all(),
+            'numero_facture_universites' => FactureUniversite::all(),
+            'numero_facture_structures' => FactureStructure::all()
+        ]);
     });
 
     Route::post('admin/factures/regler', function(Request $request) {

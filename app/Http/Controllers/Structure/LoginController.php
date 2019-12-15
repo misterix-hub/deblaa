@@ -20,6 +20,7 @@ class LoginController extends Controller
                 $password = $structures_mail->password;
                 session()->put('id', $structures_mail->id);
                 session()->put('logo', $structures_mail->logo);
+                session()->put('sigle', $structures_mail->sigle);
                 $acces = $structures_mail->acces;
             }
 

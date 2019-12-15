@@ -26,7 +26,7 @@
                         <thead>
                             <tr>
                                 <th>Titre message</th>
-                                <th width="130">Date</th>
+                                <th width="130">Date d'envoi</th>
                                 <th width="100" class="text-center">Action</th>
                             </tr>
                         </thead>

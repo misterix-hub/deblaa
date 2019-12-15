@@ -13,6 +13,8 @@ use Flash;
 use Illuminate\Support\Facades\Mail;
 use Response;
 
+use App\FactureStructure;
+
 class StructureController extends AppBaseController
 {
     /** @var  StructureRepository */
@@ -60,7 +62,7 @@ class StructureController extends AppBaseController
     {
         $input = $request->all();
 
-        $password = "ST".rand(18564124, 98985698);
+        $password = "DB".rand(1021, 9999);
 
        // $structure = $this->structureRepository->create($input);
 
@@ -103,9 +105,15 @@ class StructureController extends AppBaseController
                         ->subject("Votre mot de passe de Deblaa");
             });
 
-            Flash::success('Université ajoutée avec succès. '.$password);
+            Flash::success('Université ajoutée avec succès.');
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
+
+            $facture_structure = new FactureStructure;
+            $facture_structure->structure_id = $structure->id;
+            $facture_structure->montant = "0";
+            $facture_structure->date = now();
+            $facture_structure->save();
 
             return redirect(route('structures.index'));
 

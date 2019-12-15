@@ -32,13 +32,13 @@
                     <label for="editor"><b>Contenu du message</b></label>
                     <textarea name="message" id="editor"></textarea><br />
 
-                    <input type="checkbox" name="groupes[]" id="all">
+                    <input type="checkbox" class="allGroupes0" id="all">
                     <label for="all" class="font-weight-bold"><b>Envoyer à tous les membres</b></label><br /><br />
 
                     <div class="row">
                         @foreach($groupes as $groupe)
                             <div class="col-lg-2 col-md-3 col-sm-12 text-left">
-                                <input type="checkbox" name="groupes[]" id="groupe{{ $groupe->id }}" value="{{ $groupe->id }}">
+                                <input type="checkbox" name="groupes[]" id="groupe{{ $groupe->id }}" value="{{ $groupe->id }}" class="groupeCheckBox0">
                                 <label for="groupe{{ $groupe->id }}"><b>{{ $groupe->nom }}</b></label>
                             </div>
                         @endforeach
@@ -58,5 +58,11 @@
 @section('script')
     <script>
         CKEDITOR.replace('editor');
+
+        $(document).ready(function () {
+            $(".allGroupes0").change(function () {
+                $(".groupeCheckBox0").prop("checked", $(this).prop("checked"));
+            });
+        });
     </script>
 @endsection

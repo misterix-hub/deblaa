@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFactureUniversitesTable extends Migration
+class CreateFactureStructuresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateFactureUniversitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('facture_universites', function (Blueprint $table) {
+        Schema::create('facture_structures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('numero')->nullable();
-            $table->integer('universite_id');
+            $table->integer('structure_id');
             $table->string('montant');
             $table->string('date');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateFactureUniversitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('facture_universites');
+        Schema::dropIfExists('facture_structures');
     }
 }
