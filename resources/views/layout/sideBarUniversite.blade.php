@@ -103,13 +103,15 @@
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="pl-4 pr-4">
-                            <a href="{{ route('uCompte', 1) }}">
-                                <div>
-                                    <i class="icofont-user"></i>
-                                    Afficher le profil
-                                </div>
-                            </a>
-                            <a href="">
+                            @foreach(\App\Models\Universite::where('id', session()->get('id'))->get() as $universite)
+                                <a href="{{ route('uCompte', $universite->id) }}">
+                                    <div>
+                                        <i class="icofont-user"></i>
+                                        Afficher le profil
+                                    </div>
+                                </a>
+                            @endforeach
+                            <a href="{{ route('logout') }}">
                                 <div>
                                     <i class="icofont-power"></i>
                                     Déconnexion

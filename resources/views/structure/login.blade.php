@@ -33,7 +33,7 @@
                         </h5>
                     </div><br />
 
-                    <form action="{{ route('uLoginProcessing') }}" method="post">
+                    <form action="{{ route('sLoginProcessing') }}" method="post">
                         @csrf
 
                         <label for="email" class="font-size-14">Email</label>

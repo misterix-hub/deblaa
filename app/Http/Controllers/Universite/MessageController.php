@@ -20,6 +20,7 @@ class MessageController extends Controller
                 'niveaux' => Niveau::all(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
             ]);
         }
@@ -62,7 +63,7 @@ class MessageController extends Controller
             $message_universite->contenu = $request->message;
 
             if ($request->fichier != "") {
-                $target_dir = "db/messages/fichier/";
+                $target_dir = "db/messages/universites/fichier/";
 
                 $file_name = time() . "_" . basename($_FILES["fichier"]["name"]);
 

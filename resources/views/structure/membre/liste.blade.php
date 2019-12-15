@@ -15,6 +15,12 @@
                     </div>
                 @endif
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @endif
+
                 <div class="card card-body border rounded">
                     <table id="example" class="table table-bordered" style="width:100%">
                         <thead>
@@ -27,222 +33,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Abiger Nixon</td>
-                                <td>22891985311</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td class="text-center">
-                                    <a href="{{ route('sSupprimerMembre', 1) }}" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>22891985311</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>22891985311</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>22891985311</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>22891985311</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Brielle Williamson</td>
-                                <td>22891985311</td>
-                                <td>Integration Specialist</td>
-                                <td>New York</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Herrod Chandler</td>
-                                <td>22891985311</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Rhona Davidson</td>
-                                <td>22891985311</td>
-                                <td>Integration Specialist</td>
-                                <td>Tokyo</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Colleen Hurst</td>
-                                <td>22891985311</td>
-                                <td>Javascript Developer</td>
-                                <td>San Francisco</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sonya Frost</td>
-                                <td>22891985311</td>
-                                <td>Software Engineer</td>
-                                <td>Edinburgh</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jena Gaines</td>
-                                <td>22891985311</td>
-                                <td>Office Manager</td>
-                                <td>London</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Quinn Flynn</td>
-                                <td>22891985311</td>
-                                <td>Support Lead</td>
-                                <td>Edinburgh</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Charde Marshall</td>
-                                <td>22891985311</td>
-                                <td>Regional Director</td>
-                                <td>San Francisco</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Haley Kennedy</td>
-                                <td>22891985311</td>
-                                <td>Senior Marketing Designer</td>
-                                <td>London</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tatyana Fitzpatrick</td>
-                                <td>22891985311</td>
-                                <td>Regional Director</td>
-                                <td>London</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Michael Silva</td>
-                                <td>22891985311</td>
-                                <td>Marketing Designer</td>
-                                <td>London</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Paul Byrd</td>
-                                <td>22891985311</td>
-                                <td>Chief Financial Officer (CFO)</td>
-                                <td>New York</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Donna Snider</td>
-                                <td>22891985311</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
-                                <td class="text-center">
-                                    <a href="" class="red-text">
-                                        <i class="icofont-trash"></i>
-                                        Supprimer
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->telephone }}</td>
+                                    <td>
+                                        @foreach ($groupes as $groupe)
+                                            @if ($groupe->id == $user->departement_id)
+                                                {{ $groupe->nom }}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $user->fonction }}</td>
+                                    <td class="text-center">
+                                        <a href="{{ route('sSupprimerMembre', $user->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $user->name }} ?')" class="red-text">
+                                            <i class="icofont-trash"></i>
+                                            Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

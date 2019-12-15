@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Structure;
 
 use App\Http\Controllers\Controller;
+use App\Models\Departement;
+use App\Repositories\DepartementRepository;
 use Illuminate\Http\Request;
 
 class GroupeController extends Controller
@@ -12,9 +14,23 @@ class GroupeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    private $departementRepository;
+
+    public function __construct(DepartementRepository $departementRepo)
+    {
+        $this->departementRepository = $departementRepo;
+    }
+
     public function index()
     {
-        return view('structure.groupe.liste');
+        if (!session()->has('id')) {
+            abort("404");
+        } else {
+            return view('structure.groupe.liste', [
+                'groupes' => Departement::where('structure_id', session()->get('id'))->get()
+            ]);
+        }
     }
 
     /**
@@ -35,7 +51,17 @@ class GroupeController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect(route('sListeGroupe'))->with('success', "Groupe ajouté avec succès !");
+        if (trim($request->nom) == "") {
+            return redirect(route('sListeGroupe'))->with('error', "Impossible de retourner un champs vide !");
+        } else {
+
+            $groupe = $this->departementRepository->create([
+                'nom' => $request->nom,
+                'structure_id' => session()->get('id')
+            ]);
+
+            return redirect(route('sListeGroupe'))->with('success', "Groupe ajouté avec succès !");
+        }
     }
 
     /**
@@ -46,7 +72,14 @@ class GroupeController extends Controller
      */
     public function show($id)
     {
-        return view('sructure.groupe.details');
+        if (!session()->has('id')) {
+            abort("404");
+        } else {
+            return view('structure.groupe.details', [
+                'groupe' => Departement::findOrFail($id)
+            ]);
+        }
+
     }
 
     /**
@@ -57,7 +90,14 @@ class GroupeController extends Controller
      */
     public function edit($id)
     {
-        return view('sructure.groupe.modifier');
+        if (!session()->has('id')) {
+            abort("404");
+        } else {
+            return view('structure.groupe.modifier', [
+                "groupe" => Departement::findOrFail($id)
+            ]);
+        }
+
     }
 
     /**
@@ -69,7 +109,16 @@ class GroupeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect(route('sListeGroupe'))->with('success', "Groupe mis à jour avec succès !");
+        if (trim($request->nom) == "") {
+            return redirect(route('sListeGroupe'))->with('error', "Impossible de retourner un champs vide !");
+        } else {
+
+            $groupe = Departement::findOrFail($id);
+            $groupe->nom = $request->nom;
+            $groupe->save();
+
+            return redirect(route('sListeGroupe'))->with('success', "Groupe mis à jour avec succès !");
+        }
     }
 
     /**
@@ -80,6 +129,8 @@ class GroupeController extends Controller
      */
     public function destroy($id)
     {
+        $groupe = Departement::findOrFail($id);
+        $groupe->forceDelete();
         return redirect(route('sListeGroupe'))->with('success', "Groupe supprimé avec succès !");
     }
 }

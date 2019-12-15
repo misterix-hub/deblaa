@@ -15,6 +15,12 @@
                     </div>
                 @endif
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @endif
+
                 <table class="table table-hover table-bordered" width="100%">
                     <thead>
                         <tr>
@@ -27,22 +33,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                Nom du groupe ici là à cet endroit
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('uDetailsFiliere', 1) }}" class="btn btn-sm btn-white">
-                                    <i class="icofont-plus"></i>
-                                </a>
-                                <a href="{{ route('uModifierFiliere', 1) }}" class="btn btn-sm btn-blue">
-                                    <i class="icofont-edit"></i>
-                                </a>
-                                <a href="{{ route('uSupprimerFiliere', 1) }}" class="btn btn-sm btn-danger">
-                                    <i class="icofont-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
+                        @foreach($groupes as $groupe)
+                            <tr>
+                                <td>
+                                    {{ $groupe->nom }}
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{ route('sDetailsGroupe', $groupe->id) }}" class="btn btn-sm btn-white">
+                                        <i class="icofont-plus"></i>
+                                    </a>
+                                    <a href="{{ route('sModifierGroupe', $groupe->id) }}" class="btn btn-sm btn-blue">
+                                        <i class="icofont-edit"></i>
+                                    </a>
+                                    <a href="{{ route('sSupprimerGroupe', $groupe->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe->nom }} ?')" class="btn btn-sm btn-danger">
+                                        <i class="icofont-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

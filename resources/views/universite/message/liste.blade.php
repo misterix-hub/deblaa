@@ -15,6 +15,12 @@
                     </div>
                 @endif
 
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-success">
+                        {{ $message }}
+                    </div>
+                @endif
+
                 <div class="card card-body border rounded">
                     <table id="example" class="table table-bordered" style="width:100%">
                         <thead>

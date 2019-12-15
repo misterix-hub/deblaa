@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Universite;
 
 use App\Http\Controllers\Controller;
+use App\MessageUniversite;
 use Illuminate\Http\Request;
 use App\Models\Niveau;
 use App\Models\Filiere;

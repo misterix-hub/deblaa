@@ -57,7 +57,7 @@
 
                         @switch($message->format)
                             @case("Image")
-                                <img src="{{ URL::asset('db/messages/fichier/' . $message->fichier) }}" alt="Image-jointe" width="100%">
+                                <img src="{{ URL::asset('db/messages/universites/fichier/' . $message->fichier) }}" alt="Image-jointe" width="100%">
                                 @break
 
                             @case("Video")
@@ -76,7 +76,7 @@
                                 
                         @endswitch
 
-                        <a download href="{{ URL::asset('db/messages/fichier/' . $message->fichier) }}" class="btn btn-md btn-orange btn-block">
+                        <a download href="{{ URL::asset('db/messages/universites/fichier/' . $message->fichier) }}" class="btn btn-md btn-orange btn-block">
                             <i class="icofont-download"></i>
                             Télécharger [{{ substr($message->taille, 0, 5) }} <span style="text-transform: capitalize;">Mo</span>]
                         </a><br /><br />
