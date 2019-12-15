@@ -1,9 +1,9 @@
 <div class="indigo white-text text-center pt-2 pb-2">
     <small>
         <b>BOITE DE RÉCEPTION</b>
-        @if ((count($cible_message_universites) - count($message_lus)) > 0)    
+        @if ((count($cible_message_structures) - count($message_lus)) > 0)
             <span class="badge badge-danger z-depth-0" style="pt-1 pb-1 border-radius: 2px;">
-                {{ count($cible_message_universites) - count($message_lus) }}
+                {{ count($cible_message_structures) - count($message_lus) }}
             </span>
         @endif
     </small>
@@ -24,51 +24,51 @@
                 </a><br />
                 <small>
                     <i class="icofont-graduate-alt"></i>
-                    Étudiant
+                    Membre
                 </small>
             </td>
         </tr>
     </table>
 </div>
 
-@forelse ($cible_message_universites as $cible_message_universite)
-    @if (in_array( $cible_message_universite->message_universite_id, $tab_id))
-        <a href="#!{{ $cible_message_universite->id }}" class="message-select" data-value="{{ $cible_message_universite->id }}">
+@forelse ($cible_message_structures as $cible_message_structure)
+    @if (in_array( $cible_message_structure->message_structure_id, $tab_id))
+        <a href="#!{{ $cible_message_structure->id }}" class="message-select" data-value="{{ $cible_message_structure->id }}">
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
                         <td width="36">
                             <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
-                            class="white-text text-center grey lighten-1">
+                                 class="white-text text-center grey lighten-1">
                                 <i class="icofont-envelope-open"></i>
                             </div>
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
                             <b class="font-weight-bold black-text">
-                                {{ $cible_message_universite->titre }}
+                                {{ $cible_message_structure->titre }}
                             </b><br />
-                            <small>{{ $cible_message_universite->created_at }}</small>
+                            <small>{{ $cible_message_structure->created_at }}</small>
                         </td>
                     </tr>
                 </table>
             </div>
         </a>
-    @else    
-        <a href="#!{{ $cible_message_universite->id }}" class="message-select" data-value="{{ $cible_message_universite->id }}">
+    @else
+        <a href="#!{{ $cible_message_structure->id }}" class="message-select" data-value="{{ $cible_message_structure->id }}">
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
                         <td width="36">
                             <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
-                            class="white-text text-center green">
+                                 class="white-text text-center green">
                                 <i class="icofont-envelope"></i>
                             </div>
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
                             <b class="font-weight-bold black-text">
-                                {{ $cible_message_universite->titre }}
+                                {{ $cible_message_structure->titre }}
                             </b><br />
-                            <small>{{ $cible_message_universite->created_at }}</small>
+                            <small>{{ $cible_message_structure->created_at }}</small>
                         </td>
                     </tr>
                 </table>
@@ -90,7 +90,7 @@
         $('.message-select').each(function() {
             $(this).on("click", function() {
                 $.ajax({
-                    url : "{{ route('eDetailsMessage') }}",
+                    url : "{{ route('mDetailsMessage') }}",
                     type : 'GET',
                     data : 'id=' + $(this).attr('data-value'),
                     success : function(statut){

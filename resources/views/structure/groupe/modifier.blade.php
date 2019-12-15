@@ -9,10 +9,10 @@
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12"><br />
 
-                <form action="{{ route('uUpdateFiliere', 1) }}" method="post">
+                <form action="{{ route('sUpdateGroupe', $groupe->id) }}" method="post">
                     @csrf
                     <label class="" for="nom"><b>Nom du groupe</b></label>
-                    <input type="text" name="nom" id="nom" class="form-control" placeholder="Saisir le groupe ..."><br  />
+                    <input type="text" name="nom" id="nom" value="{{ $groupe->nom }}" class="form-control" placeholder="Saisir le groupe ..."><br  />
 
                     <div class="text-right">
                         <button type="submit" class="btn btn-md btn-indigo mr-0 rounded">

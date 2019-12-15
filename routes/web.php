@@ -119,6 +119,7 @@ Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->
 Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
+Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
 Route::get('universites/login', 'Universite\MainController@login')->name('uLogin');
 Route::post('universites/login/processing', 'Universite\LoginController@loginProcessing')->name('uLoginProcessing');
 Route::get('logout', 'Universite\LoginController@logout')->name('logout');
@@ -138,12 +139,16 @@ Route::get('structures/membres', 'Structure\MembreController@index')->name('sLis
 Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
 
 Route::get('structures/messages/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
+Route::post('structures/messages/envoyer', 'Structure\MessageController@envoyer')->name('sEnvoyerMessageForm');
 Route::get('structures/messages', 'Structure\MessageController@index')->name('sListeMessage');
 Route::get('structures/messages/bilan', 'Structure\MessageController@bilan')->name('sBilanMessage');
 Route::get('structures/messages/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
 
 Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('sCompte');
+Route::post('structures/{id}/profil/update', 'Structure\CompteController@update')->name('sCompteUpdate');
 Route::get('structures/login', 'Structure\MainController@login')->name('sLogin');
+Route::post('structures/login/processing', 'Structure\LoginController@loginProcessing')->name('sLoginProcessing');
+Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
 /* ETUDIANT */
 
@@ -157,3 +162,16 @@ Route::get('etudiants/message/{id}/details', 'Etudiant\MessageController@sDetail
 
 Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');
+
+/* MEMBRE */
+
+Route::get('membres/inbox', 'Membre\MessageController@inbox')->name('inboxMembre');
+Route::get('membres/inboxs', 'Membre\MessageController@inboxs')->name('inboxsMembre');
+Route::get('membres/message', 'Membre\MessageController@details')->name('mDetailsMessage');
+Route::get('membres/message/fetching', 'Membre\MessageController@messageFecting')->name('mMessageFecting');
+Route::get('membres/message/fetching/sScreen', 'Membre\MessageController@messageFectingS')->name('mMessageFectingS');
+
+Route::get('membres/message/{id}/details', 'Membre\MessageController@sDetails')->name('mSDetailsMessage');
+
+Route::get('membres/login', 'Membre\MainController@login')->name('mLogin');
+Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing')->name('mLoginProcessing');

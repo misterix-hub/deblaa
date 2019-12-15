@@ -4,7 +4,7 @@
     <div class="side-bar">
         <a href="{{ route('indexStructure') }}">
             <div class="logo p-2">
-                <img src="{{ URL::asset('db/logos/universite/logo.jpg') }}" alt="logo-université" width="100%">
+                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-université" width="100%">
             </div>
         </a>
 
@@ -103,13 +103,15 @@
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="pl-4 pr-4">
-                            <a href="{{ route('sCompte', 1) }}">
-                                <div>
-                                    <i class="icofont-user"></i>
-                                    Afficher le profil
-                                </div>
-                            </a>
-                            <a href="">
+                            @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
+                                <a href="{{ route('sCompte', $structure->id) }}">
+                                    <div>
+                                        <i class="icofont-user"></i>
+                                        Afficher le profil
+                                    </div>
+                                </a>
+                            @endforeach
+                            <a href="{{ route('sLogout') }}">
                                 <div>
                                     <i class="icofont-power"></i>
                                     Déconnexion
@@ -161,11 +163,11 @@
                 <tr>
                     <td>
                         <a href="" class="white-text">
-                            <b>Paneau de confiuration</b>
+                            <b>Panneau de configuration</b>
                         </a>
                     </td>
                     <td class="text-right">
-                        <a href="" class="white-text">
+                        <a href="{{ route('sLogout') }}" class="white-text">
                             <i class="icofont-ui-power"></i>
                         </a>
                     </td>
@@ -227,25 +229,24 @@
                         <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
                         <label class="" for="telephone"><b>Téléphone du membre</b></label>
-                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le nom complet ..."><br  />
+                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le numero de telephone ..."><br  />
                         
                         <table width="100%">
                             <tr>
                                 <td>
                                     <label for="groupe"><b>Groupe</b></label>
                                     <select name="groupe" id="groupe" class="form-control">
-                                        <option value="">
-                                            Client
-                                        </option>
+                                        <option value="">Sélectionnez ...</option>
+                                        @foreach(\App\Models\Departement::where('structure_id', session()->get('id'))->get() as $groupe)
+                                            <option value="{{ $groupe->id }}">
+                                                {{ $groupe->nom }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td>
-                                    <label for="filiere"><b>Rôle</b></label>
-                                    <select name="role" id="role" class="form-control">
-                                        <option value="">
-                                            Particulier
-                                        </option>
-                                    </select>
+                                    <label for="role"><b>Rôle</b></label>
+                                    <input type="text" name="role" id="role" class="form-control" placeholder="Saisir le rôle ....">
                                 </td>
                             </tr>
                         </table>

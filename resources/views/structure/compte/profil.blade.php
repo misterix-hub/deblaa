@@ -3,19 +3,65 @@
 @section('content')
     <br />
     <div class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-12">
-                <h3><i class="icofont-user"></i> Profil</h3>
+                <h3><i class="icofont-user"></i> Profil {{ $structure->sigle }}</h3>
             </div>
-            <div class="col-12"><br />
+            <div class="col-10"><br />
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         {{ $message }}
                     </div>
-                @endif<br /><br /><br />
+                @endif
 
-                <h2 class="text-center red-text">En construction ...</h2>
+                @if ($message = Session::get('error'))
+                    <div class="alert alert-danger">
+                        {{ $message }}
+                    </div>
+                @endif
+                <form action="{{ route('sCompteUpdate', $structure->id) }}" method="post" enctype="multipart/form-data">
+
+                    @csrf
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <label for="sigle">Sigle</label>
+                            <input type="text" id="sigle" name="sigle" class="form-control" value="{{ $structure->sigle }}">
+                        </div>
+                        <div class="col">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" class="form-control" value="{{ $structure->nom }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <label for="email" class="disabled">Adresse électronique</label>
+                            <input type="email" id="email" readonly name="email" class="form-control" value="{{ $structure->email }}">
+                        </div>
+                        <div class="col">
+                            <label for="telephone" class="disabled">Telephone</label>
+                            <input type="text" id="telephone" name="telephone" readonly class="form-control" value="{{ $structure->telephone }}">
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <label for="logo">Logo</label>
+                            <input type="file" id="logo" name="logo" class="form-control" value="{{ $structure->logo }}">
+                        </div>
+                        <div class="col">
+                            <label for="site_web">Site Web</label>
+                            <input type="text" id="site_web" name="site_web" class="form-control" value="{{ $structure->site_web }}">
+                        </div>
+                    </div>
+
+
+                    <!-- Sign up button -->
+                    <button class="btn btn-info my-4 k" type="submit">Mettre à jour</button>
+
+                </form>
 
             </div>
         </div>

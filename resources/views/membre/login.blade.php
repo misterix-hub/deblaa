@@ -1,7 +1,7 @@
 @extends('layout.header')
 
 @section('connexion')
-    
+
     <div class="indigo pt-1 pb-1">
         <div class="container-fluid">
             <div class="row">
@@ -29,15 +29,15 @@
                     <div>
                         <h5>
                             <span class="font-weight-bold">Connexion</span> -
-                            <span class="red-text">Accès restreint</span>
+                            <span class="red-text">compte utilisateur</span>
                         </h5>
                     </div><br />
 
-                    <form action="{{ route('sLoginProcessing') }}" method="post">
+                    <form action="{{ route('mLoginProcessing') }}" method="post">
                         @csrf
 
-                        <label for="email" class="font-size-14">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ...">
+                        <label for="telephone" class="font-size-14">Numéro de téléphone</label>
+                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
@@ -50,15 +50,14 @@
                             Mot de passe oublié ?
                         </a><hr />
 
-                        Si vous êtes une structure et que vous n'avez pas encore de compte, 
-                        <a href="">faites votre demande.</a>
-
+                        Si vous n'avez pas encore de compte, <a href="">cliquez ici</a>
+                        Pour vous informer de comment avoir un compte.
 
                     </form>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
-                
+
             </div>
         </div>
     </div>

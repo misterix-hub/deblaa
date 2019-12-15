@@ -20,6 +20,7 @@ class MessageController extends Controller
                 'niveaux' => Niveau::all(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
             ]);
         }
