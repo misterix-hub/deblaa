@@ -2,6 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Membre/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Membre/MainController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Membre/MessageController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576332797_photo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576357363_togo-flag-medium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576376868_avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576377047_togo-flag-medium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576388979_central-african-republic-flag-xs.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/structure/1576389047_togo-flag-medium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/universite/1576363823_photo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/logos/universite/1576391139_central-african-republic-flag-xs.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/messages/structures/fichier/1576346862_doc.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/messages/structures/fichier/1576346921_doc.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/messages/structures/fichier/1576347438_doc.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/messages/structures/fichier/1576357661_doc.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/db/messages/universites/fichier/1576364242_0.1.PLAN DE TRAVAIL_ACCELERATION NUNYA LAB_ProjetX_PromoteurXY_Dec2019-Mai2020.doc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/ajaxViews/membre/message/details.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/ajaxViews/membre/message/inboxS.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/ajaxViews/membre/message/sideBarMembre.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layout/sideBarMembre.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/membre/detailsMessage.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/membre/inbox.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/membre/inboxs.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/membre/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" afterDir="false" />
@@ -15,7 +40,6 @@
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/MessageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/db/messages/fichier/1576229894_17496.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/inboxS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/inboxS.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/sideBarEtudiant.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ajaxViews/etudiant/message/sideBarEtudiant.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/etudiant/detailsMessage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/etudiant/detailsMessage.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" afterDir="false" />
@@ -457,12 +481,12 @@
       <workItem from="1576076246803" duration="12906000" />
       <workItem from="1576139102531" duration="32173000" />
       <workItem from="1576303581197" duration="5339000" />
-      <workItem from="1576317305701" duration="54602000" />
+      <workItem from="1576317305701" duration="54912000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183726000" />
+    <option name="totallyTimeSpent" value="184036000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
