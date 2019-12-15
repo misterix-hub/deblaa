@@ -12,7 +12,7 @@
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         {{ $message }}
-                        @if ($message == "Membre ajouté avec succès !");
+                        @if ($message == "Membre ajouté avec succès !")
                             <?php $send_message = 1; ?>
                         @endif
                     </div>
@@ -55,10 +55,10 @@
                                         </a>
                                     </td>
                                 </tr>
-			    @empty
-				<tr>
-				    <td class="text-center" colspan="5"><b>Aucun membre</b></td>
-				</tr>
+                            @empty
+                            <tr>
+                                <td class="text-center" colspan="5"><b>Aucun membre</b></td>
+                            </tr>
                             @endforelse
                         </tbody>
                         <tfoot>

@@ -92,9 +92,6 @@ class MessageController extends Controller
 
             $message_structure->save();
 
-	    $nums = array();
-	    $k = 0;
-
             if (is_array($groupes) || is_array($groupes)) {
                 foreach ($groupes as $groupe) {
                     $cible_message_structure = new CibleMessageStructure();
@@ -102,16 +99,17 @@ class MessageController extends Controller
                     $cible_message_structure->departement_id = $groupe;
                     $cible_message_structure->save();
 
-		    $telephones = User::where('departement_id', $groupe)->get();
+		            $telephones = User::where('departement_id', $groupe)->get();
 
-		    foreach($telephones as $telephone) {
-			$nums[$k] = $telephone->telephone;
+                    foreach($telephones as $telephone) {
+                        $num = $telephone->telephone;
+                        echo $num;
 
-			$k += 1;
-		    }
+                    }
                 }
             }
-            return redirect(route('sListeMessage'))->with('nums', $nums);
+
+            //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
         }
     }
 
