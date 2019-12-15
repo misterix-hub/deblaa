@@ -62,7 +62,7 @@ class MembreController extends Controller
             $user->password = bcrypt($password);
             $user->save();
             session()->put('msg_tel', $request->telephone);
-            session()->put('msg_pwd', $password);
+            session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Connectez-vous ici: https://deblaa.com/public/membres/login");
 
             return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
         }

@@ -32,11 +32,11 @@
                                 <th>Téléphone</th>
                                 <th>Groupe</th>
                                 <th>Rôle</th>
-                                <th width="100" class="text-center">Action</th>
+                                <th width="130" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $user)
+                            @forelse($users as $user)
                                 <tr>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->telephone }}</td>
@@ -55,7 +55,11 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+			    @empty
+				<tr>
+				    <td class="text-center" colspan="5"><b>Aucun membre</b></td>
+				</tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
@@ -76,10 +80,11 @@
 @section('script')
     <script>
         $(document).ready(function() {
+	    $('#example').DataTable();
             var send_message = "{{ $send_message }}";
             if (send_message == 1) {
                 $.ajax ({
-                   url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from={{ session()->get('sigle') }}&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=1" ,
+                   url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
                    type : 'GET'
                 });
             }

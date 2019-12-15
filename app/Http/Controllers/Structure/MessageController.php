@@ -39,7 +39,7 @@ class MessageController extends Controller
         $groupes = $request->input('groupes');
 
         if(empty($groupes)) {
-            return back()->with('error', 'Sélectionnez au moins un groupe, Votre message n\'a aucun cible');
+            return back()->with('error', 'Sélectionnez au moins un groupe, Votre message n\'a aucune cible');
         } else {
             $message_structure = new MessageStructure();
             $message_structure->structure_id = session()->get('id');
@@ -92,15 +92,26 @@ class MessageController extends Controller
 
             $message_structure->save();
 
+	    $nums = array();
+	    $k = 0;
+
             if (is_array($groupes) || is_array($groupes)) {
                 foreach ($groupes as $groupe) {
                     $cible_message_structure = new CibleMessageStructure();
                     $cible_message_structure->message_structure_id = $message_structure->id;
                     $cible_message_structure->departement_id = $groupe;
                     $cible_message_structure->save();
+
+		    $telephones = User::where('departement_id', $groupe)->get();
+
+		    foreach($telephones as $telephone) {
+			$nums[$k] = $telephone->telephone;
+
+			$k += 1;
+		    }
                 }
             }
-            return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
+            return redirect(route('sListeMessage'))->with('nums', $nums);
         }
     }
 

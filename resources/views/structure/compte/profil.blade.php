@@ -3,7 +3,7 @@
 @section('content')
     <br />
     <div class="container-fluid">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-12">
                 <h3><i class="icofont-user"></i> Profil {{ $structure->sigle }}</h3>
             </div>
@@ -59,7 +59,7 @@
 
 
                     <!-- Sign up button -->
-                    <button class="btn btn-info my-4 k" type="submit">Mettre à jour</button>
+                    <button class="btn btn-indigo btn-md ml-0" type="submit">Mettre à jour</button>
 
                 </form>
 

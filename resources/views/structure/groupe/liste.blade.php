@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h3><i class="icofont-listine-dots"></i> Liste groupes</h3>
             </div>
-            <div class="col-lg-10 col-md-12 col-sm-12"><br />
+            <div class="col-lg-12 col-md-12 col-sm-12"><br />
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">

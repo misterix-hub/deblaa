@@ -9,10 +9,13 @@
             </div>
             <div class="col-12"><br />
 
-                @if ($message = Session::get('success'))
+		<?php $test = 0; $telephones = array(); ?>
+
+                @if ($message = Session::get('nums'))
                     <div class="alert alert-success">
-                        {{ $message }}
+                        Message envoyé avec succès !
                     </div>
+		    <?php $test += 1; $telephones = $nums; ?>
                 @endif
 
                 @if ($message = Session::get('error'))
@@ -47,7 +50,7 @@
                         <tfoot>
                             <tr>
                                 <th>Titre message</th>
-                                <th width="100">Date</th>
+                                <th width="100">Date d'envoi</th>
                                 <th width="100" class="text-center">Action</th>
                             </tr>
                         </tfoot>
@@ -56,4 +59,23 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script>
+	$(document).ready(function () {
+
+	    var test = "{{ $test }}";
+
+	    if(test != 0) {
+		var telephones = "{{ $telephones }}";
+            	    telephones.forEach(telephone) {
+                    console.log($telephone);
+            	}
+	    }
+
+	});
+    </script>
+
 @endsection
