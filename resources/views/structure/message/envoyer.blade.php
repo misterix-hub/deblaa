@@ -25,7 +25,9 @@
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Pièce jointe</b></label>
+
                             <input type="file" multiple name="fichier[]" id="fichier"  value="{{ old('fichier') }}" class="form-control"><br />
+
                         </div>
                     </div>
 

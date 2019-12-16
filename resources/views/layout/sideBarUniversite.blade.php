@@ -5,6 +5,10 @@
         <a href="{{ route('indexUniversite') }}">
             <div class="logo p-2">
                 <img src="{{ URL::asset('db/logos/universite/' . session()->get('logo')) }}" alt="logo-université" width="100%">
+                <span class="grey-text font-weight-bold">
+                    <i class="icofont-university"></i>
+                    Université : {{ session()->get('sigle') }}
+                </span>
             </div>
         </a>
 
@@ -136,22 +140,10 @@
                 <small><b>LIENS UTILES</b></small>
             </span><br />
             <div>
-                <a href="{{ route('sBilanMessage') }}">
+                <a href="#!">
                     <div>
                         <i class="icofont-link"></i>
-                        Premier lien
-                    </div>
-                </a>
-                <a href="{{ route('sBilanMessage') }}">
-                    <div>
-                        <i class="icofont-link"></i>
-                        Deuxième lien
-                    </div>
-                </a>
-                <a href="{{ route('sBilanMessage') }}">
-                    <div>
-                        <i class="icofont-link"></i>
-                        Troisième lien
+                        Nous envoyer un message
                     </div>
                 </a>
             </div>
@@ -203,11 +195,11 @@
                         </div>
 
                         <input type="checkbox" id="allNiveaux0" class="allNiveaux0">
-                        <label for="allNiveaux0"><b>Tous les niveaux</b></label><br />
+                        <label for="allNiveaux0"><span class="font-weight-bold">Tous les niveaux</span></label><br />
 
                         @foreach ($niveaux as $niveau)
                             <input type="checkbox" name="niveaux[]" class="niveauCheckBox0" id="niveau{{ $niveau->id }}" value="{{ $niveau->id }}">
-                            <label for="niveau{{ $niveau->id }}"><b>{{ $niveau->nom }}</b></label>&nbsp;&nbsp;&nbsp;
+                            <label for="niveau{{ $niveau->id }}"><b>{{ $niveau->nom }}</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endforeach
 
                     </div>

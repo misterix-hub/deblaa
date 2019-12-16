@@ -43,7 +43,7 @@
 <!-- Acces Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('acces', 'Acces:') !!}
-    <label class="checkbox-inline">
+    <label>
         {!! Form::hidden('acces', 0) !!}
         {!! Form::checkbox('acces', '1', null) !!}
     </label>

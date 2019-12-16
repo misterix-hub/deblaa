@@ -9,7 +9,6 @@
             <div class="box-body">
                 <div class="table-responsive">
 
-
                     <table class="table">
                         <thead>
                         <tr>
@@ -40,8 +39,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center">
-                                        <b>Aucune université !</b>
+                                    <td class="text-center text-danger" colspan="3"><br />
+                                        Aucune Structure !
                                     </td>
                                 </tr>
                             @endforelse

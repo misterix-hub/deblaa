@@ -5,6 +5,10 @@
         <a href="{{ route('indexStructure') }}">
             <div class="logo p-2">
                 <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-université" width="100%">
+                <span class="grey-text font-weight-bold">
+                    <i class="icofont-building"></i>
+                    Structure : {{ session()->get('sigle') }}
+                </span>
             </div>
         </a>
 
@@ -136,22 +140,10 @@
                 <small><b>LIENS UTILES</b></small>
             </span><br />
             <div>
-                <a href="{{ route('sBilanMessage') }}">
+                <a href="#!">
                     <div>
                         <i class="icofont-link"></i>
-                        Premier lien
-                    </div>
-                </a>
-                <a href="{{ route('sBilanMessage') }}">
-                    <div>
-                        <i class="icofont-link"></i>
-                        Deuxième lien
-                    </div>
-                </a>
-                <a href="{{ route('sBilanMessage') }}">
-                    <div>
-                        <i class="icofont-link"></i>
-                        Troisième lien
+                        Nous envoyer un message
                     </div>
                 </a>
             </div>
@@ -198,7 +190,6 @@
                         @csrf
                         <label class="" for="nom"><b>Nom du groupe</b></label>
                         <input type="text" name="nom" id="nom" class="form-control" placeholder="Saisir le groupe ..."><br  />
-
                     </div>
                     <div class="modal-footer pt-2 pb-2">
                         <button type="button" class="btn btn-white btn-md z-depth-0" data-dismiss="modal">Fermer</button>

@@ -77,7 +77,7 @@
     @endif
 @empty
 
-    <div class="text-center">
+    <div class="text-center"><br />
         <b>Aucun message !</b>
     </div>
 

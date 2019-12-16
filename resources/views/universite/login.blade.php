@@ -29,7 +29,7 @@
                     <div>
                         <h5>
                             <span class="font-weight-bold">Connexion</span> -
-                            <span class="red-text">Accès restreint</span>
+                            <span class="red-text">accès restreint</span>
                         </h5>
                     </div><br />
 

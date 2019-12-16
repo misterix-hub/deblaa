@@ -8,16 +8,22 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($filiereNiveaus as $filiereNiveau)
-            <tr>
-                <td>{{ $filiereNiveau->filiere->nom }}</td>
-                <td>{{ $filiereNiveau->niveau->nom }}</td>
-                <td width="100" class="text-center">{{ $filiereNiveau->filiere->universite->sigle }}</td>
-                <td>
+            @forelse($filiereNiveaus as $filiereNiveau)
+                <tr>
+                    <td>{{ $filiereNiveau->filiere->nom }}</td>
+                    <td>{{ $filiereNiveau->niveau->nom }}</td>
+                    <td width="100" class="text-center">{{ $filiereNiveau->filiere->universite->sigle }}</td>
+                    <td>
 
-                </td>
-            </tr>
-        @endforeach
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="3" class="text-center text-danger"><br />
+                        Pas d'enregistrement !
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

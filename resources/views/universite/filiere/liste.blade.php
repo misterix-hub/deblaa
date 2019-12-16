@@ -67,7 +67,7 @@
                         @empty
                             <tr>
                                 <td colspan="3" class="text-center">
-                                    <b>Aucune filière</b>
+                                    <b>Pas de filière</b>
                                 </td>
                             </tr>
                         @endforelse

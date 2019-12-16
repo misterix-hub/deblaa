@@ -18,7 +18,7 @@
                     </div>
                 @endif
                 <br /><br /><br />
-                <h1 style="font-weight: 200;" class="red-text text-center">En cours de développement !</h1>
+                <h1 style="font-weight: 200;" class="red-text text-center">En cours de développement ...</h1>
                 <h1 class="red-text text-center"><i class="icofont-settings"></i></h1>
 
             </div>

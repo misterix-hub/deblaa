@@ -21,8 +21,8 @@
                     </div>
                 @endif
 
-                <div class="card card-body border rounded">
-                    <table id="example" class="table table-bordered" style="width:100%">
+                <div>
+                    <table class="table table-bordered" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Titre message</th>
@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($messages as $message)    
+                            @forelse ($messages as $message)    
                                 <tr>
                                     <td>{{ $message->titre }}</td>
                                     <td>{{ $message->created_at }}</td>
@@ -42,12 +42,18 @@
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td class="text-center" colspan="3">
+                                        <b>Pas de message envoyé !</b>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th>Titre message</th>
-                                <th width="100">Date</th>
+                                <th width="100">Date d'envoi</th>
                                 <th width="100" class="text-center">Action</th>
                             </tr>
                         </tfoot>

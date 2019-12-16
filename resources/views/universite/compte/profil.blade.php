@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-user"></i> Profil {{ $universite->sigle }}</h3>
+                <h3><i class="icofont-university"></i> Profil {{ $universite->sigle }}</h3>
             </div>
             <div class="col-lg-10 col-md-12 col-sm-12"><br />
 

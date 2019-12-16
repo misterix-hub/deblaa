@@ -22,7 +22,6 @@ class MessageController extends Controller
                 'users'
             ]);
         }
-
     }
 
     public function create() {
