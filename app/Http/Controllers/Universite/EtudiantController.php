@@ -58,8 +58,24 @@ class EtudiantController extends Controller
             return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
         } else {
 
-            if (count(User::where('telephone', $request->telephone)->get()) != 0) {
-                return back()->with('error', "Numéro de téléphone déjà utilisé !");
+            $emails = User::where('telephone', $request->telephone)->get();
+
+            if (count($emails) != 0) {
+
+                foreach ($emails as $email) {
+                    $password = $email->password;
+                    break;
+                }
+
+                $user = new User;
+                $user->name = $request->nomComplet;
+                $user->telephone = $request->telephone;
+                $user->filiere_id = $request->filiere;
+                $user->niveau_id = $request->niveau;
+                $user->password = $password;
+                $user->save();
+
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
             } else {
                 $password = "DB" . rand(1021, 9999);
                 
@@ -71,8 +87,11 @@ class EtudiantController extends Controller
                 $user->niveau_id = $request->niveau;
                 $user->password = bcrypt($password);
                 $user->save();
+
+                session()->put('msg_tel', $request->telephone);
+                session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Connectez-vous ici: https://deblaa.com/public/etudiants/login");
     
-                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !" . $password);
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
             }
             
 

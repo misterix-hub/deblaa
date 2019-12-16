@@ -47,9 +47,25 @@ class MembreController extends Controller
      */
     public function store(Request $request)
     {
+        $emails = User::where('telephone', $request->telephone)->get();
 
-        if (count(User::where('telephone', $request->telephone)->get()) != 0) {
-            return back()->with('error', "Numéro de téléphone déjà utilisé !");
+        if (count($emails) != 0) {
+            
+            foreach ($emails as $email) {
+                $password = $email->password;
+                break;
+            }
+
+            $user = new User;
+            $user->name = $request->nomComplet;
+            $user->telephone = $request->telephone;
+            $user->fonction = $request->role;
+            $user->departement_id = $request->groupe;
+            $user->password = $password;
+            $user->save();
+
+            return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+
         } else {
             $password = "DB" . rand(1021, 9999);
 

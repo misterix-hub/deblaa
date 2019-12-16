@@ -107,6 +107,14 @@ class MessageController extends Controller
             }
     
             $message_universite->save();
+            
+            $titre = $request->titre;
+
+            if ($request->fichier != "") {
+                $texte = $titre . " *** Un fichier " . $message_universite->format . " est associé à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/etudiants/inbox ***";
+            } else {
+                $texte = $titre . " *** https://deblaa.com/public/etudiants/inbox ***";
+            }
     
             for ($i=0; $i < $request->index; $i++) { 
     
@@ -118,14 +126,39 @@ class MessageController extends Controller
                         $cible_message_universite->filiere_id = $_POST['filiere' . $i];
                         $cible_message_universite->niveau_id = $_POST['niveaux' . $i . $j];
                         $cible_message_universite->save();
+
+                        $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
+
+                        foreach($telephones as $telephone) {
+                            $num = $telephone->telephone;
+?>
+                            <script src="/deblaa/public/mdb/js/jquery.min.js"></script>
+                            <script>
+                                $.ajax ({
+                                    url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
+                                    type : 'GET'
+                                });
+                            </script>
+<?php
+    
+                        }
                     }
                 }
             }
-            
-            return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
-        }
-        
+            echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+            echo "<div><center><img src='/deblaa/public/assets/images/gif2.gif' width='150' /></center></div>"
+?>
+            <script>
+                
+                setTimeout(() => {
+                    window.location = "/deblaa/public/universites/messages";
+                }, 5000);
+    
+            </script>
+<?php
+                //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
 
+        }
     }
 
     public function bilan() {

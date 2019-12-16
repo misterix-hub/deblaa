@@ -17,7 +17,7 @@ class MessageController extends Controller
         } else {
             return view('structure.message.liste', [
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->orderByDesc('id')->get(),
                 'users'
             ]);
         }
@@ -93,23 +93,53 @@ class MessageController extends Controller
             $message_structure->save();
 
             if (is_array($groupes) || is_array($groupes)) {
+                $titre = $request->titre;
+                
+                if ($request->fichier != "") {
+                    $texte = $titre . " *** Un fichier " . $message_structure->format . " est associé à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/membres/inbox ***";
+                } else {
+                    $texte = $titre . " *** https://deblaa.com/public/membres/inbox ***";
+                }
+                
+
                 foreach ($groupes as $groupe) {
                     $cible_message_structure = new CibleMessageStructure();
                     $cible_message_structure->message_structure_id = $message_structure->id;
                     $cible_message_structure->departement_id = $groupe;
                     $cible_message_structure->save();
 
-		            $telephones = User::where('departement_id', $groupe)->get();
-
+                    $telephones = User::where('departement_id', $groupe)->get();
+                    
                     foreach($telephones as $telephone) {
                         $num = $telephone->telephone;
-                        echo $num;
+?>
+                        <script src="/deblaa/public/mdb/js/jquery.min.js"></script>
+                        <script>
+                            $.ajax ({
+                                url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
+                                type : 'GET'
+                            });
+                        </script>
+<?php
 
                     }
                 }
             }
 
+            echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+            echo "<div><center><img src='/deblaa/public/assets/images/gif2.gif' width='150' /></center></div>"
+            //
+?>
+        <script>
+            
+            setTimeout(() => {
+                window.location = "/deblaa/public/structures/messages";
+            }, 5000);
+
+        </script>
+<?php
             //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
+
         }
     }
 

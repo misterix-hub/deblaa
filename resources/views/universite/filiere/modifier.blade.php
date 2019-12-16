@@ -25,7 +25,7 @@
                             @endforeach
                         </ul>
 
-                        <div class="text-right">
+                        <div>
                             <i class="icofont-sort-alt"></i>
                             <b>Sélectionner les niveaux</b><br />
                         </div><br />
@@ -38,8 +38,8 @@
                             <label for="niveau{{ $niveau->id }}"><b>{{ $niveau->nom }}</b></label>&nbsp;&nbsp;&nbsp;
                         @endforeach<br /><br />
 
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-md btn-indigo mr-0 rounded">
+                        <div>
+                            <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
                                 Mettre à jour
                             </button>
                         </div>

@@ -3,11 +3,11 @@
 @section('content')
     <br />
     <div class="container-fluid">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-12">
                 <h3><i class="icofont-user"></i> Profil {{ $universite->sigle }}</h3>
             </div>
-            <div class="col-10"><br />
+            <div class="col-lg-10 col-md-12 col-sm-12"><br />
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -59,7 +59,7 @@
 
 
                     <!-- Sign up button -->
-                    <button class="btn btn-info my-4 k" type="submit">Mettre à jour</button>
+                    <button class="btn btn-indigo btn-md ml-0" type="submit">Mettre à jour</button>
 
                 </form>
 

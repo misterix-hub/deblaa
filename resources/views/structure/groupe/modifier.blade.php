@@ -12,10 +12,10 @@
                 <form action="{{ route('sUpdateGroupe', $groupe->id) }}" method="post">
                     @csrf
                     <label class="" for="nom"><b>Nom du groupe</b></label>
-                    <input type="text" name="nom" id="nom" value="{{ $groupe->nom }}" class="form-control" placeholder="Saisir le groupe ..."><br  />
+                    <input type="text" name="nom" id="nom" value="{{ $groupe->nom }}" class="form-control" placeholder="Saisir le groupe ...">
 
-                    <div class="text-right">
-                        <button type="submit" class="btn btn-md btn-indigo mr-0 rounded">
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
                             Mettre à jour
                         </button>
                     </div>

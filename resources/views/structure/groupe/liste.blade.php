@@ -33,7 +33,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($groupes as $groupe)
+                        @forelse($groupes as $groupe)
                             <tr>
                                 <td>
                                     {{ $groupe->nom }}
@@ -50,8 +50,24 @@
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="2" class="text-center">
+                                    <b>Aucun groupe</b>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                <b>Nom du groupe</b>
+                            </th>
+                            <th class="text-center" width="250">
+                                <b>Action</b>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

@@ -33,22 +33,24 @@
 
 </head>
 <body class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box" style="margin-top: 40px;">
     <div class="login-logo">
         <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" class="circle" width="120"><br>
-        <b>Déblaa </b>
-        <span style="font-size: 2rem; color: red;">Accès restreint</span>
     </div>
 
     <!-- /.login-logo -->
-    <div class="login-box-body" style="border-radius: 1.7rem;">
-        <p class="login-box-msg"><i class="fa fa-sign-in  fa-3x" style="color: deepskyblue;"></i> </p>
+    <div class="login-box-body" style="border-radius: 1rem;">
+        <div style="margin-top: 0; margin-bottom: 20px; font-size: 24px; color: #000;">
+            <b>Connexion</b> -
+            <span style="font-size: 18px; color: red;">accès restreint</span>
+        </div>
 
         <form method="post" action="{{ url('/login') }}">
             @csrf
 
             <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" style="border-radius: 3px;" name="email" value="{{ old('email') }}" placeholder="Email">
                 <i class="fa fa-envelope form-control-feedback"></i>
                 @if ($errors->has('email'))
                     <span class="help-block">
@@ -58,7 +60,8 @@
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" placeholder="Mot de passe" name="password">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" style="border-radius: 3px;" placeholder="Mot de passe" name="password">
                 <span class="fa fa-lock form-control-feedback"></span>
                 @if ($errors->has('password'))
                     <span class="help-block">
@@ -77,17 +80,22 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Connecter</button>
+                    <button type="submit" style="border-radius: 3px;" class="btn btn-primary btn-block btn-flat">Connecter</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a href="{{ url('/password/reset') }}">Mot de passe oublié ?</a><br>
-        <a href="{{ url('/register') }}" class="text-center">Inscrire un administrateur</a>
+        <a href="{{ url('/password/reset') }}" style="font-size: 14px;">Mot de passe oublié ?</a><br>
+        <!--<a href="{{ url('/register') }}" class="text-center" style="font-size: 14px;">Inscrire un administrateur</a>-->
 
     </div>
     <!-- /.login-box-body -->
+    <br /><br />
+    <div class="text-center">
+        Copyright &copy; 2019 | Tous droits réservés.<br />
+        Powered by <a href="https://ibtagroup.com">IBTAGroup</a>
+    </div>
 </div>
 <!-- /.login-box -->
 

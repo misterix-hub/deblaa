@@ -21,20 +21,20 @@
                 </div>
             @endif
 
-            <div class="card card-body border rounded">
-                <table id="example" class="table table-bordered" style="width:100%">
+            <div>
+                <table class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
                             <th>Titre message</th>
-                            <th width="130">Date d'envoi</th>
+                            <th width="180">Date d'envoi</th>
                             <th width="100" class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($messages as $message)
+                        @forelse($messages as $message)
                             <tr>
                                 <td>{{ $message->titre }}</td>
-                                <td>{{ $message->created_at }}</td>
+                                <td class="text-right">{{ $message->created_at }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('sDetailsMessage', $message->id) }}" class="blue-text">
                                         <i class="icofont-plus"></i>
@@ -42,7 +42,13 @@
                                     </a>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td class="text-center" colspan="3">
+                                    <b>Aucun message envoyée !</b>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>

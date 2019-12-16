@@ -21,7 +21,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Titre du message</b></label>
-                            <input type="text" name="titre" id="titre" placeholder="Saisir le titre ici" value="{{ old('titre') }}" class="form-control"><br />
+                            <input type="text" required name="titre" id="titre" placeholder="Saisir le titre ici" value="{{ old('titre') }}" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Pièce jointe</b></label>

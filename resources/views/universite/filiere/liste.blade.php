@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h3><i class="icofont-listine-dots"></i> Liste filières</h3>
             </div>
-            <div class="col-lg-10 col-md-12 col-sm-12"><br />
+            <div class="col-lg-12 col-md-12 col-sm-12"><br />
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -72,6 +72,19 @@
                             </tr>
                         @endforelse
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>
+                                <b>Nom de la filière</b>
+                            </th>
+                            <th width="200">
+                                <b>Niveaux</b>
+                            </th>
+                            <th class="text-center" width="250">
+                                <b>Action</b>
+                            </th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

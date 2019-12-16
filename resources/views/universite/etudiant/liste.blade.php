@@ -9,9 +9,13 @@
             </div>
             <div class="col-12"><br />
 
+                <?php $send_message = 0; ?>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         {{ $message }}
+                        @if ($message == "Étudiant ajouté avec succès !")
+                            <?php $send_message = 1; ?>
+                        @endif
                     </div>
                 @endif
 
@@ -74,4 +78,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+	    $('#example').DataTable();
+            var send_message = "{{ $send_message }}";
+            if (send_message == 1) {
+                $.ajax ({
+                   url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
+                   type : 'GET'
+                });
+            }
+        });
+    </script>
 @endsection
