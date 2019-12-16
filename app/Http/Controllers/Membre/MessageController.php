@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Membre;
 
 use App\CibleMessageStructure;
+use App\FichierMessageStructure;
 use App\Http\Controllers\Controller;
 use App\MessageLu;
 use App\MessageStructure;
@@ -83,7 +84,8 @@ class MessageController extends Controller
         }
 
         return view('ajaxViews.membre.message.details', [
-            'messages' => MessageStructure::where('id', $request->id)->get()
+            'messages' => MessageStructure::where('id', $request->id)->get(),
+            'fichier_messages' => FichierMessageStructure::where('message_structure_id', $request->id)->get()
         ]);
     }
 
@@ -98,7 +100,8 @@ class MessageController extends Controller
 
 
         return view('membre.detailsMessage', [
-            'messages' => MessageStructure::where('id', $id)->get()
+            'messages' => MessageStructure::where('id', $id)->get(),
+            'fichier_messages' => FichierMessageStructure::where('message_structure_id', $id)->get()
         ]);
     }
 }

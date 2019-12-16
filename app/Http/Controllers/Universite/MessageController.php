@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Universite;
 
+use App\FichierMessageUniversite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Niveau;
@@ -61,57 +62,44 @@ class MessageController extends Controller
             $message_universite->universite_id = session()->get('id');
             $message_universite->titre = $request->titre;
             $message_universite->contenu = $request->message;
-
-            if ($request->fichier != "") {
-                $target_dir = "db/messages/universites/fichier/";
-
-                $file_name = time() . "_" . basename($_FILES["fichier"]["name"]);
-
-                $target_file = $target_dir . $file_name;
-                $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"]), PATHINFO_EXTENSION));
-
-                $message_universite->fichier = $file_name;
-                $message_universite->taille = ($_FILES["fichier"]["size"] / 1000000);
-
-                switch ($FileType) {
-                    case 'png':
-                        $message_universite->format = "Image";
-                        break;
-
-                    case 'jpg':
-                        $message_universite->format = "Image";
-                        break;
-
-                    case 'jpeg':
-                        $message_universite->format = "Image";
-                        break;
-
-                    case 'mp3':
-                        $message_universite->format = "Audio";
-                        break;
-
-                    case 'mp4':
-                        $message_universite->format = "Vidéo";
-                        break;
-
-                    case 'pdf':
-                        $message_universite->format = "Document PDF";
-                        break;
-                    
-                    default:
-                        $message_universite->format = "Iconnu";
-                        break;
-                }
-
-                move_uploaded_file($_FILES["fichier"]["tmp_name"], $target_file);
-            }
-    
             $message_universite->save();
-            
+
+            $totalFichier = count($_FILES['fichier']['name']);
+
+            $target_dir = "db/messages/universites/fichier/";
+
+            if ($totalFichier == 0) {
+
+            } else {
+
+                for ($i = 0; $i < $totalFichier; $i++) {
+
+                    $file = $_FILES["fichier"]["name"][$i];
+
+                    if ($file != "") {
+                        $file_name = time() . "_" . basename($file);
+                        $target_file = $target_dir . $file_name;
+                        $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
+
+                        $fichier_message_universite = new FichierMessageUniversite();
+                        $fichier_message_universite->message_universite_id = $message_universite->id;
+                        $fichier_message_universite->fichier = $file_name;
+                        $fichier_message_universite->format = $FileType;
+                        $fichier_message_universite->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
+
+                        $fichier_message_universite->save();
+
+                        move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
+                    }
+
+                }
+            }
+
+
             $titre = $request->titre;
 
-            if ($request->fichier != "") {
-                $texte = $titre . " *** Un fichier " . $message_universite->format . " est associé à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/etudiants/inbox ***";
+            if ($totalFichier != 0) {
+                $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/etudiants/inbox ***";
             } else {
                 $texte = $titre . " *** https://deblaa.com/public/etudiants/inbox ***";
             }
@@ -139,6 +127,7 @@ class MessageController extends Controller
                                     type : 'GET'
                                 });
                             </script>
+
 <?php
     
                         }
@@ -183,6 +172,9 @@ class MessageController extends Controller
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'cible_messages' => CibleMessageUniversite::where('message_universite_id', $id)->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'fichier_messages' => MessageUniversite::rightJoin('fichier_message_universites', 'message_universites.id', 'message_universite_id')
+                            ->where('message_universite_id', $id)
+                            ->get(),
                 'users' => User::leftjoin('message_lus', 'users.id', 'user_id')
                                 ->where('message_universite_id', $id)
                                 ->where('user_id', '<>', null)->get()

@@ -91,7 +91,7 @@ class EtudiantController extends Controller
                 session()->put('msg_tel', $request->telephone);
                 session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Connectez-vous ici: https://deblaa.com/public/etudiants/login");
     
-                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !".$password);
             }
             
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Structure;
 
 use App\CibleMessageStructure;
+use App\FichierMessageStructure;
 use App\Http\Controllers\Controller;
 use App\MessageStructure;
 use App\Models\Departement;
@@ -45,58 +46,47 @@ class MessageController extends Controller
             $message_structure->structure_id = session()->get('id');
             $message_structure->titre = $request->titre;
             $message_structure->contenu = $request->message;
+            $message_structure->save();
 
-            if ($request->fichier != "") {
-                $target_dir = "db/messages/structures/fichier/";
+            $totalFichier = count($_FILES['fichier']['name']);
 
-                $file_name = time() . "_" . basename($_FILES["fichier"]["name"]);
+            $target_dir = "db/messages/structures/fichier/";
 
-                $target_file = $target_dir . $file_name;
-                $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"]), PATHINFO_EXTENSION));
+            if ($totalFichier == 0) {
 
-                $message_structure->fichier = $file_name;
-                $message_structure->taille = ($_FILES["fichier"]["size"] / 1000000);
+            } else {
 
-                switch ($FileType) {
-                    case 'png':
-                        $message_structure->format = "Image";
-                        break;
+                for ($i = 0; $i < $totalFichier; $i++) {
 
-                    case 'jpg':
-                        $message_structure->format = "Image";
-                        break;
+                    $file = $_FILES["fichier"]["name"][$i];
 
-                    case 'jpeg':
-                        $message_structure->format = "Image";
-                        break;
+                    if ($file != "") {
+                        $file_name = time() . "_" . basename($file);
+                        $target_file = $target_dir . $file_name;
+                        $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
 
-                    case 'mp3':
-                        $message_structure->format = "Audio";
-                        break;
+                        $fichier_message_structure = new FichierMessageStructure();
+                        $fichier_message_structure->message_structure_id = $message_structure->id;
+                        $fichier_message_structure->fichier = $file_name;
+                        $fichier_message_structure->format = $FileType;
+                        $fichier_message_structure->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
 
-                    case 'mp4':
-                        $message_structure->format = "Vidéo";
-                        break;
+                        $fichier_message_structure->save();
 
-                    case 'pdf':
-                        $message_structure->format = "Document PDF";
-                        break;
+                        move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
+                    }
 
-                    default:
-                        $message_structure->format = "Inconnu";
-                        break;
                 }
-
-                move_uploaded_file($_FILES["fichier"]["tmp_name"], $target_file);
             }
 
-            $message_structure->save();
+
+
 
             if (is_array($groupes) || is_array($groupes)) {
                 $titre = $request->titre;
                 
-                if ($request->fichier != "") {
-                    $texte = $titre . " *** Un fichier " . $message_structure->format . " est associé à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/membres/inbox ***";
+                if ($totalFichier != 0) {
+                    $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" . " à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/membres/inbox ***";
                 } else {
                     $texte = $titre . " *** https://deblaa.com/public/membres/inbox ***";
                 }
@@ -120,6 +110,7 @@ class MessageController extends Controller
                                 type : 'GET'
                             });
                         </script>
+
 <?php
 
                     }
@@ -155,6 +146,9 @@ class MessageController extends Controller
                 'messages' => MessageStructure::where('id', $id)->get(),
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                 'cible_messages' => CibleMessageStructure::where('message_structure_id', $id)->get(),
+                'fichier_messages' => MessageStructure::rightJoin('fichier_message_structures', 'message_structures.id', 'message_structure_id')
+                                        ->where('message_structure_id', $id)
+                                        ->get(),
                 'users' => User::leftjoin('message_lus', 'users.id', 'user_id')
                     ->where('message_structure_id', $id)
                     ->where('user_id', '<>', null)->get()
