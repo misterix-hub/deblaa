@@ -32,20 +32,24 @@
     <![endif]-->
 </head>
 <body class="hold-transition register-page">
-<div class="register-box">
+<div class="register-box" style="margin-top: 40px;">
     <div class="register-logo">
         <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" class="circle" width="120"><br>
-        <b>Déblaa </b><span style="font-size: 2rem; color: #ff0000;">Acces restreint </span>
     </div>
 
-    <div class="register-box-body" style="border-radius: 1.7rem;">
-        <p class="login-box-msg"><i class="fa fa-lock fa-4x text-center" style="color: red;"></i></p>
+    <div class="register-box-body" style="border-radius: 1rem;">
+        
+        <div style="margin-top: 0; margin-bottom: 20px; font-size: 24px; color: #000;">
+            <b>Inscription</b> -
+            <span style="font-size: 18px; color: red;">accès restreint</span>
+        </div>
 
         <form method="post" action="{{ url('/register') }}">
             @csrf
 
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nom complet">
+                <label for="name">Nom complet</label>
+                <input type="text" style="border-radius: 3px;" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Nom complet">
                 <i class="fa fa-user form-control-feedback"></i>
 
                 @if ($errors->has('name'))
@@ -56,7 +60,8 @@
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+                <label for="email">Email</label>
+                <input type="email" style="border-radius: 3px;" id="Email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
                 <i class="fa fa-envelope form-control-feedback"></i>
 
                 @if ($errors->has('email'))
@@ -68,7 +73,8 @@
 
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
-                <input type="password" class="form-control" name="password" placeholder="Mot de passe">
+                <label for="password">Mot de passe</label>
+                <input type="password" style="border-radius: 3px;" class="form-control" name="password" placeholder="Mot de passe">
                 <i class="fa fa-lock form-control-feedback"></i>
 
                 @if ($errors->has('password'))
@@ -79,7 +85,8 @@
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                <input type="password" name="password_confirmation" class="form-control" placeholder="Confirmer mot de passe">
+                <label for="passwrd_confirmaion">Confimer mot de passe</label>
+                <input type="password" style="border-radius: 3px;" name="password_confirmation" class="form-control" placeholder="Confirmer mot de passe">
                 <i class="fa fa-lock form-control-feedback"></i>
 
                 @if ($errors->has('password_confirmation'))
@@ -92,7 +99,7 @@
             <div class="row">
                 <!-- /.col -->
                 <div class="col-xs-4 pull-right">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Inscrire</button>
+                    <button type="submit" style="border-radius: 3px;" class="btn btn-primary btn-block btn-flat">Inscrire</button>
                 </div>
                 <!-- /.col -->
             </div>
@@ -103,6 +110,10 @@
     <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
+<div class="text-center">
+    Copyright &copy; 2019 | Tous droits réservés.<br />
+    Powered by <a href="https://ibtagroup.com">IBTAGroup</a>
+</div><br /><br /><br />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

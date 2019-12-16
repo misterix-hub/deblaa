@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($structures as $structure)
+        @forelse($structures as $structure)
             <tr class="{{ $structure->acces == 'Autorisé' ? 'success' : 'warning' }}">
                 <td>{{ $structure->nom }}</td>
                 <td>{{ $structure->sigle }}</td>
@@ -25,12 +25,18 @@
                     <div class='btn-group'>
                         <a href="{{ route('structures.show', [$structure->id]) }}" class='btn btn-default btn-sm'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('structures.edit', [$structure->id]) }}" class='btn btn-default btn-sm btn-info'><i class="glyphicon glyphicon-edit"></i></a>
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Êtes-vous sûr(e) ?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="7" class="text-center text-danger"><br />
+                    Pas d'enregistrement !
+                </td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 </div>

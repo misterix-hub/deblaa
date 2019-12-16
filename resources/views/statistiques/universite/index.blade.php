@@ -40,8 +40,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td class="text-center">
-                                        <b>Aucune université !</b>
+                                    <td class="text-center text-danger" colspan="3"><br />
+                                        Aucune université !
                                     </td>
                                 </tr>
                             @endforelse

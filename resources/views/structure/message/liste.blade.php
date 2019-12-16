@@ -45,7 +45,7 @@
                         @empty
                             <tr>
                                 <td class="text-center" colspan="3">
-                                    <b>Aucun message envoyée !</b>
+                                    <b>Pas de message envoyé !</b>
                                 </td>
                             </tr>
                         @endforelse

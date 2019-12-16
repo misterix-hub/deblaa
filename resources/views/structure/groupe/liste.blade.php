@@ -53,7 +53,7 @@
                         @empty
                             <tr>
                                 <td colspan="2" class="text-center">
-                                    <b>Aucun groupe</b>
+                                    <b>Pas de groupe</b>
                                 </td>
                             </tr>
                         @endforelse
