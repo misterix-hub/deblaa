@@ -453,6 +453,8 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\FactureStructure' => __DIR__ . '/../..' . '/app/FactureStructure.php',
         'App\\FactureUniversite' => __DIR__ . '/../..' . '/app/FactureUniversite.php',
+        'App\\FichierMessageStructure' => __DIR__ . '/../..' . '/app/FichierMessageStructure.php',
+        'App\\FichierMessageUniversite' => __DIR__ . '/../..' . '/app/FichierMessageUniversite.php',
         'App\\Filiere' => __DIR__ . '/../..' . '/app/Filiere.php',
         'App\\Http\\Controllers\\AppBaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/AppBaseController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

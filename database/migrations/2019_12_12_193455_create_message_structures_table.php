@@ -17,9 +17,6 @@ class CreateMessageStructuresTable extends Migration
             $table->bigIncrements('id');
             $table->string('titre');
             $table->text('contenu')->nullable();
-            $table->string('taille')->nullable();
-            $table->string('format')->nullable();
-            $table->string('fichier')->nullable();
             $table->unsignedInteger('structure_id');
             $table->timestamps();
         });

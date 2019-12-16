@@ -12,6 +12,8 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\FactureStructure' => $baseDir . '/app/FactureStructure.php',
     'App\\FactureUniversite' => $baseDir . '/app/FactureUniversite.php',
+    'App\\FichierMessageStructure' => $baseDir . '/app/FichierMessageStructure.php',
+    'App\\FichierMessageUniversite' => $baseDir . '/app/FichierMessageUniversite.php',
     'App\\Filiere' => $baseDir . '/app/Filiere.php',
     'App\\Http\\Controllers\\AppBaseController' => $baseDir . '/app/Http/Controllers/AppBaseController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

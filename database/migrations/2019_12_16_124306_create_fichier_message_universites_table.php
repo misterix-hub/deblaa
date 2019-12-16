@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessageUniversitesTable extends Migration
+class CreateFichierMessageUniversitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMessageUniversitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('message_universites', function (Blueprint $table) {
+        Schema::create('fichier_message_universites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('titre');
-            $table->text('contenu')->nullable();
-            $table->unsignedInteger('universite_id');
+            $table->unsignedInteger('message_universite_id');
+            $table->string('fichier');
+            $table->string('format');
+            $table->string('taille');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateMessageUniversitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('message_universites');
+        Schema::dropIfExists('fichier_message_universites');
     }
 }

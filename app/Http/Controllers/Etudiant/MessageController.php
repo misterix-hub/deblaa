@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Etudiant;
 
+use App\FichierMessageUniversite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\CibleMessageUniversite;
@@ -89,7 +90,8 @@ class MessageController extends Controller
         }
 
         return view('ajaxViews.etudiant.message.details', [
-            'messages' => MessageUniversite::where('id', $request->id)->get()
+            'messages' => MessageUniversite::where('id', $request->id)->get(),
+            'fichier_messages' => FichierMessageUniversite::where('message_universite_id', $request->id)->get()
         ]);
     }
 
@@ -104,7 +106,8 @@ class MessageController extends Controller
 
 
         return view('etudiant.detailsMessage', [
-            'messages' => MessageUniversite::where('id', $id)->get()
+            'messages' => MessageUniversite::where('id', $id)->get(),
+            'fichier_messages' => FichierMessageUniversite::where('message_universite_id', $id)->get()
         ]);
     }
 }
