@@ -105,7 +105,7 @@ class StructureController extends AppBaseController
                         ->subject("Votre mot de passe de Deblaa");
             });
 
-            Flash::success('Université ajoutée avec succès.');
+            Flash::success('Structure ajoutée avec succès.');
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
 

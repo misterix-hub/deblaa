@@ -18,6 +18,7 @@
     @yield('sideBar')
     @yield('inboxs')
     @yield('connexion')
+    @yield('home')
 
     <script src="{{ URL::asset('mdb/js/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('mdb/js/popper.min.js') }}"></script>
