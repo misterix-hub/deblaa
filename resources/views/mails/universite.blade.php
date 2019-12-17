@@ -5,6 +5,6 @@ pour votre prochaine connexion :<br /><br />
 <b>Champs email : {{$email}}</b><br />
 <b>Mot de passe : {{$motDePasse}}</b><br /><br />
 Cliquez sur le lien ci-dessous pour vous connecter :<br />
-<a href="https://www.deblaa.com/universites/login" target="_blank">https://www.deblaa.com/universites/login</a><br /><br />
+<a href="https://deblaa.com/universites/login" target="_blank">https://deblaa.com/universites/login</a><br /><br />
 Coordialement, l'équipe Deblaa.<hr />
-By <a href="https://www.ibtagroup.com" target="_blank">IBTAGroup</a>
+By <a href="https://ibtagroup.com" target="_blank">IBTAGroup</a>
