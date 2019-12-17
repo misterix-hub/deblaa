@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-listine-dots"></i> Liste membres</h3>
+                <h3><i class="icofont-listine-dots"></i> Liste des membres</h3>
             </div>
             <div class="col-12"><br />
                 <?php $send_message = 0; ?>

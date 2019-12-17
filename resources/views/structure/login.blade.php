@@ -43,7 +43,7 @@
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0">
-                            Se connecer
+                            Se connecter
                         </button><br /><br />
 
                         <a href="">

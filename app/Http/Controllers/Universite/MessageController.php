@@ -99,7 +99,7 @@ class MessageController extends Controller
             $titre = $request->titre;
 
             if ($totalFichier != 0) {
-                $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/etudiants/inbox ***";
+                $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/inbox ***";
             } else {
                 $texte = $titre . " *** https://deblaa.com/etudiants/inbox ***";
             }

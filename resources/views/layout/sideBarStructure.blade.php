@@ -4,7 +4,7 @@
     <div class="side-bar">
         <a href="{{ route('indexStructure') }}">
             <div class="logo p-2">
-                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-université" width="100%">
+                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
                 <span class="grey-text font-weight-bold">
                     <i class="icofont-building"></i>
                     Structure : {{ session()->get('sigle') }}
@@ -132,7 +132,7 @@
                 <a href="{{ route('sBilanMessage') }}">
                     <div>
                         <i class="icofont-chart-bar-graph"></i>
-                        Bilan messages
+                        Bilan des messages
                     </div>
                 </a>
             </div><br />
