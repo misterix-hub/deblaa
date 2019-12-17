@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('niveaux.show_fields')
-                    <a href="{{ route('niveaux.index') }}" class="btn btn-default">Back</a>
+                    <a href="{{ route('niveaux.index') }}" class="btn btn-default">retour</a>
                 </div>
             </div>
         </div>

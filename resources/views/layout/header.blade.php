@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ URL::asset('dataTable/dataTable.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('mdb/css/style.css') }}">
     @yield('css')
-    <title>Deblaa - université</title>
+    <title>Deblaa | Université</title>
 </head>
 <body>
 

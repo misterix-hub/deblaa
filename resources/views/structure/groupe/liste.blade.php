@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-listine-dots"></i> Liste groupes</h3>
+                <h3><i class="icofont-listine-dots"></i> Liste du (des) groupe(s)</h3>
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12"><br />
 

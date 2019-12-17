@@ -43,14 +43,14 @@
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0">
-                            Se connecer
+                            Se connecter
                         </button><br /><br />
 
                         <a href="">
                             Mot de passe oublié ?
                         </a><hr />
 
-                        Si vous n'avez pas encore de compte, <a href="">cliquez ici</a>
+                        Si vous n'avez pas encore de compte, <a href="#">cliquez ici</a>
                         Pour vous informer de comment avoir un compte.
 
                     </form>

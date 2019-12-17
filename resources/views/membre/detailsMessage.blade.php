@@ -14,7 +14,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('inboxsMembre') }}" class="black-text">
-                                    <b>Boite de résection</b>
+                                    <b>Boite de réception</b>
                                 </a>
                             </td>
                         </tr>
