@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ URL::asset('dataTable/dataTable.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('mdb/css/style.css') }}">
     @yield('css')
-    <title>Deblaa | Université</title>
+    <title>Deblaa </title>
 </head>
 <body>
 
@@ -19,6 +19,7 @@
     @yield('inboxs')
     @yield('connexion')
     @yield('home')
+    @yield('content')
 
     <script src="{{ URL::asset('mdb/js/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('mdb/js/popper.min.js') }}"></script>

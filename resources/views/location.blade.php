@@ -1,7 +1,6 @@
 @extends('layout.header')
 
-@section('connexion')
-
+@section('content')
     <div class="indigo pt-1 pb-1">
         <div class="container-fluid">
             <div class="row">
@@ -47,59 +46,18 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <br /><br /><br />
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 col-sm-12">
 
-            </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 font-size-14">
-
-                @if ($message = Session::get('error'))
-                    <div class="alert alert-danger">
-                        {{ $message }}
-                    </div>
-                @endif
-
-                <div class="card card-body border border-primary">
-                    <div>
-                        <h5>
-                            <span class="font-weight-bold">Connexion</span> -
-                            <span class="red-text">compte utilisateur</span>
-                        </h5>
-                    </div><br />
-
-                    <form action="{{ route('mLoginProcessing') }}" method="post">
-                        @csrf
-
-                        <label for="telephone" class="font-size-14">Numéro de téléphone</label>
-                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Saisir dans le champs ...">
-                        <div class="mt-3"></div>
-                        <label for="password" class="font-size-14">Mot de passe</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
-                        <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0">
-                            Se connecter
-                        </button><br /><br />
-
-                        <a href="">
-                            Mot de passe oublié ?
-                        </a><hr />
-
-                        Si vous n'avez pas encore de compte, <a href="">cliquez ici</a>
-                        Pour vous informer de comment avoir un compte.
-
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12 col-sm-12">
-
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-md-12 col-sm-12 mt-5">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.408956761869!2d1.1769050144397224!3d6.209668928455595!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1021584ead60792b%3A0x2880b392b6f7baff!2sLA%20VOLONTE!5e0!3m2!1sfr!2stg!4v1576605473010!5m2!1sfr!2stg" width="100%" height="500" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
             </div>
         </div>
     </div>
+
+
 
 @endsection

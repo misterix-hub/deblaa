@@ -81,16 +81,16 @@
                                 <i class="icofont-navigation-menu icofont-2x"></i>
                             </a>
                             <div class="dropdown-menu font-size-14">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('eLogin') }}">
                                     <i class="icofont-university brown-text"></i>
                                     Espace université
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('mLogin') }}">
                                     <i class="icofont-building yellow-text"></i>
                                     Espace structure
                                 </a>
                             <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="{{ route('aboutSection') }}">
                                     <i class="icofont-info-circle cyan-text"></i>
                                     À porpos de nous
                                 </a>

@@ -16,6 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('indexVisitors');
 
+Route::get('a-propos-de-nous', 'PageController@about')->name('about');
+Route::get('nous-trouver', 'PageController@location')->name('location');
+Route::get('partenaires', 'PageController@partners')->name('partners');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
