@@ -101,7 +101,7 @@ class MessageController extends Controller
             if ($totalFichier != 0) {
                 $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/public/etudiants/inbox ***";
             } else {
-                $texte = $titre . " *** https://deblaa.com/public/etudiants/inbox ***";
+                $texte = $titre . " *** https://deblaa.com/etudiants/inbox ***";
             }
     
             for ($i=0; $i < $request->index; $i++) { 
@@ -120,7 +120,7 @@ class MessageController extends Controller
                         foreach($telephones as $telephone) {
                             $num = $telephone->telephone;
 ?>
-                            <script src="/deblaa/public/mdb/js/jquery.min.js"></script>
+                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                             <script>
                                 $.ajax ({
                                     url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
@@ -135,12 +135,12 @@ class MessageController extends Controller
                 }
             }
             echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
-            echo "<div><center><img src='/deblaa/public/assets/images/gif2.gif' width='150' /></center></div>"
+            echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
 ?>
             <script>
                 
                 setTimeout(() => {
-                    window.location = "/deblaa/public/universites/messages";
+                    window.location = "https://deblaa.com/universites/messages";
                 }, 5000);
     
             </script>
