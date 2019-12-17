@@ -21,6 +21,7 @@ class LoginController extends Controller
                 session()->put('nom_complet', $etudiant_telephone->name);
                 session()->put('filiere_id', $etudiant_telephone->filiere_id);
                 session()->put('niveau_id', $etudiant_telephone->niveau_id);
+                session()->put('category', "etudiant");
             }
 
             if (\Hash::check($request->password, $password)) {

@@ -16,14 +16,23 @@ class MainController extends Controller
             if (session()->get('category') == "universite") {
                 return redirect(route('indexUniversite'));
             } else {
-                return view('structure.index',[
-                    'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                    'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                    "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                        ->where('structure_id', session()->get('id'))
-                        ->where('users.id', '<>', null)
-                        ->get()
-                ]);
+                if (session()->get('category') == "structure") {
+                    return view('structure.index',[
+                        'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                        'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                        "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                            ->where('structure_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get()
+                    ]);
+                } else {
+                    if (session()->get('category') == "membre") {
+                        return redirect(route('inboxMembre'));
+                    } else {
+                        return redirect(route('inboxEtudiant'));
+                    }
+                    
+                }
             }
         }
     }
@@ -33,7 +42,15 @@ class MainController extends Controller
             if (session()->get('category') == "structure") {
                 return redirect(route('indexStructure'));
             } else {
-                return redirect(route('indexUniversite'));
+                if (session()->get('category') == "universite") {
+                    return redirect(route('indexUniversite'));
+                } else {
+                    if (session()->get('category') == "membre") {
+                        return redirect(route('inboxMembre'));
+                    } else {
+                        return redirect(route('inboxEtudiant'));
+                    }
+                }
             }
         } else {
             return view('structure.login');

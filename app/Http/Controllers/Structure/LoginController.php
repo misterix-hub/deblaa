@@ -41,6 +41,7 @@ class LoginController extends Controller
     public function logout() {
         session()->forget('id');
         session()->forget('logo');
+        session()->forget('category');
 
         return redirect(route('indexVisitors'));
     }
