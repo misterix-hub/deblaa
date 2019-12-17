@@ -21,6 +21,7 @@ class LoginController extends Controller
                 session()->put('id', $structures_mail->id);
                 session()->put('logo', $structures_mail->logo);
                 session()->put('sigle', $structures_mail->sigle);
+                session()->put('category', "structure");
                 $acces = $structures_mail->acces;
             }
 

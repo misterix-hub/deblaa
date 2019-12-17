@@ -12,22 +12,35 @@ class MainController extends Controller
 {
     public function index() {
 
-        if (!session()->has('id')) {
-            abort("404");
+        if (!session()->has('category')) {
+            return redirect(route('uLogin'));
         } else {
-            return view('universite.index', [
-                'niveaux' => Niveau::all(),
-                'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
-                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                    ->where('universite_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->get()
-            ]);
+            if (session()->get('category') == "structure") {
+                return redirect(route('indexStructure'));
+            } else {
+                return view('universite.index', [
+                    'niveaux' => Niveau::all(),
+                    'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+                    'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                    'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
+                ]);
+            }
+            
         }
     }
 
     public function login() {
-        return view('universite.login');
+        if (session()->has('category')) {
+            if (session()->get('category') == "structure") {
+                return redirect(route('indexStructure'));
+            } else {
+                return redirect(route('indexUniversite'));
+            }
+        } else {
+            return view('universite.login');
+        }
     }
 }

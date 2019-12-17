@@ -21,6 +21,7 @@ class LoginController extends Controller
                 session()->put('id', $universites_mail->id);
                 session()->put('logo', $universites_mail->logo);
                 session()->put('sigle', $universites_mail->sigle);
+                session()->put('category', "universite");
                 $acces = $universites_mail->acces;
             }
 
@@ -40,6 +41,8 @@ class LoginController extends Controller
     public function logout() {
         session()->forget('id');
         session()->forget('logo');
+        session()->forget('sigle');
+        session()->forget('category');
 
         return redirect(route('indexVisitors'));
     }

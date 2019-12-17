@@ -13,7 +13,16 @@ use App\CibleMessageStructure;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
-    return view('welcome');
+    if(session()->has('category')) {
+        if (session()->get('category') == "universite") {
+            return redirect(route('indexUniversite'));
+        } else {
+            return redirect(route('indexStructure'));
+        }
+    } else {
+        return view('welcome');
+    }
+    
 })->name('indexVisitors');
 
 Auth::routes();

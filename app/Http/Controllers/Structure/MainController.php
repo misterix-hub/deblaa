@@ -10,21 +10,33 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index() {
-        if (!session()->has('id')) {
-            abort("404");
+        if (!session()->has('category')) {
+            return redirect(route('sLogin'));
         } else {
-            return view('structure.index',[
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->get()
-            ]);
+            if (session()->get('category') == "universite") {
+                return redirect(route('indexUniversite'));
+            } else {
+                return view('structure.index',[
+                    'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                    'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                    "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                        ->where('structure_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
+                ]);
+            }
         }
     }
 
     public function login() {
-        return view('structure.login');
+        if (session()->has('category')) {
+            if (session()->get('category') == "structure") {
+                return redirect(route('indexStructure'));
+            } else {
+                return redirect(route('indexUniversite'));
+            }
+        } else {
+            return view('structure.login');
+        }
     }
 }
