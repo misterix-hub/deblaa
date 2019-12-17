@@ -49,9 +49,11 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-12 mt-5 text-center">
-            <span class="red-text" style="font-size: 3rem;">Page en cours de développement ...</span>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 mt-5 text-center">
+                <span class="red-text" style="font-size: 3rem;">Page en cours de développement ...</span>
+            </div>
         </div>
     </div>
 @endsection
