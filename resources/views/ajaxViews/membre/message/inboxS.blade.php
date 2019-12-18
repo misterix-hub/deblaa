@@ -41,7 +41,7 @@
                             </div>
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1">
-                            <b class="font-weight-bold black-text">
+                            <b class="black-text">
                                 {{ $cible_message_structure->titre }}
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small>
@@ -62,7 +62,7 @@
                             </div>
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1">
-                            <b class="font-weight-bold black-text">
+                            <b class="black-text">
                                 {{ $cible_message_structure->titre }}
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small>

@@ -78,7 +78,7 @@
                         <td class="text-right">
                             <a href="#!" class="black-text" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                                <i class="icofont-navigation-menu icofont-2x"></i>
+                                <i class="icofont-navigation-menu" style="font-size: 24px;"></i>
                             </a>
                             <div class="dropdown-menu font-size-14">
                                 <a class="dropdown-item" href="#">

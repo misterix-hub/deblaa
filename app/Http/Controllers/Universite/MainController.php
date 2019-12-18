@@ -13,12 +13,12 @@ class MainController extends Controller
     public function index() {
 
         if (!session()->has('category')) {
-            return redirect(route('sLogin'));
+            return redirect(route('uLogin'));
         } else {
-            if (session()->get('category') == "universite") {
-                return redirect(route('indexUniversite'));
+            if (session()->get('category') == "structure") {
+                return redirect(route('indexStructure'));
             } else {
-                if (session()->get('category') == "structure") {
+                if (session()->get('category') == "universite") {
                     return view('universite.index', [
                         'niveaux' => Niveau::all(),
                         'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
