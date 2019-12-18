@@ -97,12 +97,6 @@ class MessageController extends Controller
 
 
             $titre = $request->titre;
-
-            if ($totalFichier != 0) {
-                $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/inbox ***";
-            } else {
-                $texte = $titre . " *** https://deblaa.com/etudiants/inbox ***";
-            }
     
             for ($i=0; $i < $request->index; $i++) { 
     
@@ -119,6 +113,12 @@ class MessageController extends Controller
 
                         foreach($telephones as $telephone) {
                             $num = $telephone->telephone;
+
+                            if ($totalFichier != 0) {
+                                $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier." sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "&password=" . $telephone->password . " ***";
+                            } else {
+                                $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "&password=" . $telephone->password . " ***";
+                            }
 ?>
                             <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                             <script>
@@ -127,9 +127,7 @@ class MessageController extends Controller
                                     type : 'GET'
                                 });
                             </script>
-
 <?php
-    
                         }
                     }
                 }

@@ -83,13 +83,6 @@ class MessageController extends Controller
 
             if (is_array($groupes) || is_array($groupes)) {
                 $titre = $request->titre;
-                
-                if ($totalFichier != 0) {
-                    $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier."sont  associés" . " à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/inbox ***";
-                } else {
-                    $texte = $titre . " *** https://deblaa.com/membres/inbox ***";
-                }
-                
 
                 foreach ($groupes as $groupe) {
                     $cible_message_structure = new CibleMessageStructure();
@@ -101,6 +94,12 @@ class MessageController extends Controller
                     
                     foreach($telephones as $telephone) {
                         $num = $telephone->telephone;
+
+                        if ($totalFichier != 0) {
+                            $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier." sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" . $num . "&password=" . $telephone->password . " ***";
+                        } else {
+                            $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $num . "&password=" . $telephone->password . " ***";
+                        }
 ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>

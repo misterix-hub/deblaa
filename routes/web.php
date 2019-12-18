@@ -165,6 +165,8 @@ Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
 /* ETUDIANT */
 
+Route::get('etudiants/query', 'Etudiant\LoginController@query');
+
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
 Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxsEtudiant');
 Route::get('etudiants/message', 'Etudiant\MessageController@details')->name('eDetailsMessage');
@@ -177,6 +179,8 @@ Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');
 
 /* MEMBRE */
+
+Route::get('membres/query', 'Membre\LoginController@query');
 
 Route::get('membres/inbox', 'Membre\MessageController@inbox')->name('inboxMembre');
 Route::get('membres/inboxs', 'Membre\MessageController@inboxs')->name('inboxsMembre');

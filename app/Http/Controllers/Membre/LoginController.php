@@ -30,4 +30,25 @@ class LoginController extends Controller
             }
         }
     }
+
+    public function query(Request $request) {
+
+        $telephone = $request->telephone;
+        $password = $request->password;
+        
+        $etudiants = User::where('telephone', $telephone)->where('password', $password)->where('filiere_id', '=', null)->get();
+
+        if(count($etudiants) == 0) {
+            abort('404');
+        } else {
+            foreach ($etudiants as $etudiant) {
+                session()->put('id', $etudiant->id);
+                session()->put('nom_complet', $etudiant->name);
+                session()->put('departement_id', $etudiant->departement_id);
+                session()->put('category', "membre");
+            }
+
+            return redirect(route('inboxMembre'));
+        }
+    }
 }

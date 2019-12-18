@@ -78,7 +78,8 @@ class MembreController extends Controller
             $user->password = bcrypt($password);
             $user->save();
             session()->put('msg_tel', $request->telephone);
-            session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Connectez-vous ici: https://deblaa.com/membres/login");
+            session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ".
+            Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...). Connectez-vous ici: https://deblaa.com/membres/login");
 
             return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
         }

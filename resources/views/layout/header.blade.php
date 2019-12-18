@@ -10,8 +10,9 @@
 
     <link rel="stylesheet" href="{{ URL::asset('dataTable/dataTable.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('mdb/css/style.css') }}">
+    <link rel="shortcut icon" href="{{ URL::asset('assets/images/deblaa.png') }}" type="image/x-icon">
     @yield('css')
-    <title>Deblaa | Université</title>
+    <title>Deblaa</title>
 </head>
 <body>
 

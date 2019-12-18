@@ -2,11 +2,51 @@
 
 @section('connexion')
 
-    <div class="indigo pt-1 pb-1">
-        <div class="container-fluid">
+    <div class="div indigo">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo-deblaa" width="55">
+                    <div>
+                        <table width="100%">
+                            <tr>
+                                <td class="pt-2">
+                                    <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px;">
+                                        <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
+                                    </a>
+                                </td>
+                                <td class="text-right">
+                                    <a href="#!" class="black-text" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                        <i class="icofont-navigation-menu white-text" style="font-size: 24px;"></i>
+                                    </a>
+                                    <div class="dropdown-menu font-size-14">
+                                        <a class="dropdown-item" href="{{ route('eLogin') }}">
+                                            <i class="icofont-university brown-text"></i>
+                                            Espace université
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('mLogin') }}">
+                                            <i class="icofont-building yellow-text"></i>
+                                            Espace structure
+                                        </a>
+                                    <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="icofont-info-circle cyan-text"></i>
+                                            À porpos de nous
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="icofont-google-map red-text"></i>
+                                            Où nous trouver ?
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="icofont-handshake-deal"></i>
+                                            Partenaires
+                                        </a>
+                                    </div>
+                                    <!-- Basic dropdown -->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
