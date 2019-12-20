@@ -1,27 +1,30 @@
 @extends('layout.header')
 
 @section('sideBar')
-    <div class="side-bar">
+    <div class="side-bar indigo lighten-5" style="border-right: 1px solid #CCC;">
         <a href="{{ route('indexStructure') }}">
-            <div class="logo p-2">
-                <div>
-                    <b>COMPTE STRUCTURE</b>
-                </div>
+            <div class="indigo p-2 darken-1">
+                <small  class="white-text">COMPTE STRUCTURE</small>
+            </div>
+            <div class="logo p-2 indigo lighten-4">
                 <table width="100%">
                     <tr>
-                        <td width="50">
-                            <div style="width: 50px; height: 50px; overflow: hidden;" class="rounded-circle">
+                        <td width="45">
+                            <div style="width: 45px; height: 45px; overflow: hidden;" class="rounded-circle">
                                 <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
                             </div>
                         </td>
-                        <td>
-
+                        <td class="pl-2 pt-1">
+                            <span class="font-weight-bold">{{ session()->get('sigle') }}</span><br />
+                            <b>Structure</b>
+                        </td>
+                        <td class="text-right">
+                            <a href="edit">
+                                <small>Modifier</small>
+                            </a>
                         </td>
                     </tr>
                 </table>
-                <span class="grey-text font-weight-bold">
-                    Structure : {{ session()->get('sigle') }}
-                </span>
             </div>
         </a>
 

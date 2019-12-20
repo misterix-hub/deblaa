@@ -5,7 +5,7 @@
     bottom: 0;
     overflow: auto;
     width: 20%;
-    background-color: #777;
+    background-color: #222;
 }
 
 .asside-content {
@@ -17,13 +17,13 @@
 }
 
 .menu-item-cover a {
-    color: #FFF;
+    color: #aaa;
     font-size: 14px;
     font-weight: 300;
 }
 
 .menu-item-cover a:hover, .menu-item-cover a:focus, .menu-item-cover a:active {
-    color: #FFF;
+    color: #aaa;
     font-weight: 400;
 }
 
