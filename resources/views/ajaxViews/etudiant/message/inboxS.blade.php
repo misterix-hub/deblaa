@@ -6,7 +6,7 @@
             </td>
             <td class="pl-1">
                 <a href="" class="white-text indigo darken-3 pt-2 pb-2 pl-3 pr-3" style="border-radius: 15px; font-size: 13px;">
-                    <b>Nom complet de ici</b>
+                    <b>{{ session()->get('nom_complet') }}</b>
                 </a>
             </td>
             <td class="text-right">

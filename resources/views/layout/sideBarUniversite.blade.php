@@ -4,9 +4,8 @@
     <div class="side-bar">
         <a href="{{ route('indexUniversite') }}">
             <div class="logo p-2">
-                <img src="{{ URL::asset('db/logos/universite/' . session()->get('logo')) }}" alt="logo-université" width="100%">
+                <img src="{{ URL::asset('db/logos/universite/' . session()->get('logo')) }}" style="border-radius: 7px;" alt="logo-université" width="100%">
                 <span class="grey-text font-weight-bold">
-                    <i class="icofont-university"></i>
                     Université : {{ session()->get('sigle') }}
                 </span>
             </div>

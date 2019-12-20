@@ -158,7 +158,7 @@
                                     </tr>
                                     <tr>
                                         <td>Montant total à payer</td>
-                                        <td class="text-right"><b>{{ $nb_dest_global * 5  }} FCFA</b></td>
+                                        <td class="text-right"><b>{{ $nb_dest_global * 15  }} FCFA</b></td>
                                     </tr>
                                 </table>
                             </div>
@@ -166,7 +166,7 @@
                                 <div class="clearfix"></div>
 
                                 <div class="form-group" style="margin-bottom: 20px;">
-                                    <b>Arrêté la présente facture à la somme de : {{ $nb_dest_global * 5  }} FCFA</b>
+                                    <b>Arrêté la présente facture à la somme de : {{ $nb_dest_global * 15  }} FCFA</b>
                                 </div>
 
                                 <div class="form-group">
@@ -176,7 +176,7 @@
                             </div>
 
                             <input type="hidden" name="universite_id" value="{{ $structure->id }}">
-                            <input type="hidden" name="montant" value="{{ $nb_dest_global * 5  }}">
+                            <input type="hidden" name="montant" value="{{ $nb_dest_global * 15  }}">
                             <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
                         @endforeach
                     </div>

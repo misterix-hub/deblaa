@@ -8,7 +8,9 @@
         }
     </script>
     <div id="inboxS">
-
+	<div class="text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	     <img src="{{ URL::asset('assets/images/833.gif') }}" width="70"/>
+	</div>
     </div>
 @endsection
 

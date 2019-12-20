@@ -15,6 +15,7 @@ class MessageController extends Controller
         if(!session()->has('id')) {
             abort('404');
         } else {
+
             return view('membre.inbox');
         }
     }

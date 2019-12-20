@@ -96,9 +96,9 @@ class MessageController extends Controller
                         $num = $telephone->telephone;
 
                         if ($totalFichier != 0) {
-                            $texte = $titre . " *** ". $totalFichier == 1 ? "1 fichier est associé" : $totalFichier." sont  associés" ." à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" . $num . "&password=" . $telephone->password . " ***";
+                            $texte = $message_structure->titre . " ***". $totalFichier." fichier(s)  associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" . $num . "" . $telephone->departement_id;
                         } else {
-                            $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $num . "&password=" . $telephone->password . " ***";
+                            $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $num . "". $telephone->departement_id;
                         }
 ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>

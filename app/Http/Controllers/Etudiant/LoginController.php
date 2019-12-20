@@ -35,9 +35,8 @@ class LoginController extends Controller
     public function query(Request $request) {
 
         $telephone = $request->telephone;
-        $password = $request->password;
         
-        $etudiants = User::where('telephone', $telephone)->where('password', $password)->where('filiere_id', '<>', null)->get();
+        $etudiants = User::where('telephone', $telephone)->where('filiere_id', '<>', null)->get();
 
         if(count($etudiants) == 0) {
             abort('404');
@@ -50,7 +49,7 @@ class LoginController extends Controller
                 session()->put('category', "etudiant");
             }
 
-            return redirect(route('inboxEtudiant'));
+            return redirect(route('inboxsEtudiant'));
         }
     }
 }
