@@ -447,6 +447,8 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
     );
 
     public static $classMap = array (
+        'App\\BilanMessageStructure' => __DIR__ . '/../..' . '/app/BilanMessageStructure.php',
+        'App\\BilanMessageUniversite' => __DIR__ . '/../..' . '/app/BilanMessageUniversite.php',
         'App\\CibleMessageStructure' => __DIR__ . '/../..' . '/app/CibleMessageStructure.php',
         'App\\CibleMessageUniversite' => __DIR__ . '/../..' . '/app/CibleMessageUniversite.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',

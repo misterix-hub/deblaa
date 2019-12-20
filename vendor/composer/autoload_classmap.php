@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\BilanMessageStructure' => $baseDir . '/app/BilanMessageStructure.php',
+    'App\\BilanMessageUniversite' => $baseDir . '/app/BilanMessageUniversite.php',
     'App\\CibleMessageStructure' => $baseDir . '/app/CibleMessageStructure.php',
     'App\\CibleMessageUniversite' => $baseDir . '/app/CibleMessageUniversite.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',

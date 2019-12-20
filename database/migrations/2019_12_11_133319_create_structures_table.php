@@ -19,6 +19,7 @@ class CreateStructuresTable extends Migration
             $table->string('sigle');
             $table->string('logo')->nullable();
             $table->string('telephone');
+            $table->integer('message_bonus')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('site_web')->nullable();

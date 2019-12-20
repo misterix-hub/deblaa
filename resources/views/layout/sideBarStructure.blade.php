@@ -4,7 +4,21 @@
     <div class="side-bar">
         <a href="{{ route('indexStructure') }}">
             <div class="logo p-2">
-                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" style="border-radius: 7px;" alt="logo-structure" width="100%">
+                <div>
+                    <b>COMPTE STRUCTURE</b>
+                </div>
+                <table width="100%">
+                    <tr>
+                        <td width="50">
+                            <div style="width: 50px; height: 50px; overflow: hidden;" class="rounded-circle">
+                                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
                 <span class="grey-text font-weight-bold">
                     Structure : {{ session()->get('sigle') }}
                 </span>
