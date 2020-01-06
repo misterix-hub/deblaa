@@ -25,12 +25,12 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 font-size-14">
-            <a href="" class="white-text">
+            <a href="{{ route('uRegister') }}" class="white-text">
                 <i class="icofont-edit"></i>
                 <b>Inscription</b>
             </a>&nbsp;&nbsp;&nbsp;
 
-            <a href="" class="btn btn-white btn-sm rounded mr-0 pr-4 pl-4">
+            <a href="{{ route('uLogin') }}" class="btn btn-white btn-sm rounded mr-0 pr-4 pl-4">
                 Connexion
             </a>
         </form>

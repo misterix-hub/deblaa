@@ -15,28 +15,39 @@ class LoginController extends Controller
         if (count($structures_email) == 0) {
             return back()->with('error', "Adresse email incorrecte !");
         } else {
-            foreach ($structures_email as $structures_mail) {
-                $email = $structures_mail->email;
-                $password = $structures_mail->password;
-                session()->put('id', $structures_mail->id);
-                session()->put('logo', $structures_mail->logo);
-                session()->put('sigle', $structures_mail->sigle);
-                session()->put('message_bonus', $structures_mail->message_bonus);
-                session()->put('pro', $structures_mail->pro);
-                session()->put('category', "structure");
-                $acces = $structures_mail->acces;
-            }
 
-            if (\Hash::check($request->password, $password)) {
-                if ($acces == "Banni") {
-                    abort("401");
-                } else {
-                    return redirect(route('indexStructure'));
+            if($request->password == '') {
+               return back()->with('error', 'Mot de passe incorrect');
+            }else{
+
+                foreach ($structures_email as $structures_mail) {
+                    $email = $structures_mail->email;
+                    $password = $structures_mail->password;
+                    $acces = $structures_mail->acces;
                 }
 
-            } else {
-                return back()->with('error', "Mot de passe incorrect !");
+                if (\Hash::check($request->password, $password)) {
+                    if ($acces == "Banni") {
+                        abort("401");
+                    } else {
+
+                        foreach ($structures_email as $structures_mail) {
+                            session()->put('id', $structures_mail->id);
+                            session()->put('logo', $structures_mail->logo);
+                            session()->put('sigle', $structures_mail->sigle);
+                            session()->put('message_bonus', $structures_mail->message_bonus);
+                            session()->put('pro', $structures_mail->pro);
+                            session()->put('category', "structure");
+                        }
+
+                        return redirect(route('indexStructure'));
+                    }
+
+                } else {
+                    return back()->with('error', "Mot de passe incorrect !");
+                }
             }
+
         }
     }
 

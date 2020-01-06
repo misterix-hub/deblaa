@@ -20,6 +20,7 @@
     @yield('inboxs')
     @yield('connexion')
     @yield('home')
+    @yield('resetPassword')
 
     <script src="{{ URL::asset('mdb/js/jquery.min.js') }}"></script>
     <script src="{{ URL::asset('mdb/js/popper.min.js') }}"></script>

@@ -36,6 +36,12 @@
                         </div>
                     @endif
 
+                    @if ($messageReset = Session::get('successReset'))
+                        <div class="alert alert-success">
+                            {{ $messageReset }}
+                        </div>
+                    @endif
+
                     <h5 class="comfortaa text-muted">                    
                         Connexion à un compte
                     </h5>
@@ -44,7 +50,7 @@
                         @csrf
     
                         <label for="email" class="font-size-14">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ...">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ..." value="{{ old('email') }}">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
@@ -53,7 +59,7 @@
                             Se connecter
                         </button><br />
     
-                        <a href="">
+                        <a href="{{ route('sResetPassword') }}">
                             <b>Mot de passe oublié ?</b>
                         </a><hr />
     
