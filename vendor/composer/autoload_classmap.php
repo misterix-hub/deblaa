@@ -11,6 +11,7 @@ return array(
     'App\\CibleMessageStructure' => $baseDir . '/app/CibleMessageStructure.php',
     'App\\CibleMessageUniversite' => $baseDir . '/app/CibleMessageUniversite.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\DemandeStructure' => $baseDir . '/app/DemandeStructure.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\FactureStructure' => $baseDir . '/app/FactureStructure.php',
     'App\\FactureUniversite' => $baseDir . '/app/FactureUniversite.php',

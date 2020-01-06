@@ -16,14 +16,17 @@ class MainController extends Controller
             if (session()->get('category') == "universite") {
                 return redirect(route('indexUniversite'));
             } else {
-                if (session()->get('category') == "structure") {
+                if (session()->get('category') == "structure") {                    
                     return view('structure.index',[
                         'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                         'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                        "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                        'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                             ->where('structure_id', session()->get('id'))
                             ->where('users.id', '<>', null)
-                            ->get()
+                            ->get(),
+                        'fichier_messages' => MessageStructure::rightJoin('fichier_message_structures', 'message_structures.id', 'message_structure_id')
+                                    ->where('message_structure_id', session()->get('id'))
+                                    ->get()
                     ]);
                 } else {
                     if (session()->get('category') == "membre") {
@@ -55,5 +58,9 @@ class MainController extends Controller
         } else {
             return view('structure.login');
         }
+    }
+
+    public function register() {
+        return view('structure.register');
     }
 }

@@ -5,13 +5,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-envelope-open"></i> Envoyer message</h3>
+                <h6>
+                    <i class="icofont-envelope-open"></i>
+                    Envoyer message
+                </h6>
             </div>
             <div class="col-12"><br />
 
                 @if($message = Session::get('error'))
                     <div class="alert alert-danger">
-                        {{ $message }}
+                        {!! $message !!}
                     </div>
                 @endif
 
@@ -45,8 +48,8 @@
                             </div>
                         @endforeach
                     </div><br />
-
-                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0">
+                    {!! (count($groupes)) == 0 ? '<span class=\'red-text\'>Impossible d\'envoyer sans ancun groupe</span>' : '' !!}<br />
+                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0 {{ (count($groupes)) == 0 ? 'disabled' : '' }}">
                         Envoyer
                     </button>
 

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Structure;
 use Illuminate\Http\Request;
 use Psy\Util\Str;
+use App\Models\Departement;
+use App\MessageStructure;
+use App\DemandeStructure;
 
 class CompteController extends Controller
 {
@@ -63,7 +66,13 @@ class CompteController extends Controller
             abort('404');
         } else {
             return view('structure.compte.profil', [
-                'structure' => Structure::findOrFail($id)
+                'structure' => Structure::findOrFail($id),
+                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
     }
@@ -128,5 +137,19 @@ class CompteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function comptePro() {
+        if (count(DemandeStructure::where('structure_id', session()->get('id'))->get()) != 0) {
+            return back()->with('warningDemande', "true");
+        } else {
+            $demande_structure = new DemandeStructure;
+            $demande_structure->structure_id = session()->get('id');
+            $demande_structure->accord = 0;
+            $demande_structure->save();
+
+            return back()->with('successDemande', "true");
+        }
+        
     }
 }

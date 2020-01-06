@@ -134,7 +134,12 @@ Route::get('universites/messages/{id}/details', 'Universite\MessageController@de
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
 Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
 Route::get('universites/login', 'Universite\MainController@login')->name('uLogin');
+
 Route::post('universites/login/processing', 'Universite\LoginController@loginProcessing')->name('uLoginProcessing');
+Route::get('universites/register', 'Universite\MainController@register')->name('uRegister');
+Route::post('universites/register', 'Universite\LoginController@registerProcessing')->name('uRegisterProcessing');
+Route::get('universites/register/success', 'Universite\LoginController@registerSuccess')->name('uRegisterSuccess');
+
 Route::get('logout', 'Universite\LoginController@logout')->name('logout');
 
 /* STRUCTURE */
@@ -161,7 +166,14 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 Route::post('structures/{id}/profil/update', 'Structure\CompteController@update')->name('sCompteUpdate');
 Route::get('structures/login', 'Structure\MainController@login')->name('sLogin');
 Route::post('structures/login/processing', 'Structure\LoginController@loginProcessing')->name('sLoginProcessing');
+
+Route::get('structures/register', 'Structure\MainController@register')->name('sRegister');
+Route::post('structures/register', 'Structure\LoginController@registerProcessing')->name('sRegisterProcessing');
+Route::get('structures/register/success', 'Structure\LoginController@registerSuccess')->name('sRegisterSuccess');
+
 Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
+
+Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
 
 /* ETUDIANT */
 

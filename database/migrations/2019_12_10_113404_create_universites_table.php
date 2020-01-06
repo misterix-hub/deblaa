@@ -18,12 +18,13 @@ class CreateUniversitesTable extends Migration
             $table->string('nom');
             $table->string('sigle');
             $table->string('logo')->nullable();
-            $table->string('telephone');
+            $table->string('telephone')->nullable();
             $table->integer('message_bonus')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('site_web')->nullable();
             $table->tinyInteger('acces');
+            $table->tinyInteger('pro');
             $table->softDeletes();
             $table->timestamps();
         });

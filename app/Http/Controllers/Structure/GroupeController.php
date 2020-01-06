@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Departement;
 use App\Repositories\DepartementRepository;
 use Illuminate\Http\Request;
+use App\MessageStructure;
+use App\User;
 
 class GroupeController extends Controller
 {
@@ -28,7 +30,12 @@ class GroupeController extends Controller
             abort("404");
         } else {
             return view('structure.groupe.liste', [
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get()
+                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
     }
@@ -76,7 +83,13 @@ class GroupeController extends Controller
             abort("404");
         } else {
             return view('structure.groupe.details', [
-                'groupe' => Departement::findOrFail($id)
+                'groupe' => Departement::findOrFail($id),
+                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
 
@@ -94,7 +107,13 @@ class GroupeController extends Controller
             abort("404");
         } else {
             return view('structure.groupe.modifier', [
-                "groupe" => Departement::findOrFail($id)
+                "groupe" => Departement::findOrFail($id),
+                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
             ]);
         }
 
@@ -131,6 +150,10 @@ class GroupeController extends Controller
     {
         $groupe = Departement::findOrFail($id);
         $groupe->forceDelete();
+
+        $users = User::where('departement_id', $id);
+        $users->forceDelete();
+
         return redirect(route('sListeGroupe'))->with('success', "Groupe supprimé avec succès !");
     }
 }

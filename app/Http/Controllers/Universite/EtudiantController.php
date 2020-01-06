@@ -25,10 +25,12 @@ class EtudiantController extends Controller
             return view('universite.etudiant.liste', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                                ->where('universite_id', session()->get('id'))
-                                ->where('users.id', '<>', null)
-                                ->get()
+                            ->where('universite_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }

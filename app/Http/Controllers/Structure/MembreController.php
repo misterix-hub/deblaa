@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Departement;
 use App\User;
 use Illuminate\Http\Request;
+use App\MessageStructure;
 
 class MembreController extends Controller
 {
@@ -20,6 +21,7 @@ class MembreController extends Controller
             abort("404");
         } else {
             return view('structure.membre.liste', [
+                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 "groupes" => Departement::where('structure_id', session()->get('id'))->get(),
                 "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
                                         ->where('structure_id', session()->get('id'))
@@ -47,42 +49,51 @@ class MembreController extends Controller
      */
     public function store(Request $request)
     {
-        $emails = User::where('telephone', $request->telephone)->get();
-
-        if (count($emails) != 0) {
-            
-            foreach ($emails as $email) {
-                $password = $email->password;
-                break;
-            }
-
-            $user = new User;
-            $user->name = $request->nomComplet;
-            $user->telephone = $request->telephone;
-            $user->fonction = $request->role;
-            $user->departement_id = $request->groupe;
-            $user->password = $password;
-            $user->save();
-
-            return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
-
+        if ($request->groupe == "") {
+            return back()->with('error', "Impossble d'ajouter un membre sans groupe !");
         } else {
-            $password = "DB" . rand(1021, 9999);
-
-            $user = new User;
-            $user->name = $request->nomComplet;
-            $user->email = $request->telephone . "@example.com";
-            $user->telephone = $request->telephone;
-            $user->fonction = $request->role;
-            $user->departement_id = $request->groupe;
-            $user->password = bcrypt($password);
-            $user->save();
-            session()->put('msg_tel', $request->telephone);
-            session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
-
-            return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+            $check_membre = User::where('telephone', $request->telephone)->where('departement_id', $request->groupe)->get();
+            
+            if (count($check_membre) != 0) {
+                return back()->with('error', "Membre déjà ajouté !");
+            } else {
+                $emails = User::where('telephone', $request->telephone)->get();
+    
+                if (count($emails) != 0) {
+                    
+                    foreach ($emails as $email) {
+                        $password = $email->password;
+                        break;
+                    }
+    
+                    $user = new User;
+                    $user->name = $request->nomComplet;
+                    $user->telephone = $request->telephone;
+                    $user->fonction = $request->role;
+                    $user->departement_id = $request->groupe;
+                    $user->password = $password;
+                    $user->save();
+    
+                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+    
+                } else {
+                    $password = "DB" . rand(1021, 9999);
+    
+                    $user = new User;
+                    $user->name = $request->nomComplet;
+                    $user->email = $request->telephone . "@example.com";
+                    $user->telephone = $request->telephone;
+                    $user->fonction = $request->role;
+                    $user->departement_id = $request->groupe;
+                    $user->password = bcrypt($password);
+                    $user->save();
+                    session()->put('msg_tel', $request->telephone);
+                    session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
+    
+                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+                }
+            }
         }
-
     }
 
     /**

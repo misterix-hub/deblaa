@@ -10,6 +10,7 @@ use App\Models\Filiere;
 use App\MessageUniversite;
 use App\CibleMessageUniversite;
 use App\User;
+use App\BilanMessageUniversite;
 
 class MessageController extends Controller
 {
@@ -21,8 +22,11 @@ class MessageController extends Controller
                 'niveaux' => Niveau::all(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
             ]);
         }
     }
@@ -36,7 +40,12 @@ class MessageController extends Controller
                 'j' => 0,
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
             ]);
         }
     }
@@ -68,7 +77,7 @@ class MessageController extends Controller
 
             $target_dir = "db/messages/universites/fichier/";
 
-            if ($totalFichier == 0) {
+            if ($request->fichier == "") {
 
             } else {
 
@@ -97,6 +106,12 @@ class MessageController extends Controller
 
 
             $titre = $request->titre;
+
+            if (session()->get('pro') == 0) {
+                $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
+            } else {
+                $titre = $message_structure->titre;
+            }
     
             for ($i=0; $i < $request->index; $i++) { 
     
@@ -114,7 +129,7 @@ class MessageController extends Controller
                         foreach($telephones as $telephone) {
                             $num = $telephone->telephone;
 
-                            if ($totalFichier != 0) {
+                            if ($request->fichier != "") {
                                 $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
                             } else {
                                 $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
@@ -155,7 +170,15 @@ class MessageController extends Controller
             return view('universite.message.bilan', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get(),
+                'bilan_messages' => BilanMessageUniversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
+                                    ->where('bilan_message_universites.universite_id', session()->get('id'))
+                                    ->orderByDesc('bilan_message_universites.id')->get()
             ]);
         }
     }

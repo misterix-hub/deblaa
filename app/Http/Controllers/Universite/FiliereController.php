@@ -8,6 +8,7 @@ use App\Models\Filiere;
 use App\Models\FiliereNiveau;
 use App\Repositories\FiliereRepository;
 use App\Models\Niveau;
+use App\MessageUniversite;
 
 class FiliereController extends Controller
 {
@@ -32,7 +33,12 @@ class FiliereController extends Controller
             return view('universite.filiere.liste', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                            ->where('universite_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -98,7 +104,12 @@ class FiliereController extends Controller
             return view('universite.filiere.details', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('id', $id)->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                            ->where('universite_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -114,7 +125,12 @@ class FiliereController extends Controller
         return view('universite.filiere.modifier', [
             'niveaux' => Niveau::all(),
             'filieres' => Filiere::where('id', $id)->get(),
-            'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get()
+            'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+            'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get(),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
         ]);
     }
 

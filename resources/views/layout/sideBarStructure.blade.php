@@ -1,25 +1,94 @@
 @extends('layout.header')
 
+@section('css')
+    <style>
+        .side-bar-item a div.item {
+            border-bottom: 1px solid #DDD;
+            font-size: 13px;
+            padding: 14px;
+        }
+        .side-bar-item a div {
+            font-size: 13px;
+            padding: 5px;
+            color: #222;
+        }
+        .side-bar {
+            width: 18%;
+        }
+
+        .asside-content {
+            width: 82%;
+        }
+        .comfortaa {
+            font-family: comfortaa;
+        }
+
+        @font-face {
+            font-family: comfortaa;
+            src: url(/deblaa/fonts/Comfortaa-Regular.ttf);
+        }
+
+        @media (max-width: 1000px) {
+            .side-bar {
+                width: 18%;
+            }
+
+            .asside-content {
+                width: 82%;
+            }
+
+            .menu-item-sm-hide {
+                display: none;
+            }
+
+            .side-bar-item div a div.item {
+                text-align: center;
+            }
+
+            .side-bar-item div a div.item i {
+                font-size: 18px;
+            }
+        }
+    </style>
+@endsection
+
 @section('sideBar')
-    <div class="side-bar indigo lighten-5" style="border-right: 1px solid #CCC;">
+    <div class="side-bar indigo lighten-5">
         <a href="{{ route('indexStructure') }}">
-            <div class="indigo p-2 darken-1">
-                <small  class="white-text">COMPTE STRUCTURE</small>
+            <div class="indigo p-1 darken-1">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 p-0">
+                            <!--<img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" width="100%">-->
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 4px 0 5px 0;">
+                            <b class="font-weight-bold">
+                                <small class="white-text comfortaa">Deblaa<span class="menu-item-sm-hide"> - STRUCTURE</span></small>
+                            </b>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="logo p-2 indigo lighten-4">
+            <div class="logo p-2 indigo lighten-4 black-text">
                 <table width="100%">
                     <tr>
                         <td width="45">
                             <div style="width: 45px; height: 45px; overflow: hidden;" class="rounded-circle">
-                                <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
+                                @if (session()->get('logo') == "")
+                                    <div style="width: 45px; height: 45px; line-height: 45px;" class="orange text-center">
+                                        <b>Logo</b>
+                                    </div>
+                                @else
+                                    <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
+                                @endif
                             </div>
                         </td>
-                        <td class="pl-2 pt-1">
+                        <td class="pl-2 pt-1 menu-item-sm-hide">
                             <span class="font-weight-bold">{{ session()->get('sigle') }}</span><br />
                             <b>Structure</b>
                         </td>
-                        <td class="text-right">
-                            <a href="edit">
+                        <td class="text-right menu-item-sm-hide">
+                            <a href="{{ route('sCompte', session()->get('id')) }}">
                                 <small>Modifier</small>
                             </a>
                         </td>
@@ -28,15 +97,15 @@
             </div>
         </a>
 
-        <div class="menu-item-cover p-2">
+        <div class="side-bar-item">
             <div class="accordion" id="accordionExample">
                 <div class="z-depth-0">
                     <div id="headingOne">
                         <a href="#!" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="true" aria-controls="collapseOne">
-                            <div>
+                            <div class="item">
                                 <i class="icofont-bag-alt"></i>&nbsp;
-                                Gestion de groupes
+                                <b><span class="menu-item-sm-hide">Gestion de groupes <span class="badge badge-pill badge-light z-depth-0">{{ count($groupes) }}</span></span></b>
                             </div>
                         </a>
                     </div>
@@ -45,13 +114,13 @@
                             <a href="#!" data-toggle="modal" data-target="#filiereModal">
                                 <div>
                                     <i class="icofont-plus"></i>
-                                    Ajouter un groupe
+                                    <span class="menu-item-sm-hide">Ajouter un groupe</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeGroupe') }}">
                                 <div>
                                     <i class="icofont-listine-dots"></i>
-                                    Liste des groupes
+                                    <span class="menu-item-sm-hide">Liste des groupes</span>
                                 </div>
                             </a>
                         </div>
@@ -61,9 +130,9 @@
                     <div id="headingTwo">
                         <a href="#!" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
-                            <div>
-                                <i class="icofont-graduate-alt"></i>&nbsp;
-                                Gestion de membres
+                            <div class="item">
+                                <i class="icofont-group"></i>&nbsp;
+                                <b><span class="menu-item-sm-hide">Gestion de membres <span class="badge badge-pill badge-light z-depth-0">{{ count($users) }}</span></span></b>
                             </div>
                         </a>
                     </div>
@@ -72,13 +141,13 @@
                             <a href="#!" data-toggle="modal" data-target="#etudiantModal">
                                 <div>
                                     <i class="icofont-plus"></i>
-                                    Ajouter un membre
+                                    <span class="menu-item-sm-hide">Ajouter un membre</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeMembre') }}">
                                 <div>
                                     <i class="icofont-listine-dots"></i>
-                                    Liste des membres
+                                    <span class="menu-item-sm-hide">Liste des membres</span>
                                 </div>
                             </a>
                         </div>
@@ -88,9 +157,9 @@
                     <div id="headingThree">
                         <a href="#!" data-toggle="collapse" data-target="#collapseThree"
                         aria-expanded="true" aria-controls="collapseThree">
-                            <div>
+                            <div class="item">
                                 <i class="icofont-envelope"></i>&nbsp;
-                                Gestion de messages
+                                <b><span class="menu-item-sm-hide">Gestion de messages <span class="badge badge-pill badge-light z-depth-0">{{ count($messages) }}</span></span></b>
                             </div>
                         </a>
                     </div>
@@ -99,13 +168,13 @@
                             <a href="{{ route('sEnvoyerMessage') }}">
                                 <div>
                                     <i class="icofont-plus"></i>
-                                    Envoyer un message
+                                    <span class="menu-item-sm-hide">Envoyer un message</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeMessage') }}">
                                 <div>
                                     <i class="icofont-listine-dots"></i>
-                                    Liste des messages
+                                    <span class="menu-item-sm-hide">Liste des messages</span>
                                 </div>
                             </a>
                         </div>
@@ -115,9 +184,9 @@
                     <div id="headingFour">
                         <a href="#!" data-toggle="collapse" data-target="#collapseFour"
                         aria-expanded="true" aria-controls="collapseFour">
-                            <div>
+                            <div class="item">
                                 <i class="icofont-ui-settings"></i>&nbsp;
-                                Gestion du compte
+                                <b><span class="menu-item-sm-hide">Gestion du compte</span></b>
                             </div>
                         </a>
                     </div>
@@ -127,62 +196,77 @@
                                 <a href="{{ route('sCompte', $structure->id) }}">
                                     <div>
                                         <i class="icofont-user"></i>
-                                        Afficher le profil
+                                        <span class="menu-item-sm-hide">Afficher le profil</span>
                                     </div>
                                 </a>
                             @endforeach
                             <a href="{{ route('sLogout') }}">
                                 <div>
                                     <i class="icofont-power"></i>
-                                    Déconnexion
+                                    <span class="menu-item-sm-hide">Déconnexion</span>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </div>
             </div><br />
-            <span class="white-text">
-                <small><b>STATISTIQUES</b></small>
-            </span><br />
-            <div>
-                <a href="{{ route('sBilanMessage') }}">
-                    <div>
-                        <i class="icofont-chart-bar-graph"></i>
-                        Bilan des messages
-                    </div>
-                </a>
-            </div><br />
-            <span class="white-text">
-                <small><b>LIENS UTILES</b></small>
-            </span><br />
-            <div>
-                <a href="#!">
-                    <div>
-                        <i class="icofont-link"></i>
-                        Nous envoyer un message
-                    </div>
-                </a>
+            <div class="pl-2 pr-2">
+                <span class="menu-item-sm-hide">
+                    &nbsp;<small><b><span>STATISTIQUES</span></b></small>
+                </span><br class="menu-item-sm-hide" />
+                <div>
+                    <a href="{{ route('sBilanMessage') }}">
+                        <div class="item" style="border: none;">
+                            <i class="icofont-chart-bar-graph"></i>
+                            <b><span class="menu-item-sm-hide">Bilan des messages</span></b>
+                        </div>
+                    </a>
+                </div><br />
+            </div>
+            <div style="position: absolute; bottom: 15px; left: 0; right: 0;" class="pl-2 pr-2 pb-1">
+                <span class="">
+                    &nbsp;<small><b><span class="menu-item-sm-hide">LIENS UTILES</span></b></small>
+                </span><br />
+                <div>
+                    <a href="#!">
+                        <div class="item" style="border: none;">
+                            <i class="icofont-comment"></i>
+                            <b><span class="menu-item-sm-hide">Nous envoyer un message</span></b>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     <div class="asside-content font-size-14">
-        <div class="top-bar p-4 indigo">
+        <div class="p-2 border-bottom indigo lighten-5">
             <table width="100%">
                 <tr>
                     <td>
-                        <a href="" class="white-text">
-                            <b>Panneau de configuration</b>
+                        <div class="btn-group" role="group">
+                            <a href="{{ route('sLogout') }}" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                                <i class="icofont-navigation-menu"></i>
+                            </a>
+                            <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}">Déconnexion</a>
+                            </div>
+                        </div>
+                        <a href="" class="">
+                            <small><b>PANNEAU DE CONFIGURATION</b></small>
                         </a>
                     </td>
                     <td class="text-right">
-                        <a href="{{ route('sLogout') }}" class="white-text">
-                            <i class="icofont-ui-power"></i>
+                        <a href="{{ URL::asset('logout') }}" title="Se déconnecter" class="btn btn-danger p-0 rounded m-0 z-depth-0"
+                        style="width: 22px; height: 22px; line-height: 22px;">
+                            <i class="icofont-power"></i>
                         </a>
                     </td>
                 </tr>
             </table>
         </div>
-
+        
         @yield('content')
 
     </div>
@@ -267,6 +351,39 @@
             </div>
         </div>
     </form>
+
+
+    <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="border-radius: 15px;">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="compteProModalLabel">
+                        <i class="icofont-diamond"></i>
+                        <b>Passer en compte pro</b>
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pl-4 pr-4">
+                    <h3 class="text-center green-text">
+                        <i class="icofont-diamond icofont-3x"></i>
+                    </h3>
+                    <p style="text-align: center;">
+                        Cette
+                        opération consiste à nous adresser directement une demande, puis nous prendrons contact avec vous
+                        dans les prochaines 5 minutes pour vous communiquer de l'état de l'opération. cliquez sur
+                        " <span class="green-text">Faire ma demande</span> ".
+                    </p>
+                    <hr class="my-2">
+                    <p class="lead text-center">
+                        <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('sDemandeComptePro') }}" role="button">Faire ma demande</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')

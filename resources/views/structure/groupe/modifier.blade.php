@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-edit"></i> Modifier groupe</h3>
+                <h6><i class="icofont-edit"></i> <b>Modifier groupe</b></h6>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12"><br />
 

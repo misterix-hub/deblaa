@@ -21,6 +21,8 @@ class LoginController extends Controller
                 session()->put('id', $structures_mail->id);
                 session()->put('logo', $structures_mail->logo);
                 session()->put('sigle', $structures_mail->sigle);
+                session()->put('message_bonus', $structures_mail->message_bonus);
+                session()->put('pro', $structures_mail->pro);
                 session()->put('category', "structure");
                 $acces = $structures_mail->acces;
             }
@@ -38,10 +40,60 @@ class LoginController extends Controller
         }
     }
 
+    public function registerProcessing(Request $request) {
+
+        $structures_email = Structure::where('email', $request->email)->get();
+
+        if (count($structures_email) != 0) {
+            return back()->with('error', "Email dejà utilisé !");
+        } else {
+
+            $password = "DB".rand(1021, 9999);
+
+            $structure = new Structure;
+            $structure->nom = $request->nom;
+            $structure->sigle = $request->sigle;
+            $structure->message_bonus = 0;
+            $structure->email = $request->email;
+            $structure->password = bcrypt($password);
+            $structure->acces = 1;
+            $structure->pro = 0;
+            $structure->save();
+
+            $to_name = "Deblaa";
+
+            $to_email = $request->input('email');
+            $data = array(
+                'nom' => $request->input('sigle'),
+                'email' => $request->input('email'),
+                'motDePasse' => $password
+            );
+
+            \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+                $message->to($to_email)
+                        ->subject("Votre mot de passe de Deblaa");
+            });
+
+            session()->put('email', $request->email);
+            
+            return redirect(route('sRegisterSuccess'));
+        }
+
+    }
+
+    public function registerSuccess() {
+        if(!session()->has('email')) {
+            abort('404');
+        } else {
+            return view('structure.success.register');
+        }
+    }
+
     public function logout() {
         session()->forget('id');
         session()->forget('logo');
         session()->forget('category');
+        session()->forget('message_bonus');
 
         return redirect(route('indexVisitors'));
     }

@@ -452,6 +452,7 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\CibleMessageStructure' => __DIR__ . '/../..' . '/app/CibleMessageStructure.php',
         'App\\CibleMessageUniversite' => __DIR__ . '/../..' . '/app/CibleMessageUniversite.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DemandeStructure' => __DIR__ . '/../..' . '/app/DemandeStructure.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\FactureStructure' => __DIR__ . '/../..' . '/app/FactureStructure.php',
         'App\\FactureUniversite' => __DIR__ . '/../..' . '/app/FactureUniversite.php',

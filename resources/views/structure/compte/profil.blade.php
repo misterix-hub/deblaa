@@ -7,7 +7,7 @@
             <div class="col-12">
                 <h3><i class="icofont-building"></i> Profil {{ $structure->sigle }}</h3>
             </div>
-            <div class="col-10"><br />
+            <div class="col-lg-9 col-md-12 col-sm-12"><br />
 
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -37,7 +37,7 @@
 
                     <div class="form-row mb-4">
                         <div class="col">
-                            <label for="email" class="disabled">Adresse électronique</label>
+                            <label for="email" class="disabled">Email</label>
                             <input type="email" id="email" readonly name="email" class="form-control" value="{{ $structure->email }}">
                         </div>
                         <div class="col">
@@ -59,7 +59,7 @@
 
 
                     <!-- Sign up button -->
-                    <button class="btn btn-indigo btn-md ml-0" type="submit">Mettre à jour</button>
+                    <button class="btn btn-indigo btn-md ml-0 rounded pl-3 pr-3" type="submit">Mettre à jour</button>
 
                 </form>
 

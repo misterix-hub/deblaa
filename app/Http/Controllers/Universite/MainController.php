@@ -60,4 +60,8 @@ class MainController extends Controller
             return view('universite.login');
         }
     }
+
+    public function register() {
+        return view('universite.register');
+    }
 }

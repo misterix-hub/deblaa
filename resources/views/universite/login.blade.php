@@ -1,106 +1,86 @@
 @extends('layout.header')
 
+@section('css')
+    <style>
+        .comfortaa {
+            font-family: comfortaa;
+        }
+
+        @font-face {
+            font-family: comfortaa;
+            src: url(../fonts/Comfortaa-Regular.ttf);
+        }
+    </style>
+@endsection
+
 @section('connexion')
     
-    <div class="div indigo">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div>
-                        <table width="100%">
-                            <tr>
-                                <td class="pt-2">
-                                    <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px;">
-                                        <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
-                                    </a>
-                                </td>
-                                <td class="text-right">
-                                    <a href="#!" class="black-text" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                        <i class="icofont-navigation-menu white-text" style="font-size: 24px;"></i>
-                                    </a>
-                                    <div class="dropdown-menu font-size-14">
-                                        <a class="dropdown-item" href="{{ route('eLogin') }}">
-                                            <i class="icofont-university brown-text"></i>
-                                            Espace université
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('mLogin') }}">
-                                            <i class="icofont-building yellow-text"></i>
-                                            Espace structure
-                                        </a>
-                                    <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-info-circle cyan-text"></i>
-                                            À porpos de nous
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-google-map red-text"></i>
-                                            Où nous trouver ?
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-handshake-deal"></i>
-                                            Partenaires
-                                        </a>
-                                    </div>
-                                    <!-- Basic dropdown -->
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('included.menuVisitors') 
+    
+    <ol class="breadcrumb font-size-14">
+        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+        <li class="breadcrumb-item active">Connexion université</li>
+    </ol>
+
     <br /><br /><br />
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-12 col-sm-12">
+            
+            <div class="col-lg-5 col-md-12 col-sm-12 font-size-14">
 
-            </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 font-size-14">
+                <div style="border-left: 4px solid #CCC;" class="pl-4">
+                    
+                    @if ($message = Session::get('error'))
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @endif
 
-                @if ($message = Session::get('error'))
-                    <div class="alert alert-danger">
-                        {{ $message }}
-                    </div>
-                @endif
-
-                <div class="card card-body border border-primary">
-                    <div>
-                        <h5>
-                            <span class="font-weight-bold">Connexion</span> -
-                            <span class="red-text">accès restreint</span>
-                        </h5>
-                    </div><br />
-
+                    <h5 class="comfortaa text-muted">                    
+                        Connexion à un compte
+                    </h5>
+    
                     <form action="{{ route('uLoginProcessing') }}" method="post">
                         @csrf
-
+    
                         <label for="email" class="font-size-14">Email</label>
                         <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0">
                             Se connecter
-                        </button><br /><br />
-
+                        </button><br />
+    
                         <a href="">
-                            Mot de passe oublié ?
+                            <b>Mot de passe oublié ?</b>
                         </a><hr />
+    
+                        <b>Pas encore de compe ? <a href="{{ route('uRegister') }}">Créer un compte</a></b>
+                    </form><br />
+                </div><br /><br />
 
-                        Si vous êtes une université et que vous n'avez pas encore de compte, 
-                        <a href="">faites votre demande.</a>
-
-
-                    </form>
-                </div>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12">
-                
+            <div class="col-lg-1 col-md-12 col-sm-12"></div>
+            <div class="col-lg-6 col-md-12 col-sm-12">
+                <h1>
+                    <div class="deblaa comfortaa">
+                        <span class="indigo-text">Deb</span><span class="orange-text">laa</span> - Université
+                    </div>
+                </h1>
+                <br />
+                <h5 style="line-height: 35px; text-align: justify;" class="comfortaa">
+                    Si vous n'avez pas encore de compte, n'attendez pas plus longtemps pour vous inscrire.
+                    C'est gratuit et en plus ça prend moins de 2 minutes.
+                </h5>
+                <a href="{{ route('uRegister') }}" class="float-right mr-0 btn btn-lg btn-orange rounded">
+                    Créer un compte
+                </a>
             </div>
         </div>
     </div>
+    
+    @include('included.footerVisitors')
 
 @endsection

@@ -85,10 +85,12 @@ class StructureController extends AppBaseController
                 'sigle' => $request->input('sigle'),
                 'logo' => $file_name,
                 'telephone' => $request->input('telephone'),
+                'message_bonus' => 0,
                 'email' => $request->input('email'),
                 'password' => bcrypt($password),
                 'site_web' => $request->input('site_web'),
-                'acces' => $request->input('acces')
+                'acces' => $request->input('acces'),
+                'pro' => 0
             ]);
 
             $to_name = "Deblaa";

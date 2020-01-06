@@ -7,6 +7,7 @@ use App\Models\Universite;
 use Illuminate\Http\Request;
 use App\Models\Niveau;
 use App\Models\Filiere;
+use App\MessageUniversite;
 
 class CompteController extends Controller
 {
@@ -66,7 +67,13 @@ class CompteController extends Controller
             return view('universite.compte.profil', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'universite' => Universite::findOrFail($id)
+                'universite' => Universite::findOrFail($id),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
             ]);
         }
 
