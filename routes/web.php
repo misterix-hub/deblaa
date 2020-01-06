@@ -135,6 +135,9 @@ Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name(
 Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
 Route::get('universites/login', 'Universite\MainController@login')->name('uLogin');
 
+Route::get('universites/reset-password', 'Universite\ResetPasswordController@checkEmailView')->name('uResetPassword');
+Route::post('universites/reset-password/processing', 'Universite\ResetPasswordController@resetPasswordProcessing')->name('uResetPasswordProcessing');
+
 Route::post('universites/login/processing', 'Universite\LoginController@loginProcessing')->name('uLoginProcessing');
 Route::get('universites/register', 'Universite\MainController@register')->name('uRegister');
 Route::post('universites/register', 'Universite\LoginController@registerProcessing')->name('uRegisterProcessing');
@@ -166,6 +169,9 @@ Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('s
 Route::post('structures/{id}/profil/update', 'Structure\CompteController@update')->name('sCompteUpdate');
 Route::get('structures/login', 'Structure\MainController@login')->name('sLogin');
 Route::post('structures/login/processing', 'Structure\LoginController@loginProcessing')->name('sLoginProcessing');
+
+Route::get('structures/reset-password', 'Structure\ResetPasswordController@checkEmailView')->name('sResetPassword');
+Route::post('structures/reset-password/processing', 'Structure\ResetPasswordController@resetPasswordProcessing')->name('sResetPasswordProcessing');
 
 Route::get('structures/register', 'Structure\MainController@register')->name('sRegister');
 Route::post('structures/register', 'Structure\LoginController@registerProcessing')->name('sRegisterProcessing');

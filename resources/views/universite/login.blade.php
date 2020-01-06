@@ -15,7 +15,7 @@
 
 @section('connexion')
     
-    @include('included.menuVisitors') 
+    @include('included.menuVisitorsUniv')
     
     <ol class="breadcrumb font-size-14">
         <li class="breadcrumb-item"><a href="#">Accueil</a></li>
@@ -36,6 +36,12 @@
                         </div>
                     @endif
 
+                    @if ($messageReset = Session::get('successReset'))
+                        <div class="alert alert-success">
+                            {{ $messageReset }}
+                        </div>
+                    @endif
+
                     <h5 class="comfortaa text-muted">                    
                         Connexion à un compte
                     </h5>
@@ -53,7 +59,7 @@
                             Se connecter
                         </button><br />
     
-                        <a href="">
+                        <a href="{{ route('uResetPassword') }}">
                             <b>Mot de passe oublié ?</b>
                         </a><hr />
     
@@ -81,6 +87,6 @@
         </div>
     </div>
     
-    @include('included.footerVisitors')
+    @include('included.footerVisitorsUniv')
 
 @endsection

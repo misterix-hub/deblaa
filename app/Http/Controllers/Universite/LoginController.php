@@ -18,25 +18,32 @@ class LoginController extends Controller
             foreach ($universites_email as $universites_mail) {
                 $email = $universites_mail->email;
                 $password = $universites_mail->password;
-                session()->put('id', $universites_mail->id);
-                session()->put('logo', $universites_mail->logo);
-                session()->put('sigle', $universites_mail->sigle);
-                session()->put('pro', $universites_mail->pro);
-                session()->put('message_bonus', $universites_mail->message_bonus);
-                session()->put('category', "universite");
                 $acces = $universites_mail->acces;
             }
 
-            if (\Hash::check($request->password, $password)) {
-                if ($acces == "Banni") {
-                    abort("401");
+            if($request->password == '') {
+                return back()->with('error', 'Mot de passe incorrect');
+            }else {
+                if (\Hash::check($request->password, $password)) {
+                    if ($acces == "Banni") {
+                        abort("401");
+                    } else {
+                        foreach ($universites_email as $universites_mail) {
+                            session()->put('id', $universites_mail->id);
+                            session()->put('logo', $universites_mail->logo);
+                            session()->put('sigle', $universites_mail->sigle);
+                            session()->put('pro', $universites_mail->pro);
+                            session()->put('message_bonus', $universites_mail->message_bonus);
+                            session()->put('category', "universite");
+                        }
+                        return redirect(route('indexUniversite'));
+                    }
+
                 } else {
-                    return redirect(route('indexUniversite'));
+                    return back()->with('error', "Mot de passe incorrect !");
                 }
-                
-            } else {
-                return back()->with('error', "Mot de passe incorrect !");
             }
+
         }   
     }
 
@@ -76,7 +83,7 @@ class LoginController extends Controller
 
             session()->put('email', $request->email);
             
-            return redirect(route('uRegisterSuccess'));
+            return redirect(route('uRegisterSuccess '));
         }
 
     }
