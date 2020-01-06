@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            \Mail::send('mails.resets.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                     ->subject("Votre mot de passe de Deblaa");
             });
@@ -44,7 +44,7 @@ class ResetPasswordController extends Controller
                 bcrypt($password), now(), $request->input('email')
             ]);
 
-            return redirect(route('uLogin'))->with('successReset', 'Un nouveau mot de passe a été envoyé dans votre boîte mail!');
+            return view('universite.success.register');
         }
     }
 }

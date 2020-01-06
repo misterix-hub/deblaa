@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+            \Mail::send('mails.resets.structure', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                     ->subject("Votre mot de passe de Deblaa");
             });
@@ -44,7 +44,7 @@ class ResetPasswordController extends Controller
                 bcrypt($password), $request->input('email')
             ]);
 
-            return redirect(route('sLogin'))->with('successReset', 'Un nouveau mot de passe a été envoyé dans votre boîte mail !!');
+            return view('structure.success.register');
         }
     }
 }
