@@ -18,7 +18,8 @@
     @include('included.menuVisitorsUniv')
 
     <ol class="breadcrumb font-size-14">
-        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('indexVisitors') }}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('uLogin') }}">Connexion université</a></li>
         <li class="breadcrumb-item active">Réinitialiser mot de passe</li>
     </ol>
 

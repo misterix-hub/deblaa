@@ -18,7 +18,8 @@
     @include('included.menuVisitors')
 
     <ol class="breadcrumb font-size-14">
-        <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('indexVisitors') }}">Accueil</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('sLogin') }}">Connexion structure</a></li>
         <li class="breadcrumb-item active">Réinitialiser mot de passe</li>
     </ol>
 

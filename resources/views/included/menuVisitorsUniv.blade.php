@@ -25,14 +25,22 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 font-size-14">
-            <a href="{{ route('uRegister') }}" class="white-text">
-                <i class="icofont-edit"></i>
-                <b>Inscription</b>
-            </a>&nbsp;&nbsp;&nbsp;
-
-            <a href="{{ route('uLogin') }}" class="btn btn-white btn-sm rounded mr-0 pr-4 pl-4">
-                Connexion
-            </a>
+            <div class="dropdown">
+                <a href="{{ route('sLogin') }}" class="btn btn-white btn-sm rounded ml-0" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" style="margin-right: 35px;">
+                    <i class="icofont-sign-in"></i>
+                    Connexion
+                </a>
+                
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="{{ route('uLogin') }}">
+                        <b>Connexion universités</b>
+                    </a>
+                    <a class="dropdown-item" href="{{ route('sLogin') }}">
+                        <b>Connexion structures</b>
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 </nav>
