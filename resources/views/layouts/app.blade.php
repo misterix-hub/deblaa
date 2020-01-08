@@ -23,6 +23,17 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('icofont/icofont.min.css') }}">
+
+    <style>
+        .diamondAsk {
+            display: block;
+            position: fixed;
+            bottom: 60px;
+            right: 30px;
+            z-index: 99;
+        }
+    </style>
 
     @yield('css')
 </head>
@@ -102,6 +113,12 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             @yield('content')
+            <div class="diamondAsk">
+                <a href="{{ route('indexDemandes') }}">
+                    <i class="icofont icofont-diamond" style="font-size: 50px; color: cornflowerblue;"></i>
+                    <span class="badge badge-pill badge-info" id="totauxDemandes"></span>
+                </a>
+            </div>
         </div>
 
         <!-- Main Footer -->
@@ -168,6 +185,22 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            setInterval(() => {
+                $.ajax({
+                    url: "{{ route('demandeComptePro') }}",
+                    type: "GET",
+                    success: function (statut) {
+                        $('#totauxDemandes').html(statut);
+                    }
+                });
+            }, 2000);
+
+        });
+    </script>
 
     @yield('scripts')
 </body>

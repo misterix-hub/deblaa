@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DemandeUniversite;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -85,6 +86,10 @@ class Universite extends Model
 
     public function filieres() {
         return $this->hasMany(Filiere::class);
+    }
+
+    public function demande_universites() {
+        return $this->hasMany(DemandeUniversite::class);
     }
 
     

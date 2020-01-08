@@ -296,7 +296,7 @@
                     </p>
                     <hr class="my-2">
                     <p class="lead text-center">
-                        <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('sDemandeComptePro') }}" role="button">Faire ma demande</a>
+                        <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('uDemandeComptePro') }}" role="button">Faire ma demande</a>
                     </p>
                 </div>
             </div>
