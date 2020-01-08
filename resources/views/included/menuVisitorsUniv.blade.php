@@ -18,10 +18,10 @@
                 <a class="nav-link" href="#"><b>Services</b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><b>Prix</b></a>
+                <a class="nav-link" href="#"><b>A propos</b></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><b>A propos</b></a>
+                <a class="nav-link" href="#"><b>Contactez-nous</b></a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 font-size-14">

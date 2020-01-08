@@ -26,16 +26,25 @@
                             <input type="text" required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <label for="fichier"><b>Pièce jointe</b></label>
-                            <input type="file" multiple name="fichier[]" id="fichier" class="form-control"><br />
+                            <br />
+                            <div class="form-group">
+                                <label for="file">
+                                    <i class="icofont-paperclip"></i>
+                                    <b>Pièce jointe</b>
+                                </label>&nbsp;&nbsp;&nbsp;
+                                <input type="file" multiple name="fichier[]" id="fichier"  value="{{ old('fichier') }}">
+                            </div>
                         </div>
                     </div>
 
                     <label for="editor"><b>Contenu du message</b></label>
                     <textarea name="message" id="editor"></textarea><br />
 
-                    <input type="checkbox" class="allNiveaux0" id="all">
-                    <label for="all" class="font-weight-bold"><b>Envoyer à tous les étudiants</b></label><br /><br />
+                    @if (count($filieres) != 0)    
+                        <input type="checkbox" class="allNiveaux0" id="all">
+                        <label for="all" class="font-weight-bold"><b>Envoyer à tous les étudiants</b></label><br /><br />
+                    @endif
+
 
                     <div class="row">
                         @php
@@ -69,8 +78,8 @@
                         @endforeach
                         <input type="hidden" name="index" value="{{ $i }}">
                     </div><br />
-
-                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0">
+                    {!! (count($filieres)) == 0 ? '<span class=\'red-text\'>Impossible d\'envoyer sans ancune filière</span>' : '' !!}<br />
+                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0 {{ (count($filieres)) == 0 ? 'disabled' : '' }}">
                         Envoyer
                     </button>
 

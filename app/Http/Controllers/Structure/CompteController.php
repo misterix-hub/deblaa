@@ -86,7 +86,7 @@ class CompteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "" || trim($request->input('site_web')) == "") {
+        if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "") {
             return back()->with('error', 'Modification invalide, veuillez ne laisser aucun champ vide !');
         } else {
 

@@ -253,7 +253,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}">Déconnexion</a>
                             </div>
                         </div>
-                        <a href="" class="">
+                        <a href="{{ route('indexStructure') }}" class="">
                             <small><b>PANNEAU DE CONFIGURATION</b></small>
                         </a>
                     </td>

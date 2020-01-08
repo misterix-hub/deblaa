@@ -27,18 +27,25 @@
                             <input type="text" required name="titre" id="titre" placeholder="Saisir le titre ici" value="{{ old('titre') }}" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <label for="titre"><b>Pièce jointe</b></label>
-
-                            <input type="file" multiple name="fichier[]" id="fichier"  value="{{ old('fichier') }}" class="form-control"><br />
-
+                            <br />
+                            <div class="form-group">
+                                <label for="file">
+                                    <i class="icofont-paperclip"></i>
+                                    <b>Pièce jointe</b>
+                                </label>&nbsp;&nbsp;&nbsp;
+                                <input type="file" multiple name="fichier[]" id="fichier"  value="{{ old('fichier') }}">
+                            </div>
                         </div>
                     </div>
 
                     <label for="editor"><b>Contenu du message</b></label>
                     <textarea name="message" id="editor"></textarea><br />
 
-                    <input type="checkbox" class="allGroupes0" id="all">
-                    <label for="all" class="font-weight-bold"><b>Envoyer à tous les membres</b></label><br /><br />
+                    @if (count($groupes) != 0)    
+                        <input type="checkbox" class="allGroupes0" id="all">
+                        <label for="all" class="font-weight-bold"><b>Envoyer à tous les membres</b></label><br /><br />
+                    @endif
+
 
                     <div class="row">
                         @foreach($groupes as $groupe)

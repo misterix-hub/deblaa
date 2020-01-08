@@ -93,7 +93,7 @@
 
         <div class="text-center">
             <br />
-            <a href="{{ route('sCompte', session()->get('id')) }}">
+            <a href="{{ route('uCompte', session()->get('id')) }}">
                 <i class="icofont-pencil"></i>Modifier le profil
             </a>
         </div>

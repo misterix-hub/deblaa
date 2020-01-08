@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.resets.universite', $data, function ($message) use ($to_name, $to_email) {
+            \Mail::send('mails.resets.universite_password', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                     ->subject("Votre mot de passe de Deblaa");
             });

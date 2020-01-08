@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-12 text-center font-size-14 border-top"><br />
                     <b>Deblaa &copy; 2019 | Tous droits réservés</b><br />
-                    <b>Produit de <a target="_blank" href="https://ibtagroup.com">IBTAGroup</a></b><br /><br />
+                    <b>Produit de <a target="_blank" href="#!">IBTAGroup</a></b><br /><br />
                 </div>
             </div>
         </div>
