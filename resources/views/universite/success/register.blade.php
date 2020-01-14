@@ -20,6 +20,12 @@
     <br /><br /><br /><br />
     <div class="container">
         <div class="row">
+
+            @if($message = Session::get('success'))
+                <div class="alert alert-success">
+                    {{ $message }}
+                </div>
+            @endif
             
             <div class="col-lg-3 col-md-12 col-sm-12 font-size-14"></div>
             <div class="col-lg-6 col-md-12 col-sm-12 text-center">

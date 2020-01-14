@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Universite;
 
+use App\DemandeUniversite;
 use App\Http\Controllers\Controller;
 use App\Models\Universite;
 use Illuminate\Http\Request;
@@ -139,5 +140,19 @@ class CompteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function comptePro() {
+        if (count(DemandeUniversite::where('universite_id', session()->get('id'))->get()) != 0) {
+            return back()->with('warningDemande', "true");
+        } else {
+            $demande_universite = new DemandeUniversite();
+            $demande_universite->universite_id = session()->get('id');
+            $demande_universite->accord = 0;
+            $demande_universite->save();
+
+            return back()->with('successDemande', "true");
+        }
+
     }
 }

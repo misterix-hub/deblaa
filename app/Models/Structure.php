@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\DemandeStructure;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -84,6 +85,10 @@ class Structure extends Model
 
     public function departement() {
         return $this->hasMany(Departement::class);
+    }
+
+    public function demande_structures() {
+        return $this->hasMany(DemandeStructure::class);
     }
 
     

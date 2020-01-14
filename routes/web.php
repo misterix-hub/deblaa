@@ -108,6 +108,12 @@ Route::group(['middleware' => 'auth'], function () {
             'structures' => Structure::all()
         ]);
     });
+
+    /* DEMANDE */
+    Route::get('demandes-processing', 'DemandeController@totalDemande')->name('demandeComptePro');
+    Route::get('demandes', 'DemandeController@indexDemandes')->name('indexDemandes');
+    Route::post('demandes/structure-accord-processing/{id}', 'DemandeController@accordStructureProcessing')->name('accordStructureProcessing');
+    Route::post('demandes/universite-accord-processing/{id}', 'DemandeController@accordUniversiteProcessing')->name('accordUniversiteProcessing');
 });
 
 
@@ -144,6 +150,8 @@ Route::post('universites/register', 'Universite\LoginController@registerProcessi
 Route::get('universites/register/success', 'Universite\LoginController@registerSuccess')->name('uRegisterSuccess');
 
 Route::get('logout', 'Universite\LoginController@logout')->name('logout');
+
+Route::get('universites/demande', 'Universite\CompteController@comptePro')->name('uDemandeComptePro');
 
 /* STRUCTURE */
 
@@ -210,3 +218,5 @@ Route::get('membres/message/{id}/details', 'Membre\MessageController@sDetails')-
 
 Route::get('membres/login', 'Membre\MainController@login')->name('mLogin');
 Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing')->name('mLoginProcessing');
+
+

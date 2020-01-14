@@ -92,7 +92,7 @@ class LoginController extends Controller
         if(!session()->has('email')) {
             abort('404');
         } else {
-            return view('structure.success.register');
+            return view('universite.success.register');
         }
     }
     
