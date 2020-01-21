@@ -89,13 +89,13 @@
         </button>
         <div class="collapse navbar-collapse comfortaa" id="collapsibleNavId">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0 font-size-14">
-                
+
             </ul>
             <form class="form-inline my-2 my-lg-0" style="font-size: 13px;">
 
-                <a class="nav-link white-text" href="#"><b>Accueil</b></a>
+                <a class="nav-link white-text" href="#accueil"><b>Accueil</b></a>
 
-                <a class="nav-link white-text" href="#"><b>Tarification</b></a>
+                <a class="nav-link white-text" href="#tarifications"><b>Tarification</b></a>
 
                 <div class="dropdown">
                     <a class="nav-link white-text" href="#" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -110,14 +110,14 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="dropdown">
                     <a href="{{ route('sLogin') }}" class="btn btn-white btn-md mr-0" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                         <i class="icofont-sign-in"></i>
                         <small><b>Connexion</b></small>
                     </a>
-                    
+
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
                         <a class="dropdown-item" href="{{ route('uLogin') }}">
                             <b>Connexion université</b>
@@ -132,25 +132,25 @@
     </nav>
 
     <div class="container">
-        <div class="row">            
-    
+        <div class="row" id="accueil">
+
             <div class="col-lg-7 col-md-12 col-sm-12">
-    
+
                 <div class="deblaa">
                     <span class="indigo-text">Deb</span><span class="orange-text">laa</span>
                 </div><br />
-    
+
                 <div class="slogan">
-                    En plus des sms mobiles et la posibilité de personnaliser vos messages, joingnez à vos
-                    messages des fichiers multimedia.
+                    Dotez-vous désormais d'une gouvernance et d'une gestion d'informations
+                    professionnelles appropriées à votre contexte d'affaire
                 </div><br />
-    
+
                 <div class="lg-btn-cover comfortaa">
                     <table>
                         <tr>
                             <td>
                                 <div class="dropdown">
-                                    
+
                                     <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         <span style="font-size: 13px;">
@@ -170,7 +170,7 @@
                             </td>
                             <td>
                                 <div class="dropdown">
-                                    
+
                                     <a href="#!" class="btn btn-indigo btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         <span style="font-size: 13px;">
@@ -189,9 +189,9 @@
                                 </div>
                             </td>
                         </tr>
-                    </table> 
+                    </table>
                 </div>
-    
+
                 <div class="sm-btn-cover comfortaa">
 
                     <center>
@@ -199,7 +199,7 @@
                             <tr>
                                 <td>
                                     <div class="dropdown">
-                                        
+
                                         <a href="#!" class="btn btn-orange btn-md ml-0 rounded"style="width: 150px;" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             <span style="font-size: 13px;">
@@ -219,7 +219,7 @@
                                 </td>
                                 <td>
                                     <div class="dropdown">
-                                        
+
                                         <a href="#!" class="btn btn-white btn-md ml-0 rounded"style="width: 150px;" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                             aria-expanded="false">
                                             <span style="font-size: 13px;">
@@ -239,10 +239,10 @@
                                 </td>
                             </tr>
                         </table>
-                    </center> 
+                    </center>
 
                 </div><br />
-                
+
             </div>
 
             <div class="col-lg-5 col-md-12 col-sm-12"><br /><br /><br />
@@ -252,7 +252,7 @@
                     <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="" width="150">
                 </div>
             </div>
-    
+
         </div>
     </div>
 
@@ -302,7 +302,7 @@
                 Et bien plus encore ...
             </h3>
             <span class="font-weight-bold">
-                Joingez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne
+                Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne
             </span>
             <br /><br /><hr /><br />
             <!--<img src="{{ URL::asset('assets/images/pdf.svg') }}" alt="" width="20%" class="m-4">
@@ -310,7 +310,7 @@
             <img src="{{ URL::asset('assets/images/video.svg') }}" alt="" width="23%" class="m-4">-->
         </div>
     </div>
-    <div class="row">
+    <div class="row" id="tarifications">
         <div class="col-12 text-center">
             <br />
             <h1 class="comfortaa">
@@ -447,7 +447,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-12 col-lg-6 text-center">
             <br /><br /><br /><br />
             <h3 class="comfortaa">
                 <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" width="100">
@@ -456,7 +456,7 @@
             </h3>
             <br />
             <div class="dropdown">
-                                        
+
                 <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                     <span style="font-size: 13px;">
@@ -474,6 +474,51 @@
                 </div>
             </div>
         </div>
+        <div class="col-12 col-lg-6">
+            <br /><br />
+
+            @if($errors->any())
+                <div class="alert alert-error">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if($message = Session::get('success'))
+                <div class="alert alert-success">
+                    {{ $message }}
+                </div>
+            @endif
+
+            <h3 class="comfortaa">Nous contacter</h3>
+            <hr>
+            <form action="" method="post" class="comfortaa">
+               <div class="form-row mb-2">
+                   <div class="col">
+                       <label for="sigle">Sigle:</label>
+                       <input type="text" name="sigle" id="sigle" class="form-control" required>
+                   </div>
+                   <div class="col">
+                       <label for="email">E-mail:</label>
+                       <input type="email" name="email" id="email" class="form-control" required>
+                   </div>
+               </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" style="min-height: 200px;" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-blue" id="sendMessage">ENVOYER</button>
+                </div>
+            </form>
+            <div>
+                <i class="icofont icofont-google-map icofont-2x"></i><span class="mr-3"> Agoè, Togo</span>
+                <i class="icofont icofont-android-nexus icofont-2x"></i><span> 00228 91 01 92 45 | 97 53 17 17</span>
+            </div>
+        </div>
     </div>
 </div><br /><br /><br /><br />
 
@@ -489,7 +534,7 @@
                 </a>&nbsp;&nbsp;&nbsp;
                 <a href="">
                     <i class="icofont-lock"></i>
-                    <b>Confidantialités</b>
+                    <b>Confidentialités</b>
                 </a>
                 <span class="float-right">
                     Produit de :
@@ -503,4 +548,17 @@
 
 </div><br />
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            $('a[href^="#"]').click(function (evt) {
+                evt.preventDefault();
+                let target = $(this).attr('href');
+
+                $('html, body').stop().animate({scrollTop: $(target).offset().top}, 1000);
+            });
+        });
+    </script>
 @endsection
