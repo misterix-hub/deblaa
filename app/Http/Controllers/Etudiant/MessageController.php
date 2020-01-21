@@ -17,6 +17,16 @@ class MessageController extends Controller
             abort('404');
         } else {
 
+?>
+
+            <script>
+                if (window.innerWidth < 1000) {
+                    window.location = "http://192.168.1.66/deblaa/etudiants/inboxs";
+                }
+            </script>
+
+<?php
+
             return view('etudiant.inbox');
         }
         

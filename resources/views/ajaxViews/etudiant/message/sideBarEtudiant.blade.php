@@ -38,12 +38,12 @@
                 <table width="100%">
                     <tr>
                         <td width="36">
-                            <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
+                            <div style="border-radius: 100%; padding: 13px;"
                             class="white-text text-center grey lighten-1">
                                 <i class="icofont-envelope-open"></i>
                             </div>
                         </td>
-                        <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
+                        <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="font-weight-bold black-text">
                                 {{ $cible_message_universite->titre }}
                             </b><br />
@@ -59,12 +59,12 @@
                 <table width="100%">
                     <tr>
                         <td width="36">
-                            <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
+                            <div style="border-radius: 100%; padding: 13px;"
                             class="white-text text-center green">
                                 <i class="icofont-envelope"></i>
                             </div>
                         </td>
-                        <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
+                        <td style="line-height: 20px;" class="pl-1 text-truncate">
                             <b class="font-weight-bold black-text">
                                 {{ $cible_message_universite->titre }}
                             </b><br />

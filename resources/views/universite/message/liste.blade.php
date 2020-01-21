@@ -37,7 +37,7 @@
                                     @forelse($messages as $message)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('sDetailsMessage', $message->id) }}">
+                                                <a href="{{ route('uDetailsMessage', $message->id) }}">
                                                     <div class="indigo lighten-5 pt-2 pb-2 pr-3 pl-3 mb-1 mt-1 text-muted float-right"
                                                     style="border-radius: 25px;">
                                                         <b>{{ $message->titre }}</b><br />
@@ -56,7 +56,7 @@
                                 </tbody>
                             </table><br /><br />
 
-                            <a href="">
+                            <a href="{{ route('uEnvoyerMessage') }}">
                                 <i class="icofont-facebook-messenger"></i>
                                 <b>Envoyer un nouveau message</b>
                             </a><br /><br />

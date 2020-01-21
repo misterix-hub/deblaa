@@ -6,10 +6,13 @@
     div.deblaa {
         font-size: 94px;
         font-family: comfortaa;
+        margin-top: 75px;
     }
 
     div.slogan {
-        font-size: 40px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 35px;
         font-family: comfortaa;
     }
 
@@ -36,11 +39,13 @@
         }
         div.deblaa {
             text-align: center;
-            font-size: 54px;
+            font-size: 60px;
+            margin-top: 30px;
         }
         div.slogan {
             text-align: center;
-            font-size: 18px;
+            font-size: 14px;
+            line-height: 25px;
         }
         .lg-btn-cover {
             display: none;
@@ -63,116 +68,439 @@
     }
 
     .bg-body {
-        background-image: url(assets/images/1.jpg);
+        /*background-image: url(assets/images/1.jpg);
         background-size: contain;
-        position: absolute; top: 0; right: 0; left: 0; bottom: 0;
+        position: absolute; top: 0; right: 0; left: 0; bottom: 0;*/
     }
 </style>
 
-<div class="bg-body">
+<div class="bg-body indigo lighten-5">
 
-    <div class="div indigo">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div>
-                        <table width="100%">
-                            <tr>
-                                <td class="pt-2">
-                                    <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px;">
-                                        <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
-                                    </a>
-                                </td>
-                                <td class="text-right">
-                                    <a href="#!" class="black-text" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                        <i class="icofont-navigation-menu white-text" style="font-size: 24px;"></i>
-                                    </a>
-                                    <div class="dropdown-menu font-size-14">
-                                        <a class="dropdown-item" href="{{ route('eLogin') }}">
-                                            <i class="icofont-university brown-text"></i>
-                                            Espace université
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('mLogin') }}">
-                                            <i class="icofont-building yellow-text"></i>
-                                            Espace structure
-                                        </a>
-                                    <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-info-circle cyan-text"></i>
-                                            À porpos de nous
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-google-map red-text"></i>
-                                            Où nous trouver ?
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="icofont-handshake-deal"></i>
-                                            Partenaires
-                                        </a>
-                                    </div>
-                                    <!-- Basic dropdown -->
-                                </td>
-                            </tr>
-                        </table>
+    <nav class="navbar navbar-expand-sm navbar-dark indigo">
+        <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
+            <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
+        </a>
+        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexVisitors') }}">
+            Deblaa
+        </a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <i class="icofont-navigation-menu"></i>
+        </button>
+        <div class="collapse navbar-collapse comfortaa" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 font-size-14">
+                
+            </ul>
+            <form class="form-inline my-2 my-lg-0" style="font-size: 13px;">
+
+                <a class="nav-link white-text" href="#"><b>Accueil</b></a>
+
+                <a class="nav-link white-text" href="#"><b>Tarification</b></a>
+
+                <div class="dropdown">
+                    <a class="nav-link white-text" href="#" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Créer un compte</a>
+
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <a class="dropdown-item" href="{{ route('uRegister') }}">
+                            <b>Créer un compte université</b>
+                        </a>
+                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                            <b>Créer un compte structure</b>
+                        </a>
                     </div>
                 </div>
-            </div>
+                
+                <div class="dropdown">
+                    <a href="{{ route('sLogin') }}" class="btn btn-white btn-md mr-0" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                        <i class="icofont-sign-in"></i>
+                        <small><b>Connexion</b></small>
+                    </a>
+                    
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                        <a class="dropdown-item" href="{{ route('uLogin') }}">
+                            <b>Connexion université</b>
+                        </a>
+                        <a class="dropdown-item" href="{{ route('sLogin') }}">
+                            <b>Connexion structure</b>
+                        </a>
+                    </div>
+                </div>
+            </form>
         </div>
-    </div>
+    </nav>
 
     <div class="container">
         <div class="row">            
     
-            <div class="col-lg-5 col-md-12 col-sm-12 text-center"><br />
-    
-                <img src="{{ URL::asset('assets/images/deblaa.png') }}" class="logo" alt="logo">
-                
-            </div>
-            <div class="col-lg-1 col-md-12 col-sm-12"></div>
-    
-            <div class="col-lg-6 col-md-12 col-sm-12"><br />
+            <div class="col-lg-7 col-md-12 col-sm-12">
     
                 <div class="deblaa">
                     <span class="indigo-text">Deb</span><span class="orange-text">laa</span>
-                </div>
-    
-                <div class="slogan white-text">
-                    Ma boite à informations professionelle, sûre et rapide !
                 </div><br />
     
-                <div class="lg-btn-cover">
-                    <a href="{{ route('eLogin') }}" class="btn btn-orange btn-lg ml-0">
-                        Espace universités
-                    </a>
-        
-                    <a href="{{ route('mLogin') }}" class="btn btn-indigo btn-lg ml-0">
-                        Espace structures
-                    </a>
+                <div class="slogan">
+                    En plus des sms mobiles et la posibilité de personnaliser vos messages, joingnez à vos
+                    messages des fichiers multimedia.
+                </div><br />
+    
+                <div class="lg-btn-cover comfortaa">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="dropdown">
+                                    
+                                    <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <span style="font-size: 13px;">
+                                            Créer un compte
+                                        </span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <a class="dropdown-item" href="{{ route('uRegister') }}">
+                                            <b>Créer un compte université</b>
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                                            <b>Créer un compte structure</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    
+                                    <a href="#!" class="btn btn-indigo btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <span style="font-size: 13px;">
+                                            Connexion
+                                        </span>
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <a class="dropdown-item" href="{{ route('uLogin') }}">
+                                            <b>Connexion université</b>
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('sLogin') }}">
+                                            <b>Connexion structure</b>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table> 
                 </div>
     
-                <div class="sm-btn-cover">
-                    <a href="{{ route('eLogin') }}" class="btn btn-orange m-0">
-                        Espace universités
-                    </a>
-        
-                    <a href="{{ route('mLogin') }}" class="btn btn-indigo m-0">
-                        Espace structures
-                    </a>
+                <div class="sm-btn-cover comfortaa">
+
+                    <center>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="dropdown">
+                                        
+                                        <a href="#!" class="btn btn-orange btn-md ml-0 rounded"style="width: 150px;" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <span style="font-size: 13px;">
+                                                <small>Créer un compte</small>
+                                            </span>
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" href="{{ route('uRegister') }}">
+                                                <b>Créer un compte université</b>
+                                            </a>
+                                            <a class="dropdown-item" href="{{ route('sRegister') }}">
+                                                <b>Créer un compte structure</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        
+                                        <a href="#!" class="btn btn-white btn-md ml-0 rounded"style="width: 150px;" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            <span style="font-size: 13px;">
+                                                <small>Connexion</small>
+                                            </span>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
+                                            <a class="dropdown-item" href="{{ route('uLogin') }}">
+                                                <b>Connexion université</b>
+                                            </a>
+                                            <a class="dropdown-item" href="{{ route('sLogin') }}">
+                                                <b>Connexion structure</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </center> 
+
                 </div><br />
                 
             </div>
+
+            <div class="col-lg-5 col-md-12 col-sm-12"><br /><br /><br />
+                <!--<img src="{{ URL::asset('assets/images/chat.svg') }}" alt="" width="40%">-->
+                <img src="{{ URL::asset('assets/images/transfer.svg') }}" alt="" width="100%">
+                <div class="text-center" style="position: absolute; top: 125px; left: 0; right: 0;">
+                    <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="" width="150">
+                </div>
+            </div>
     
         </div>
-    </div><br />
-    
-    <div class="text-center font-size-14 white-text">
-        Deblaa &copy; Copyright 2019 | Tous droits réservés<br />
-        Produit de <a target="_blank" href="http://ibtagroup.com">IBTAGroup</a>
-
     </div>
 
 </div>
 
+<div class="container comfortaa">
+    <div class="row">
+        <div class="col-12 text-center">
+            <br /><br />
+            <h1 class="comfortaa font-weight-bold">
+                En savoir plus sur Deblaa
+            </h1>
+            <br />
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 text-center">
+            <h5><span class="font-weight-bold">Envois de messages groupés</span></h5>
+            <div class="font-size-14">
+                Envoyez un seul message pour un groupe de plusieurs contacts
+                <br /><br />
+
+                <div class="text-center">
+                    <img src="{{ URL::asset('assets/images/team.svg') }}" alt="" width="70%">
+                </div>
+            </div><br />
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 text-center">
+            <h5><span class="font-weight-bold">Personnalisation de massages</span></h5>
+            <div class="font-size-14">
+                Personnalisez l'expéditeur de chacun de vos sms dans limite
+                <div class="text-center"><br /><br />
+                    <img src="{{ URL::asset('assets/images/mail.svg') }}" alt="" width="55%">
+                </div>
+            </div><br /><br />
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 text-center">
+            <span class="font-weight-bold">Rapport et confirmation de lecture</span>
+            <div class="font-size-14">
+                Suivez vos messages et consultez les rapports et confirmation de lecture
+                <div class="text-center"><br /><br />
+                    <img src="{{ URL::asset('assets/images/mail2.svg') }}" alt="" width="55%" class="mt-3">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <br /><br />
+            <h3 class="comfortaa font-weight-bold mb-3">
+                Et bien plus encore ...
+            </h3>
+            <span class="font-weight-bold">
+                Joingez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne
+            </span>
+            <br /><br /><hr /><br />
+            <!--<img src="{{ URL::asset('assets/images/pdf.svg') }}" alt="" width="20%" class="m-4">
+            <img src="{{ URL::asset('assets/images/image.svg') }}" alt="" width="25%" class="m-4">
+            <img src="{{ URL::asset('assets/images/video.svg') }}" alt="" width="23%" class="m-4">-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <br />
+            <h1 class="comfortaa">
+                <i class="icofont-money icofont-2x brown-text"></i>
+                <div class="mt-2"></div>
+                Tarifications
+            </h1>
+            <br /><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="card orange card-body">
+                <h6 class="font-weight-bold text-center comfortaa">
+                    10 messages
+                </h6>
+                <div class="text-center comfortaa">
+                    <h5 class="font-weight-bold white-text">Gratuit !</h5>
+                    <small class="white-text">20 F CFA par message</small>
+                </div>
+                <div class="text-center mt-2">
+                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                </div>
+                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                    <b>Trial</b>
+                </a>
+            </div>
+            <div class="card card-body">
+                <ul class="font-size-14 pl-4">
+                    <li>
+                        Possibilité de joindre des fichiers
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Message perssonnalisé
+                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                    </li>
+                    <li>
+                        Envois groupés
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Envois uniques
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Assistance
+                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                    </li>
+                </ul>
+            </div><br />
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="card blue card-body">
+                <h6 class="font-weight-bold text-center comfortaa">
+                    1000 messages
+                </h6>
+                <div class="text-center comfortaa">
+                    <h5 class="font-weight-bold white-text">15 000 F CFA</h5>
+                    <small class="white-text">15 F CFA par message</small>
+                </div>
+                <div class="text-center mt-2">
+                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                </div>
+                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                    <b>Pro</b>
+                </a>
+            </div>
+            <div class="card card-body">
+                <ul class="font-size-14 pl-4">
+                    <li>
+                        Possibilité de joindre des fichiers
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Message perssonnalisé
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Envois groupés
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Envois uniques
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Assistance
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                </ul>
+            </div><br />
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="card green card-body">
+                <h6 class="font-weight-bold text-center comfortaa">
+                    50 000 messages
+                </h6>
+                <div class="text-center comfortaa">
+                    <h5 class="font-weight-bold white-text">500 000 F CFA</h5>
+                    <small class="white-text">10 F CFA par message</small>
+                </div>
+                <div class="text-center mt-2">
+                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                </div>
+                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                    <b>Pro max</b>
+                </a>
+            </div>
+            <div class="card card-body">
+                <ul class="font-size-14 pl-4">
+                    <li>
+                        Possibilité de joindre des fichiers
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Message perssonnalisé
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Envois groupés
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Envois uniques
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                    <li>
+                        Assistance
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <br /><br /><br /><br />
+            <h3 class="comfortaa">
+                <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="logo" width="100">
+                <div class="mt-2"></div>
+                Commencer avec Deblaa
+            </h3>
+            <br />
+            <div class="dropdown">
+                                        
+                <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <span style="font-size: 13px;">
+                        <small>Créer un compte</small>
+                    </span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="triggerId">
+                    <a class="dropdown-item" href="{{ route('uRegister') }}">
+                        <b>Créer un compte université</b>
+                    </a>
+                    <a class="dropdown-item" href="{{ route('sRegister') }}">
+                        <b>Créer un compte structure</b>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br /><br /><br /><br />
+
+<div class="font-size-14">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <span class="font-weight-bold">Deblaa &copy; 2020</span><br />
+                <a href="">
+                    <i class="icofont-license"></i>
+                    <b>Termes et conditions</b>
+                </a>&nbsp;&nbsp;&nbsp;
+                <a href="">
+                    <i class="icofont-lock"></i>
+                    <b>Confidantialités</b>
+                </a>
+                <span class="float-right">
+                    Produit de :
+                    <a target="_blank" href="#!">
+                        <b>IBTAGroup</b>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div><br />
 
 @endsection

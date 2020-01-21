@@ -229,9 +229,15 @@
                 </span><br />
                 <div>
                     <a href="#!">
-                        <div class="item" style="border: none;">
+                        <div class="item">
                             <i class="icofont-comment"></i>
                             <b><span class="menu-item-sm-hide">Nous envoyer un message</span></b>
+                        </div>
+                    </a>
+                    <a href="#!">
+                        <div class="item">
+                            <i class="icofont-book-alt"></i>
+                            <b><span class="menu-item-sm-hide">Documentation</span></b>
                         </div>
                     </a>
                 </div>
@@ -355,31 +361,155 @@
 
     <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" style="border-radius: 15px;">
                 <div class="modal-header">
                     <h6 class="modal-title" id="compteProModalLabel">
-                        <i class="icofont-diamond"></i>
-                        <b>Passer en compte pro</b>
+                        <i class="icofont-refresh"></i>
+                        <b>Recharge de compte</b>
                     </h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body pl-4 pr-4">
-                    <h3 class="text-center green-text">
-                        <i class="icofont-diamond icofont-3x"></i>
-                    </h3>
-                    <p style="text-align: center;">
-                        Cette
-                        opération consiste à nous adresser directement une demande, puis nous prendrons contact avec vous
-                        dans les prochaines 5 minutes pour vous communiquer de l'état de l'opération. cliquez sur
-                        " <span class="green-text">Faire ma demande</span> ".
-                    </p>
-                    <hr class="my-2">
-                    <p class="lead text-center">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card orange card-body">
+                                <h6 class="font-weight-bold text-center comfortaa">
+                                    10 messages
+                                </h6>
+                                <div class="text-center comfortaa">
+                                    <h5 class="font-weight-bold white-text">200 F CFA</h5>
+                                    <small class="white-text">20 F CFA par message</small>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                                </div>
+                                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                                    <b>Trial</b>
+                                </a>
+                            </div>
+                            <div class="card card-body">
+                                <ul class="font-size-14 pl-4">
+                                    <li>
+                                        Possibilité de joindre des fichiers multimedia
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Message perssonnalisé
+                                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois groupés
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois uniques
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Assistance
+                                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                                    </li>
+                                </ul>
+                                <a href="" class="btn btn-orange rounded btn-block btn-md disabled">
+                                    Gratuit !
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card blue card-body">
+                                <h6 class="font-weight-bold text-center comfortaa">
+                                    1000 messages
+                                </h6>
+                                <div class="text-center comfortaa">
+                                    <h5 class="font-weight-bold white-text">15 000 F CFA</h5>
+                                    <small class="white-text">15 F CFA par message</small>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                                </div>
+                                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                                    <b>Pro</b>
+                                </a>
+                            </div>
+                            <div class="card card-body">
+                                <ul class="font-size-14 pl-4">
+                                    <li>
+                                        Possibilité de joindre des fichiers multimedia
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Message perssonnalisé
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois groupés
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois uniques
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Assistance
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                </ul>
+                                <a href="{{ route('sDemandeComptePro') }}" class="btn rounded btn-blue btn-block btn-md">
+                                    Sélectionner
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card green card-body">
+                                <h6 class="font-weight-bold text-center comfortaa">
+                                    50 000 messages
+                                </h6>
+                                <div class="text-center comfortaa">
+                                    <h5 class="font-weight-bold white-text">500 000 F CFA</h5>
+                                    <small class="white-text">10 F CFA par message</small>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <i class="icofont-thin-down white-text icofont-2x"></i>
+                                </div>
+                                <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
+                                    <b>Pro max</b>
+                                </a>
+                            </div>
+                            <div class="card card-body">
+                                <ul class="font-size-14 pl-4">
+                                    <li>
+                                        Possibilité de joindre des fichiers multimedia
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Message perssonnalisé
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois groupés
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Envois uniques
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                    <li>
+                                        Assistance
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
+                                    </li>
+                                </ul>
+                                <a href="" class="btn rounded btn-green btn-block btn-md">
+                                    Sélectionner
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<p class="lead text-center">
                         <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('sDemandeComptePro') }}" role="button">Faire ma demande</a>
-                    </p>
+                    </p>-->
                 </div>
             </div>
         </div>

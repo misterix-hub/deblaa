@@ -33,20 +33,15 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            if ($(window).width() < 760) {
-                $('body').html("<br /><br /><h2 class='text-center'>Redirection en cours ...</h2>");
-                window.location = "{{ route('inboxsEtudiant') }}";
-            } else {
-                setInterval(() => {
-                    $.ajax({
-                        url : "{{ route('eMessageFecting') }}",
-                        type : 'GET',
-                        success : function(statut){
-                            $('#sideBarEtudiant').html(statut);
-                        }
-                    });
-                }, 1000);
-            }
+            setInterval(() => {
+                $.ajax({
+                    url : "{{ route('eMessageFecting') }}",
+                    type : 'GET',
+                    success : function(statut){
+                        $('#sideBarEtudiant').html(statut);
+                    }
+                });
+            }, 1000);
         });
     </script>
 @endsection

@@ -61,20 +61,20 @@ class MessageController extends Controller
             }
         }
 
-        if ($dest > 10) {
-            return back()->with('error', "Le nombre de destinataires autorisé est dépassé ! <a href=''>Passer en mode compte pro</a>");
+        if ($dest > session()->get('message_bonus')) {
+            return back()->with('error', "Le nombre de destinataires autorisé est dépassé !");
         } else {
             
             if($dest == 0) {
                 return back()->with('error', 'Sélectionnez au moins un groupe, Votre message n\'a aucune cible');
             } else {
 
-                if(session()->get('message_bonus') >= 10) {
-                    return back()->with('error', "Vous avez épuisé votre nombre nombre de messages bonnus.");
+                if(session()->get('message_bonus') == 0) {
+                    return back()->with('error', "Vous avez épuisé votre nombre nombre de messages.");
                 }
 
                 $structure = Structure::findOrFail(session()->get('id'));
-                $structure->message_bonus = $dest + $structure->message_bonus;
+                $structure->message_bonus = $structure->message_bonus - $dest;
                 $structure->save();
 
                 session()->put('message_bonus', $structure->message_bonus);
@@ -90,7 +90,7 @@ class MessageController extends Controller
                 $bilan_message_structure->message_structure_id = $message_structure->id;
                 $bilan_message_structure->nb_destinataire = $dest;
                 $bilan_message_structure->save();
-    
+
                 $totalFichier = count($_FILES['fichier']['name']);
     
                 $target_dir = "db/messages/structures/fichier/";

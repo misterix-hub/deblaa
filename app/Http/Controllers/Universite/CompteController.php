@@ -89,7 +89,7 @@ class CompteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "" || trim($request->input('site_web')) == "") {
+        if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "") {
             return back()->with('error', 'Modification invalide, veuillez ne laisser aucun champ vide !');
         } else {
 
@@ -143,16 +143,27 @@ class CompteController extends Controller
     }
 
     public function comptePro() {
-        if (count(DemandeUniversite::where('universite_id', session()->get('id'))->get()) != 0) {
-            return back()->with('warningDemande', "true");
+
+        if (count(Universite::where('id', session()->get('id'))->where('pro', 1)->get()) != 0) {
+            
+            $universite = Universite ::findOrFail(session()->get('id'));
+            $universite->message_bonus = 1000 + session()->get('message_bonus');
+            $universite->save();
+
+            session()->put('message_bonus', $universite->message_bonus);
+
+            return back()->with('success', "Compte rechargé avec succès !");
+
         } else {
-            $demande_universite = new DemandeUniversite();
-            $demande_universite->universite_id = session()->get('id');
-            $demande_universite->accord = 0;
-            $demande_universite->save();
+            $universite = Universite ::findOrFail(session()->get('id'));
+            $universite->message_bonus = 1000 + session()->get('message_bonus');
+            $universite->pro = 1;
+            $universite->save();
 
-            return back()->with('successDemande', "true");
+            session()->put('message_bonus', $universite->message_bonus);
+            session()->put('pro', 1);
+
+            return back()->with('success', "Compte rechargé avec succès !");
         }
-
     }
 }

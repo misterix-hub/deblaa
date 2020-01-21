@@ -32,21 +32,6 @@
                             </h6>
 
                             <br />
-                            <?php $send_message = 0; ?>
-                            @if ($message = Session::get('success'))
-                                <div class="alert alert-success">
-                                    {{ $message }}
-                                    @if ($message == "Étudiant ajouté avec succès !")
-                                        <?php $send_message = 1; ?>
-                                    @endif
-                                </div>
-                            @endif
-
-                            @if ($message = Session::get('error'))
-                                <div class="alert alert-danger">
-                                    {{ $message }}
-                                </div>
-                            @endif
 
                             <table id="example" class="table table-responsive" style="width:100%">
                                 <thead>

@@ -49,7 +49,7 @@ class LoginController extends Controller
                 session()->put('category', "etudiant");
             }
 
-            return redirect(route('inboxsEtudiant'));
+            return redirect(route('inboxEtudiant'));
         }
     }
 }

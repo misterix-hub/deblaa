@@ -43,9 +43,6 @@
                                 </div>
                             @endif
                             
-                            <script>
-                              $(".alert").alert();
-                            </script>
                             @if (session()->get('pro') == 0) 
                             
                                 <div class="card">
@@ -53,16 +50,16 @@
                                         <h4 class="card-title comfortaa">
                                             Bienvenue, {{ session()->get('sigle') }}
                                         </h4>
-                                        <p class="card-text" style="text-align: justify;">
+                                        <p class="card-text black-text" style="text-align: justify;">
                                             Le compte que vous utilisez est un compte d'essai avec un nombre limité de messages
-                                            à envoyer à un nombre de destinataires limité. <a href="#!" data-toggle="modal" data-target="#compteProModal">Passez en compte pro</a>
+                                            à envoyer à un nombre de destinataires limité. <a href="#!" data-toggle="modal" data-target="#compteProModal">Chargez votre compte</a>
                                             pour utiliser Deblaa sans restrictions.
                                         </p>
                                         <div class="row">
-                                            <div class="col-lg-5 col-md-6 col-sm-12">
-                                                <a class="btn btn-danger ml-0 rounded btn-block" href="#!" data-toggle="modal" data-target="#compteProModal" role="button">
-                                                    <i class="icofont-diamond"></i>
-                                                    Passer en compte pro
+                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                                <a class="btn btn-green ml-0 rounded btn-block" href="#!" data-toggle="modal" data-target="#compteProModal" role="button">
+                                                    <i class="icofont-refresh"></i>
+                                                    Charger le compte
                                                 </a>
                                             </div>
                                         </div>

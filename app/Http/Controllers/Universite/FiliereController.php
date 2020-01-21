@@ -9,6 +9,7 @@ use App\Models\FiliereNiveau;
 use App\Repositories\FiliereRepository;
 use App\Models\Niveau;
 use App\MessageUniversite;
+use App\User;
 
 class FiliereController extends Controller
 {
@@ -186,6 +187,9 @@ class FiliereController extends Controller
 
         $del_filiereNiveau = FiliereNiveau::where('filiere_id', $id);
         $del_filiereNiveau->forceDelete();
+
+        $users = User::where('filiere_id', $id);
+        $users->forceDelete();
 
         return redirect(route('uListeFiliere'))->with('success', "Filière supprimée avec succès !");
     }

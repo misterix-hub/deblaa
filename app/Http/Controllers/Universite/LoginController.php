@@ -60,7 +60,7 @@ class LoginController extends Controller
             $universite = new Universite;
             $universite->nom = $request->nom;
             $universite->sigle = $request->sigle;
-            $universite->message_bonus = 0;
+            $universite->message_bonus = 10;
             $universite->email = $request->email;
             $universite->password = bcrypt($password);
             $universite->acces = 1;

@@ -23,7 +23,7 @@
     </ol>
 
     <br /><br /><br />
-    <div class="container">
+    <div class="container comfortaa">
         <div class="row">
             
             <div class="col-lg-5 col-md-12 col-sm-12 font-size-14">
@@ -76,7 +76,7 @@
                 </h5>
             </div>
         </div>
-    </div>
+    </div><br />
     
     @include('included.footerVisitors')
 

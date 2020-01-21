@@ -2,11 +2,6 @@
 
 
 @section('inboxs')
-    <script>
-        if ($(window).width() >= 760) {
-            window.location = "{{ route('inboxEtudiant') }}";
-        }
-    </script>
     <div id="inboxS">
 	<div class="text-center"><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	     <img src="{{ URL::asset('assets/images/833.gif') }}" width="70"/>

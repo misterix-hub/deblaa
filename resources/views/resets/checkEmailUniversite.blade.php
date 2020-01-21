@@ -25,9 +25,9 @@
 
     <br /><br />
 
-    <div class="container mb-5">
+    <div class="container comfortaa">
         <div class="row justify-content-center mb-5">
-            <div class="col-lg-4 col-md-12 col-sm-12 font-size-14 mb-5">
+            <div class="col-lg-4 col-md-12 col-sm-12 font-size-14 mb-3">
 
                 <h4 class="text-center"><i class="icofont-refresh icofont-2x mb-2"></i></h4>
                 <h4 class="text-muted text-center">
@@ -35,7 +35,7 @@
                 </h4>
                 <br />
 
-                <p>Veuillez renseigner votre adresse électronique dans le champs ci-dessous.
+                <p class="text-center">Veuillez renseigner votre adresse électronique dans le champs ci-dessous.
                     Un mot de passe vous sera envoyé à cette adresse vous permettant de vous connecter.</p>
 
                 @if( $message = Session::get('error'))

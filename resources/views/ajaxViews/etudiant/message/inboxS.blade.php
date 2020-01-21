@@ -19,11 +19,6 @@
                     @endif
                 </a>&nbsp;&nbsp;
             </td>
-            <td width="20" class="text-right pt-1">
-                <a href="{{ route('logout') }}" id="dropdownMenuButton">
-                    <i class="icofont-sign-out white-text" style="font-size: 22px;"></i>
-                </a>
-            </td>
         </tr>
     </table>
 </div>
@@ -31,41 +26,41 @@
 @forelse ($cible_message_universites as $cible_message_universite)
     @if (in_array( $cible_message_universite->message_universite_id, $tab_id))
         <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}">
-            <div class="pt-2 pb-2 pr-2 pl-2 border-bottom">
+            <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
-                        <td width="45px">
-                            <div style="width: 45px; height: 45px; border-radius: 100%; line-height: 50px;"
+                        <td width="36px">
+                            <div style="border-radius: 100%; padding: 13px;"
                             class="white-text text-center grey lighten-1">
-                                <i style="font-size: 18px;" class="icofont-envelope-open"></i>
+                                <i class="icofont-envelope-open"></i>
                             </div>
                         </td>
-                        <td style="line-height: 15px;" class="pl-1 pt-1">
+                        <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="black-text">
                                 {{ $cible_message_universite->titre }}
                             </b><br />
-                            <small>{{ $cible_message_universite->created_at }}</small>
+                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
                         </td>
                     </tr>
                 </table> 
             </div>
         </a>
     @else
-        <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}">
-            <div class="pt-2 pb-2 pr-2 pl-2 border-bottom">
+        <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}" class="message-select">
+            <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
-                        <td width="45px">
-                            <div style="width: 45px; height: 45px; border-radius: 100%; line-height: 50px;"
+                        <td width="36px">
+                            <div style="border-radius: 100%; padding: 10px 13px;"
                             class="white-text text-center green">
-                                <i style="font-size: 18px;" class="icofont-envelope"></i>
+                                <i class="icofont-envelope"></i>
                             </div>
                         </td>
-                        <td style="line-height: 15px;" class="pl-1 pt-1">
-                            <b class="black-text">
+                        <td style="line-height: 20px;" class="pl-1 text-truncate">
+                            <b class="black-text font-weight-bold">
                                 {{ $cible_message_universite->titre }}
                             </b><br />
-                            <small>{{ $cible_message_universite->created_at }}</small>
+                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
                         </td>
                     </tr>
                 </table> 

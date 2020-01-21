@@ -11,6 +11,7 @@ use App\MessageUniversite;
 use App\CibleMessageUniversite;
 use App\User;
 use App\BilanMessageUniversite;
+use App\Models\Universite;
 
 class MessageController extends Controller
 {
@@ -52,115 +53,138 @@ class MessageController extends Controller
 
     public function envoyer(Request $request) {
 
-        $test = 0;
+        $dest = 0;
 
         for ($i=0; $i < $request->index; $i++) { 
 
             for ($j=0; $j < $_POST['index' . $i]; $j++) { 
                 if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
 
-                    $test += 1;
+                    $dest += 1;
                 }
             }
         }
 
-        if ($test == 0) {
-            return back()->with('error', "Votre message n'a aucune cible !");
+        if ($dest > session()->get('message_bonus')) {
+            return back()->with('error', "Le nombre de destinataires autorisé est dépassé !");
         } else {
-            $message_universite = new MessageUNiversite;
-            $message_universite->universite_id = session()->get('id');
-            $message_universite->titre = $request->titre;
-            $message_universite->contenu = $request->message;
-            $message_universite->save();
 
-            $totalFichier = count($_FILES['fichier']['name']);
-
-            $target_dir = "db/messages/universites/fichier/";
-
-            if ($request->fichier == "") {
-
+            if ($dest == 0) {
+                return back()->with('error', "Votre message n'a aucune cible !");
             } else {
 
-                for ($i = 0; $i < $totalFichier; $i++) {
-
-                    $file = $_FILES["fichier"]["name"][$i];
-
-                    if ($file != "") {
-                        $file_name = time() . "_" . basename($file);
-                        $target_file = $target_dir . $file_name;
-                        $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
-
-                        $fichier_message_universite = new FichierMessageUniversite();
-                        $fichier_message_universite->message_universite_id = $message_universite->id;
-                        $fichier_message_universite->fichier = $file_name;
-                        $fichier_message_universite->format = $FileType;
-                        $fichier_message_universite->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
-
-                        $fichier_message_universite->save();
-
-                        move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
-                    }
-
+                if(session()->get('message_bonus') == 0) {
+                    return back()->with('error', "Vous avez épuisé votre nombre nombre de messages.");
                 }
-            }
 
+                $universite = Universite::findOrFail(session()->get('id'));
+                $universite->message_bonus = $universite->message_bonus - $dest;
+                $universite->save();
 
-            $titre = $request->titre;
+                session()->put('message_bonus', $universite->message_bonus);
 
-            if (session()->get('pro') == 0) {
-                $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
-            } else {
-                $titre = $message_structure->titre;
-            }
+                $message_universite = new MessageUNiversite;
+                $message_universite->universite_id = session()->get('id');
+                $message_universite->titre = $request->titre;
+                $message_universite->contenu = $request->message;
+                $message_universite->save();
+
+                $bilan_message_universite = new BilanMessageUniversite;
+                $bilan_message_universite->universite_id = session()->get('id');
+                $bilan_message_universite->message_universite_id = $message_universite->id;
+                $bilan_message_universite->nb_destinataire = $dest;
+                $bilan_message_universite->save();
     
-            for ($i=0; $i < $request->index; $i++) { 
+                $totalFichier = count($_FILES['fichier']['name']);
     
-                for ($j=0; $j < $_POST['index' . $i]; $j++) { 
-                    if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
+                $target_dir = "db/messages/universites/fichier/";
     
-                        $cible_message_universite = new CibleMessageUniversite;
-                        $cible_message_universite->message_universite_id = $message_universite->id;
-                        $cible_message_universite->filiere_id = $_POST['filiere' . $i];
-                        $cible_message_universite->niveau_id = $_POST['niveaux' . $i . $j];
-                        $cible_message_universite->save();
-
-                        $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
-
-                        foreach($telephones as $telephone) {
-                            $num = $telephone->telephone;
-
-                            if ($request->fichier != "") {
-                                $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
-                            } else {
-                                $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
+                if ($request->fichier == "") {
+    
+                } else {
+    
+                    for ($i = 0; $i < $totalFichier; $i++) {
+    
+                        $file = $_FILES["fichier"]["name"][$i];
+    
+                        if ($file != "") {
+                            $file_name = time() . "_" . basename($file);
+                            $target_file = $target_dir . $file_name;
+                            $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
+    
+                            $fichier_message_universite = new FichierMessageUniversite();
+                            $fichier_message_universite->message_universite_id = $message_universite->id;
+                            $fichier_message_universite->fichier = $file_name;
+                            $fichier_message_universite->format = $FileType;
+                            $fichier_message_universite->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
+    
+                            $fichier_message_universite->save();
+    
+                            move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
+                        }
+    
+                    }
+                }
+    
+    
+                $titre = $request->titre;
+    
+                if (session()->get('pro') == 0) {
+                    $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
+                } else {
+                    $titre = $message_universite->titre;
+                }
+        
+                for ($i=0; $i < $request->index; $i++) { 
+        
+                    for ($j=0; $j < $_POST['index' . $i]; $j++) { 
+                        if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
+        
+                            $cible_message_universite = new CibleMessageUniversite;
+                            $cible_message_universite->message_universite_id = $message_universite->id;
+                            $cible_message_universite->filiere_id = $_POST['filiere' . $i];
+                            $cible_message_universite->niveau_id = $_POST['niveaux' . $i . $j];
+                            $cible_message_universite->save();
+    
+                            $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
+    
+                            foreach($telephones as $telephone) {
+                                $num = $telephone->telephone;
+    
+                                if ($request->fichier != "") {
+                                    $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
+                                } else {
+                                    $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
+                                }
+    ?>
+                                <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                                <script>
+                                    $.ajax ({
+                                        url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
+                                        type : 'GET'
+                                    });
+                                </script>
+    <?php
                             }
-?>
-                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
-                            <script>
-                                $.ajax ({
-                                    url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
-                                    type : 'GET'
-                                });
-                            </script>
-<?php
                         }
                     }
                 }
-            }
-            echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
-            echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
-?>
-            <script>
-                
-                setTimeout(() => {
-                    window.location = "https://deblaa.com/universites/messages";
-                }, 5000);
+                echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
+    ?>
+                <script>
+                    
+                    setTimeout(() => {
+                        window.location = "https://deblaa.com/universites/messages";
+                    }, 5000);
+        
+                </script>
+    <?php
+                    //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
     
-            </script>
-<?php
-                //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
-
+            }
         }
+
     }
 
     public function bilan() {
@@ -196,9 +220,10 @@ class MessageController extends Controller
                 'fichier_messages' => MessageUniversite::rightJoin('fichier_message_universites', 'message_universites.id', 'message_universite_id')
                             ->where('message_universite_id', $id)
                             ->get(),
-                'users' => User::leftjoin('message_lus', 'users.id', 'user_id')
-                                ->where('message_universite_id', $id)
-                                ->where('user_id', '<>', null)->get()
+                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->get()
             ]);
         }
     }

@@ -1,39 +1,24 @@
 <div class="mt-2 mb-2"></div>
 
-@if (session()->get('pro') == 0)
-    <a class="btn btn-danger btn-md m-0 btn-block z-depth-0" href="#!" data-toggle="modal" data-target="#compteProModal"
-    role="button" style="border-radius: 5px;">
-        <i class="icofont-diamond"></i>
-        Passer en compte pro
-    </a>
-    <div class="mt-2"></div>
-    <div class="card border-warning font-size-14">
-        <div class="card-header">
-            Messages d'essai
-        </div>
-        <div class="card-body">
-            <h4 class="card-title text-center">
-                {{ 10 - session()->get('message_bonus') }}
-            </h4>
-            <p class="card-text">
-                Il vous reste {{ 10 - session()->get('message_bonus') }} message(s) sur votre compte d'essai.
-            </p>
-        </div>
-        <div class="card-footer text-muted">
-            <a href="#!" data-toggle="modal" data-target="#compteProModal">
-                <i class="icofont-diamond"></i>
-                Passer en compte pro
-            </a>
-        </div>
-    </div><br />
-@else
-    <div class="pt-1 pb-1 pr-2 pl-2 border border-success mb-2 rounded text-center">
-        <a href="" class="green-text">
-            <i class="icofont-briefcase"></i>
-            <b>Compte professionnel</b>
-        </a>
+<a class="btn btn-green btn-md m-0 btn-block z-depth-0" href="#!" data-toggle="modal" data-target="#compteProModal"
+role="button" style="border-radius: 5px;">
+    <i class="icofont-refresh"></i>
+    Charger le compte
+</a>
+<div class="mt-2"></div>
+<div class="card border-warning font-size-14">
+    <div class="card-header">
+        Messages en réserve
     </div>
-@endif
+    <div class="card-body text-center">
+        <h4 class="card-title text-center">
+            {{ session()->get('message_bonus') }}
+        </h4>
+        <p class="card-text">
+            Il vous reste {{ session()->get('message_bonus') }} message(s) sur votre compte.
+        </p>
+    </div>
+</div><br />
 
 <div class="card border-primary">
     <div class="card-header">

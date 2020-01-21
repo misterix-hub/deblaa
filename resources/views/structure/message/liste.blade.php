@@ -55,7 +55,7 @@
                                 </tbody>
                             </table><br /><br />
 
-                            <a href="">
+                            <a href="{{ route('sEnvoyerMessage') }}">
                                 <i class="icofont-facebook-messenger"></i>
                                 <b>Envoyer un nouveau message</b>
                             </a><br /><br />

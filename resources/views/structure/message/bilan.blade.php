@@ -27,10 +27,10 @@
                                 <b>Liste des membres</b>
                             </h6>
 
-                            <table class="table table-bordered table-sm table-responsive" style="width:100%">
+                            <table class="table table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Date d'envoi</th>
+                                        <th width="150">Date d'envoi</th>
                                         <th>Message</th>
                                         <th>Dest.</th>
                                         <th width="60" class="text-center">Action</th>
@@ -39,7 +39,7 @@
                                 <tbody>
                                     @forelse($bilan_messages as $bilan_message)
                                         <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 <small>{{ $bilan_message->created_at }}</small>
                                             </td>
                                             <td>{{ $bilan_message->titre }}</td>

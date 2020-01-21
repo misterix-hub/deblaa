@@ -30,7 +30,7 @@
                             <table class="table table-bordered table-sm" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">Date d'envoi</th>
+                                        <th width="150">Date d'envoi</th>
                                         <th>Message</th>
                                         <th>Dest.</th>
                                         <th width="60" class="text-center">Action</th>
@@ -39,13 +39,13 @@
                                 <tbody>
                                     @forelse($bilan_messages as $bilan_message)
                                         <tr>
-                                            <td class="text-center">
+                                            <td>
                                                 <small>{{ $bilan_message->created_at }}</small>
                                             </td>
                                             <td>{{ $bilan_message->titre }}</td>
                                             <td class="text-right">{{ $bilan_message->nb_destinataire }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('sDetailsMessage', $bilan_message->id) }}" class="btn btn-sm btn-outline-grey m-0 rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ route('uDetailsMessage', $bilan_message->id) }}" class="btn btn-sm btn-outline-grey m-0 rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-plus"></i>
                                                 </a>
                                             </td>

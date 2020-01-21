@@ -140,15 +140,26 @@ class CompteController extends Controller
     }
 
     public function comptePro() {
-        if (count(DemandeStructure::where('structure_id', session()->get('id'))->get()) != 0) {
-            return back()->with('warningDemande', "true");
-        } else {
-            $demande_structure = new DemandeStructure;
-            $demande_structure->structure_id = session()->get('id');
-            $demande_structure->accord = 0;
-            $demande_structure->save();
+        if (count(Structure::where('id', session()->get('id'))->where('pro', 1)->get()) != 0) {
+            
+            $structure = Structure ::findOrFail(session()->get('id'));
+            $structure->message_bonus = 1000 + session()->get('message_bonus');
+            $structure->save();
 
-            return back()->with('successDemande', "true");
+            session()->put('message_bonus', $structure->message_bonus);
+
+            return back()->with('success', "Compte rechargé avec succès !");
+
+        } else {
+            $structure = Structure ::findOrFail(session()->get('id'));
+            $structure->message_bonus = 1000 + session()->get('message_bonus');
+            $structure->pro = 1;
+            $structure->save();
+
+            session()->put('message_bonus', $structure->message_bonus);
+            session()->put('pro', 1);
+
+            return back()->with('success', "Compte rechargé avec succès !");
         }
         
     }
