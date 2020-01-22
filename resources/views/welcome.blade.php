@@ -247,7 +247,7 @@
 
             <div class="col-lg-5 col-md-12 col-sm-12"><br /><br /><br />
                 <!--<img src="{{ URL::asset('assets/images/chat.svg') }}" alt="" width="40%">-->
-                <img src="{{ URL::asset('assets/images/transfer.svg') }}" alt="" width="100%">
+                <img src="{{ URL::asset('assets/images/transfer.png') }}" alt="" width="100%">
                 <div class="text-center" style="position: absolute; top: 125px; left: 0; right: 0;">
                     <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="" width="150">
                 </div>

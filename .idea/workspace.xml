@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/deblaa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deblaa.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/structure/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,7 +186,8 @@
       <workItem from="1578304007944" duration="4933000" />
       <workItem from="1578316617096" duration="10482000" />
       <workItem from="1578492437720" duration="12339000" />
-      <workItem from="1579625258026" duration="12858000" />
+      <workItem from="1579625258026" duration="13145000" />
+      <workItem from="1579688400353" duration="352000" />
     </task>
     <servers />
   </component>
@@ -232,5 +230,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1579688451697">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1579688451697" />
   </component>
 </project>
