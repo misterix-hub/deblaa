@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactFormMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -10,24 +11,13 @@ class ContactController extends Controller
 {
     public function sendMessageByUser(Request $request) {
 
-        $request->validate([
-            'sigle' => 'required|string',
+        $data = request()->validate([
+            'sigle' => 'required',
             'email' => 'required|email',
             'message' => 'required'
         ]);
 
-        $to_name = "AVIS de ".$request->input('sigle');
-
-        $data = array(
-            'sigle' => $request->input('sigle'),
-            'email' => $request->input('email'),
-            'message' => $request->input('message')
-        );
-
-        Mail::send("mails.users.message", $data, function ($message) use ($to_name) {
-            $message->to("deblaa.ap@gmail.com")
-                ->subject($to_name);
-        });
+        Mail::to("deblaa.ap@gmail.com")->send(new ContactFormMail($data));
 
         return back()->with('success', 'Votre message a été envoyé avec succès.');
     }

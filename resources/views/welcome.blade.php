@@ -241,16 +241,13 @@
                         </table>
                     </center>
 
-                </div><br />
+                </div>
 
             </div>
 
             <div class="col-lg-5 col-md-12 col-sm-12"><br /><br /><br />
                 <!--<img src="{{ URL::asset('assets/images/chat.svg') }}" alt="" width="40%">-->
                 <img src="{{ URL::asset('assets/images/transfer.png') }}" alt="" width="100%">
-                <div class="text-center" style="position: absolute; top: 125px; left: 0; right: 0;">
-                    <img src="{{ URL::asset('assets/images/deblaa.png') }}" alt="" width="150">
-                </div>
             </div>
 
         </div>
@@ -478,8 +475,8 @@
             <br /><br />
 
             @if($errors->any())
-                <div class="alert alert-error">
-                    <ul>
+                <div class="alert alert-danger">
+                    <ul class="list-unstyled">
                         @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -495,20 +492,21 @@
 
             <h3 class="comfortaa">Nous contacter</h3>
             <hr>
-            <form action="" method="post" class="comfortaa">
+            <form action="{{ route('messageSendByUsers') }}" method="post" class="comfortaa">
+                @csrf
                <div class="form-row mb-2">
                    <div class="col">
                        <label for="sigle">Sigle:</label>
-                       <input type="text" name="sigle" id="sigle" class="form-control" required>
+                       <input type="text" name="sigle" id="sigle" class="form-control" value="{{ old('sigle') }}" required>
                    </div>
                    <div class="col">
                        <label for="email">E-mail:</label>
-                       <input type="email" name="email" id="email" class="form-control" required>
+                       <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                    </div>
                </div>
                 <div class="form-group">
                     <label for="message">Message:</label>
-                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" style="min-height: 200px;" required></textarea>
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control" style="min-height: 200px;" ></textarea>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-blue" id="sendMessage">ENVOYER</button>
