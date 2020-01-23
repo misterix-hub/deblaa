@@ -25,15 +25,16 @@ Route::get('/', function () {
                 } else {
                     return redirect(route('inboxEtudiant'));
                 }
-                
+
             }
-            
+
         }
     } else {
         return view('welcome');
     }
-    
+
 })->name('indexVisitors');
+Route::post('contact', 'ContactController@sendMessageByUser')->name('messageSendByUsers');
 
 Auth::routes();
 
@@ -92,11 +93,11 @@ Route::group(['middleware' => 'auth'], function () {
             $facture_universite->montant = $request->montant;
             $facture_universite->date = $request->date;
             $facture_universite->save();
-            
+
             return back()->with('success', "Facture réglée avec succès !");
         }
     })->name('reglerFacture');
-    
+
     Route::get('admin/statistiques/universites', function () {
         return view('statistiques.universite.index', [
             'universites' => Universite::all()
