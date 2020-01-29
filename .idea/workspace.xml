@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/mails/users/message.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +132,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -192,7 +191,15 @@
       <workItem from="1578492437720" duration="12339000" />
       <workItem from="1579625258026" duration="13145000" />
       <workItem from="1579688400353" duration="2230000" />
-      <workItem from="1579738830853" duration="2206000" />
+      <workItem from="1579738830853" duration="3691000" />
+      <workItem from="1579790664877" duration="68000" />
+      <workItem from="1579796157731" duration="560000" />
+      <workItem from="1579801922324" duration="450000" />
+      <workItem from="1579850402806" duration="681000" />
+      <workItem from="1579858892894" duration="2845000" />
+      <workItem from="1579917361108" duration="3106000" />
+      <workItem from="1580146942224" duration="4714000" />
+      <workItem from="1580288886132" duration="238000" />
     </task>
     <servers />
   </component>
@@ -237,9 +244,13 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1579739291815">
+    <state x="463" y="140" key="FileChooserDialogImpl" timestamp="1579917446970">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1579739291815" />
+    <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1579917446970" />
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1580288931273">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1580288931273" />
   </component>
 </project>

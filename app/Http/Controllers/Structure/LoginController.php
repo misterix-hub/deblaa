@@ -86,7 +86,7 @@ class LoginController extends Controller
             });
 
             session()->put('email', $request->email);
-            
+
             return redirect(route('sRegisterSuccess'));
         }
 

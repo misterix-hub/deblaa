@@ -257,6 +257,12 @@
                             <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
                                 <a class="dropdown-item" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Déconnexion</a>
+                                <a class="dropdown-item"  href="#!" data-toggle="modal" data-target="#compteProModal" role="button">
+                                    Reharger votre compte
+                                </a>
+                                <a class="dropdown-item"  href="#!" data-toggle="modal" data-target="#MessageEnReserve" role="button">
+                                    Messages en reserve
+                                </a>
                             </div>
                         </div>
                         <a href="{{ route('indexStructure') }}" class="">
@@ -272,7 +278,7 @@
                 </tr>
             </table>
         </div>
-        
+
         @yield('content')
 
     </div>
@@ -327,7 +333,7 @@
 
                         <label class="" for="telephone"><b>Téléphone du membre</b></label>
                         <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le numero de telephone ..."><br  />
-                        
+
                         <table width="100%">
                             <tr>
                                 <td>
@@ -510,6 +516,27 @@
                     <!--<p class="lead text-center">
                         <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('sDemandeComptePro') }}" role="button">Faire ma demande</a>
                     </p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="MessageEnReserve" tabindex="-1" role="dialog" aria-labelledby="MessageEnReserveLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="border-radius: 15px;">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="MessageEnReserve">
+                        <b>Messages en reserve</b>
+                    </h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body pl-4 pr-4">
+                    Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus'))  }}  sur votre compte
+                </div>
+                <div class="modal-footer pt-2 pb-2">
+                    <button type="button" class="btn btn-danger btn-md z-depth-0" data-dismiss="modal">Fermer</button>
                 </div>
             </div>
         </div>

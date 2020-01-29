@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Models\Structure;
 use App\BilanMessageStructure;
+use Illuminate\Support\Str;
 
 class MessageController extends Controller
 {
@@ -49,12 +50,12 @@ class MessageController extends Controller
         $groupes = $request->input('groupes');
 
         if (is_array($groupes) || is_array($groupes)) {
-            
+
             $dest = 0;
             foreach ($groupes as $groupe) {
 
                 $telephones = User::where('departement_id', $groupe)->get();
-                
+
                 foreach($telephones as $telephone) {
                     $dest += 1;
                 }
@@ -64,7 +65,7 @@ class MessageController extends Controller
         if ($dest > session()->get('message_bonus')) {
             return back()->with('error', "Le nombre de destinataires autorisé est dépassé !");
         } else {
-            
+
             if($dest == 0) {
                 return back()->with('error', 'Sélectionnez au moins un groupe, Votre message n\'a aucune cible');
             } else {
@@ -92,36 +93,36 @@ class MessageController extends Controller
                 $bilan_message_structure->save();
 
                 $totalFichier = count($_FILES['fichier']['name']);
-    
+
                 $target_dir = "db/messages/structures/fichier/";
-    
+
                 if ($request->fichier == "") {
-    
+
                 } else {
-    
+
                     for ($i = 0; $i < $totalFichier; $i++) {
-    
+
                         $file = $_FILES["fichier"]["name"][$i];
-    
+
                         if ($file != "") {
                             $file_name = time() . "_" . basename($file);
                             $target_file = $target_dir . $file_name;
                             $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
-    
+
                             $fichier_message_structure = new FichierMessageStructure();
                             $fichier_message_structure->message_structure_id = $message_structure->id;
                             $fichier_message_structure->fichier = $file_name;
                             $fichier_message_structure->format = $FileType;
                             $fichier_message_structure->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
-    
+
                             $fichier_message_structure->save();
-    
+
                             move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
                         }
-    
+
                     }
                 }
-    
+
                 if (is_array($groupes) || is_array($groupes)) {
 
                     if (session()->get('pro') == 0) {
@@ -129,22 +130,22 @@ class MessageController extends Controller
                     } else {
                         $titre = $message_structure->titre;
                     }
-    
+
                     foreach ($groupes as $groupe) {
                         $cible_message_structure = new CibleMessageStructure();
                         $cible_message_structure->message_structure_id = $message_structure->id;
                         $cible_message_structure->departement_id = $groupe;
                         $cible_message_structure->save();
-    
+
                         $telephones = User::where('departement_id', $groupe)->get();
-                        
+
                         foreach($telephones as $telephone) {
                             $num = $telephone->telephone;
-    
+
                             if ($request->fichier != "") {
-                                $texte = strtoupper($titre) . " *** ". $totalFichier." fichier(s)  associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" . $num . "" . $telephone->departement_id;
+                                $texte = Str::limit(strtoupper($titre) . " *** ". $totalFichier." fichier(s)  associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" . $num . "" . $telephone->departement_id, 10, $end='...');
                             } else {
-                                $texte = strtoupper($titre) . " *** https://deblaa.com/membres/query?telephone= " . $num . "". $telephone->departement_id;
+                                $texte = Str::limit(strtoupper($titre) . " *** https://deblaa.com/membres/query?telephone= " . $num . "". $telephone->departement_id, 10, $end='...');
                             }
     ?>
                             <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
@@ -154,26 +155,26 @@ class MessageController extends Controller
                                     type : 'GET'
                                 });
                             </script>
-    
+
     <?php
-    
+
                         }
                     }
                 }
-    
+
                 echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                 echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
                 //
     ?>
             <script>
-                
+
                 setTimeout(() => {
                     window.location = "https://deblaa.com/structures/messages";
                 }, 5000);
-    
+
             </script>
     <?php
-    
+
             }
 
         }
@@ -204,7 +205,7 @@ class MessageController extends Controller
                 'cible_messages' => CibleMessageStructure::where('message_structure_id', $id)->get(),
                 'fichier_messages' => MessageStructure::rightJoin('fichier_message_structures', 'message_structures.id', 'message_structure_id')
                                         ->where('message_structure_id', $id)
-                                        ->get(),        
+                                        ->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
