@@ -6,16 +6,31 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
+
+                    <div class="row menu-item-sm-show">
+                        <div class="col-12">
+                            <a class="btn btn-green btn-md m-0 btn-block mt-2 z-depth-0" href="#!" data-toggle="modal" data-target="#compteProModal"
+                            role="button" style="border-radius: 5px;">
+                                <i class="icofont-refresh"></i>
+                                Charger le compte
+                            </a>
+                            <div class="mt-2"></div>
+                            <div class="card border-warning" style="font-size: 13px;">
+                                <div class="card-header text-center">
+                                    Messages en réserve
+                                </div>
+                                <div class="card-body text-center p-2">
+                                    <p class="card-text"  style="font-size: 13px;">
+                                        Il vous reste {{ session()->get('message_bonus') }} message(s) sur votre compte.
+                                    </p>
+                                </div>
+                            </div><br />
+                        </div>
+                    </div>
                     
                     <div class="row">
                         <div class="col-12">
-                            <div class="text-right mt-3">
-                                <a href="{{ route('sEnvoyerMessage') }}">
-                                    <i class="icofont-facebook-messenger"></i>
-                                    <b>Envoyer un message</b>
-                                </a>
-                            </div><br />
-
+                            
                             @if($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ $message }}
@@ -55,14 +70,6 @@
                                             à envoyer à un nombre de destinataires limité. <a href="#!" data-toggle="modal" data-target="#compteProModal">Chargez votre compte</a>
                                             pour utiliser Deblaa sans restrictions.
                                         </p>
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                                <a class="btn btn-green ml-0 rounded btn-block" href="#!" data-toggle="modal" data-target="#compteProModal" role="button">
-                                                    <i class="icofont-refresh"></i>
-                                                    Charger le compte
-                                                </a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br /><br />
                             @else    

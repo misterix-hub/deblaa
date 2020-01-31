@@ -93,7 +93,9 @@ class StructureController extends AppBaseController
                 'pro' => 0
             ]);
 
-            $to_name = "Deblaa";
+            return $password;
+
+            /*$to_name = "Deblaa";
 
             $to_email = $request->input('email');
             $data = array(
@@ -105,7 +107,7 @@ class StructureController extends AppBaseController
             Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });
+            });*/
 
             Flash::success('Structure ajoutée avec succès.');
 

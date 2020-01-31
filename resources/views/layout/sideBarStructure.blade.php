@@ -23,9 +23,13 @@
             font-family: comfortaa;
         }
 
+        .menu-item-sm-show {
+            display: none;
+        }
+
         @font-face {
             font-family: comfortaa;
-            src: url(/deblaa/fonts/Comfortaa-Regular.ttf);
+            src: url(fonts/Comfortaa-Regular.ttf);
         }
 
         @media (max-width: 1000px) {
@@ -47,6 +51,12 @@
 
             .side-bar-item div a div.item i {
                 font-size: 18px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .menu-item-sm-show {
+                display: block;
             }
         }
     </style>
@@ -377,17 +387,17 @@
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card orange card-body">
                                 <h6 class="font-weight-bold text-center comfortaa">
-                                    10 messages
+                                    1 000 messages
                                 </h6>
                                 <div class="text-center comfortaa">
-                                    <h5 class="font-weight-bold white-text">200 F CFA</h5>
+                                    <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
                                     <small class="white-text">20 F CFA par message</small>
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icofont-thin-down white-text icofont-2x"></i>
                                 </div>
                                 <a href="" class="btn btn-block rounded btn-md btn-white z-depth-0 mt-2 disabled">
-                                    <b>Trial</b>
+                                    <b>Perso</b>
                                 </a>
                             </div>
                             <div class="card card-body">
@@ -413,18 +423,18 @@
                                         <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
                                     </li>
                                 </ul>
-                                <a href="" class="btn btn-orange rounded btn-block btn-md disabled">
-                                    Gratuit !
+                                <a href="" class="btn btn-orange rounded btn-block btn-md">
+                                    Sélectionner
                                 </a>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card blue card-body">
                                 <h6 class="font-weight-bold text-center comfortaa">
-                                    1000 messages
+                                    10 000 messages
                                 </h6>
                                 <div class="text-center comfortaa">
-                                    <h5 class="font-weight-bold white-text">15 000 F CFA</h5>
+                                    <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
                                     <small class="white-text">15 F CFA par message</small>
                                 </div>
                                 <div class="text-center mt-2">

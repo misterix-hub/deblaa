@@ -285,30 +285,38 @@
                 </div>
             </div><br /><br />
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 text-center">
-           <h5><span class="font-weight-bold">Rapport et confirmation</span></h5>
-            <div class="font-size-14">
-                Suivez vos messages et consultez les rapports et confirmation de lecture
-                <div class="text-center"><br /><br />
-                    <img src="{{ URL::asset('assets/images/mail2.svg') }}" alt="" width="55%" class="mt-3">
-                </div>
-            </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            
+            <h5 class="comfortaa font-weight-bold mb-3">Association de fichiers</h5>
+            <span class="font-size-14">
+                Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne à travers votre téléphone mobile.
+            </span>
+            <br /><br />
+            <h1><i class="icofont-attachment orange-text icofont-4x"></i></h1><br /><br />
         </div>
 	<div class="col-lg-2 col-md-12 col-sm-12">
 	</div>
-        <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            <br /><br />
-            <h5 class="comfortaa font-weight-bold mb-3">
-                Plus de sécurité ...
-            </h5>
-            <span class="font-size-14">
-                Sécurisez vos informations grâce à la disponibilité d'une interface personnelle et confidentielle.
-            </span>
-            <br /><br />
-	     <h1><i class="icofont-lock green-text icofont-4x"></i></h1><br /><br />
+    <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+        <br /><br />
+        <h5 class="comfortaa font-weight-bold mb-3">
+            Plus de sécurité ...
+        </h5>
+        <span class="font-size-14">
+            Sécurisez vos informations grâce à la disponibilité d'une interface personnelle et confidentielle.
+        </span>
+        <br /><br />
+        <h1><i class="icofont-lock green-text icofont-4x"></i></h1><br /><br />
+    </div>
+	<div class="col-lg-4 col-md-12 col-sm-12 text-center">
+    <br /><br />
+        <h5><span class="font-weight-bold">Rapport et confirmation</span></h5>
+        <div class="font-size-14">
+            Suivez vos messages et consultez les rapports et confirmation de lecture
+            <div class="text-center"><br /><br />
+                <img src="{{ URL::asset('assets/images/mail2.svg') }}" alt="" width="55%" class="mt-3">
+            </div>
         </div>
-	<div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            <br /><br />                                                                                                                                                            <h5 class="comfortaa font-weight-bold mb-3">                                                                                                                                Et bien plus encore ...                                                                                                                                             </h5>                                                                                                                                                                   <span class="font-size-14">                                                                                                                                                 Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne à travers votre téléphone mobile.                                                                          </span>                                                                                                                                                                 <br /><br />                                                                                                                                                             <h1><i class="icofont-attachment orange-text icofont-4x"></i></h1><br /><br />                                                                                     </div>
+    </div>
 	<div class="col-lg-2 col-md-6 col-sm-12">
 	</div>
     </div>
@@ -327,10 +335,10 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card orange card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    10 messages
+                    1 000 messages
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">200 F CFA</h5>
+                    <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
                     <small class="white-text">20 F CFA par message</small>
                 </div>
                 <div class="text-center mt-2">
@@ -363,26 +371,26 @@
                         <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
                     </li>
                 </ul>
-		<div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-orange btn-md ml-0 rounded btn-block" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">
-                                            <span style="font-size: 13px;">
-                                                <small>Sélectionner</small>
-                                            </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">
-                                                Compte université
-                                            </a>
-                                            <a class="dropdown-item" href="{{ route('sRegister') }}">
-                                                Compte structure
-                                            </a>
-                                        </div>
-                                    </div>
+		        <div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-orange btn-md ml-0 rounded btn-block" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">
+                        <span style="font-size: 13px;">
+                            <small>Sélectionner</small>
+                        </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">
+                            Compte université
+                        </a>
+                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                            Compte structure
+                        </a>
+                    </div>
+                </div>
             </div><br />
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card blue card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    1000 messages
+                    10 000 messages
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">15 000 F CFA</h5>
+                    <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
                     <small class="white-text">15 F CFA par message</small>
                 </div>
                 <div class="text-center mt-2">
@@ -415,17 +423,17 @@
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                 </ul>
-		<div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-blue btn-md ml-0 rounded btn-block" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">
-                                            <span style="font-size: 13px;">
-                                                <small>Sélectionner</small>
-                                            </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">
-                                                Compte université
-                                            </a>
-                                            <a class="dropdown-item" href="{{ route('sRegister') }}">
-                                                Compte structure
-                                            </a>
-                                        </div>
-                                    </div>
+		        <div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-blue btn-md ml-0 rounded btn-block" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">
+                        <span style="font-size: 13px;">
+                            <small>Sélectionner</small>
+                        </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">
+                            Compte université
+                        </a>
+                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                            Compte structure
+                        </a>
+                    </div>
+                </div>
             </div><br />
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12">
