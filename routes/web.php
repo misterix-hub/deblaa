@@ -153,6 +153,7 @@ Route::get('universites/register/success', 'Universite\LoginController@registerS
 Route::get('logout', 'Universite\LoginController@logout')->name('logout');
 
 Route::get('universites/demande', 'Universite\CompteController@comptePro')->name('uDemandeComptePro');
+Route::get('universites/{id}/{formule}/paiements', 'Universite\CompteController@modePaiement')->name('uModePaiement');
 
 /* STRUCTURE */
 
@@ -189,6 +190,7 @@ Route::get('structures/register/success', 'Structure\LoginController@registerSuc
 Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
 Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
+Route::get('structures/{id}/{formule}/paiements', 'Structure\CompteController@modePaiement')->name('sModePaiement');
 
 /* ETUDIANT */
 

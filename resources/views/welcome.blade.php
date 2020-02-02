@@ -555,7 +555,7 @@
                 </div>
             </form>
             <div>
-                <i class="icofont icofont-google-map icofont-2x"></i><span class="mr-3"> Agoè, Togo</span>
+                <i class="icofont icofont-google-map icofont-2x"></i><span class="mr-3"> Lomé, Togo</span>
                 <i class="icofont icofont-android-nexus icofont-2x"></i><span> 00228 91 01 92 45 | 97 53 17 17</span>
             </div>
         </div>

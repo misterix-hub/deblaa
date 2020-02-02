@@ -163,4 +163,56 @@ class CompteController extends Controller
         }
         
     }
+
+    public function modePaiement($id, $formule) {
+        switch ($formule) {
+            case 1:
+                $montant = 20000;
+                $nbm = 1000;
+                break;
+
+            case 2:
+                $montant = 150000;
+                $nbm = "100 000";
+                break;
+
+            case 3:
+                $montant = 500000;
+                $nbm = "500 000";
+                break;
+
+            default:
+                return back();
+                break;
+        }
+
+        $to_name = "Deblaa";
+
+        $to_email = "deblaa.ap@gmail.com";
+        $data = array(
+            'nom' => session()->get('sigle'),
+            'email' => session()->get('email'),
+            "montant" =>$montant
+        );
+
+        \Mail::send('mails.structure_sms', $data, function ($message) use ($to_name, $to_email) {
+            $message->to($to_email)
+                    ->subject("Alterte de recharge de messages");
+        });
+
+        return view('structure.mode_paiement', [
+            'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get(),
+            'fichier_messages' => MessageStructure::rightJoin('fichier_message_structures', 'message_structures.id', 'message_structure_id')
+                        ->where('message_structure_id', session()->get('id'))
+                        ->get(),
+            'montant' => $montant,
+            'id' => $id,
+            'nbm' => $nbm
+        ]);
+    }
 }

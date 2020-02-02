@@ -23,7 +23,7 @@
     @yield('resetPassword')
 
     <script src="{{ URL::asset('mdb/js/jquery.min.js') }}"></script>
-    <script src="{{ URL::asset('mdb/js/popper.min.js') }}"></script>
+    <script src="{{ URL::asset('mdb/js/popper.js') }}"></script>
     <script src="{{ URL::asset('mdb/js/mdb.min.js') }}"></script>
     <script src="{{ URL::asset('mdb/js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('dataTable/jquery.dataTable.min.js') }}"></script>

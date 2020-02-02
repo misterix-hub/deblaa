@@ -305,11 +305,11 @@
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card orange card-body">
                                 <h6 class="font-weight-bold text-center comfortaa">
-                                    1 000 messages
+                                    1 000 sms
                                 </h6>
                                 <div class="text-center comfortaa">
                                     <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
-                                    <small class="white-text">20 F CFA par message</small>
+                                    <small class="white-text">20 F CFA par sms</small>
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -341,7 +341,7 @@
                                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                                     </li>
                                 </ul>
-                                <a href="" class="btn btn-orange rounded btn-block btn-md">
+                                <a href="{{ route('uModePaiement', ['univ' . session()->get('id'), 1]) }}" class="btn btn-orange rounded btn-block btn-md">
                                     Sélectionner
                                 </a>
                             </div>
@@ -349,11 +349,11 @@
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card blue card-body">
                                 <h6 class="font-weight-bold text-center comfortaa">
-                                    10 000 messages
+                                    10 000 sms
                                 </h6>
                                 <div class="text-center comfortaa">
                                     <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
-                                    <small class="white-text">15 F CFA par message</small>
+                                    <small class="white-text">15 F CFA par sms</small>
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -385,7 +385,7 @@
                                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                                     </li>
                                 </ul>
-                                <a href="{{ route('uDemandeComptePro') }}" class="btn rounded btn-blue btn-block btn-md">
+                                <a href="{{ route('uModePaiement', ['univ' . session()->get('id'), 2]) }}" class="btn rounded btn-blue btn-block btn-md">
                                     Sélectionner
                                 </a>
                             </div>
@@ -393,11 +393,11 @@
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card green card-body">
                                 <h6 class="font-weight-bold text-center comfortaa">
-                                    50 000 messages
+                                    50 000 sms
                                 </h6>
                                 <div class="text-center comfortaa">
                                     <h5 class="font-weight-bold white-text">500 000 F CFA</h5>
-                                    <small class="white-text">10 F CFA par message</small>
+                                    <small class="white-text">10 F CFA par sms</small>
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -429,15 +429,24 @@
                                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                                     </li>
                                 </ul>
-                                <a href="" class="btn rounded btn-green btn-block btn-md">
-                                    Sélectionner
-                                </a>
+                                <div class="dropdown">
+                                    <a href="{{ route('uModePaiement', ['univ' . session()->get('id'), 3]) }}" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false"
+                                        class="btn rounded btn-green btn-block btn-md">
+                                        Sélectionner
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                                        <div class="p-2">
+                                            Pour ce montant, le paiement n'est pas encore disponible en ligne.
+                                            Merci de nous contacter directement sur <a href="tel:+22891019245">022891019245</a>
+                                            /
+                                            <a href="tel:+2897531717">002897531717</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!--<p class="lead text-center">
-                        <a class="btn btn-green ml-0 mb-0 rounded" href="{{ route('sDemandeComptePro') }}" role="button">Faire ma demande</a>
-                    </p>-->
                 </div>
             </div>
         </div>
