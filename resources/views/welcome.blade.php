@@ -268,7 +268,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12 text-center">
             <h5><span class="font-weight-bold">Envois de messages groupés</span></h5>
             <div class="font-size-14">
-                Envoyez un seul message pour un groupe de plusieurs contacts
+                Envoyez un seul message pour un groupe de contacts
                 <br /><br />
 
                 <div class="text-center">
@@ -277,7 +277,7 @@
             </div><br />
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12 text-center">
-            <h5><span class="font-weight-bold">Personnalisation de massages</span></h5>
+            <h5><span class="font-weight-bold">Personnalisation de messages</span></h5>
             <div class="font-size-14">
                 Rendez vos sms plus professionnels en les personnalisant au nom de votre entreprise.
                 <div class="text-center"><br /><br />
@@ -289,7 +289,7 @@
             
             <h5 class="comfortaa font-weight-bold mb-3">Association de fichiers</h5>
             <span class="font-size-14">
-                Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible en ligne à travers votre téléphone mobile.
+                Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible sur téléphone, tablette ou ordinateur.
             </span>
             <br /><br />
             <h1><i class="icofont-attachment orange-text icofont-4x"></i></h1><br /><br />
@@ -302,7 +302,7 @@
             Plus de sécurité ...
         </h5>
         <span class="font-size-14">
-            Sécurisez vos informations grâce à la disponibilité d'une interface personnelle et confidentielle.
+            Sécurisez vos informations grâce à la disponibilité d'une interface de gestion, de rédaction et d'envoi personnelle et confidentielle
         </span>
         <br /><br />
         <h1><i class="icofont-lock green-text icofont-4x"></i></h1><br /><br />
@@ -356,7 +356,7 @@
                     </li>
                     <li>
                         Message perssonnalisé
-                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
                         Envois groupés
@@ -368,7 +368,7 @@
                     </li>
                     <li>
                         Assistance
-                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                 </ul>
 		        <div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-orange btn-md ml-0 rounded btn-block" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">

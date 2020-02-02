@@ -44,10 +44,10 @@
                         @csrf
 
                         <label for="nom" class="font-size-14"><b>Nom de la structure</b></label>
-                        <input type="text" id="nom" name="nom"  required minlength="5" maxlength="100" class="form-control" placeholder="Saisir dans le champs ...">
+                        <input type="text" id="nom" name="nom"  required minlength="1" maxlength="100" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="sigle" class="font-size-14"><b>Sigle</b></label>
-                        <input type="text" id="sigle" name="sigle" required minlength="2" maxlength="10"  class="form-control" placeholder="Saisir dans le champs ...">
+                        <input type="text" id="sigle" name="sigle" required minlength="1" maxlength="100"  class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="email" class="font-size-14"><b>Email</b></label>
                         <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">

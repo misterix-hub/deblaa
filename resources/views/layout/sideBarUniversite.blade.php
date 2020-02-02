@@ -326,7 +326,7 @@
                                     </li>
                                     <li>
                                         Message perssonnalisé
-                                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                                     </li>
                                     <li>
                                         Envois groupés
@@ -338,7 +338,7 @@
                                     </li>
                                     <li>
                                         Assistance
-                                        <i class="icofont-close-line red-text"></i><i class="icofont-close-line red-text"></i>
+                                        <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                                     </li>
                                 </ul>
                                 <a href="" class="btn btn-orange rounded btn-block btn-md">

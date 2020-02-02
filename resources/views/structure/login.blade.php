@@ -50,7 +50,7 @@
                         @csrf
     
                         <label for="email" class="font-size-14">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ..." value="{{ old('email') }}">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ..." value="{{ (session()->has('email')) ? session()->get('email') : '' }}">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
