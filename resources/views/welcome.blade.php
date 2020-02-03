@@ -266,9 +266,9 @@
             <br />
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12 text-center">
-            <h5><span class="font-weight-bold">Envois de messages groupés</span></h5>
+            <h5><span class="font-weight-bold">Envois de sms groupés</span></h5>
             <div class="font-size-14">
-                Envoyez un seul message pour un groupe de contacts
+                Envoyez un seul sms pour un groupe de contacts
                 <br /><br />
 
                 <div class="text-center">
@@ -277,7 +277,7 @@
             </div><br />
         </div>
         <div class="col-lg-4 col-md-12 col-sm-12 text-center">
-            <h5><span class="font-weight-bold">Personnalisation de messages</span></h5>
+            <h5><span class="font-weight-bold">Personnalisation des sms</span></h5>
             <div class="font-size-14">
                 Rendez vos sms plus professionnels en les personnalisant au nom de votre entreprise.
                 <div class="text-center"><br /><br />
@@ -286,7 +286,7 @@
             </div><br /><br />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 text-center">
-            
+
             <h5 class="comfortaa font-weight-bold mb-3">Association de fichiers</h5>
             <span class="font-size-14">
                 Joignez à vos sms des fichiers multimedia en pièce jointe directement accessible sur téléphone, tablette ou ordinateur.
@@ -311,7 +311,7 @@
     <br /><br />
         <h5><span class="font-weight-bold">Rapport et confirmation</span></h5>
         <div class="font-size-14">
-            Suivez vos messages et consultez les rapports et confirmation de lecture
+            Suivez vos sms et consultez les rapports et confirmation de lecture
             <div class="text-center"><br /><br />
                 <img src="{{ URL::asset('assets/images/mail2.svg') }}" alt="" width="55%" class="mt-3">
             </div>
@@ -335,11 +335,11 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card orange card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    1 000 messages
+                    1 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
-                    <small class="white-text">20 F CFA par message</small>
+                    <small class="white-text">20 F CFA par sms</small>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -355,7 +355,7 @@
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
-                        Message perssonnalisé
+                        sms perssonnalisé
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
@@ -387,11 +387,11 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card blue card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    10 000 messages
+                    10 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
-                    <small class="white-text">15 F CFA par message</small>
+                    <small class="white-text">15 F CFA par sms</small>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -407,7 +407,7 @@
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
-                        Message perssonnalisé
+                        sms perssonnalisé
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
@@ -439,11 +439,11 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card green card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    50 000 messages
+                    50 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">500 000 F CFA</h5>
-                    <small class="white-text">10 F CFA par message</small>
+                    <small class="white-text">10 F CFA par sms</small>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -459,7 +459,7 @@
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
-                        Message perssonnalisé
+                        sms perssonnalisé
                         <i class="icofont-check-alt green-text"></i><i class="icofont-check-alt green-text"></i>
                     </li>
                     <li>
@@ -479,7 +479,7 @@
             </div>
         </div>
 	<div class="col-12 text-center"><br />
-	    <h4>Inscrivez-vous et bénéficiez gratuitement de 10 messages pour commencer !</h4><br />
+	    <h4>Inscrivez-vous et bénéficiez gratuitement de 10 sms pour commencer !</h4><br />
 	    <center>
 		<div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">                                                                                                                                                  <span style="font-size: 13px;">                                                                                                                                             <small>Essai gratuit !</small>                                                                                                                                      </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">                                                                                                                   Créer un compte université                                                                                                                                          </a>                                                                                                                                                                    <a class="dropdown-item" href="{{ route('sRegister') }}">                                                                                                                   Créer un compte structure                                                                                                                                           </a>                                                                                                                                                                </div>                                                                                                                                                              </div>
 	    </center>
