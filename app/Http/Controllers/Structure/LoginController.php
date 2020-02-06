@@ -64,7 +64,7 @@ class LoginController extends Controller
             $structure = new Structure;
             $structure->nom = $request->nom;
             $structure->sigle = $request->sigle;
-            $structure->message_bonus = 10;
+            $structure->message_bonus = 5;
             $structure->email = $request->email;
             $structure->password = bcrypt($password);
             $structure->acces = 1;
@@ -86,7 +86,7 @@ class LoginController extends Controller
             });
 
             session()->put('email', $request->email);
-            
+
             return redirect(route('sRegisterSuccess'));
         }
 
