@@ -103,10 +103,10 @@
                     aria-expanded="false">Créer un compte</a>
 
                     <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="{{ route('uRegister') }}">
+                        <a class="dropdown-item spinnerShower" href="{{ route('uRegister') }}">
                             Créer un compte université
                         </a>
-                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                        <a class="dropdown-item spinnerShower" href="{{ route('sRegister') }}">
                             Créer un compte structure
                         </a>
                     </div>
@@ -120,10 +120,10 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="{{ route('uLogin') }}">
+                        <a class="dropdown-item spinnerShower" href="{{ route('uLogin') }}">
                             Connexion université
                         </a>
-                        <a class="dropdown-item" href="{{ route('sLogin') }}">
+                        <a class="dropdown-item spinnerShower" href="{{ route('sLogin') }}">
                             Connexion structure
                         </a>
                     </div>
@@ -160,10 +160,10 @@
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <a class="dropdown-item" href="{{ route('uRegister') }}">
+                                        <a class="dropdown-item spinnerShower" href="{{ route('uRegister') }}">
                                             Créer un compte université
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('sRegister') }}">
+                                        <a class="dropdown-item spinnerShower" href="{{ route('sRegister') }}">
                                             Créer un compte structure
                                         </a>
                                     </div>
@@ -180,10 +180,10 @@
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="triggerId">
-                                        <a class="dropdown-item" href="{{ route('uLogin') }}">
+                                        <a class="dropdown-item spinnerShower" href="{{ route('uLogin') }}">
                                             Connexion université
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('sLogin') }}">
+                                        <a class="dropdown-item spinnerShower" href="{{ route('sLogin') }}">
                                             Connexion structure
                                         </a>
                                     </div>
@@ -209,10 +209,10 @@
                                         </a>
 
                                         <div class="dropdown-menu" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="{{ route('uRegister') }}">
+                                            <a class="dropdown-item spinnerShower" href="{{ route('uRegister') }}">
                                                 Créer un compte université
                                             </a>
-                                            <a class="dropdown-item" href="{{ route('sRegister') }}">
+                                            <a class="dropdown-item spinnerShower" href="{{ route('sRegister') }}">
                                                 Créer un compte structure
                                             </a>
                                         </div>
@@ -229,10 +229,10 @@
                                         </a>
 
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                            <a class="dropdown-item" href="{{ route('uLogin') }}">
+                                            <a class="dropdown-item spinnerShower" href="{{ route('uLogin') }}">
                                                 Connexion université
                                             </a>
-                                            <a class="dropdown-item" href="{{ route('sLogin') }}">
+                                            <a class="dropdown-item spinnerShower" href="{{ route('sLogin') }}">
                                                 Connexion structure
                                             </a>
                                         </div>
@@ -335,7 +335,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card orange card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    1 000 sms
+                    0 - 1 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
@@ -387,7 +387,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card blue card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    10 000 sms
+                    1 001 - 10 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
@@ -439,7 +439,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card green card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    50 000 sms
+                    10 001 - 50 000 sms
                 </h6>
                 <div class="text-center comfortaa">
                     <h5 class="font-weight-bold white-text">500 000 F CFA</h5>

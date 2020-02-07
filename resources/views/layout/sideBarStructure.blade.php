@@ -129,8 +129,8 @@
                             </a>
                             <a href="{{ route('sListeGroupe') }}">
                                 <div>
-                                    <i class="icofont-listine-dots"></i>
-                                    <span class="menu-item-sm-hide">Liste des groupes</span>
+                                    <i class="icofont-listine-dots spinnerShower"></i>
+                                    <span class="menu-item-sm-hide spinnerShower">Liste des groupes</span>
                                 </div>
                             </a>
                         </div>
@@ -156,8 +156,8 @@
                             </a>
                             <a href="{{ route('sListeMembre') }}">
                                 <div>
-                                    <i class="icofont-listine-dots"></i>
-                                    <span class="menu-item-sm-hide">Liste des membres</span>
+                                    <i class="icofont-listine-dots spinnerShower"></i>
+                                    <span class="menu-item-sm-hide spinnerShower">Liste des membres</span>
                                 </div>
                             </a>
                         </div>
@@ -177,14 +177,14 @@
                         <div class="pl-4 pr-4">
                             <a href="{{ route('sEnvoyerMessage') }}">
                                 <div>
-                                    <i class="icofont-plus"></i>
-                                    <span class="menu-item-sm-hide">Envoyer un message</span>
+                                    <i class="icofont-plus spinnerShower"></i>
+                                    <span class="menu-item-sm-hide spinnerShower">Envoyer un message</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeMessage') }}">
                                 <div>
-                                    <i class="icofont-listine-dots"></i>
-                                    <span class="menu-item-sm-hide">Liste des messages</span>
+                                    <i class="icofont-listine-dots spinnerShower"></i>
+                                    <span class="menu-item-sm-hide spinnerShower">Liste des messages</span>
                                 </div>
                             </a>
                         </div>
@@ -205,15 +205,15 @@
                             @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
                                 <a href="{{ route('sCompte', $structure->id) }}">
                                     <div>
-                                        <i class="icofont-user"></i>
-                                        <span class="menu-item-sm-hide">Afficher le profil</span>
+                                        <i class="icofont-user spinnerShower"></i>
+                                        <span class="menu-item-sm-hide spinnerShower">Afficher le profil</span>
                                     </div>
                                 </a>
                             @endforeach
                             <a href="{{ route('sLogout') }}">
                                 <div>
-                                    <i class="icofont-power"></i>
-                                    <span class="menu-item-sm-hide">Déconnexion</span>
+                                    <i class="icofont-power spinnerShower"></i>
+                                    <span class="menu-item-sm-hide spinnerShower">Déconnexion</span>
                                 </div>
                             </a>
                         </div>
@@ -227,8 +227,8 @@
                 <div>
                     <a href="{{ route('sBilanMessage') }}">
                         <div class="item" style="border: none;">
-                            <i class="icofont-chart-bar-graph"></i>
-                            <b><span class="menu-item-sm-hide">Bilan des messages</span></b>
+                            <i class="icofont-chart-bar-graph spinnerShower"></i>
+                            <b><span class="menu-item-sm-hide spinnerShower">Bilan des messages</span></b>
                         </div>
                     </a>
                 </div><br />
@@ -265,24 +265,24 @@
                                 <i class="icofont-navigation-menu"></i>
                             </a>
                             <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}">Déconnexion</a>
+                                <a class="dropdown-item spinnerShower" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
+                                <a class="dropdown-item spinnerShower" href="{{ route('logout') }}">Déconnexion</a>
                             </div>
                         </div>
-                        <a href="{{ route('indexStructure') }}" class="">
+                        <a href="{{ route('indexStructure') }}" class="spinnerShower">
                             <small><b>PANNEAU DE CONFIGURATION</b></small>
                         </a>
                     </td>
                     <td class="text-right">
                         <a href="{{ URL::asset('logout') }}" title="Se déconnecter" class="btn btn-danger p-0 rounded m-0 z-depth-0"
                         style="width: 22px; height: 22px; line-height: 22px;">
-                            <i class="icofont-power"></i>
+                            <i class="icofont-power spinnerShower"></i>
                         </a>
                     </td>
                 </tr>
             </table>
         </div>
-        
+
         @yield('content')
 
     </div>
@@ -336,8 +336,8 @@
                         <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
                         <label class="" for="telephone"><b>Téléphone du membre</b></label>
-                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="Saisir le numero de telephone ..."><br  />
-                        
+                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="exemple: 0022899989796"><br  />
+
                         <table width="100%">
                             <tr>
                                 <td>
@@ -533,6 +533,7 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('script')

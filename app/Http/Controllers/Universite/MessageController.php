@@ -15,6 +15,12 @@ use App\Models\Universite;
 
 class MessageController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('checkMessageBonusUniversite')->only(['create', 'envoyer']);
+    }
+
     public function index() {
         if (!session()->has('id')) {
             abort("404");
@@ -55,9 +61,9 @@ class MessageController extends Controller
 
         $dest = 0;
 
-        for ($i=0; $i < $request->index; $i++) { 
+        for ($i=0; $i < $request->index; $i++) {
 
-            for ($j=0; $j < $_POST['index' . $i]; $j++) { 
+            for ($j=0; $j < $_POST['index' . $i]; $j++) {
                 if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
 
                     $dest += 1;
@@ -94,63 +100,63 @@ class MessageController extends Controller
                 $bilan_message_universite->message_universite_id = $message_universite->id;
                 $bilan_message_universite->nb_destinataire = $dest;
                 $bilan_message_universite->save();
-    
+
                 $totalFichier = count($_FILES['fichier']['name']);
-    
+
                 $target_dir = "db/messages/universites/fichier/";
-    
+
                 if ($request->fichier == "") {
-    
+
                 } else {
-    
+
                     for ($i = 0; $i < $totalFichier; $i++) {
-    
+
                         $file = $_FILES["fichier"]["name"][$i];
-    
+
                         if ($file != "") {
                             $file_name = time() . "_" . basename($file);
                             $target_file = $target_dir . $file_name;
                             $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
-    
+
                             $fichier_message_universite = new FichierMessageUniversite();
                             $fichier_message_universite->message_universite_id = $message_universite->id;
                             $fichier_message_universite->fichier = $file_name;
                             $fichier_message_universite->format = $FileType;
                             $fichier_message_universite->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
-    
+
                             $fichier_message_universite->save();
-    
+
                             move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
                         }
-    
+
                     }
                 }
-    
-    
+
+
                 $titre = $request->titre;
-    
+
                 if (session()->get('pro') == 0) {
                     $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
                 } else {
                     $titre = $message_universite->titre;
                 }
-        
-                for ($i=0; $i < $request->index; $i++) { 
-        
-                    for ($j=0; $j < $_POST['index' . $i]; $j++) { 
+
+                for ($i=0; $i < $request->index; $i++) {
+
+                    for ($j=0; $j < $_POST['index' . $i]; $j++) {
                         if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
-        
+
                             $cible_message_universite = new CibleMessageUniversite;
                             $cible_message_universite->message_universite_id = $message_universite->id;
                             $cible_message_universite->filiere_id = $_POST['filiere' . $i];
                             $cible_message_universite->niveau_id = $_POST['niveaux' . $i . $j];
                             $cible_message_universite->save();
-    
+
                             $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
-    
+
                             foreach($telephones as $telephone) {
                                 $num = $telephone->telephone;
-    
+
                                 if ($request->fichier != "") {
                                     $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
                                 } else {
@@ -173,15 +179,15 @@ class MessageController extends Controller
                 echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
     ?>
                 <script>
-                    
+
                     setTimeout(() => {
                         window.location = "https://deblaa.com/universites/messages";
                     }, 5000);
-        
+
                 </script>
     <?php
                     //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
-    
+
             }
         }
 

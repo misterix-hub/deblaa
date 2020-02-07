@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="">
-        
+
         <div class="container-fluid">
 
             <div class="row menu-item-sm-show">
@@ -28,7 +28,7 @@
 
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
-                    
+
                     <div class="row">
                         <div class="col-12">
                             <div class="text-right mt-3">
@@ -38,13 +38,19 @@
                                 </a>
                             </div><br />
 
+                            @if($message = Session::get('error'))
+                                <div class="alert alert-danger">
+                                    {{ $message }}
+                                </div>
+                            @endif <br />
+
                             @if($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ $message }}
                                 </div>
                             @endif <br />
-                            
-                            @if ($message = Session::get('successDemande'))    
+
+                            @if ($message = Session::get('successDemande'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -55,7 +61,7 @@
                                 </div>
                             @endif
 
-                            @if ($message = Session::get('warningDemande'))    
+                            @if ($message = Session::get('warningDemande'))
                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -64,9 +70,9 @@
                                     Une demande de cette provenance a déjà été enregisrée !
                                 </div>
                             @endif
-                            
-                            @if (session()->get('pro') == 0) 
-                            
+
+                            @if (session()->get('pro') == 0 && session()->get('message_bonus') == 0)
+
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title comfortaa">
@@ -79,19 +85,32 @@
                                         </p>
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br /><br />
-                            @else    
+                            @elseif (session()->get('message_bonus') == 0)
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title comfortaa text-danger">
+                                            ALERTE <br>
+                                        </h4>
+                                        <p class="card-text black-text" style="text-align: justify;">
+                                            {{ session()->get('sigle') }}, votre stock de message est épuisé. Veuillez penser à
+                                            <a href="#!" data-toggle="modal" data-target="#compteProModal">reharger votre compte</a>
+                                            pour utiliser votre application de messagerie préférée.
+                                        </p>
+                                    </div>
+                                </div><br /><br /><br /><br /><br /><br /><br />
+                            @else
                                 <br /><br /><br />
                                 <h1 class="mb-1 comfortaa text-center grey-text">
                                     <i class="icofont-attachment icofont-3x"></i><br />
                                     Espace de travail
                                 </h1><br /><br /><br /><br /><br /><br /><br /><br />
                             @endif
-        
+
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 menu-item-sm-hide">
-                    
+
                     @include('included.sideBarRightUniv')
 
                 </div>
