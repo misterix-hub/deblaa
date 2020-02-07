@@ -79,6 +79,8 @@
                     </div>
                 </div>
             </div>
+        </a>
+        <a href="{{ route('uCompte', session()->get('id')) }}">
             <div class="logo p-2 indigo lighten-4 black-text">
                 <table width="100%">
                     <tr>
@@ -282,7 +284,7 @@
                 </tr>
             </table>
         </div>
-        
+
         @yield('content')
 
     </div>
@@ -475,15 +477,15 @@
                             <i class="icofont-sort-alt"></i>
                             <b>Sélectionner les niveaux</b><br />
                         </div>
-    
+
                         <input type="checkbox" id="allNiveaux0" class="allNiveaux0">
                         <label for="allNiveaux0"><span class="font-weight-bold">Tous les niveaux</span></label><br />
-    
+
                         @foreach ($niveaux as $niveau)
                             <input type="checkbox" name="niveaux[]" class="niveauCheckBox0" id="niveau{{ $niveau->id }}" value="{{ $niveau->id }}">
                             <label for="niveau{{ $niveau->id }}"><b>{{ $niveau->nom }}</b></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         @endforeach
-    
+
                     </div>
                     <div class="modal-footer pt-2 pb-2">
                         <button type="button" class="btn btn-white btn-md z-depth-0" data-dismiss="modal">Fermer</button>
@@ -493,7 +495,7 @@
             </div>
         </div>
     </form>
-    
+
     <form action="{{ route('uAjouterEtudiant') }}" method="post">
         <div class="modal fade" id="etudiantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -512,16 +514,16 @@
                         @csrf
                         <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
                         <input type="text" required name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
-    
+
                         <label class="" for="telephone"><b>Téléphone de l'étudiant</b></label>
                         <input type="text" required name="telephone" id="telephone" class="form-control" placeholder="Saisir le téléphone ..."><br  />
-                        
+
                         <table width="100%">
                             <tr>
                                 <td>
                                     <label for="filiere"><b>Filière</b></label>
                                     <select required name="filiere" id="filiere" class="form-control">
-                                        @forelse ($filieres as $filiere)    
+                                        @forelse ($filieres as $filiere)
                                             <option value="{{ $filiere->id }}">
                                                 {{ $filiere->nom }}
                                             </option>
@@ -533,7 +535,7 @@
                                 <td>
                                     <label for="filiere"><b>Niveau</b></label>
                                     <select required name="niveau" id="niveau" class="form-control">
-                                        @forelse ($niveaux as $niveau)    
+                                        @forelse ($niveaux as $niveau)
                                             <option value="{{ $niveau->id }}">
                                                 {{ $niveau->nom }}
                                             </option>
@@ -544,7 +546,7 @@
                                 </td>
                             </tr>
                         </table>
-    
+
                     </div>
                     <div class="modal-footer pt-2 pb-2">
                         <button type="button" class="btn btn-white btn-md z-depth-0" data-dismiss="modal">Fermer</button>

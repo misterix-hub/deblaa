@@ -1,12 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-    <form action="{{ route('reglerFacture') }}" method="post">
+    <form action="{{ route('reglerFactureStructure') }}" method="post">
         @csrf
         <section class="content-header">
             <div>
 
-                @if ($message = Session::get('error'))
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+
+            @if ($message = Session::get('error'))
                     <div class="alert alert-danger">
                         {{ $message }}
                     </div>
@@ -24,7 +35,7 @@
                             <i class="fa fa-calendar fa-2x"></i>
                         </td>
                         <td width="300">
-                            <input type="text" name="date" required class="form-control form-control-md" placeholder="Date de règement ...">
+                            <input type="text" name="date" value="{{ now() }}" readonly required class="form-control form-control-md" placeholder="Date de règlement : {{ now() }}">
                         </td>
                         <td width='5'></td>
                         <td width="100">
@@ -46,7 +57,7 @@
             <div class="clearfix"></div>
         </section>
         <div class="content" id="printable">
-            
+
             <div class="text-center" style="position: absolute; left: 0; right: 0;"><br /><br /><br /><br /><br />
                 <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="20%" alt="logo">
             </div>
@@ -55,7 +66,6 @@
                 <div class="box-body">
                     <div class="row">
 
-                        @foreach ($structures as $structure)
                             <div class="clearfix"></div>
 
                             <div class="form-group col-xs-6">
@@ -73,9 +83,11 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-xs-6"><br /><br />
-                                <b>Référence du client : #CLT{{ $structure->id }}-UNIV</b><br />
+                                <b>Référence du client : #CLT{{ $structure->id }}-STRC</b><br />
                                 <b>Date d'édition : {{ now() }}</b><br />
-                                <b>Dernier règlement : {{ $structure->date }}</b><br />
+                                @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
+                                    <b>Dernier règlement : {{ $factureStructureDate }}</b><br />
+                                @endif
                             </div>
                             <div class="form-group col-xs-6 text-right"><br /><br />
                                 <div style="font-weight: 1000; font-size: 16px;">{{ $structure->nom }}</div>
@@ -96,8 +108,31 @@
                                     <tbody>
                                         <?php $nb_dest_global = 0; $nb_msg = 0; ?>
                                         @foreach ($messages as $message)
-                                            @if ($message->created_at >= $structure->date)    
-                                                <?php $nb_dest = 0; ?>   
+                                            @if ($message->created_at >= $factureStructureDate)
+                                                <?php $nb_dest = 0; ?>
+                                                <tr>
+                                                    <td>{{ $message->titre }}</td>
+                                                    <td class="text-right" width="120">
+                                                        @foreach ($cible_message_structures as $cible_message_structure)
+                                                            @if ($cible_message_structure->message_structure_id == $message->id)
+                                                                @foreach ($users as $user)
+                                                                    @if ($user->departement_id == $cible_message_structure->departement_id)
+                                                                        <?php $nb_dest += 1; ?>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                        {{ $nb_dest }}
+                                                    </td>
+                                                    <td class="text-right" width="180">
+                                                        {{ $message->created_at }}
+                                                    </td>
+                                                </tr>
+                                                <?php $nb_dest_global += $nb_dest; ?>
+                                                <?php $nb_msg += 1; ?>
+                                            @endif
+                                            @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
+                                                <?php $nb_dest = 0; ?>
                                                 <tr>
                                                     <td>{{ $message->titre }}</td>
                                                     <td class="text-right" width="120">
@@ -120,7 +155,7 @@
                                                 <?php $nb_msg += 1; ?>
                                             @endif
                                         @endforeach
-                                        
+
                                         @if ($nb_msg == 0)
                                             <tr>
                                                 <td colspan="3" class="text-center">
@@ -150,7 +185,7 @@
                                     </tr>
                                     <tr>
                                         <td>Date debut des statistiques</td>
-                                        <td class="text-right"><b>{{ $structure->date }}</b></td>
+                                        <td class="text-right"><b>{{ $factureStructureDate }}</b></td>
                                     </tr>
                                     <tr>
                                         <td>Date fin des statistiques</td>
@@ -158,7 +193,19 @@
                                     </tr>
                                     <tr>
                                         <td>Montant total à payer</td>
-                                        <td class="text-right"><b>{{ $nb_dest_global * 15  }} FCFA</b></td>
+                                        <td class="text-right">
+                                            <b>
+                                                @if($nb_dest_global == 0)
+                                                    0 FCFA
+                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                    {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                    {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                                @else
+                                                    {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                                @endif
+                                            </b>
+                                        </td>
                                     </tr>
                                 </table>
                             </div>
@@ -166,7 +213,17 @@
                                 <div class="clearfix"></div>
 
                                 <div class="form-group" style="margin-bottom: 20px;">
-                                    <b>Arrêté la présente facture à la somme de : {{ $nb_dest_global * 15  }} FCFA</b>
+                                    <b>Arrêté la présente facture à la somme de :
+                                        @if($nb_dest_global == 0)
+                                            0 FCFA
+                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                            {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                            {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                        @else
+                                            {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                        @endif
+                                    </b>
                                 </div>
 
                                 <div class="form-group">
@@ -175,10 +232,17 @@
                                 </div>
                             </div>
 
-                            <input type="hidden" name="universite_id" value="{{ $structure->id }}">
-                            <input type="hidden" name="montant" value="{{ $nb_dest_global * 15  }}">
+                            <input type="hidden" name="structure_id" value="{{ $structure->id }}">
+                            <input type="hidden" name="montant" value="
+                                    @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                        {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                        {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                    @else
+                                        {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                    @endif
+                                ">
                             <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
-                        @endforeach
                     </div>
                 </div>
             </div>

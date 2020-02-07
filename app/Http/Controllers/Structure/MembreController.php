@@ -10,6 +10,12 @@ use App\MessageStructure;
 
 class MembreController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->middleware('checkMessageBonusStructure')->only('store');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -53,19 +59,19 @@ class MembreController extends Controller
             return back()->with('error', "Impossble d'ajouter un membre sans groupe !");
         } else {
             $check_membre = User::where('telephone', $request->telephone)->where('departement_id', $request->groupe)->get();
-            
+
             if (count($check_membre) != 0) {
                 return back()->with('error', "Membre déjà ajouté !");
             } else {
                 $emails = User::where('telephone', $request->telephone)->get();
-    
+
                 if (count($emails) != 0) {
-                    
+
                     foreach ($emails as $email) {
                         $password = $email->password;
                         break;
                     }
-    
+
                     $user = new User;
                     $user->name = $request->nomComplet;
                     $user->telephone = $request->telephone;
@@ -73,12 +79,12 @@ class MembreController extends Controller
                     $user->departement_id = $request->groupe;
                     $user->password = $password;
                     $user->save();
-    
+
                     return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
-    
+
                 } else {
                     $password = "DB" . rand(1021, 9999);
-    
+
                     $user = new User;
                     $user->name = $request->nomComplet;
                     $user->email = $request->telephone . "@example.com";
@@ -89,7 +95,7 @@ class MembreController extends Controller
                     $user->save();
                     session()->put('msg_tel', $request->telephone);
                     session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
-    
+
                     return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
                 }
             }

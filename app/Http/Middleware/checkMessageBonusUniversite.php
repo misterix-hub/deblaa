@@ -15,8 +15,8 @@ class checkMessageBonusUniversite
      */
     public function handle($request, Closure $next)
     {
-        if(session()->get('message_bonus') == 0) {
-            return redirect()->route('indexUniversite');
+        if(session()->get('message_bonus') == 0 && session()->get('pro') == 0) {
+            return redirect()->route('alertUniversite');
         }
         return $next($request);
     }

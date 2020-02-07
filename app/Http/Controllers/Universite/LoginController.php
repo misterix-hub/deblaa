@@ -44,7 +44,7 @@ class LoginController extends Controller
                 }
             }
 
-        }   
+        }
     }
 
     public function registerProcessing(Request $request) {
@@ -60,7 +60,7 @@ class LoginController extends Controller
             $universite = new Universite;
             $universite->nom = $request->nom;
             $universite->sigle = $request->sigle;
-            $universite->message_bonus = 10;
+            $universite->message_bonus = 3;
             $universite->email = $request->email;
             $universite->password = bcrypt($password);
             $universite->acces = 1;
@@ -82,7 +82,7 @@ class LoginController extends Controller
             });
 
             session()->put('email', $request->email);
-            
+
             return redirect(route('uRegisterSuccess'));
         }
 
@@ -95,7 +95,7 @@ class LoginController extends Controller
             return view('universite.success.register');
         }
     }
-    
+
     public function logout() {
         session()->forget('id');
         session()->forget('logo');

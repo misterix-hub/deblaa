@@ -218,4 +218,13 @@ class MessageController extends Controller
         }
 
     }
+
+    public function alert() {
+        if( !session()->has('id')){
+            abort('404');
+        } else {
+            return view('structure.alert');
+        }
+
+    }
 }
