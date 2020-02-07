@@ -48,7 +48,7 @@
                     @csrf
 
                     <input type="text" id="email" name="email" required class="form-control" placeholder="Saisir votre adresse email ....." value="{{ old('email') }}">
-                    <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0">
+                    <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
                         Valider
                     </button>
 

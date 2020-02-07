@@ -1,24 +1,21 @@
 <div class="mt-2 mb-2"></div>
-
-<a class="btn btn-green btn-md m-0 btn-block z-depth-0" href="#!" data-toggle="modal" data-target="#compteProModal"
-role="button" style="border-radius: 5px;">
-    <i class="icofont-refresh"></i>
-    Charger le compte
-</a>
 <div class="mt-2"></div>
-<div class="card border-warning font-size-14">
-    <div class="card-header">
-        Messages en réserve
+@if(session()->get('pro') == 0)
+    <div class="card border-warning font-size-14">
+        <div class="card-header">
+            Messages en réserve
+        </div>
+        <div class="card-body text-center">
+            <h4 class="card-title text-center">
+                {{ session()->get('message_bonus') }}
+            </h4>
+            <p class="card-text">
+                Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus')) }} bonus sur votre compte.
+            </p>
+        </div>
     </div>
-    <div class="card-body text-center">
-        <h4 class="card-title text-center">
-            {{ session()->get('message_bonus') }}
-        </h4>
-        <p class="card-text">
-            Il vous reste {{ session()->get('message_bonus') }} message(s) sur votre compte.
-        </p>
-    </div>
-</div><br />
+@endif
+<br />
 
 <div class="card border-primary">
     <div class="card-header">

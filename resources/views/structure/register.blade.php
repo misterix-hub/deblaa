@@ -52,7 +52,7 @@
                         <label for="email" class="font-size-14"><b>Email</b></label>
                         <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
                             S'incrire
                         </button><br />
 

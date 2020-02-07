@@ -14,9 +14,9 @@
 @endsection
 
 @section('connexion')
-    
-    @include('included.menuVisitors')  
-    
+
+    @include('included.menuVisitors')
+
     <ol class="breadcrumb font-size-14">
         <li class="breadcrumb-item"><a href="{{ route('indexVisitors') }}">Accueil</a></li>
         <li class="breadcrumb-item active">Connexion structure</li>
@@ -25,11 +25,11 @@
     <br /><br /><br />
     <div class="container comfortaa">
         <div class="row">
-            
+
             <div class="col-lg-5 col-md-12 col-sm-12 font-size-14">
 
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
-                    
+
                     @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -42,27 +42,27 @@
                         </div>
                     @endif
 
-                    <h5 class="comfortaa text-muted">                    
+                    <h5 class="comfortaa text-muted">
                         Connexion à un compte
                     </h5>
-    
+
                     <form action="{{ route('sLoginProcessing') }}" method="post">
                         @csrf
-    
+
                         <label for="email" class="font-size-14">Email</label>
                         <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ..." value="{{ (session()->has('email')) ? session()->get('email') : '' }}">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
                             Se connecter
                         </button><br />
-    
+
                         <a href="{{ route('sResetPassword') }}">
                             <b>Mot de passe oublié ?</b>
                         </a><hr />
-    
+
                         <b>Pas encore de compe ? <a href="{{ route('sRegister') }}">Créer un compte</a></b>
                     </form><br />
                 </div><br /><br />
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div><br />
-    
+
     @include('included.footerVisitors')
 
 @endsection

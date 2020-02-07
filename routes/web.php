@@ -57,9 +57,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/statistiques/universites/show/{id}/', function ($id) {
 
         return view('statistiques.universite.show', [
-            'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
+            'universite' => Universite::findOrFail($id),
+            /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
-                                        ->limit(1)->get(),
+                                        ->limit(1)->get(),*/
+            'factureUniversiteDate' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
             'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
@@ -71,9 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/statistiques/structures/show/{id}/', function ($id) {
 
         return view('statistiques.structure.show', [
-            'structures' => FactureStructure::leftJoin('structures', 'structure_id', 'structures.id')
-                                        ->where('structures.id', $id)->orderByDesc('facture_structures.id')
-                                        ->limit(1)->get(),
+            'structure' => Structure::findOrFail($id),
+            /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
+                                        ->where('structures.id', $id)->orderByDesc('facture_structures.id)
+                                        ->limit(1)->get(),*/
+            'factureStructureDate' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
             'messages' => MessageStructure::where('structure_id', $id)->get(),
             'users' => User::where('departement_id', '<>', null)->get(),
             'cible_message_structures' => CibleMessageStructure::all(),
@@ -82,7 +86,15 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
 
-    Route::post('admin/factures/regler', function(Request $request) {
+    Route::post('admin/factures/universite/regler', function(Request $request) {
+
+        $request->validate([
+            'date' => 'required',
+        ],
+            [
+                'date.required' => 'Veuillez entrer la date du règlement'
+            ]);
+
         if ($request->montant == 0) {
             return back()->with('error', "Impossible de régler une facture vide !");
         } else {
@@ -96,7 +108,31 @@ Route::group(['middleware' => 'auth'], function () {
 
             return back()->with('success', "Facture réglée avec succès !");
         }
-    })->name('reglerFacture');
+    })->name('reglerFactureUniversite');
+
+    Route::post('admin/factures/structure/regler', function(Request $request) {
+
+        $request->validate([
+            'date' => 'required',
+        ],
+            [
+                'date.required' => 'Veuillez entrer la date du règlement'
+            ]);
+
+        if ($request->montant == 0) {
+            return back()->with('error', "Impossible de régler une facture vide !");
+        } else {
+
+            $facture_structure = new FactureStructure;
+            $facture_structure->numero = $request->numero;
+            $facture_structure->structure_id = $request->structure_id;
+            $facture_structure->montant = $request->montant;
+            $facture_structure->date = $request->date;
+            $facture_structure->save();
+
+            return back()->with('success', "Facture réglée avec succès !");
+        }
+    })->name('reglerFactureStructure');
 
     Route::get('admin/statistiques/universites', function () {
         return view('statistiques.universite.index', [
@@ -116,7 +152,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('demandes/structure-accord-processing/{id}', 'DemandeController@accordStructureProcessing')->name('accordStructureProcessing');
     Route::post('demandes/universite-accord-processing/{id}', 'DemandeController@accordUniversiteProcessing')->name('accordUniversiteProcessing');
 });
-
 
 /* UNIVERSITE */
 
@@ -155,6 +190,8 @@ Route::get('logout', 'Universite\LoginController@logout')->name('logout');
 Route::get('universites/demande', 'Universite\CompteController@comptePro')->name('uDemandeComptePro');
 Route::get('universites/{id}/{formule}/paiements', 'Universite\CompteController@modePaiement')->name('uModePaiement');
 
+Route::get('alerte-message', 'Universite\MessageController@alert')->name('alertUniversite');
+
 /* STRUCTURE */
 
 Route::get('structures', 'Structure\MainController@index')->name('indexStructure');
@@ -191,6 +228,8 @@ Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
 Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
 Route::get('structures/{id}/{formule}/paiements', 'Structure\CompteController@modePaiement')->name('sModePaiement');
+
+Route::get('alerte-message', 'Structure\MessageController@alert')->name('alertStructure');
 
 /* ETUDIANT */
 

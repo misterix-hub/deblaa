@@ -14,9 +14,9 @@
 @endsection
 
 @section('connexion')
-    
+
     @include('included.menuVisitors')
-    
+
     <ol class="breadcrumb font-size-14">
         <li class="breadcrumb-item"><a href="{{ route('indexVisitors') }}">Accueil</a></li>
         <li class="breadcrumb-item active">Inscription université</li>
@@ -25,24 +25,24 @@
     <br /><br /><br />
     <div class="container comfortaa">
         <div class="row">
-            
+
             <div class="col-lg-5 col-md-12 col-sm-12 font-size-14">
 
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
-                    
+
                     @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             {{ $message }}
                         </div>
                     @endif
 
-                    <h5 class="comfortaa text-muted">                    
+                    <h5 class="comfortaa text-muted">
                         Création de compte
                     </h5>
-    
+
                     <form action="{{ route('uRegisterProcessing') }}" method="post">
                         @csrf
-                        
+
                         <label for="nom" class="font-size-14"><b>Nom de l'université</b></label>
                         <input type="text" id="nom" name="nom"  required minlength="1" maxlength="100" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
@@ -50,14 +50,14 @@
                         <input type="text" id="sigle" name="sigle" required minlength="1" maxlength="100"  class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="email" class="font-size-14"><b>Email</b></label>
-                        <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">                        
+                        <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
                             S'incrire
                         </button><br />
-    
-                        
-    
+
+
+
                         <b>Déjà membre ? <a href="{{ route('uLogin') }}">Connectez-vous</a></b>
                     </form><br />
                 </div><br />
@@ -77,7 +77,7 @@
             </div>
         </div>
     </div><br />
-    
+
     @include('included.footerVisitors')
 
 @endsection

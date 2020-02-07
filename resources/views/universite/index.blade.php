@@ -6,23 +6,24 @@
         <div class="container-fluid">
 
             <div class="row menu-item-sm-show">
+                <div class="mt-2"></div>
                 <div class="col-12">
-                    <a class="btn btn-green btn-md m-0 btn-block mt-2 z-depth-0" href="#!" data-toggle="modal" data-target="#compteProModal"
-                    role="button" style="border-radius: 5px;">
-                        <i class="icofont-refresh"></i>
-                        Charger le compte
-                    </a>
-                    <div class="mt-2"></div>
-                    <div class="card border-warning" style="font-size: 13px;">
-                        <div class="card-header text-center">
-                            Messages en réserve
+                    @if(session()->get('pro') == 0)
+                        <div class="card border-warning font-size-14">
+                            <div class="card-header">
+                                Messages en réserve
+                            </div>
+                            <div class="card-body text-center">
+                                <h4 class="card-title text-center">
+                                    {{ session()->get('message_bonus') }}
+                                </h4>
+                                <p class="card-text">
+                                    Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus')) }} bonus sur votre compte.
+                                </p>
+                            </div>
                         </div>
-                        <div class="card-body text-center p-2">
-                            <p class="card-text"  style="font-size: 13px;">
-                                Il vous reste {{ session()->get('message_bonus') }} message(s) sur votre compte.
-                            </p>
-                        </div>
-                    </div><br />
+                    @endif
+                        <br />
                 </div>
             </div>
 
@@ -80,21 +81,29 @@
                                         </h4>
                                         <p class="card-text black-text" style="text-align: justify;">
                                             Le compte que vous utilisez est un compte d'essai avec un nombre limité de messages
-                                            à envoyer à un nombre de destinataires limité. <a href="#!" data-toggle="modal" data-target="#compteProModal">Chargez votre compte</a>
-                                            pour utiliser Deblaa sans restrictions.
+                                            à envoyer à un nombre de destinataires limité.  Pour passez en compte professionnel
+                                            illimité, contactez nous.
+
+                                            <h4 class="text-center">
+                                                <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
+                                            </h4>
                                         </p>
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br /><br />
-                            @elseif (session()->get('message_bonus') == 0)
+                            @elseif (session()->get('message_bonus') == 0 && session()->get('pro') ==0)
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title comfortaa text-danger">
                                             ALERTE <br>
                                         </h4>
                                         <p class="card-text black-text" style="text-align: justify;">
-                                            {{ session()->get('sigle') }}, votre stock de message est épuisé. Veuillez penser à
-                                            <a href="#!" data-toggle="modal" data-target="#compteProModal">reharger votre compte</a>
-                                            pour utiliser votre application de messagerie préférée.
+                                            {{ session()->get('sigle') }}, {{ session()->get('sigle') }}, Vous avez épuisé le nombre de messages de bonus que vous aviez.
+                                            Il est à présent impossible d'envoyer des messages ou d'ajouter des étudiants.
+                                            Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
+
+                                            <h4 class="text-center">
+                                                <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
+                                            </h4>
                                         </p>
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br /><br />

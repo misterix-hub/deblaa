@@ -64,7 +64,7 @@ class LoginController extends Controller
             $structure = new Structure;
             $structure->nom = $request->nom;
             $structure->sigle = $request->sigle;
-            $structure->message_bonus = 5;
+            $structure->message_bonus = 3;
             $structure->email = $request->email;
             $structure->password = bcrypt($password);
             $structure->acces = 1;
