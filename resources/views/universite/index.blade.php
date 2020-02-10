@@ -32,12 +32,6 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <div class="text-right mt-3">
-                                <a href="{{ route('uEnvoyerMessage') }}">
-                                    <i class="icofont-facebook-messenger"></i>
-                                    <b>Envoyer un message</b>
-                                </a>
-                            </div><br />
 
                             @if($message = Session::get('error'))
                                 <div class="alert alert-danger">
@@ -72,8 +66,7 @@
                                 </div>
                             @endif
 
-                            @if (session()->get('pro') == 0 && session()->get('message_bonus') == 0)
-
+                            @if (session()->get('pro') == 0 && session()->get('message_bonus') != 0)
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title comfortaa">
@@ -91,22 +84,22 @@
                                     </div>
                                 </div><br /><br /><br /><br /><br /><br /><br />
                             @elseif (session()->get('message_bonus') == 0 && session()->get('pro') ==0)
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title comfortaa text-danger">
-                                            ALERTE <br>
-                                        </h4>
-                                        <p class="card-text black-text" style="text-align: justify;">
-                                            {{ session()->get('sigle') }}, {{ session()->get('sigle') }}, Vous avez épuisé le nombre de messages de bonus que vous aviez.
-                                            Il est à présent impossible d'envoyer des messages ou d'ajouter des étudiants.
-                                            Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title comfortaa text-danger">
+                                                <i class="icofont icofont-exclamation-tringle"></i> ALERTE <i class="icofont icofont-exclamation-tringle"></i><br>
+                                            </h4>
+                                            <p class="card-text black-text" style="text-align: justify;">
+                                                {{ session()->get('sigle') }}, Vous avez épuisé le nombre de messages de bonus que vous aviez.
+                                                Il est à présent impossible d'envoyer des messages ou d'ajouter des membres.
+                                                Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
 
                                             <h4 class="text-center">
                                                 <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
                                             </h4>
-                                        </p>
-                                    </div>
-                                </div><br /><br /><br /><br /><br /><br /><br />
+                                            </p>
+                                        </div>
+                                    </div><br /><br /><br /><br /><br /><br /><br />
                             @else
                                 <br /><br /><br />
                                 <h1 class="mb-1 comfortaa text-center grey-text">
