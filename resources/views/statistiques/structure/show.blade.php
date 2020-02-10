@@ -195,14 +195,26 @@
                                         <td>Montant total à payer</td>
                                         <td class="text-right">
                                             <b>
-                                                @if($nb_dest_global == 0)
-                                                    0 FCFA
-                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                                    {{ ($nb_dest_global * 20) - 60  }} FCFA
-                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                                    {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                                @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
+                                                    @if($nb_dest_global == 0)
+                                                        0 FCFA
+                                                    @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                        {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                        {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                                    @else
+                                                        {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                                    @endif
                                                 @else
-                                                    {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                                    @if($nb_dest_global == 0)
+                                                        0 FCFA
+                                                    @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                        {{ ($nb_dest_global * 20)  }} FCFA
+                                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                        {{ ($nb_dest_global * 15)  }} FCFA
+                                                    @else
+                                                        {{ ($nb_dest_global * 10) }} FCFA
+                                                    @endif
                                                 @endif
                                             </b>
                                         </td>
@@ -214,14 +226,26 @@
 
                                 <div class="form-group" style="margin-bottom: 20px;">
                                     <b>Arrêté la présente facture à la somme de :
-                                        @if($nb_dest_global == 0)
-                                            0 FCFA
-                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                            {{ ($nb_dest_global * 20) - 60  }} FCFA
-                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                            {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                        @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
+                                            @if($nb_dest_global == 0)
+                                                0 FCFA
+                                            @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                            @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                            @else
+                                                {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                            @endif
                                         @else
-                                            {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                            @if($nb_dest_global == 0)
+                                                0 FCFA
+                                            @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                {{ ($nb_dest_global * 20)  }} FCFA
+                                            @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                {{ ($nb_dest_global * 15)  }} FCFA
+                                            @else
+                                                {{ ($nb_dest_global * 10) }} FCFA
+                                            @endif
                                         @endif
                                     </b>
                                 </div>
@@ -234,13 +258,23 @@
 
                             <input type="hidden" name="structure_id" value="{{ $structure->id }}">
                             <input type="hidden" name="montant" value="
+                                @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
                                     @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                        {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 20) - 60  }}
                                     @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                        {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 15) - 60  }}
                                     @else
-                                        {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 10) - 60  }}
                                     @endif
+                                @else
+                                    @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                        {{ ($nb_dest_global * 20)  }}
+                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                        {{ ($nb_dest_global * 15)  }}
+                                    @else
+                                        {{ ($nb_dest_global * 10) }}
+                                    @endif
+                                @endif
                                 ">
                             <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
                     </div>
