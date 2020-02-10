@@ -99,7 +99,7 @@ class EtudiantController extends Controller
                 session()->put('msg_tel', $request->telephone);
                 session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS.  Connectez-vous ici: https://deblaa.com/etudiants/login");
 
-                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !".$password);
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
             }
 
 

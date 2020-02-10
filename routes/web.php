@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
             /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
                                         ->limit(1)->get(),*/
-            'factureUniversiteDate' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
+            'factureUniversiteDate' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
             'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
@@ -190,7 +190,7 @@ Route::get('logout', 'Universite\LoginController@logout')->name('logout');
 Route::get('universites/demande', 'Universite\CompteController@comptePro')->name('uDemandeComptePro');
 Route::get('universites/{id}/{formule}/paiements', 'Universite\CompteController@modePaiement')->name('uModePaiement');
 
-Route::get('alerte-message', 'Universite\MessageController@alert')->name('alertUniversite');
+Route::get('universite/alerte-message', 'Universite\MessageController@alert')->name('alertUniversite');
 
 /* STRUCTURE */
 
@@ -229,7 +229,7 @@ Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
 Route::get('structures/{id}/{formule}/paiements', 'Structure\CompteController@modePaiement')->name('sModePaiement');
 
-Route::get('alerte-message', 'Structure\MessageController@alert')->name('alertStructure');
+Route::get('structure/alerte-message', 'Structure\MessageController@alert')->name('alertStructure');
 
 /* ETUDIANT */
 
