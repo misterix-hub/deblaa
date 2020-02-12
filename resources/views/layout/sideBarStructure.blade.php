@@ -338,7 +338,7 @@
                         <input type="text" name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
                         <label class="" for="telephone"><b>Téléphone du membre</b></label>
-                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="exemple: 0022899989796"><br  />
+                        <input type="text" name="telephone" id="telephone" class="form-control" placeholder="exemple: +22891019245"><br  />
 
                         <table width="100%">
                             <tr>

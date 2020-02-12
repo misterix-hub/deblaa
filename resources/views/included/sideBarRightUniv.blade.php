@@ -62,7 +62,7 @@
         <h4 class="card-title">Infos compte</h4>
         <p class="card-text">
             Sigle : {{ session()->get('sigle') }}<br />
-            Email : email@email.com
+            Email : {{ session()->get('email') }}<br />
         </p>
 
         @if (session()->get('logo') == "")
@@ -70,7 +70,7 @@
                 <b>Votre logo</b>
             </div>
         @else
-            <img src="{{ URL::asset('db/logos/structure/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
+            <img src="{{ URL::asset('db/logos/universite/'.session()->get('logo')) }}" alt="logo-universite" width="100%">
         @endif
 
         <div class="text-center">
