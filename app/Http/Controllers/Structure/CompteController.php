@@ -123,6 +123,7 @@ class CompteController extends Controller
             session()->put('sigle', $compte->sigle);
             session()->put('nom', $compte->nom);
             session()->put('site_web', $compte->site_web);
+            session()->put('email', $compte->email);
 
             return redirect(route('indexStructure'))->with('success', 'Votre profil a bien été mis à jour avec succès');
         }
@@ -141,7 +142,7 @@ class CompteController extends Controller
 
     public function comptePro() {
         if (count(Structure::where('id', session()->get('id'))->where('pro', 1)->get()) != 0) {
-            
+
             $structure = Structure ::findOrFail(session()->get('id'));
             $structure->message_bonus = 1000 + session()->get('message_bonus');
             $structure->save();
@@ -161,7 +162,7 @@ class CompteController extends Controller
 
             return back()->with('success', "Compte rechargé avec succès !");
         }
-        
+
     }
 
     public function modePaiement($id, $formule) {

@@ -7,6 +7,14 @@
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
 
+                    @if($errors->any())
+                        <ul class="alert alert-danger list-unstyled mt-3">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+
                     <div class="row menu-item-sm-show">
                         <div class="col-12">
                             <div class="mt-2"></div>

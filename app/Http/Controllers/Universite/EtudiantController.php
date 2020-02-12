@@ -59,6 +59,21 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/',
+            'nomComplet' => 'required',
+            'niveau' => 'required',
+            'filiere' => 'required'
+        ],
+            [
+                'telephone.required' => 'Veuillez entrer le numero de telephone',
+                'telephone.regex' => 'Numero invalide !',
+                'nomComplet.required' => 'Veuillez entrer votre nom',
+                'niveau.required' => 'Veuillez entrer le niveau',
+                'filiere.required' => 'Veuillez sélectionner la filiere'
+            ]);
+
         $ckech_filiere_niveau = FiliereNiveau::where('filiere_id', $request->filiere)
                                                 ->where('niveau_id', $request->niveau)
                                                 ->get();
@@ -77,7 +92,7 @@ class EtudiantController extends Controller
 
                 $user = new User;
                 $user->name = $request->nomComplet;
-                $user->telephone = $request->telephone;
+                $user->telephone = substr($request->telephone, 1);;
                 $user->filiere_id = $request->filiere;
                 $user->niveau_id = $request->niveau;
                 $user->password = $password;
@@ -90,7 +105,7 @@ class EtudiantController extends Controller
                 $user = new User;
                 $user->name = $request->nomComplet;
                 $user->email = $request->telephone . "@example.com";
-                $user->telephone = $request->telephone;
+                $user->telephone = substr($request->telephone, 1);;
                 $user->filiere_id = $request->filiere;
                 $user->niveau_id = $request->niveau;
                 $user->password = bcrypt($password);

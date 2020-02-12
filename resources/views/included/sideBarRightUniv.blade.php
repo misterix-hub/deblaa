@@ -62,7 +62,7 @@
         <h4 class="card-title">Infos compte</h4>
         <p class="card-text">
             Sigle : {{ session()->get('sigle') }}<br />
-            Email : {{ session()->get('email') }}<br />
+            @ : {{ session()->get('email') }} <br />
         </p>
 
         @if (session()->get('logo') == "")

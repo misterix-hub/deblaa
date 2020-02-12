@@ -124,6 +124,7 @@ class CompteController extends Controller
 
             session()->put('logo', $compte->logo);
             session()->put('sigle', $compte->sigle);
+            session()->put('email', $compte->email);
             session()->put('nom', $compte->nom);
             session()->put('site_web', $compte->site_web);
 
@@ -145,7 +146,7 @@ class CompteController extends Controller
     public function comptePro() {
 
         if (count(Universite::where('id', session()->get('id'))->where('pro', 1)->get()) != 0) {
-            
+
             $universite = Universite ::findOrFail(session()->get('id'));
             $universite->message_bonus = 1000 + session()->get('message_bonus');
             $universite->save();

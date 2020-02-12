@@ -29,13 +29,13 @@ class LoginController extends Controller
             } else {
                 return back()->with('error', "Mot de passe incorrect !");
             }
-        }   
+        }
     }
 
     public function query(Request $request) {
 
         $telephone = $request->telephone;
-        
+
         $etudiants = User::where('telephone', $telephone)->where('filiere_id', '<>', null)->get();
 
         if(count($etudiants) == 0) {
