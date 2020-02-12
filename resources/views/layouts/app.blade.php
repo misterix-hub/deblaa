@@ -27,7 +27,7 @@
 
     <style>
         .diamondAsk {
-            display: block;
+            display: none;
             position: fixed;
             bottom: 60px;
             right: 30px;

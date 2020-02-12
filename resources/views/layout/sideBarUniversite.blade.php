@@ -91,7 +91,7 @@
                                         <b>Logo</b>
                                     </div>
                                 @else
-                                    <img src="{{ URL::asset('db/logos/universite/'.session()->get('logo')) }}" alt="logo-structure" width="100%">
+                                    <img src="{{ URL::asset('db/logos/universite/'.session()->get('logo')) }}" alt="logo-universite" width="100%">
                                 @endif
                             </div>
                         </td>
@@ -516,7 +516,7 @@
                         <input type="text" required name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
                         <label class="" for="telephone"><b>Téléphone de l'étudiant</b></label>
-                        <input type="text" required name="telephone" id="telephone" class="form-control" placeholder="Saisir le téléphone ..."><br  />
+                        <input type="text" required name="telephone" id="telephone" class="form-control" placeholder="exemple : +22891019245"><br  />
 
                         <table width="100%">
                             <tr>

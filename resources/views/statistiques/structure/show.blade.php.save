@@ -86,7 +86,7 @@
                                 <b>Référence du client : #CLT{{ $structure->id }}-STRC</b><br />
                                 <b>Date d'édition : {{ now() }}</b><br />
                                 @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
-                                    <b>Dernier règlement : {{ $factureStructureDate }}</b><br />
+                                    <b>Dernier règlement : {{ \App\FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date)}}</b><br />
                                 @endif
                             </div>
                             <div class="form-group col-xs-6 text-right"><br /><br />
@@ -108,7 +108,6 @@
                                     <tbody>
                                         <?php $nb_dest_global = 0; $nb_msg = 0; ?>
                                         @foreach ($messages as $message)
-					@if (count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
                                             @if ($message->created_at >= $factureStructureDate)
                                                 <?php $nb_dest = 0; ?>
                                                 <tr>
@@ -132,7 +131,6 @@
                                                 <?php $nb_dest_global += $nb_dest; ?>
                                                 <?php $nb_msg += 1; ?>
                                             @endif
-					@endif
                                             @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
                                                 <?php $nb_dest = 0; ?>
                                                 <tr>
