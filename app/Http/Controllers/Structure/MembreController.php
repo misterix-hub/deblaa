@@ -55,6 +55,20 @@ class MembreController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/',
+            'nomComplet' => 'required',
+            'role' => 'required',
+            'groupe' => 'required'
+        ],
+            [
+                'telephone.required' => 'Veuillez entrer le numero de telephone',
+                'telephone.regex' => 'Numero invalide !',
+                'nomComplet.required' => 'Veuillez entrer votre nom',
+                'role.required' => 'Veuillez entrer le role',
+                'groupe.required' => 'Veuillez sélectionner le groupe'
+            ]);
         if ($request->groupe == "") {
             return back()->with('error', "Impossble d'ajouter un membre sans groupe !");
         } else {
@@ -74,7 +88,7 @@ class MembreController extends Controller
 
                     $user = new User;
                     $user->name = $request->nomComplet;
-                    $user->telephone = $request->telephone;
+                    $user->telephone = substr($request->telephone, 1);
                     $user->fonction = $request->role;
                     $user->departement_id = $request->groupe;
                     $user->password = $password;
@@ -88,7 +102,7 @@ class MembreController extends Controller
                     $user = new User;
                     $user->name = $request->nomComplet;
                     $user->email = $request->telephone . "@example.com";
-                    $user->telephone = $request->telephone;
+                    $user->telephone = substr($request->telephone, 1);
                     $user->fonction = $request->role;
                     $user->departement_id = $request->groupe;
                     $user->password = bcrypt($password);

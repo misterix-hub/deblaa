@@ -61,7 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
             /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
                                         ->limit(1)->get(),*/
-            'factureUniversiteDate' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
             'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
@@ -77,7 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
             /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
                                         ->where('structures.id', $id)->orderByDesc('facture_structures.id)
                                         ->limit(1)->get(),*/
-            'factureStructureDate' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('date')->first()->date,
             'messages' => MessageStructure::where('structure_id', $id)->get(),
             'users' => User::where('departement_id', '<>', null)->get(),
             'cible_message_structures' => CibleMessageStructure::all(),

@@ -35,6 +35,7 @@ class LoginController extends Controller
                             session()->put('id', $structures_mail->id);
                             session()->put('logo', $structures_mail->logo);
                             session()->put('sigle', $structures_mail->sigle);
+                            session()->put('email', $structures_mail->email);
                             session()->put('message_bonus', $structures_mail->message_bonus);
                             session()->put('pro', $structures_mail->pro);
                             session()->put('category', "structure");
@@ -85,9 +86,9 @@ class LoginController extends Controller
                         ->subject("Votre mot de passe de Deblaa");
             });
 
-            session()->put('email', $request->email);
+            session()->put('email', $request->get('email'));
 
-            return redirect(route('sRegisterSuccess'));
+            return redirect(route('sRegisterSuccess'.$password));
         }
 
     }

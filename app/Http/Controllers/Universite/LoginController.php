@@ -32,6 +32,7 @@ class LoginController extends Controller
                             session()->put('id', $universites_mail->id);
                             session()->put('logo', $universites_mail->logo);
                             session()->put('sigle', $universites_mail->sigle);
+                            session()->put('email', $universites_mail->email);
                             session()->put('pro', $universites_mail->pro);
                             session()->put('message_bonus', $universites_mail->message_bonus);
                             session()->put('category', "universite");
@@ -81,7 +82,7 @@ class LoginController extends Controller
                         ->subject("Votre mot de passe de Deblaa");
             });
 
-            session()->put('email', $request->email);
+            session()->put('email', $request->get('email'));
 
             return redirect(route('uRegisterSuccess'));
         }

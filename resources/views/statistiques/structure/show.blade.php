@@ -86,7 +86,7 @@
                                 <b>Référence du client : #CLT{{ $structure->id }}-STRC</b><br />
                                 <b>Date d'édition : {{ now() }}</b><br />
                                 @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
-                                    <b>Dernier règlement : {{ $factureStructureDate }}</b><br />
+                                    <b>Dernier règlement : {{ \App\FactureStructure::where('structure_id', $structure->id)->orderByDesc('id')->limit(1)->get('date')->first()->date }}</b><br />
                                 @endif
                             </div>
                             <div class="form-group col-xs-6 text-right"><br /><br />
@@ -108,31 +108,31 @@
                                     <tbody>
                                         <?php $nb_dest_global = 0; $nb_msg = 0; ?>
                                         @foreach ($messages as $message)
-					@if (count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
-                                            @if ($message->created_at >= $factureStructureDate)
-                                                <?php $nb_dest = 0; ?>
-                                                <tr>
-                                                    <td>{{ $message->titre }}</td>
-                                                    <td class="text-right" width="120">
-                                                        @foreach ($cible_message_structures as $cible_message_structure)
-                                                            @if ($cible_message_structure->message_structure_id == $message->id)
-                                                                @foreach ($users as $user)
-                                                                    @if ($user->departement_id == $cible_message_structure->departement_id)
-                                                                        <?php $nb_dest += 1; ?>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        @endforeach
-                                                        {{ $nb_dest }}
-                                                    </td>
-                                                    <td class="text-right" width="180">
-                                                        {{ $message->created_at }}
-                                                    </td>
-                                                </tr>
-                                                <?php $nb_dest_global += $nb_dest; ?>
-                                                <?php $nb_msg += 1; ?>
+                                            @if (count(\App\FactureStructure::where('structure_id', $structure->id)->get()) != 0)
+                                                @if ($message->created_at >= \App\FactureStructure::where('structure_id', $structure->id)->orderByDesc('id')->limit(1)->get('date')->first()->date )
+                                                    <?php $nb_dest = 0; ?>
+                                                    <tr>
+                                                        <td>{{ $message->titre }}</td>
+                                                        <td class="text-right" width="120">
+                                                            @foreach ($cible_message_structures as $cible_message_structure)
+                                                                @if ($cible_message_structure->message_structure_id == $message->id)
+                                                                    @foreach ($users as $user)
+                                                                        @if ($user->departement_id == $cible_message_structure->departement_id)
+                                                                            <?php $nb_dest += 1; ?>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                            {{ $nb_dest }}
+                                                        </td>
+                                                        <td class="text-right" width="180">
+                                                            {{ $message->created_at }}
+                                                        </td>
+                                                    </tr>
+                                                    <?php $nb_dest_global += $nb_dest; ?>
+                                                    <?php $nb_msg += 1; ?>
+                                                @endif
                                             @endif
-					@endif
                                             @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
                                                 <?php $nb_dest = 0; ?>
                                                 <tr>
@@ -187,7 +187,15 @@
                                     </tr>
                                     <tr>
                                         <td>Date debut des statistiques</td>
-                                        <td class="text-right"><b>{{ $factureStructureDate }}</b></td>
+                                        <td class="text-right">
+                                            <b>
+                                                @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
+                                                    {{ \App\MessageStructure::where('structure_id', $structure->id)->limit(1)->get('created_at')->first()->created_at }}
+                                                @else
+                                                    {{ \App\FactureStructure::where('structure_id', $structure->id)->orderByDesc('id')->limit(1)->get('date')->first()->date }}
+                                                @endif
+                                            </b>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Date fin des statistiques</td>

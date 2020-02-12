@@ -84,7 +84,7 @@
                                 <b>Référence du client : #CLT{{ $universite->id }}-UNIV</b><br />
                                 <b>Date d'édition : {{ now() }}</b><br />
                                 @if(count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) != 0)
-                                    <b>Dernier règlement : {{ $factureUniversiteDate }}</b><br />
+                                    <b>Dernier règlement : {{ \App\FactureUniversite::where('universite_id', $univeriste->id)->orderByDesc('id')->limit(1)->get('date')->first()->date }}</b><br />
                                 @endif
                             </div>
                             <div class="form-group col-xs-6 text-right"><br /><br />
@@ -106,29 +106,31 @@
                                     <tbody>
                                         <?php $nb_dest_global = 0; $nb_msg = 0; ?>
                                         @foreach ($messages as $message)
-                                            @if ($message->created_at >= $factureUniversiteDate)
-                                                <?php $nb_dest = 0; ?>
-                                                <tr>
-                                                    <td>{{ $message->titre }}</td>
-                                                    <td class="text-right" width="120">
-                                                        @foreach ($cible_message_universites as $cible_message_universite)
-                                                            @if ($cible_message_universite->message_universite_id == $message->id)
-                                                                @foreach ($users as $user)
-                                                                    @if ($user->filiere_id == $cible_message_universite->filiere_id
-                                                                    && $user->niveau_id == $cible_message_universite->niveau_id)
-                                                                        <?php $nb_dest += 1; ?>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        @endforeach
-                                                        {{ $nb_dest }}
-                                                    </td>
-                                                    <td class="text-right" width="180">
-                                                        {{ $message->created_at }}
-                                                    </td>
-                                                </tr>
-                                                <?php $nb_dest_global += $nb_dest; ?>
-                                                <?php $nb_msg += 1; ?>
+                                            @if (count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) != 0)
+                                                @if ($message->created_at >= \App\FactureUniversite::where('universite_id', $universite->id)->orderByDesc('id')->limit(1)->get('date')->first()->date )
+                                                    <?php $nb_dest = 0; ?>
+                                                    <tr>
+                                                        <td>{{ $message->titre }}</td>
+                                                        <td class="text-right" width="120">
+                                                            @foreach ($cible_message_universites as $cible_message_universite)
+                                                                @if ($cible_message_universite->message_universite_id == $message->id)
+                                                                    @foreach ($users as $user)
+                                                                        @if ($user->filiere_id == $cible_message_universite->filiere_id
+                                                                        && $user->niveau_id == $cible_message_universite->niveau_id)
+                                                                            <?php $nb_dest += 1; ?>
+                                                                        @endif
+                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
+                                                            {{ $nb_dest }}
+                                                        </td>
+                                                        <td class="text-right" width="180">
+                                                            {{ $message->created_at }}
+                                                        </td>
+                                                    </tr>
+                                                    <?php $nb_dest_global += $nb_dest; ?>
+                                                    <?php $nb_msg += 1; ?>
+                                                @endif
                                             @endif
                                             @if(count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) == 0)
                                                 <?php $nb_dest = 0; ?>
@@ -185,7 +187,19 @@
                                     </tr>
                                     <tr>
                                         <td>Date debut des statistiques</td>
-                                        <td class="text-right"><b>{{ $factureUniversiteDate }}</b></td>
+                                        <td class="text-right">
+                                            <b>
+                                                @if(count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) == 0)
+                                                    @if(count(\App\MessageUniversite::where('universite_id', $universite->id)->get()) != 0)
+                                                        {{ \App\MessageUniversite::where('universite_id', $universite->id)->limit(1)->get('created_at')->first()->created_at }}
+                                                    @else
+                                                        {{ now() }}
+                                                    @endif
+                                                @else
+                                                    {{ \App\FactureUniversite::where('universite_id', $universite->id)->orderByDesc('id')->limit(1)->get('date')->first()->date }}
+                                                @endif
+                                            </b>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Date fin des statistiques</td>
