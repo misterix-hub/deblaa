@@ -88,7 +88,7 @@ class LoginController extends Controller
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('sRegisterSuccess'.$password));
+            return redirect(route('sRegisterSuccess'));
         }
 
     }
