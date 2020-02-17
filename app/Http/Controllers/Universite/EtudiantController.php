@@ -104,7 +104,7 @@ class EtudiantController extends Controller
 
                 $user = new User;
                 $user->name = $request->nomComplet;
-                $user->email = $request->telephone . "@example.com";
+                $user->email = $request->telephone . time() . "@example.com";
                 $user->telephone = substr($request->telephone, 1);;
                 $user->filiere_id = $request->filiere;
                 $user->niveau_id = $request->niveau;

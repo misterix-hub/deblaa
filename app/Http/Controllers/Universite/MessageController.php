@@ -158,9 +158,9 @@ class MessageController extends Controller
                                 $num = $telephone->telephone;
 
                                 if ($request->fichier != "") {
-                                    $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
+                                    $texte = strtoupper($message_universite->titre) . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
                                 } else {
-                                    $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
+                                    $texte = strtoupper($titre) . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
                                 }
     ?>
                                 <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>

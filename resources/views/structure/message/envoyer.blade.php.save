@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Titre du message</b></label>
-                            <input type="text" maxLength="191"  required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
+                            <input type="text" maxLength="190"  required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <br />
@@ -75,17 +75,11 @@
             $(".allGroupes0").change(function () {
                 $(".groupeCheckBox0").prop("checked", $(this).prop("checked"));
             });
+
+	    $('#titre').change(function(){
+		var title_val = $(this).val(
+	    });
+
         });
-	/* VICTOR SI TU ARRIVES ICI TU PEUX LAISSER, C'EST DEJA FAIT */
-
-	$('#titre').keyup(function(){
-	    var titre_val = $(this).val().substring(0, 190);
-	    if($(this).val().length > 190) {
-		$(this).val(titre_val);
-		alert('Nombre maximal de caratères atteint');
-	    }
-	});
-	/* MASTO N'EST PAS BON !!! */
-
     </script>
 @endsection

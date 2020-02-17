@@ -17,7 +17,12 @@
                             {{ count($cible_message_universites) - count($message_lus) }}
                         </span>
                     @endif
-                </a>&nbsp;&nbsp;
+                </a>
+            </td>
+	    <td width="20" class="text-right pl-2">
+                <a href="{{ route('logout') }}" id="dropdownMenuButton">
+                    <i class="icofont-sign-out white-text" style="font-size: 22px;"></i>
+                </a>
             </td>
         </tr>
     </table>
@@ -37,7 +42,7 @@
                         </td>
                         <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="black-text">
-                                {{ $cible_message_universite->titre }}
+                                {{ (strlen($cible_message_universite->titre) > 35) ? substr($cible_message_universite->titre, 0, 35) . " ..." : $cible_message_universite->titre ." ..." }}
                             </b><br />
                             <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
                         </td>

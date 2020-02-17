@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Titre du message</b></label>
-                            <input type="text" required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
+                            <input type="text" maxLength="191"  required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <br />
@@ -32,7 +32,7 @@
                                     <i class="icofont-paperclip"></i>
                                     <b>Pièce jointe</b>
                                 </label>&nbsp;&nbsp;&nbsp;
-                                <input type="file" multiple name="fichier[]" id="fichier"  value="{{ old('fichier') }}">
+                                <input type="file" multiple name="fichier[]" id="fichier">
                             </div>
                         </div>
                     </div>
@@ -99,5 +99,17 @@
                 $('.niveauCheckBox0').prop("checked", $(this).prop("checked"));
             });
         });
+	
+	 /* VICTOR SI TU ARRIVES ICI TU PEUX LAISSER, C'EST DEJA FAIT */
+
+        $('#titre').keyup(function(){
+            var titre_val = $(this).val().substring(0, 190);
+	    if($(this).val().length > 190) {
+		$(this).val(titre_val);
+                alert('Nombre maximal de caratères atteint');
+            }
+        });
+        /* AHOCO EST MAUVAIS !!! */ 
+
     </script>
 @endsection

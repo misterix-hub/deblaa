@@ -21,7 +21,7 @@ class MessageController extends Controller
 
             <script>
                 if (window.innerWidth < 1000) {
-                    window.location = "http://192.168.1.66/deblaa/etudiants/inboxs";
+                    window.location = "https://deblaa.com/etudiants/inboxs";
                 }
             </script>
 

@@ -63,7 +63,7 @@
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1">
                             <b class="black-text">
-                                {{ $cible_message_structure->titre }}
+                                {{ (strlen($cible_message_structure->titre) > 35) ? substr($cible_message_structure->titre, 0, 35) . " ..." : $cible_message_structure->titre . " ..." }}
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small>
                         </td>

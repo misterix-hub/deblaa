@@ -14,7 +14,7 @@
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ $message }}
-                                    @if ($message == "Membre ajouté avec succès !")
+                                    @if (session()->has('msg_tel') || session()->has('msg_pwd'))
                                         <?php $send_message = 1; ?>
                                     @endif
                                 </div>
