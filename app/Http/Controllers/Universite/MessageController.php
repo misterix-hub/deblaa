@@ -12,6 +12,8 @@ use App\CibleMessageUniversite;
 use App\User;
 use App\BilanMessageUniversite;
 use App\Models\Universite;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
 {
@@ -61,12 +63,16 @@ class MessageController extends Controller
 
         $dest = 0;
 
-        for ($i=0; $i < $request->index; $i++) {
+        for ($i=0; $i < intval($request->input('index'),10); $i++) {
 
-            for ($j=0; $j < $_POST['index' . $i]; $j++) {
+            for ($j=0; $j < intval($_POST['index' . $i],10); $j++) {
                 if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
 
-                    $dest += 1;
+                    $users = User::where(['filiere_id' => intval($_POST['filiere' . $i], 10), 'niveau_id' => intval($_POST['niveaux' . $i . $j],10)])->get();
+
+                    if(count($users) != 0) {
+                        $dest += count($users);
+                    }
                 }
             }
         }
@@ -80,7 +86,7 @@ class MessageController extends Controller
             } else {
 
                 if(session()->get('message_bonus') == 0) {
-                    return back()->with('error', "Vous avez épuisé votre nombre nombre de messages.");
+                    return back()->with('error', "Vous avez épuisé votre nombre de messages.");
                 }
 
                 $universite = Universite::findOrFail(session()->get('id'));
@@ -104,6 +110,8 @@ class MessageController extends Controller
                 $totalFichier = count($_FILES['fichier']['name']);
 
                 $target_dir = "db/messages/universites/fichier/";
+
+
 
                 if ($request->fichier == "") {
 

@@ -68,7 +68,7 @@ class LoginController extends Controller
             $universite->pro = 0;
             $universite->save();
 
-            $to_name = "Deblaa";
+            /*$to_name = "Deblaa";
 
             $to_email = $request->input('email');
             $data = array(
@@ -80,11 +80,11 @@ class LoginController extends Controller
             \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });
+            });*/
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('uRegisterSuccess'));
+            return redirect(route('uRegisterSuccess'.$password));
         }
 
     }
