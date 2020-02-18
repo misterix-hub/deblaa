@@ -338,8 +338,7 @@
                     0 - 1 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">20 000 F CFA</h5>
-                    <small class="white-text">20 F CFA par sms</small>
+                    <h5 class="font-weight-bold white-text">20 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -390,8 +389,7 @@
                     1 001 - 10 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">150 000 F CFA</h5>
-                    <small class="white-text">15 F CFA par sms</small>
+                    <h5 class="font-weight-bold white-text">15 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -442,8 +440,7 @@
                     10 001 - 50 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">500 000 F CFA</h5>
-                    <small class="white-text">10 F CFA par sms</small>
+                    <h5 class="font-weight-bold white-text">10 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>

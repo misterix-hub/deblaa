@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
 
-                @if ($message = Session::get('error')) 
+                @if ($message = Session::get('error'))
                     <div class="alert alert-danger">
                         {{ $message }}
                     </div>
@@ -19,7 +19,7 @@
 
                 <form action="{{ route('uEnvoyerMessageFrom') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Titre du message</b></label>
@@ -40,7 +40,7 @@
                     <label for="editor"><b>Contenu du message</b></label>
                     <textarea name="message" id="editor"></textarea><br />
 
-                    @if (count($filieres) != 0)    
+                    @if (count($filieres) != 0)
                         <input type="checkbox" class="allNiveaux0" id="all">
                         <label for="all" class="font-weight-bold"><b>Envoyer à tous les étudiants</b></label><br /><br />
                     @endif
@@ -63,7 +63,7 @@
                                     @foreach ($filiere_niveaux as $filiere_niveau)
                                         @if ($filiere_niveau->filiere_id == $filiere->id)
                                             <input type="checkbox" value="{{ $filiere_niveau->niveau_id }}" class="niveauCheckBox0" name="niveaux{{ $i . $j }}" id="niveaux{{ $filiere->id . $filiere_niveau->id }}">
-                                            <label for="niveaux{{ $filiere->id . $filiere_niveau->id }}">{{ $filiere_niveau->nom }}</label><br />   
+                                            <label for="niveaux{{ $filiere->id . $filiere_niveau->id }}">{{ $filiere_niveau->nom }}</label><br />
                                             @php
                                                 $j += 1;
                                             @endphp
@@ -99,7 +99,7 @@
                 $('.niveauCheckBox0').prop("checked", $(this).prop("checked"));
             });
         });
-	
+
 	 /* VICTOR SI TU ARRIVES ICI TU PEUX LAISSER, C'EST DEJA FAIT */
 
         $('#titre').keyup(function(){
@@ -109,7 +109,7 @@
                 alert('Nombre maximal de caratères atteint');
             }
         });
-        /* AHOCO EST MAUVAIS !!! */ 
+        /* AHOCO EST MAUVAIS !!! */
 
     </script>
 @endsection

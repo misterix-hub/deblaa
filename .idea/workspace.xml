@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deblaa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deblaa.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Etudiant/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Etudiant/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Membre/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Membre/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MembreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MembreController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/CompteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/EtudiantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/EtudiantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/included/sideBarRight.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/included/sideBarRight.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/included/sideBarRightUniv.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/included/sideBarRightUniv.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statistiques/structure/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statistiques/structure/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/statistiques/universite/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/statistiques/universite/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/structure/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +204,7 @@
       <workItem from="1581418390923" duration="3003000" />
       <workItem from="1581431204258" duration="22000" />
       <workItem from="1581496388188" duration="15029000" />
+      <workItem from="1581956029162" duration="5079000" />
     </task>
     <servers />
   </component>
