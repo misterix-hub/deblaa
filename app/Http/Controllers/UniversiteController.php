@@ -10,8 +10,10 @@ use App\Models\Niveau;
 use App\Models\Universite;
 use App\Repositories\UniversiteRepository;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 use Response;
 
@@ -87,10 +89,12 @@ class UniversiteController extends AppBaseController
                 'telephone' => $request->input('telephone'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($password),
+                'message_bonus' => 3,
                 'acces' => $request->input('acces'),
                 'sigle' => $request->input('sigle'),
                 'site_web' => $request->input('site_web'),
                 'logo' => $file_name,
+                'pro' => 0
             ]);
 
             $to_name = "Deblaa";
@@ -111,11 +115,11 @@ class UniversiteController extends AppBaseController
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
 
-            $facture_universite = new FactureUniversite;
+            /*$facture_universite = new FactureUniversite;
             $facture_universite->universite_id = $universite->id;
             $facture_universite->montant = "0";
             $facture_universite->date = now();
-            $facture_universite->save();
+            $facture_universite->save();*/
 
             return redirect(route('universites.index'));
         }
@@ -253,6 +257,42 @@ class UniversiteController extends AppBaseController
         $universite->forceDelete();
 
         Flash::success('Université supprimée avec succès.');
+
+        return redirect(route('universites.index'));
+    }
+
+    /**
+     * @param $id
+     * @return RedirectResponse|Redirector
+     */
+
+    public function giveAccessPro($id) {
+        $universite = $this->universiteRepository->find($id);
+
+        if (empty($universite)) {
+            Flash::error('Université non trouvée');
+
+            return redirect(route('universites.index'));
+        }
+
+        $accessPro = $this->universiteRepository->update([
+            'pro' => 1
+        ], $id);
+
+        $to_name = "Deblaa";
+
+        $to_email = $universite->get('email');
+        $data = array(
+            'nom' => $universite->get('sigle'),
+        );
+
+
+        Mail::send('mails.comptepro.universite', $data, function($message) use($to_name, $to_email) {
+            $message->to($to_email)
+                ->subject('Compte professionnel Deblaa');
+        });
+
+        Flash::success('L\'université a été passée en compte professionnel avec succès ');
 
         return redirect(route('universites.index'));
     }

@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('admin/universites', 'UniversiteController');
 
+    Route::patch('admin/universites/{id}/access-pro', 'UniversiteController@getAccessPro')->name('universites.getAccess');
+
     Route::resource('admin/filieres', 'FiliereController');
 
     Route::resource('admin/niveaux', 'NiveauController');
@@ -51,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 
     Route::resource('admin/structures', 'StructureController');
+
+    Route::patch('admin/structures/{id}/access-pro', 'StructureController@getAccessPro')->name('structures.getAccess');
 
     Route::resource('admin/departements', 'DepartementController');
 

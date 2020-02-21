@@ -8,8 +8,10 @@ use App\Models\Departement;
 use App\Models\Structure;
 use App\Repositories\StructureRepository;
 use App\Http\Controllers\AppBaseController;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
 use Response;
 
@@ -85,7 +87,7 @@ class StructureController extends AppBaseController
                 'sigle' => $request->input('sigle'),
                 'logo' => $file_name,
                 'telephone' => $request->input('telephone'),
-                'message_bonus' => 0,
+                'message_bonus' => 3,
                 'email' => $request->input('email'),
                 'password' => bcrypt($password),
                 'site_web' => $request->input('site_web'),
@@ -93,9 +95,9 @@ class StructureController extends AppBaseController
                 'pro' => 0
             ]);
 
-            return $password;
 
-            /*$to_name = "Deblaa";
+
+            $to_name = "Deblaa";
 
             $to_email = $request->input('email');
             $data = array(
@@ -107,17 +109,17 @@ class StructureController extends AppBaseController
             Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });*/
+            });
 
             Flash::success('Structure ajoutée avec succès.');
 
             move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
 
-            $facture_structure = new FactureStructure;
+            /*$facture_structure = new FactureStructure;
             $facture_structure->structure_id = $structure->id;
             $facture_structure->montant = "0";
             $facture_structure->date = now();
-            $facture_structure->save();
+            $facture_structure->save();*/
 
             return redirect(route('structures.index'));
 
@@ -249,6 +251,42 @@ class StructureController extends AppBaseController
         //$this->structureRepository->delete($id);
 
         Flash::success('Structure deleted successfully.');
+
+        return redirect(route('structures.index'));
+    }
+
+    /**
+     * @param $id
+     * @return RedirectResponse|Redirector
+     */
+
+    public function getAccessPro($id) {
+        $structure = $this->structureRepository->find($id);
+
+        if(empty($structure)) {
+            Flash::error('Structure non trouvée');
+
+            return redirect(route('structures.index'));
+        }
+
+        $accessPro = $this->structureRepository->update([
+            'pro' => 1
+        ], $id);
+
+        $to_name = "Deblaa";
+
+        $to_email = $structure->get('email');
+        $data = array(
+            'nom' => $structure->get('sigle'),
+        );
+
+
+        Mail::send('mails.comptepro.structure', $data, function($message) use($to_name, $to_email) {
+            $message->to($to_email)
+                ->subject('Compte professionnel Deblaa');
+        });
+
+        Flash::success('La structure a bien été passée en compte professionnel');
 
         return redirect(route('structures.index'));
     }

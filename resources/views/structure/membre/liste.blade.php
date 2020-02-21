@@ -2,19 +2,19 @@
 
 @section('content')
     <div class="">
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
-                    
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-            
+
                             <?php $send_message = 0; ?>
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
                                     {{ $message }}
-                                    @if (session()->has('msg_tel') || session()->has('msg_pwd'))
+                                    @if (session()->has('msg_tel') && session()->has('msg_pwd'))
                                         <?php $send_message = 1; ?>
                                     @endif
                                 </div>
@@ -79,13 +79,13 @@
                                     </tfoot>
                                 </table>
                             <br />
-                            
+
                         </div>
                     </div><br /><br /><br />
 
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 menu-item-sm-hide">
-                   
+
                     @include('included.sideBarRight')
 
                 </div>
@@ -104,11 +104,11 @@
     <script>
         $(document).ready(function() {
 	    $('#example').DataTable();
-            var send_message = "{{ $send_message }}";
-            if (send_message == 1) {
+            let send_message = "{{ $send_message }}";
+            if (parseInt(send_message, 10) === 1) {
                 $.ajax ({
-                   url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
-                   type : 'GET'
+                    url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
+                    type : 'GET'
                 });
             }
         });
