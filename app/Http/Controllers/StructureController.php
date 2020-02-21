@@ -261,33 +261,38 @@ class StructureController extends AppBaseController
      */
 
     public function getAccessPro($id) {
-        $structure = $this->structureRepository->find($id);
 
-        if(empty($structure)) {
-            Flash::error('Structure non trouvée');
+        if(!session()->has('id')) {
+            abort('401');
+        } else {
+            $structure = $this->structureRepository->find($id);
+
+            if(empty($structure)) {
+                Flash::error('Structure non trouvée');
+
+                return redirect(route('structures.index'));
+            }
+
+            $accessPro = $this->structureRepository->update([
+                'pro' => 1
+            ], $id);
+
+            $to_name = "Deblaa";
+
+            $to_email = $structure->get('email');
+            $data = array(
+                'nom' => $structure->get('sigle'),
+            );
+
+
+            Mail::send('mails.comptepro.structure', $data, function($message) use($to_name, $to_email) {
+                $message->to($to_email)
+                    ->subject('Compte professionnel Deblaa');
+            });
+
+            Flash::success('La structure a bien été passée en compte professionnel');
 
             return redirect(route('structures.index'));
         }
-
-        $accessPro = $this->structureRepository->update([
-            'pro' => 1
-        ], $id);
-
-        $to_name = "Deblaa";
-
-        $to_email = $structure->get('email');
-        $data = array(
-            'nom' => $structure->get('sigle'),
-        );
-
-
-        Mail::send('mails.comptepro.structure', $data, function($message) use($to_name, $to_email) {
-            $message->to($to_email)
-                ->subject('Compte professionnel Deblaa');
-        });
-
-        Flash::success('La structure a bien été passée en compte professionnel');
-
-        return redirect(route('structures.index'));
     }
 }

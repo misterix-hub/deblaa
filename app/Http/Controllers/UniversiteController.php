@@ -267,33 +267,40 @@ class UniversiteController extends AppBaseController
      */
 
     public function giveAccessPro($id) {
-        $universite = $this->universiteRepository->find($id);
 
-        if (empty($universite)) {
-            Flash::error('Université non trouvée');
+        if(!session()->has('id')) {
+            abort('401');
+        } else {
+            $universite = $this->universiteRepository->find($id);
+
+            if (empty($universite)) {
+                Flash::error('Université non trouvée');
+
+                return redirect(route('universites.index'));
+            }
+
+            $accessPro = $this->universiteRepository->update([
+                'pro' => 1
+            ], $id);
+
+            $to_name = "Deblaa";
+
+            $to_email = $universite->get('email');
+            $data = array(
+                'nom' => $universite->get('sigle'),
+            );
+
+
+            Mail::send('mails.comptepro.universite', $data, function($message) use($to_name, $to_email) {
+                $message->to($to_email)
+                    ->subject('Compte professionnel Deblaa');
+            });
+
+            Flash::success('L\'université a été passée en compte professionnel avec succès ');
 
             return redirect(route('universites.index'));
         }
 
-        $accessPro = $this->universiteRepository->update([
-            'pro' => 1
-        ], $id);
 
-        $to_name = "Deblaa";
-
-        $to_email = $universite->get('email');
-        $data = array(
-            'nom' => $universite->get('sigle'),
-        );
-
-
-        Mail::send('mails.comptepro.universite', $data, function($message) use($to_name, $to_email) {
-            $message->to($to_email)
-                ->subject('Compte professionnel Deblaa');
-        });
-
-        Flash::success('L\'université a été passée en compte professionnel avec succès ');
-
-        return redirect(route('universites.index'));
     }
 }
