@@ -21,7 +21,7 @@ class EtudiantController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -36,7 +36,12 @@ class EtudiantController extends Controller
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -55,7 +60,7 @@ class EtudiantController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
     {
@@ -81,7 +86,7 @@ class EtudiantController extends Controller
             return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
         } else {
 
-            $emails = User::where('telephone', $request->telephone)->get();
+            $emails = User::where('telephone', substr($request->telephone, 1))->get();
 
             if (count($emails) != 0) {
 
@@ -149,7 +154,7 @@ class EtudiantController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {

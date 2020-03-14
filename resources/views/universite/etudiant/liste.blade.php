@@ -47,7 +47,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>{{ $user->name }}</td>
-                                            <td>{{ $user->telephone }}</td>
+                                            <td>+{{ $user->telephone }}</td>
                                             <td>
                                                 @foreach ($filieres as $filiere)
                                                     @if ($filiere->id == $user->filiere_id)

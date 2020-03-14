@@ -58,7 +58,7 @@ class CompteController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function edit($id)
     {
@@ -69,7 +69,12 @@ class CompteController extends Controller
                 'structure' => Structure::findOrFail($id),
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
                     ->get()
@@ -204,7 +209,12 @@ class CompteController extends Controller
         return view('structure.mode_paiement', [
             'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
             'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
             'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get(),
+            'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                 ->where('structure_id', session()->get('id'))
                 ->where('users.id', '<>', null)
                 ->get(),

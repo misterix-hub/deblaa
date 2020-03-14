@@ -19,7 +19,7 @@ class MembreController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function index()
     {
@@ -28,11 +28,16 @@ class MembreController extends Controller
         } else {
             return view('structure.membre.liste', [
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 "groupes" => Departement::where('structure_id', session()->get('id'))->get(),
                 "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
                                         ->where('structure_id', session()->get('id'))
                                         ->where('users.id', '<>', null)
-                                        ->get()
+                                        ->get(),
+                "userCount" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
     }
@@ -51,7 +56,7 @@ class MembreController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -75,9 +80,9 @@ class MembreController extends Controller
             $check_membre = User::where('telephone', $request->telephone)->where('departement_id', $request->groupe)->get();
 
             if (count($check_membre) != 0) {
-                return back()->with('error', "Membre déjà ajouté !");
+                return back()->with('error', "Membre déjà ajouté à ce groupe!");
             } else {
-                $emails = User::where('telephone', $request->telephone)->get();
+                $emails = User::where('telephone', substr($request->telephone, 1))->get();
 
                 if (count($emails) != 0) {
 
@@ -107,10 +112,10 @@ class MembreController extends Controller
                     $user->departement_id = $request->groupe;
                     $user->password = bcrypt($password);
                     $user->save();
-                    session()->put('msg_tel', $request->telephone);
-                    session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
+                    /*session()->put('msg_tel', $request->telephone);
+                    session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");*/
 
-                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !".$password);
                 }
             }
         }

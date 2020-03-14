@@ -100,6 +100,7 @@ class UniversiteController extends AppBaseController
             $to_name = "Deblaa";
 
             $to_email = $request->input('email');
+
             $data = array(
                 'nom' => $request->input('sigle'),
                 'email' => $request->input('email'),
@@ -268,9 +269,6 @@ class UniversiteController extends AppBaseController
 
     public function giveAccessPro($id) {
 
-        if(!session()->has('id')) {
-            abort('401');
-        } else {
             $universite = $this->universiteRepository->find($id);
 
             if (empty($universite)) {
@@ -279,19 +277,20 @@ class UniversiteController extends AppBaseController
                 return redirect(route('universites.index'));
             }
 
+
             $accessPro = $this->universiteRepository->update([
+                'message_bonus' => 0,
                 'pro' => 1
             ], $id);
 
             $to_name = "Deblaa";
 
-            $to_email = $universite->get('email');
+            $to_email = $universite->email;
             $data = array(
-                'nom' => $universite->get('sigle'),
+                'nom' => $universite->sigle,
             );
 
-
-            Mail::send('mails.comptepro.universite', $data, function($message) use($to_name, $to_email) {
+           Mail::send('mails.comptepro.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                     ->subject('Compte professionnel Deblaa');
             });
@@ -301,6 +300,4 @@ class UniversiteController extends AppBaseController
             return redirect(route('universites.index'));
         }
 
-
-    }
 }

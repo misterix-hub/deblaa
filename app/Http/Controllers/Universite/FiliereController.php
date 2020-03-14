@@ -39,7 +39,12 @@ class FiliereController extends Controller
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -58,7 +63,7 @@ class FiliereController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -95,7 +100,7 @@ class FiliereController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function show($id)
     {
@@ -110,7 +115,12 @@ class FiliereController extends Controller
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -119,7 +129,7 @@ class FiliereController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function edit($id)
     {
@@ -131,7 +141,12 @@ class FiliereController extends Controller
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
                         ->get(),
-            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get(),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
         ]);
     }
 

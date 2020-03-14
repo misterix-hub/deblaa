@@ -20,7 +20,13 @@ class MainController extends Controller
                     return view('structure.index',[
                         'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                         'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                        'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                         'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                            ->where('structure_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get(),
+
+                        'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                             ->where('structure_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),

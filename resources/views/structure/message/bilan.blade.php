@@ -10,6 +10,17 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
 
+                            @if($errors->any())
+                                <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </ul>
+                            @endif
+
                             @if ($message = Session::get('error'))
                                 <div class="alert alert-danger">
                                     {{ $message }}

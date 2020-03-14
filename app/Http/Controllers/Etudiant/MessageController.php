@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Etudiant;
 
 use App\FichierMessageUniversite;
 use App\Http\Controllers\Controller;
+use App\Models\Universite;
 use Illuminate\Http\Request;
 use App\CibleMessageUniversite;
 use App\MessageUniversite;
 use App\MessageLu;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -46,11 +48,22 @@ class MessageController extends Controller
         return view('ajaxViews.etudiant.message.sideBarEtudiant', [
             'tab_id' => $tab_id,
             'message_lus' => $message_lus,
-            'cible_message_universites' => CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
+            'cible_message_universites' => DB::table('cible_message_universites')
+                ->join('message_universites', 'message_universites.id', '=', 'cible_message_universites.message_universite_id')
+                ->join('users', 'users.filiere_id', '=', 'cible_message_universites.filiere_id')
+                ->where('users.telephone', session()->get('telephone'))
+                ->groupBy('cible_message_universites.message_universite_id')
+                ->orderByDesc('message_structures.created_at')
+                ->get(),
+
+            'universites' => Universite::all()
+
+
+                /*CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
                                             ->where('filiere_id', session()->get('filiere_id'))
                                             ->where('niveau_id', session()->get('niveau_id'))
                                             ->orderByDesc('message_universites.created_at')
-                                            ->get()
+                                            ->get()*/
         ]);
     }
 
@@ -70,11 +83,22 @@ class MessageController extends Controller
         return view('ajaxViews.etudiant.message.inboxS', [
             'tab_id' => $tab_id,
             'message_lus' => $message_lus,
-            'cible_message_universites' => CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
+            'cible_message_universites' => DB::table('cible_message_universites')
+                ->join('message_universites', 'message_universites.id', '=', 'cible_message_universites.message_universite_id')
+                ->join('users', 'users.filiere_id', '=', 'cible_message_universites.filiere_id')
+                ->where('users.telephone', session()->get('telephone'))
+                ->groupBy('cible_message_universites.message_universite_id')
+                ->orderByDesc('message_structures.created_at')
+                ->get(),
+
+            'universites' => Universite::all()
+
+
+                /*CibleMessageUNiversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
                                             ->where('filiere_id', session()->get('filiere_id'))
                                             ->where('niveau_id', session()->get('niveau_id'))
                                             ->orderByDesc('message_universites.created_at')
-                                            ->get()
+                                            ->get()*/
         ]);
     }
 

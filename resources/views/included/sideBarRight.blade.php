@@ -26,7 +26,7 @@
         <div class="list-group">
             <a href="{{ route('sListeMessage') }}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ count($messages) }}</h5>
+                    <h5 class="mb-1">{{ count($messageCount) }}</h5>
                     <small>Détails</small>
                 </div>
                 <p class="mb-1">Messages envoyés</p>
@@ -34,7 +34,7 @@
             </a>
             <a href="{{ route('sListeMembre') }}" class="list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{{ count($users) }}</h5>
+                    <h5 class="mb-1">{{ count($userCount) }}</h5>
                     <small>Détails</small>
                 </div>
                 <p class="mb-1">Membres</p>

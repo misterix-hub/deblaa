@@ -9,7 +9,15 @@ use App\User;
 class LoginController extends Controller
 {
     public function loginProcessing(Request $request) {
-        $etudiant_telephones = User::where('telephone', $request->telephone)->get();
+
+        $request->validate([
+            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/'
+        ], [
+            'telephone.required' => 'Le champ du téléphone est requis',
+            'telephone.regex' => 'Votre numéro est incorrect'
+        ]);
+
+        $etudiant_telephones = User::where('telephone', substr($request->telephone, 1))->get();
 
         if (count($etudiant_telephones) == 0) {
             return back()->with('error', "Numéro de téléphone incorrecte !");
@@ -21,6 +29,7 @@ class LoginController extends Controller
                 session()->put('nom_complet', $etudiant_telephone->name);
                 session()->put('filiere_id', $etudiant_telephone->filiere_id);
                 session()->put('niveau_id', $etudiant_telephone->niveau_id);
+                session()->put('telephone', $telephone);
                 session()->put('category', "etudiant");
             }
 
@@ -34,7 +43,14 @@ class LoginController extends Controller
 
     public function query(Request $request) {
 
-        $telephone = $request->telephone;
+        $request->validate([
+            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/'
+        ], [
+            'telephone.required' => 'Le champ du téléphone est requis',
+            'telephone.regex' => 'Votre numéro est incorrect'
+        ]);
+
+        $telephone = substr($request->telephone, 1);
 
         $etudiants = User::where('telephone', $telephone)->where('filiere_id', '<>', null)->get();
 
@@ -46,6 +62,7 @@ class LoginController extends Controller
                 session()->put('nom_complet', $etudiant->name);
                 session()->put('filiere_id', $etudiant->filiere_id);
                 session()->put('niveau_id', $etudiant->niveau_id);
+                session()->put('telephone', $etudiant->telephone);
                 session()->put('category', "etudiant");
             }
 

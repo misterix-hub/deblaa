@@ -134,9 +134,23 @@
                                 @foreach ($users as $user)    
                                     <tr>
                                         <td>{{ $user->name }}</td>
-                                        <td class="text-right">{{ $user->telephone }}</td>
+                                        <td class="text-right">+{{ $user->telephone }}</td>
                                         <td class="text-center">
-                                            <i class="icofont-check green-text"></i>
+                                            @if(count($message_lus) == 0)
+                                                <i class="icofont-check grey-text"></i>
+                                                <i class="icofont-check grey-text"></i>
+                                            @else
+
+                                                @foreach($message_lus as $message_lu)
+                                                    @if($message_lu->telephone == $user->telephone)
+                                                        <i class="icofont-check green-text"></i>
+                                                        <i class="icofont-check green-text"></i>
+                                                    @else
+                                                        <i class="icofont-check grey-text"></i>
+                                                        <i class="icofont-check grey-text"></i>
+                                                    @endif
+                                                @endforeach
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

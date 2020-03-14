@@ -1,10 +1,12 @@
 @foreach ($messages as $message)    
     <div class="col-lg-12 col-md-12 col-sm-12">
-        <h3>{{ $message->titre }}</h3>
-
-        <div>
-            {!! $message->contenu !!}
-        </div><br />
+        @if($message->contenu == null)
+            <h3>{{ $message->titre }}</h3>
+        @else
+            <div>
+                {!! $message->contenu !!}
+            </div><br />
+        @endif
         <small>
             <i class="icofont-history"></i>
             Date d'envoi : {{ $message->created_at }}
@@ -27,6 +29,10 @@
 
                             @case("doc")
                             <img src="{{ URL::asset('assets/images/doc.png') }}" alt="Word-joint" width="100%">
+                            @break
+
+                            @case("docx")
+                                <img src="{{ URL::asset('assets/images/doc.png') }}" alt="Word-joint" width="100%">
                             @break
 
                             @case("mp3")

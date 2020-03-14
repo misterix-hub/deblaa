@@ -80,7 +80,7 @@
         <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
             <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
         </a>
-        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexVisitors') }}">
+        <a class="navbar-brand comfortaa white-text font-weight-bold" href="{{ route('indexVisitors') }}">
             Deblaa
         </a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
@@ -338,7 +338,7 @@
                     0 - 1 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">20 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">20 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -389,7 +389,7 @@
                     1 001 - 10 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">15 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">15 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -437,10 +437,10 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card green card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    10 001 - 50 000 sms
+                    10 001 et plus
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text">10 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">10 F CFA par sms</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -476,7 +476,7 @@
             </div>
         </div>
 	<div class="col-12 text-center"><br />
-	    <h4>Inscrivez-vous et bénéficiez gratuitement de 10 sms pour commencer !</h4><br />
+	    <h4>Inscrivez-vous et bénéficiez gratuitement de 3 sms pour commencer !</h4><br />
 	    <center>
 		<div class="dropdown">                                                                                                                                                                                                                                                                                                                              <a href="#!" class="btn btn-orange btn-lg ml-0 rounded" id="triggerId" data-toggle="dropdown" aria-haspopu$                                            aria-expanded="false">                                                                                                                                                  <span style="font-size: 13px;">                                                                                                                                             <small>Essai gratuit !</small>                                                                                                                                      </span>                                                                                                                                                             </a>                                                                                                                                                                                                                                                                                                                                            <div class="dropdown-menu" aria-labelledby="triggerId">                                                                                                                     <a class="dropdown-item" href="{{ route('uRegister') }}">                                                                                                                   Créer un compte université                                                                                                                                          </a>                                                                                                                                                                    <a class="dropdown-item" href="{{ route('sRegister') }}">                                                                                                                   Créer un compte structure                                                                                                                                           </a>                                                                                                                                                                </div>                                                                                                                                                              </div>
 	    </center>

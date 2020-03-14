@@ -13,6 +13,7 @@ use App\User;
 use App\BilanMessageUniversite;
 use App\Models\Universite;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MessageController extends Controller
@@ -50,18 +51,23 @@ class MessageController extends Controller
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
-                        ->get()
+                        ->get(),
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
     }
 
     public function envoyer(Request $request) {
 
-        $dest = 0;
+        $numero = [];
 
         for ($i=0; $i < intval($request->input('index'),10); $i++) {
 
@@ -70,30 +76,22 @@ class MessageController extends Controller
 
                     $users = User::where(['filiere_id' => intval($_POST['filiere' . $i], 10), 'niveau_id' => intval($_POST['niveaux' . $i . $j],10)])->get();
 
-                    if(count($users) != 0) {
-                        $dest += count($users);
+                    if (count($users) != 0) {
+                        foreach ($users as $user) {
+                            $numero[] = $user->telephone;
+                        }
                     }
                 }
             }
         }
 
-        if ($dest > session()->get('message_bonus')) {
-            return back()->with('error', "Le nombre de destinataires autorisé est dépassé !");
-        } else {
+        $dest = sizeof(array_unique($numero));
+
+        if(session()->has('pro') == 1) {
 
             if ($dest == 0) {
-                return back()->with('error', "Votre message n'a aucune cible !");
+                return back()->with('error', 'Votre message n\'a aucun destinataire');
             } else {
-
-                if(session()->get('message_bonus') == 0) {
-                    return back()->with('error', "Vous avez épuisé votre nombre de messages.");
-                }
-
-                $universite = Universite::findOrFail(session()->get('id'));
-                $universite->message_bonus = $universite->message_bonus - $dest;
-                $universite->save();
-
-                session()->put('message_bonus', $universite->message_bonus);
 
                 $message_universite = new MessageUNiversite;
                 $message_universite->universite_id = session()->get('id');
@@ -140,14 +138,9 @@ class MessageController extends Controller
                     }
                 }
 
+                $number1 = [];
 
-                $titre = $request->titre;
-
-                if (session()->get('pro') == 0) {
-                    $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
-                } else {
-                    $titre = $message_universite->titre;
-                }
+                $titre = $message_universite->titre;
 
                 for ($i=0; $i < $request->index; $i++) {
 
@@ -162,44 +155,181 @@ class MessageController extends Controller
 
                             $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
 
-                            foreach($telephones as $telephone) {
-                                $num = $telephone->telephone;
-
-                                if ($request->fichier != "") {
-                                    $texte = strtoupper($message_universite->titre) . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $num . "";
-                                } else {
-                                    $texte = strtoupper($titre) . " *** https://deblaa.com/etudiants/query?telephone= " . $num . "";
-                                }
-    ?>
-                                <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
-                                <script>
-                                    $.ajax ({
-                                        url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $num ?>&text=<?php echo $texte ?>&type=0" ,
-                                        type : 'GET'
-                                    });
-                                </script>
-    <?php
+                            foreach ($telephones as $telephone) {
+                                $number1[] = $telephone->telephone;
                             }
                         }
                     }
                 }
+
+                $numero_trie1 = array_unique($number1);
+
+                for($i = 0; $i < sizeof($numero_trie1); $i++) {
+
+                    if ($request->fichier != "") {
+                        $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "";
+                    } else {
+                        $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $numero_trie1[$i] . "";
+                    }
+                    ?>
+                    <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                    <script>
+                        $.ajax ({
+                            url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie1[$i] ?>&text=<?php echo $texte ?>&type=0" ,
+                            type : 'GET'
+                        });
+                    </script>
+                    <?php
+                }
                 echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                 echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
-    ?>
+                ?>
                 <script>
 
                     setTimeout(() => {
-                        window.location = "https://deblaa.com/universites/messages";
+                        <?php
+                            return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
+                        ?>
                     }, 5000);
 
                 </script>
-    <?php
-                    //return redirect(route('sListeMessage'))->with('success', "Message envoyé avec succès !");
+                <?php
 
+                //return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
+
+
+            }
+
+        } else {
+
+            if ($dest > session()->get('message_bonus')) {
+                return back()->with('error', "Le nombre de destinataires autorisé est dépassé !");
+            } else {
+
+                if ($dest == 0) {
+                    return back()->with('error', "Votre message n'a aucun destinataire !");
+                } else {
+
+                    if (session()->get('message_bonus') == 0) {
+                        return back()->with('error', "Vous avez épuisé votre nombre de messages bonus.");
+                    }
+                    $universite = Universite::findOrFail(session()->get('id'));
+                    $universite->message_bonus = $universite->message_bonus - $dest;
+                    $universite->save();
+
+                    session()->put('message_bonus', $universite->message_bonus);
+
+                    $message_universite = new MessageUNiversite;
+                    $message_universite->universite_id = session()->get('id');
+                    $message_universite->titre = $request->titre;
+                    $message_universite->contenu = $request->message;
+                    $message_universite->save();
+
+                    $bilan_message_universite = new BilanMessageUniversite;
+                    $bilan_message_universite->universite_id = session()->get('id');
+                    $bilan_message_universite->message_universite_id = $message_universite->id;
+                    $bilan_message_universite->nb_destinataire = $dest;
+                    $bilan_message_universite->save();
+
+                    $totalFichier = count($_FILES['fichier']['name']);
+
+                    $target_dir = "db/messages/universites/fichier/";
+
+
+
+                    if ($request->fichier == "") {
+
+                    } else {
+
+                        for ($i = 0; $i < $totalFichier; $i++) {
+
+                            $file = $_FILES["fichier"]["name"][$i];
+
+                            if ($file != "") {
+                                $file_name = time() . "_" . basename($file);
+                                $target_file = $target_dir . $file_name;
+                                $FileType = strtolower(pathinfo(basename($_FILES["fichier"]["name"][$i]), PATHINFO_EXTENSION));
+
+                                $fichier_message_universite = new FichierMessageUniversite();
+                                $fichier_message_universite->message_universite_id = $message_universite->id;
+                                $fichier_message_universite->fichier = $file_name;
+                                $fichier_message_universite->format = $FileType;
+                                $fichier_message_universite->taille = ($_FILES["fichier"]["size"][$i] / 1000000);
+
+                                $fichier_message_universite->save();
+
+                                move_uploaded_file($_FILES["fichier"]["tmp_name"][$i], $target_file);
+                            }
+
+                        }
+                    }
+                    //$titre = $request->titre;
+
+                    $titre = "Message de Deblaa. Vous pouvez le personnaliser quand vous passerez en compte profesionnel.";
+
+                    $number2 = [];
+
+                    for ($i=0; $i < $request->index; $i++) {
+
+                        for ($j=0; $j < $_POST['index' . $i]; $j++) {
+                            if (isset($_POST['niveaux' . $i . $j]) && $_POST['niveaux' . $i . $j] != "") {
+
+                                $cible_message_universite = new CibleMessageUniversite;
+                                $cible_message_universite->message_universite_id = $message_universite->id;
+                                $cible_message_universite->filiere_id = $_POST['filiere' . $i];
+                                $cible_message_universite->niveau_id = $_POST['niveaux' . $i . $j];
+                                $cible_message_universite->save();
+
+                                $telephones = User::where('filiere_id', $_POST['filiere' . $i])->where('niveau_id', $_POST['niveaux' . $i . $j])->get();
+
+                                foreach ($telephones as $telephone) {
+                                    $number2[] = $telephone->telephone;
+                                }
+                            }
+                        }
+                    }
+
+                    $numero_trie2 = array_unique($number2);
+
+                    for($i = 0; $i < sizeof($numero_trie2); $i++) {
+
+                        if ($request->fichier != "") {
+                            $texte = $message_universite->titre. " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie2 . "";
+                        } else {
+                            $texte = $titre. " *** https://deblaa.com/etudiants/query?telephone= " . $numero_trie2[$i] . "";
+                        }
+                        ?>
+                        <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                        <script>
+                            $.ajax ({
+                                url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie2[$i] ?>&text=<?php echo $texte ?>&type=0" ,
+                                type : 'GET'
+                            });
+                        </script>
+                        <?php
+                    }
+                    echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                    echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
+                    ?>
+                    <script>
+
+                        setTimeout(() => {
+                            <?php
+                                return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
+                            ?>
+                        }, 5000);
+
+                    </script>
+                    <?php
+
+                }
+
+
+            }
             }
         }
 
-    }
+
 
     public function bilan() {
         if (!session()->has('id')) {
@@ -210,10 +340,15 @@ class MessageController extends Controller
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
                         ->get(),
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
                 'bilan_messages' => BilanMessageUniversite::leftJoin('message_universites', 'message_universite_id', 'message_universites.id')
                                     ->where('bilan_message_universites.universite_id', session()->get('id'))
                                     ->orderByDesc('bilan_message_universites.id')->get()
@@ -228,16 +363,41 @@ class MessageController extends Controller
             return view('universite.message.details', [
                 'niveaux' => Niveau::all(),
                 'messages' => MessageUniversite::where('id', $id)->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'cible_messages' => CibleMessageUniversite::where('message_universite_id', $id)->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'fichier_messages' => MessageUniversite::rightJoin('fichier_message_universites', 'message_universites.id', 'message_universite_id')
                             ->where('message_universite_id', $id)
                             ->get(),
-                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                        ->where('universite_id', session()->get('id'))
-                        ->where('users.id', '<>', null)
-                        ->get()
+                'users' => DB::table('cible_message_universites')
+                                ->join('message_universites', 'message_universites.id', '=', 'cible_message_universites.message_universite_id')
+                                ->join('users', 'users.filiere_id', '=', 'cible_message_universites.filiere_id')
+                                ->where('message_universites.id', $id)
+                                ->where('message_universites.universite_id', session()->get('id'))
+                                ->where('users.id', '<>', null)
+                                ->groupBy('users.telephone')
+                                ->get(),
+
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+
+                'message_lus' => DB::table('users')
+                    ->join('message_lus', 'message_lus.user_id', '=', 'users.id')
+                    ->join('message_universites', 'message_universites.id', '=', 'message_lus.message_universite_id')
+                    ->where('message_universites.id', $id)
+                    ->get()
+
+
+                /*DB::table('message_lus')
+                            ->join('message_universites', 'message_universites.id', '=', 'message_lus.message_universite_id')
+                            ->join('cible_message_universites', 'cible_message_universites.message_universite_id', '=', 'message_lus.message_universite_id')
+                            ->where('message_universites.id', $id)
+                            ->where('message_universites.universite_id', session()->get('id'))
+                            ->get(),*/
+
             ]);
         }
     }
@@ -249,5 +409,4 @@ class MessageController extends Controller
             return view('universite.alert');
         }
     }
-
 }

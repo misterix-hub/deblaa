@@ -2,7 +2,7 @@
     <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
         <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
     </a>
-    <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexVisitors') }}">
+    <a class="navbar-brand comfortaa white-text font-weight-bold" href="{{ route('indexVisitors') }}">
         Deblaa
     </a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"

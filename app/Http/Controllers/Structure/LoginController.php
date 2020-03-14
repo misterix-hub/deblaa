@@ -54,6 +54,22 @@ class LoginController extends Controller
 
     public function registerProcessing(Request $request) {
 
+        $request->validate([
+            'nom' => 'required|min:1|max:100',
+            'sigle' => 'required|string|min:2|max:11',
+            'email' => 'required'
+        ],
+            [
+                'sigle.required' => 'Le champ du sigle est requis',
+                'sigle.string' => 'Le sigle doit être une chaîne de caractères',
+                'sigle.min' => 'Votre sigle est trop court',
+                'sigle.max' => 'Le nombre de caractères maximal est atteint',
+                'nom.required' => 'Le champ du nom est requis',
+                'nom.min' => 'Votre nom est trop court',
+                'nom.max' => 'Le nombre de caractères est atteint',
+                'email.required' => 'le champ Email est requis',
+        ]);
+
         $structures_email = Structure::where('email', $request->email)->get();
 
         if (count($structures_email) != 0) {

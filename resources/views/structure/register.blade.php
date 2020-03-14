@@ -30,6 +30,17 @@
 
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
 
+                    @if($errors->any())
+                        <ul class="alert alert-danger list-unstyled alert-dismissible fade show" role="alert">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                            <button type="button" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </ul>
+                    @endif
+
                     @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             {{ $message }}
@@ -47,7 +58,8 @@
                         <input type="text" id="nom" name="nom"  required minlength="1" maxlength="100" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
                         <label for="sigle" class="font-size-14"><b>Sigle</b></label>
-                        <input type="text" id="sigle" name="sigle" required minlength="1" maxlength="100"  class="form-control" placeholder="Saisir dans le champs ...">
+                        <input type="text" id="sigle" name="sigle" required minlength="2" maxlength="11"  class="form-control" placeholder="Saisir dans le champs ...">
+                        <small class="small">Votre sigle doit être entre 2 et 11 caractères</small>
                         <div class="mt-3"></div>
                         <label for="email" class="font-size-14"><b>Email</b></label>
                         <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">
@@ -134,4 +146,25 @@
 
     @include('included.footerVisitors')
 
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready( function () {
+            $('#sigle').keypress( function () {
+                let maxlength = $('#sigle').attr('maxlength');
+                let sigle = $(this).val().length
+                if ( parseInt(maxlength) === sigle ) {
+                    alert('Le nombre maximal de caractères pour le sigle est atteint');
+                }
+            });
+            $('#sigle').focusout( function () {
+                let minlength = $('#sigle').attr('minlength');
+                let sigle = $(this).val().length
+                if ( parseInt(minlength) > sigle ) {
+                    alert('Votre sigle doit avoir au moins deux caractères');
+                }
+            });
+        })
+    </script>
 @endsection

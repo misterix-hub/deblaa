@@ -144,7 +144,7 @@
                         aria-expanded="true" aria-controls="collapseTwo">
                             <div class="item">
                                 <i class="icofont-group"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de membres <span class="badge badge-pill badge-light z-depth-0">{{ count($users) }}</span></span></b>
+                                <b><span class="menu-item-sm-hide">Gestion de membres <span class="badge badge-pill badge-light z-depth-0">{{ count($userCount) }}</span></span></b>
                             </div>
                         </a>
                     </div>
@@ -171,7 +171,7 @@
                         aria-expanded="true" aria-controls="collapseThree">
                             <div class="item">
                                 <i class="icofont-envelope"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de messages <span class="badge badge-pill badge-light z-depth-0">{{ count($messages) }}</span></span></b>
+                                <b><span class="menu-item-sm-hide">Gestion de messages <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span></b>
                             </div>
                         </a>
                     </div>

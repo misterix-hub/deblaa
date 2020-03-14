@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('admin/universites', 'UniversiteController');
 
-    Route::patch('admin/universites/{id}/access-pro', 'UniversiteController@getAccessPro')->name('universites.getAccess');
+    Route::get('admin/universites/{id}/access-pro', 'UniversiteController@giveAccessPro')->name('universites.getAccess');
 
     Route::resource('admin/filieres', 'FiliereController');
 
@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('admin/structures', 'StructureController');
 
-    Route::patch('admin/structures/{id}/access-pro', 'StructureController@getAccessPro')->name('structures.getAccess');
+    Route::get('admin/structures/{id}/access-pro', 'StructureController@giveAccessPro')->name('structures.getAccess');
 
     Route::resource('admin/departements', 'DepartementController');
 
@@ -65,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
             /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
                                         ->limit(1)->get(),*/
+            'montantUniversite' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
             'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
@@ -80,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
             /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
                                         ->where('structures.id', $id)->orderByDesc('facture_structures.id)
                                         ->limit(1)->get(),*/
+            'montantStructure' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
             'messages' => MessageStructure::where('structure_id', $id)->get(),
             'users' => User::where('departement_id', '<>', null)->get(),
             'cible_message_structures' => CibleMessageStructure::all(),

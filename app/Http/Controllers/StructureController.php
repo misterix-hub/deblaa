@@ -260,11 +260,8 @@ class StructureController extends AppBaseController
      * @return RedirectResponse|Redirector
      */
 
-    public function getAccessPro($id) {
+    public function giveAccessPro($id) {
 
-        if(!session()->has('id')) {
-            abort('401');
-        } else {
             $structure = $this->structureRepository->find($id);
 
             if(empty($structure)) {
@@ -274,14 +271,15 @@ class StructureController extends AppBaseController
             }
 
             $accessPro = $this->structureRepository->update([
+                'message_bonus' => 0,
                 'pro' => 1
             ], $id);
 
             $to_name = "Deblaa";
 
-            $to_email = $structure->get('email');
+            $to_email = $structure->email;
             $data = array(
-                'nom' => $structure->get('sigle'),
+                'nom' => $structure->sigle,
             );
 
 
@@ -293,6 +291,6 @@ class StructureController extends AppBaseController
             Flash::success('La structure a bien été passée en compte professionnel');
 
             return redirect(route('structures.index'));
-        }
     }
+
 }

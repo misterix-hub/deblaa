@@ -32,7 +32,12 @@ class GroupeController extends Controller
             return view('structure.groupe.liste', [
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
                     ->get()
@@ -75,7 +80,7 @@ class GroupeController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -86,7 +91,12 @@ class GroupeController extends Controller
                 'groupe' => Departement::findOrFail($id),
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
                     ->get()
@@ -99,7 +109,7 @@ class GroupeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function edit($id)
     {
@@ -110,10 +120,15 @@ class GroupeController extends Controller
                 "groupe" => Departement::findOrFail($id),
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
                     ->get(),
+                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
 
@@ -124,7 +139,7 @@ class GroupeController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
@@ -144,7 +159,7 @@ class GroupeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function destroy($id)
     {

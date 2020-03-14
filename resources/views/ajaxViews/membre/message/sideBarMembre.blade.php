@@ -33,28 +33,38 @@
 
 @forelse ($cible_message_structures as $cible_message_structure)
     @if (in_array( $cible_message_structure->message_structure_id, $tab_id))
-        <a href="#!{{ $cible_message_structure->id }}" class="message-select" data-value="{{ $cible_message_structure->id }}">
-            <div class="p-2 border-bottom">
-                <table width="100%">
-                    <tr>
-                        <td width="36">
-                            <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
-                                 class="white-text text-center grey lighten-1">
-                                <i class="icofont-envelope-open"></i>
-                            </div>
-                        </td>
-                        <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
-                            <b class="font-weight-bold black-text">
-                                {{ $cible_message_structure->titre }}
-                            </b><br />
-                            <small>{{ $cible_message_structure->created_at }}</small>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </a>
+
+        <div class="p-2 border-bottom">
+            <table width="100%">
+                <tr>
+                    <td width="36">
+                        <div style="width: 36px; height: 36px; border-radius: 100%; line-height: 38px;"
+                             class="white-text text-center grey lighten-1">
+                            <i class="icofont-envelope-open"></i>
+                        </div>
+                    </td>
+                    <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
+
+                        <b class=" black-text">
+                            {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
+                        </b><br />
+                        <small>{{ $cible_message_structure->created_at }}</small><br><br>
+                        @foreach($structures as $structure)
+                            @if($structure->id == $cible_message_structure->structure_id)
+                                <div class="font-weight-bold"><b>{{ $structure->sigle }}</b></div>
+                            @else
+
+                            @endif
+                        @endforeach
+                    </td>
+                    <td width="100">
+                        <a href="#!{{ $cible_message_structure->message_structure_id }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_structure->message_structure_id }}">Voir tout le message</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
     @else
-        <a href="#!{{ $cible_message_structure->id }}" class="message-select" data-value="{{ $cible_message_structure->id }}">
+        <a href="#!{{ $cible_message_structure->message_structure_id }}" class="message-select" data-value="{{ $cible_message_structure->message_structure_id }}">
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
@@ -65,10 +75,21 @@
                             </div>
                         </td>
                         <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
+
                             <b class="font-weight-bold black-text">
-                                {{ $cible_message_structure->titre }}
+                                {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
                             </b><br />
-                            <small>{{ $cible_message_structure->created_at }}</small>
+                            <small>{{ $cible_message_structure->created_at }}</small><br><br>
+                            @foreach($structures as $structure)
+                                @if($structure->id == $cible_message_structure->structure_id)
+                                    <div class="font-weight-bold"><b>{{ $structure->sigle }}</b></div>
+                                @else
+
+                                @endif
+                            @endforeach
+                        </td>
+                        <td width="100">
+                            <a href="#!{{ $cible_message_structure->message_structure_id }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_structure->message_structure_id }}">Voir tout le message</a>
                         </td>
                     </tr>
                 </table>

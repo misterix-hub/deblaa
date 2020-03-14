@@ -10,19 +10,36 @@
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
 
+                            @if($errors->any())
+                                <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </ul>
+                            @endif
+
                             <?php $send_message = 0; ?>
                             @if ($message = Session::get('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
                                     @if (session()->has('msg_tel') && session()->has('msg_pwd'))
                                         <?php $send_message = 1; ?>
                                     @endif
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
                                 </div>
                             @endif
 
                             @if ($message = Session::get('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
                                 </div>
                             @endif
                             <br />
@@ -46,7 +63,7 @@
                                         @forelse($users as $user)
                                             <tr>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ $user->telephone }}</td>
+                                                <td>+{{ $user->telephone }}</td>
                                                 <td>
                                                     @foreach ($groupes as $groupe)
                                                         @if ($groupe->id == $user->departement_id)
