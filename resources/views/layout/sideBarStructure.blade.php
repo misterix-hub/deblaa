@@ -110,35 +110,24 @@
         </a>
 
         <div class="side-bar-item">
+            <div>
+                <a href="{{ route('sListeGroupe') }}">
+                    <div class="item d-block d-md-none">
+                        <i class="icofont-bag-alt spinnerShower"></i><br>
+                        <span class="spinnerShower" style="font-size: 3px;"><b>Gestion de groupes</b></span>
+                    </div>
+                    <div class="item d-none d-md-block d-lg-none">
+                        <i class="icofont-bag-alt spinnerShower"></i><br>
+                        <span class="spinnerShower" style="font-size: 8px;"><b>Gestion de groupes</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($groupes) }}</span></span>
+                    </div>
+                    <div class="item d-none d-lg-block">
+                        <i class="icofont-bag-alt spinnerShower"></i>&nbsp;
+                        <span class="spinnerShower"><b>Gestion de groupes</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($groupes) }}</span></span>
+                    </div>
+                </a>
+            </div>
             <div class="accordion" id="accordionExample">
-                <div class="z-depth-0">
-                    <div id="headingOne">
-                        <a href="#!" data-toggle="collapse" data-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                            <div class="item">
-                                <i class="icofont-bag-alt"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de groupes <span class="badge badge-pill badge-light z-depth-0">{{ count($groupes) }}</span></span></b>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="pl-4 pr-4">
-                            <a href="#!" data-toggle="modal" data-target="#filiereModal">
-                                <div>
-                                    <i class="icofont-plus"></i>
-                                    <span class="menu-item-sm-hide">Ajouter un groupe</span>
-                                </div>
-                            </a>
-                            <a href="{{ route('sListeGroupe') }}">
-                                <div>
-                                    <i class="icofont-listine-dots spinnerShower"></i>
-                                    <span class="menu-item-sm-hide spinnerShower">Liste des groupes</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="z-depth-0">
+                {{--<div class="z-depth-0">
                     <div id="headingTwo">
                         <a href="#!" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
@@ -164,29 +153,53 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <div class="z-depth-0">
                     <div id="headingThree">
                         <a href="#!" data-toggle="collapse" data-target="#collapseThree"
                         aria-expanded="true" aria-controls="collapseThree">
-                            <div class="item">
+                            <div class="item d-block d-md-none">
+                                <i class="icofont-envelope"></i><br>
+                                <span style="font-size: 3px;"><b>Gestion de messages</b></span>
+                            </div>
+                            <div class="item d-none d-md-block d-lg-none">
+                                <i class="icofont-envelope"></i><br>
+                                <span style="font-size: 8px;"><b>Gestion de messages</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span>
+                            </div>
+                            <div class="item d-none d-lg-block">
                                 <i class="icofont-envelope"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de messages <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span></b>
+                                <span><b>Gestion de messages</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span>
                             </div>
                         </a>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="pl-4 pr-4">
+                        <div class="px-4">
                             <a href="{{ route('sEnvoyerMessage') }}">
-                                <div>
-                                    <i class="icofont-plus spinnerShower"></i>
-                                    <span class="menu-item-sm-hide spinnerShower">Envoyer un message</span>
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-plus"></i><br>
+                                    <span style="font-size: 3px;">Ajouter un message</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-plus"></i><br>
+                                    <span style="font-size: 8px;">Ajouter un message</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-plus"></i>&nbsp;
+                                    <span>Ajouter un message</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeMessage') }}">
-                                <div>
-                                    <i class="icofont-listine-dots spinnerShower"></i>
-                                    <span class="menu-item-sm-hide spinnerShower">Liste des messages</span>
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-listine-dots spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 3px;">Liste des messages</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-listine-dots spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Liste des messages</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-listine-dots spinnerShower"></i>&nbsp;
+                                    <span class="spinnerShower">Liste des messages</span>
                                 </div>
                             </a>
                         </div>
@@ -206,16 +219,32 @@
                         <div class="pl-4 pr-4">
                             @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
                                 <a href="{{ route('sCompte', $structure->id) }}">
-                                    <div>
-                                        <i class="icofont-user spinnerShower"></i>
-                                        <span class="menu-item-sm-hide spinnerShower">Afficher le profil</span>
+                                    <div class="d-block d-md-none">
+                                        <i class="icofont-user spinnerShower"></i><br>
+                                        <span  class="spinnerShower" style="font-size: 3px;">Afficher le profil</span>
+                                    </div>
+                                    <div class="d-none d-md-block d-lg-none">
+                                        <i class="icofont-user spinnerShower"></i><br>
+                                        <span  class="spinnerShower" style="font-size: 8px;">Afficher le profil</span>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <i class="icofont-user spinnerShower"></i>&nbsp;
+                                        <span class="spinnerShower">Afficher le profil</span>
                                     </div>
                                 </a>
                             @endforeach
                             <a href="{{ route('sLogout') }}">
-                                <div>
-                                    <i class="icofont-power spinnerShower"></i>
-                                    <span class="menu-item-sm-hide spinnerShower">Déconnexion</span>
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-power spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 3px;">Deconnexion</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-power spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Deconnexion</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-power spinnerShower"></i>&nbsp;
+                                    <span class="spinnerShower">Deconnexion</span>
                                 </div>
                             </a>
                         </div>

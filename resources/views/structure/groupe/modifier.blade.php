@@ -15,7 +15,7 @@
                             <li>{{ $error }}</li>
                         @endforeach
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </ul>
                 @endif
@@ -24,7 +24,7 @@
                     <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
                         <button type="button" class="close" aria-label="close" data-dismiss="alert">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 @endif
@@ -33,7 +33,7 @@
                     <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
                         <button type="button" class="close" aria-label="close" data-dismiss="alert">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 @endif
@@ -49,7 +49,7 @@
                         </button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
     </div>

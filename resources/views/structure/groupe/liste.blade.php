@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="">
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
-                    
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
 
@@ -25,7 +25,7 @@
                                 <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
                                     <button type="button" class="close" aria-label="close" data-dismiss="alert">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @endif
@@ -39,16 +39,28 @@
                                 </div>
                             @endif
                             <br />
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="float-right">
+                                        <a href="{{ route('sListeMembre') }}" class="btn btn-grey btn-sm"><i class="icofont-listine-dots"></i> Liste des membres</a>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="icofont-plus-circle"></i> Ajouter un groupe</a>
+                                    </div>
+
+                                </div>
+                            </div>
                             <h6>
                                 <i class="icofont-listine-dots"></i>
                                 <b>Liste des groupes</b>
                             </h6>
-            
-                            <table class="table table-hover table-bordered table-sm" width="100%">
+
+                            <table class="table table-hover table-bordered table-sm table-responsive-sm" width="100%">
                                 <thead>
                                     <tr>
                                         <th>
                                             <b>Nom du groupe</b>
+                                        </th>
+                                        <th width="250">
+                                            <b>Opération</b>
                                         </th>
                                         <th class="text-center" width="120">
                                             <b>Action</b>
@@ -61,14 +73,26 @@
                                             <td>
                                                 {{ $groupe->nom }}
                                             </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-blue-grey btn-sm">Ajouter membre</button>
+                                                    <button type="button" class="btn btn-blue-grey btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item" href="#">Mes contacts</a>
+                                                        <a class="dropdown-item" href="#">Nouveau</a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="text-center">
-                                                <a href="{{ route('sDetailsGroupe', $groupe->id) }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ route('sDetailsGroupe', $groupe->id) }}" title="Détails du groupe" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-plus"></i>
                                                 </a>
-                                                <a href="{{ route('sModifierGroupe', $groupe->id) }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ route('sModifierGroupe', $groupe->id) }}" title="Modifier le  groupe" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-edit"></i>
                                                 </a>
-                                                <a href="{{ route('sSupprimerGroupe', $groupe->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe->nom }} ? Tous les membres de ce groupe seront également supprimés.')"
+                                                <a href="{{ route('sSupprimerGroupe', $groupe->id) }}" title="Supprimer le groupe" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe->nom }} ? Tous les membres de ce groupe seront également supprimés.')"
                                                     class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-trash"></i>
                                                 </a>
@@ -76,7 +100,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="2" class="text-center">
+                                            <td colspan="3" class="text-center">
                                                 <b>Pas de groupe</b>
                                             </td>
                                         </tr>
@@ -86,6 +110,9 @@
                                     <tr>
                                         <th>
                                             <b>Nom du groupe</b>
+                                        </th>
+                                        <th>
+                                            <b>Opération</b>
                                         </th>
                                         <th class="text-center">
                                             <b>Action</b>
@@ -98,7 +125,7 @@
 
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12  menu-item-sm-hide">
-                    
+
                     @include('included.sideBarRight')
 
                 </div>
