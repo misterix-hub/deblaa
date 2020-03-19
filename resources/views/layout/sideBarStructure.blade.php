@@ -114,7 +114,7 @@
                 <a href="{{ route('sListeGroupe') }}">
                     <div class="item d-block d-md-none">
                         <i class="icofont-bag-alt spinnerShower"></i><br>
-                        <span class="spinnerShower" style="font-size: 3px;"><b>Gestion de groupes</b></span>
+                        <span class="spinnerShower" style="font-size: 8px;"><b>Groupes</b></span>
                     </div>
                     <div class="item d-none d-md-block d-lg-none">
                         <i class="icofont-bag-alt spinnerShower"></i><br>
@@ -160,7 +160,7 @@
                         aria-expanded="true" aria-controls="collapseThree">
                             <div class="item d-block d-md-none">
                                 <i class="icofont-envelope"></i><br>
-                                <span style="font-size: 3px;"><b>Gestion de messages</b></span>
+                                <span style="font-size: 8px;"><b>Messages</b></span>
                             </div>
                             <div class="item d-none d-md-block d-lg-none">
                                 <i class="icofont-envelope"></i><br>
@@ -173,11 +173,11 @@
                         </a>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                        <div class="px-4">
+                        <div class="text-center px-md-4">
                             <a href="{{ route('sEnvoyerMessage') }}">
                                 <div class="d-block d-md-none">
                                     <i class="icofont-plus"></i><br>
-                                    <span style="font-size: 3px;">Ajouter un message</span>
+                                    <span style="font-size: 8px;">Ajouter</span>
                                 </div>
                                 <div class="d-none d-md-block d-lg-none">
                                     <i class="icofont-plus"></i><br>
@@ -191,7 +191,7 @@
                             <a href="{{ route('sListeMessage') }}">
                                 <div class="d-block d-md-none">
                                     <i class="icofont-listine-dots spinnerShower"></i><br>
-                                    <span  class="spinnerShower" style="font-size: 3px;">Liste des messages</span>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Liste</span>
                                 </div>
                                 <div class="d-none d-md-block d-lg-none">
                                     <i class="icofont-listine-dots spinnerShower"></i><br>
@@ -209,19 +209,27 @@
                     <div id="headingFour">
                         <a href="#!" data-toggle="collapse" data-target="#collapseFour"
                         aria-expanded="true" aria-controls="collapseFour">
-                            <div class="item">
+                            <div class="item d-block d-md-none">
+                                <i class="icofont-ui-settings"></i><br>
+                                <span style="font-size: 8px;"><b>Compte</b></span>
+                            </div>
+                            <div class="item d-none d-md-block d-lg-none">
+                                <i class="icofont-ui-settings"></i><br>
+                                <span style="font-size: 8px;"><b>Gestion de compte</b></span>
+                            </div>
+                            <div class="item d-none d-lg-block">
                                 <i class="icofont-ui-settings"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion du compte</span></b>
+                                <span><b>Gestion de compte</b></span>
                             </div>
                         </a>
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                        <div class="pl-4 pr-4">
+                        <div class="text-center px-md-4">
                             @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
                                 <a href="{{ route('sCompte', $structure->id) }}">
                                     <div class="d-block d-md-none">
                                         <i class="icofont-user spinnerShower"></i><br>
-                                        <span  class="spinnerShower" style="font-size: 3px;">Afficher le profil</span>
+                                        <span  class="spinnerShower" style="font-size: 8px;">Profil</span>
                                     </div>
                                     <div class="d-none d-md-block d-lg-none">
                                         <i class="icofont-user spinnerShower"></i><br>
@@ -234,9 +242,9 @@
                                 </a>
                             @endforeach
                             <a href="{{ route('sLogout') }}">
-                                <div class="d-block d-md-none">
-                                    <i class="icofont-power spinnerShower"></i><br>
-                                    <span  class="spinnerShower" style="font-size: 3px;">Deconnexion</span>
+                                <div class="d-block d-md-none"><br>
+                                    <i class="icofont-power spinnerShower"></i>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Deconnexion</span>
                                 </div>
                                 <div class="d-none d-md-block d-lg-none">
                                     <i class="icofont-power spinnerShower"></i><br>
@@ -250,21 +258,29 @@
                         </div>
                     </div>
                 </div>
-            </div><br />
+            </div>
             <div class="pl-2 pr-2">
                 <span class="menu-item-sm-hide">
                     &nbsp;<small><b><span>STATISTIQUES</span></b></small>
                 </span><br class="menu-item-sm-hide" />
                 <div>
                     <a href="{{ route('sBilanMessage') }}">
-                        <div class="item" style="border: none;">
+                        <div class="item d-block d-md-none" style="border: none;">
+                            <i class="icofont-chart-bar-graph spinnerShower"></i><br>
+                            <b><span class="spinnerShower" style="font-size: 8px;">Bilan</span></b>
+                        </div>
+                        <div class="item d-none d-md-block d-lg-none" style="border: none;">
                             <i class="icofont-chart-bar-graph spinnerShower"></i>
-                            <b><span class="menu-item-sm-hide spinnerShower">Bilan des messages</span></b>
+                            <b><span class="spinnerShower" style="font-size: 8px;">Bilan des messages</span></b>
+                        </div>
+                        <div class="item d-none d-lg-block" style="border: none;">
+                            <i class="icofont-chart-bar-graph spinnerShower"></i>
+                            <b><span class="spinnerShower">Bilan des messages</span></b>
                         </div>
                     </a>
                 </div><br />
             </div>
-            <div style="position: absolute; bottom: 15px; left: 0; right: 0;" class="pl-2 pr-2 pb-1">
+            {{--<div style="position: absolute; bottom: 15px; left: 0; right: 0;" class="pl-2 pr-2 pb-1">
                 <span class="">
                     &nbsp;<small><b><span class="menu-item-sm-hide">LIENS UTILES</span></b></small>
                 </span><br />
@@ -275,14 +291,14 @@
                             <b><span class="menu-item-sm-hide">Nous envoyer un message</span></b>
                         </div>
                     </a>
-                    <a href="#!">
+                    --}}{{--<a href="#!">
                         <div class="item">
                             <i class="icofont-book-alt"></i>
                             <b><span class="menu-item-sm-hide">Documentation</span></b>
                         </div>
-                    </a>
+                    </a>--}}{{--
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <div class="asside-content font-size-14">
@@ -320,7 +336,7 @@
 
 
     <form action="{{ route('sAjouterGroupe') }}" method="post">
-        <div class="modal fade" id="filiereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="groupeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content" style="border-radius: 15px;">

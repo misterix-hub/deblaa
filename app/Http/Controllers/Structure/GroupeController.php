@@ -36,10 +36,12 @@ class GroupeController extends Controller
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get(),
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get()
             ]);
         }
@@ -95,10 +97,12 @@ class GroupeController extends Controller
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get(),
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get()
             ]);
         }
@@ -124,10 +128,12 @@ class GroupeController extends Controller
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get(),
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get()
             ]);
         }

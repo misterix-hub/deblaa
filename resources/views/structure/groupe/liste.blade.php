@@ -30,11 +30,20 @@
                                 </div>
                             @endif
 
+                            @if($message = Session::get('warning'))
+                                <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                                    {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
                             @if($message = Session::get('error'))
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
                                     <button type="button" class="close" aria-label="close" data-dismiss="alert">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @endif
@@ -43,7 +52,7 @@
                                 <div class="col-12">
                                     <div class="float-right">
                                         <a href="{{ route('sListeMembre') }}" class="btn btn-grey btn-sm"><i class="icofont-listine-dots"></i> Liste des membres</a>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="icofont-plus-circle"></i> Ajouter un groupe</a>
+                                        <a href="#!" data-toggle="modal" data-target="#groupeModal" class="btn btn-primary btn-sm"><i class="icofont-plus-circle"></i> Ajouter un groupe</a>
                                     </div>
 
                                 </div>
@@ -73,15 +82,15 @@
                                             <td>
                                                 {{ $groupe->nom }}
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-blue-grey btn-sm">Ajouter membre</button>
-                                                    <button type="button" class="btn btn-blue-grey btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <button type="button" class="btn btn-success btn-sm">Ajouter membre</button>
+                                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="#">Mes contacts</a>
-                                                        <a class="dropdown-item" href="#">Nouveau</a>
+                                                        <a class="dropdown-item" href="{{ route('sListContactByDepartment', $groupe->id) }}">Mes contacts</a>
+                                                        <a class="dropdown-item" href="{{ route('sCreateMembre', $groupe->id) }}">Nouveau</a>
                                                     </div>
                                                 </div>
                                             </td>

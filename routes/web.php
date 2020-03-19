@@ -206,6 +206,9 @@ Route::get('structures/groupes/{id}/modifier', 'Structure\GroupeController@edit'
 Route::post('structures/groupes/{id}/update', 'Structure\GroupeController@update')->name('sUpdateGroupe');
 Route::get('structures/groupes/{id}/supprimer', 'Structure\GroupeController@destroy')->name('sSupprimerGroupe');
 
+Route::get('structures/membres/ajouter/{departement}', 'Structure\MembreController@create')->name('sCreateMembre');
+Route::get('structures/membres/departement-contact/{departement}', 'Structure\MembreController@listContactByDepartment')->name('sListContactByDepartment');
+Route::post('structures/membres/departement-contact/insertion', 'Structure\MembreController@insertContact')->name('sInsertContact');
 Route::post('structures/membres', 'Structure\MembreController@store')->name('sAjouterMembre');
 Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
 Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');

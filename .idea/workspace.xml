@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/structure/membre/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/structure/membre/listByDepartment.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/structure/membre/myContact.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deblaa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deblaa.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/CompteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/GroupeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/GroupeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MembreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MembreController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sideBarStructure.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/structure/groupe/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/groupe/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/structure/groupe/liste.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/groupe/liste.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/structure/membre/liste.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/membre/liste.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,10 +154,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -205,6 +229,7 @@
       <workItem from="1581431204258" duration="22000" />
       <workItem from="1581496388188" duration="15029000" />
       <workItem from="1581956029162" duration="5079000" />
+      <workItem from="1584609225885" duration="9010000" />
     </task>
     <servers />
   </component>
@@ -277,10 +302,10 @@
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768/1366.0.1680.1050@0.0.1366.768" timestamp="1580903738041" />
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768/1366.0.1680.1050@1366.0.1680.1050" timestamp="1580932391143" />
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1581322275693">
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1584609266890">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768/1366.0.1680.1050@0.0.1366.768" timestamp="1581322275693" />
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1580952662465" />
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1584609266890" />
   </component>
 </project>

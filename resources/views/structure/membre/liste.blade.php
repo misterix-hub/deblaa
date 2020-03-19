@@ -65,11 +65,23 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>+{{ $user->telephone }}</td>
                                                 <td>
-                                                    @foreach ($groupes as $groupe)
+                                                    @foreach(\App\Models\Departement::leftJoin('users', 'departements.id', 'departement_id')
+                                                        ->where('structure_id', session()->get('id'))
+                                                        ->where('users.id', '<>', null)
+                                                        ->get() as $department_user)
+                                                        @foreach ($groupes as $groupe)
+                                                            @if($user->telephone == $department_user->telephone)
+                                                                @if ($groupe->id == $department_user->departement_id)
+                                                                    {{ $groupe->nom }} |
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                    {{--@foreach ($groupes as $groupe)
                                                         @if ($groupe->id == $user->departement_id)
                                                             {{ $groupe->nom }}
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach--}}
                                                 </td>
                                                 <td>{{ $user->fonction }}</td>
                                                 <td class="text-center">
@@ -122,11 +134,13 @@
         $(document).ready(function() {
 	    $('#example').DataTable();
             let send_message = "{{ $send_message }}";
+            console.log(send_message);
             if (parseInt(send_message, 10) === 1) {
-                $.ajax ({
-                    url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
-                    type : 'GET'
-                });
+                    $.ajax({
+                        type: "GET",
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=IBTA Group&Message={{ session()->get('msg_pwd') }}&MobileNumber={{ session()->get('msg_tel') }}",
+
+                    });
             }
         });
     </script>

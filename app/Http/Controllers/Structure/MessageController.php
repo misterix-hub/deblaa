@@ -33,10 +33,12 @@ class MessageController extends Controller
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('telephone')
                     ->get(),
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('telephone')
                     ->get()
             ]);
         }
@@ -53,11 +55,13 @@ class MessageController extends Controller
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('telephone')
                     ->get(),
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                ->where('structure_id', session()->get('id'))
-                ->where('users.id', '<>', null)
-                ->get()
+                    ->where('structure_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->groupBy('telephone')
+                    ->get()
             ]);
         }
     }
@@ -161,9 +165,11 @@ class MessageController extends Controller
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
-                            $.ajax ({
-                                url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie1[$i] ?>&text=<?php echo $texte ?>&type=0" ,
-                                type : 'GET'
+                            $(function () {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=<?php session()->get('sigle')?>&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie1[$i]?>^",
+                                });
                             });
                         </script>
 
@@ -282,9 +288,11 @@ class MessageController extends Controller
                             ?>
                             <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                             <script>
-                                $.ajax ({
-                                    url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie2[$i] ?>&text=<?php echo $texte ?>&type=0" ,
-                                    type : 'GET'
+                                $(function () {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=IBTA%20Group&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie2[$i]?>",
+                                    });
                                 });
                             </script>
 
@@ -325,6 +333,7 @@ class MessageController extends Controller
             'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                 ->where('structure_id', session()->get('id'))
                 ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
                 ->get(),
                 'bilan_messages' => BilanMessageStructure::leftJoin('message_structures', 'message_structure_id', 'message_structures.id')
                                     ->where('bilan_message_structures.structure_id', session()->get('id'))
@@ -365,6 +374,7 @@ class MessageController extends Controller
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get()
 
                     /*DB::table('message_lus')

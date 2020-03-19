@@ -97,14 +97,14 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+            /*\Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });
+            });*/
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('sRegisterSuccess'));
+            return redirect(route('sRegisterSuccess'.$password));
         }
 
     }

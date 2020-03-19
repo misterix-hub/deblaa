@@ -73,10 +73,12 @@ class CompteController extends Controller
                 'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get(),
                 'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                     ->where('structure_id', session()->get('id'))
                     ->where('users.id', '<>', null)
+                    ->groupBy('users.telephone')
                     ->get()
             ]);
         }
@@ -213,10 +215,12 @@ class CompteController extends Controller
             'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                 ->where('structure_id', session()->get('id'))
                 ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
                 ->get(),
             'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
                 ->where('structure_id', session()->get('id'))
                 ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
                 ->get(),
             'fichier_messages' => MessageStructure::rightJoin('fichier_message_structures', 'message_structures.id', 'message_structure_id')
                         ->where('message_structure_id', session()->get('id'))
