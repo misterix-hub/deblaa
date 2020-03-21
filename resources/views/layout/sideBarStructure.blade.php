@@ -177,15 +177,15 @@
                             <a href="{{ route('sEnvoyerMessage') }}">
                                 <div class="d-block d-md-none">
                                     <i class="icofont-plus"></i><br>
-                                    <span style="font-size: 8px;">Ajouter</span>
+                                    <span style="font-size: 8px;">Envoyer</span>
                                 </div>
                                 <div class="d-none d-md-block d-lg-none">
                                     <i class="icofont-plus"></i><br>
-                                    <span style="font-size: 8px;">Ajouter un message</span>
+                                    <span style="font-size: 8px;">Envoyer un message</span>
                                 </div>
                                 <div class="d-none d-lg-block">
                                     <i class="icofont-plus"></i>&nbsp;
-                                    <span>Ajouter un message</span>
+                                    <span>Envoyer un message</span>
                                 </div>
                             </a>
                             <a href="{{ route('sListeMessage') }}">

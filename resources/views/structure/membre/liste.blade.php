@@ -138,8 +138,7 @@
             if (parseInt(send_message, 10) === 1) {
                     $.ajax({
                         type: "GET",
-                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=IBTA Group&Message={{ session()->get('msg_pwd') }}&MobileNumber={{ session()->get('msg_tel') }}",
-
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumber={{ session()->get('msg_tel') }}",
                     });
             }
         });

@@ -169,6 +169,9 @@ Route::get('universites/filieres/{id}/supprimer', 'Universite\FiliereController@
 
 Route::post('universites/etudiants', 'Universite\EtudiantController@store')->name('uAjouterEtudiant');
 Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name('uListeEtudiant');
+Route::get('universtes/etudiants/ajouter/{filiere}', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
+Route::get('universites/etudiants/filiere-contact/{filiere}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
+Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');

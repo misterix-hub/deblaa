@@ -291,7 +291,7 @@ class MessageController extends Controller
                                 $(function () {
                                     $.ajax({
                                         type: "GET",
-                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=IBTA%20Group&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie2[$i]?>",
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=Deblaa&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie2[$i]?>",
                                     });
                                 });
                             </script>

@@ -53,7 +53,7 @@ class LoginController extends Controller
         $request->validate([
             'nom' => 'required|min:1|max:100',
             'sigle' => 'required|string|min:2|max:11',
-            'email' => 'required|email:rfc,dns'
+            'email' => 'required|email'
         ],
             [
                 'sigle.required' => 'Le champ du sigle est requis',
@@ -63,7 +63,7 @@ class LoginController extends Controller
                 'nom.required' => 'Le champ du nom est requis',
                 'nom.min' => 'Votre nom est trop court',
                 'nom.max' => 'Le nombre de caractères est atteint',
-                'email' => 'le champ Email est requis',
+                'email.required' => 'le champ Email est requis',
                 'email.email' => 'Adresse électronique incorrecte'
             ]);
 
@@ -94,14 +94,14 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            /*\Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });
+            });*/
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('uRegisterSuccess'));
+            return redirect(route('uRegisterSuccess'.$password));
         }
 
     }
