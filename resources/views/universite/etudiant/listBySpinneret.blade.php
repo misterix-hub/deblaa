@@ -65,19 +65,8 @@
                                                 <th class="font-weight-bold">Niveau</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        @forelse($contacts as $contact)
-                                            <tr>
-                                                <td></td>
-                                                <td>{{ $contact->name }}</td>
-                                                <td>{{ $contact->filiere_id }}</td>
-                                                <td>{{ $contact->niveau_id }}</td>
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="4">Aucun étudiant disponible</td>
-                                            </tr>
-                                        @endforelse
+                                        <tbody class="data">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -113,13 +102,13 @@
 
                     $.ajax({
                         type: 'GET',
-                        url: '{{ route('uListContactBySpinneret', $filiere->id) }}',
+                        url: '{{ route('ajaxListContact') }}',
                         data: {
                             'filiere': filiere_id,
-                            'niveau': $('.niveau_select').val()
+                            'niveau': $(this).val()
                         },
                         success: function (status) {
-                            console.log($(this).niveau)
+                            $('.data').html(status);
                         }
                     })
                 })

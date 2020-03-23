@@ -196,7 +196,21 @@ class EtudiantController extends Controller
         return redirect(route('uListeEtudiant'))->with('success', "Étudiant supprimé avec succès !");
     }
 
-    public function listContactBySpinneret(Filiere $filiere, Request $request) {
+    public function ajaxContactSpinneret(Request $request) {
+
+        $contacts = Filiere::join('users', 'filieres.id', 'filiere_id')
+            ->where('filieres.universite_id', session()->get('id'))
+            ->where('users.filiere_id', '<>', $request->filiere)
+            ->where('users.niveau_id', '<>', $request->niveau)
+            ->where('users.telephone', '<>', 'null')
+            ->where('users.id', '<>', null)
+            ->groupBy('users.telephone')
+            ->get();
+
+        return view('universite.etudiant.ajaxList', compact('contacts'));
+    }
+
+    public function listContactBySpinneret(Filiere $filiere) {
 
         $niveaux = Niveau::all();
         $filieres = Filiere::where('universite_id', session()->get('id'))->get();
@@ -212,17 +226,10 @@ class EtudiantController extends Controller
         $messages = MessageUniversite::where('universite_id', session()->get('id'))->get();
         $messageCount = MessageUniversite::where('universite_id', session()->get('id'))->get();
 
-        $contacts = Filiere::join('users', 'filieres.id', 'filiere_id')
-            ->where('universite_id', session()->get('id'))
-            ->where('users.filiere_id', '<>', $request->filiere_id)
-            ->where('users.niveau_id', '<>', $request->niveau_id)
-            ->where('users.telephone', '<>', 'null')
-            ->where('users.id', '<>', null)
-            ->groupBy('users.telephone')
-            ->get();
 
 
-        return view('universite.etudiant.listBySpinneret', compact('niveaux', 'filieres', 'filiere_niveaux', 'users', 'userCount', 'messageCount', 'messages', 'filiere', 'contacts'));
+
+        return view('universite.etudiant.listBySpinneret', compact('niveaux', 'filieres', 'filiere_niveaux', 'users', 'userCount', 'messageCount', 'messages', 'filiere'));
     }
 
     public function insertContact(Request $request) {

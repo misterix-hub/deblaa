@@ -159,6 +159,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 /* UNIVERSITE */
 
+
+Route::get('universites/etudiants/ajouter/filiere-niveau', 'Universite\EtudiantController@ajaxContactSpinneret')->name('ajaxListContact');
+
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
 Route::post('universites/filieres', 'Universite\FiliereController@store')->name('uAjouterFiliere');
@@ -169,7 +172,7 @@ Route::get('universites/filieres/{id}/supprimer', 'Universite\FiliereController@
 
 Route::post('universites/etudiants', 'Universite\EtudiantController@store')->name('uAjouterEtudiant');
 Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name('uListeEtudiant');
-Route::get('universtes/etudiants/ajouter/{filiere}', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
+Route::get('universites/etudiants/ajouter/{filiere}', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
 Route::get('universites/etudiants/filiere-contact/{filiere}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
 Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
