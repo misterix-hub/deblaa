@@ -517,7 +517,9 @@
                     <div class="modal-body font-size-14">
                         @csrf
                         <label class="" for="nom"><b>Nom de la filière</b></label>
-                        <input type="text" required name="nom" id="nom" class="form-control" placeholder="Saisir la filière ..."><br  />
+                        <input type="text" required name="nom" id="nom" class="form-control" value="{{ old('nom') }}" placeholder="Saisir la filière ..."><br  />
+                        <label for="acronyme"><b>Acronyme de la filière</b></label>
+                        <input type="text" name="acronyme" id="acronyme" class="form-control" required value="{{ old('acronyme') }}" placeholder="Exemple: MI/IRT/FDD/FASEG/etc..."><br />
                         <div class="text-right">
                             <i class="icofont-sort-alt"></i>
                             <b>Sélectionner les niveaux</b><br />

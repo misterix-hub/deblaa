@@ -174,9 +174,13 @@ class MessageController extends Controller
                     ?>
                     <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                     <script>
-                        $.ajax ({
-                            url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie1[$i] ?>&text=<?php echo $texte ?>&type=0" ,
-                            type : 'GET'
+                        $(document).ready(function () {
+                            $(function () {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie1[$i] ?>",
+                                });
+                            });
                         });
                     </script>
                     <?php
@@ -301,9 +305,13 @@ class MessageController extends Controller
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
-                            $.ajax ({
-                                url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=<?php echo session()->get('sigle') ?>&to=<?php echo $numero_trie2[$i] ?>&text=<?php echo $texte ?>&type=0" ,
-                                type : 'GET'
+                            $(document).ready(function () {
+                                $(function () {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=Deblaa&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie2[$i] ?>",
+                                    });
+                                });
                             });
                         </script>
                         <?php

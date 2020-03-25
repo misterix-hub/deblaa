@@ -17,7 +17,7 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </ul>
                             @endif
@@ -86,16 +86,7 @@
                                                 </ul>
                                             </td>
                                             <td class="text-center">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success btn-sm">Ajouter membre</button>
-                                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('uListContactBySpinneret', $filiere->id) }}">Mes contacts</a>
-                                                        <a class="dropdown-item" href="{{ route('uCreateEtudiant', $filiere->id) }}">Nouveau</a>
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('uCreateEtudiant', $filiere->id) }}" class="btn btn-success btn-sm">Ajouter membre</a>
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ route('uDetailsFiliere', $filiere->id) }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">

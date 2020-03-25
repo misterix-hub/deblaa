@@ -17,6 +17,7 @@ class CreateFilieresTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('universite_id');
             $table->string('nom');
+            $table->string('acronyme', 10);
             $table->softDeletes();
             $table->timestamps();
         });

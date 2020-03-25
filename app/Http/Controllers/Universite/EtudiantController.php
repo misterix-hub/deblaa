@@ -15,6 +15,7 @@ use App\User;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use League\Flysystem\File;
 
 class EtudiantController extends Controller
 {
@@ -37,6 +38,7 @@ class EtudiantController extends Controller
             return view('universite.etudiant.liste', [
                 'niveaux' => Niveau::all(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+                'fil_nivos' => FiliereNiveau::all(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                             ->where('universite_id', session()->get('id'))
@@ -81,7 +83,7 @@ class EtudiantController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response|Redirector
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {
@@ -108,7 +110,16 @@ class EtudiantController extends Controller
             return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
         } else {
 
-            $emails = User::where('telephone', $telephone)->get();
+            $verify_students = User::where('telephone', $telephone)
+                ->where('filiere_id', '<>', null)
+                ->where('niveau_id', '<>', null)
+                ->get();
+
+            $emails = User::where('telephone' , $telephone)->get();
+
+            if (count($verify_students) != 0) {
+                return back()->with('error', 'L\'étudiant que vous essayez d\'enregistrer existe déja .');
+            }
 
             if (count($emails) != 0) {
 
@@ -125,7 +136,7 @@ class EtudiantController extends Controller
                 $user->password = $password;
                 $user->save();
 
-                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !");
+                return redirect(route('uListeEtudiant'))->with('success', "L'étudiant est enregistré avec succès !");
             } else {
                 $password = "DB" . rand(1021, 9999);
 
@@ -139,9 +150,9 @@ class EtudiantController extends Controller
                 $user->save();
 
                 session()->put('msg_tel', $telephone);
-                session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS.  Connectez-vous ici: https://deblaa.com/etudiants/login");
+                session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est crée et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS.  Connectez-vous ici: https://deblaa.com/etudiants/login");
 
-                return redirect(route('uListeEtudiant'))->with('success', "Étudiant ajouté avec succès !".$password);
+                return redirect(route('uListeEtudiant'))->with('success', "L'étudiant est enregistré avec succès !".$password);
             }
 
 
@@ -196,7 +207,29 @@ class EtudiantController extends Controller
         return redirect(route('uListeEtudiant'))->with('success', "Étudiant supprimé avec succès !");
     }
 
-    public function ajaxContactSpinneret(Request $request) {
+    public function ajaxListStudent(Request $request) {
+        if ($request->data == '') {
+            $users = Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get();
+            $niveaux = Niveau::all();
+            $filieres = Filiere::where('universite_id', session()->get('id'))->get();
+
+        } else {
+            $users = Filiere::join('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.filiere_id', substr($request->data, 0, 1))
+                ->where('users.niveau_id', substr($request->data, 1))
+                ->where('users.id', '<>', null)
+                ->get();
+            $niveaux = Niveau::all();
+            $filieres = Filiere::where('universite_id', session()->get('id'))->get();
+        }
+        return view('universite.etudiant.ajaxListStudent', compact('users', 'niveaux', 'filieres'));
+    }
+
+    /*public function ajaxContactSpinneret(Request $request) {
 
         $contacts = Filiere::join('users', 'filieres.id', 'filiere_id')
             ->where('filieres.universite_id', session()->get('id'))
@@ -208,9 +241,9 @@ class EtudiantController extends Controller
             ->get();
 
         return view('universite.etudiant.ajaxList', compact('contacts'));
-    }
+    }*/
 
-    public function listContactBySpinneret(Filiere $filiere) {
+    /*public function listContactBySpinneret(Filiere $filiere) {
 
         $niveaux = Niveau::all();
         $filieres = Filiere::where('universite_id', session()->get('id'))->get();
@@ -234,5 +267,5 @@ class EtudiantController extends Controller
 
     public function insertContact(Request $request) {
 
-    }
+    }*/
 }

@@ -165,10 +165,12 @@ class MessageController extends Controller
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
-                            $(function () {
-                                $.ajax({
-                                    type: "GET",
-                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=<?php session()->get('sigle')?>&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie1[$i]?>^",
+                            $(document).ready(function () {
+                                $(function () {
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie1[$i] ?>",
+                                    });
                                 });
                             });
                         </script>
@@ -288,10 +290,12 @@ class MessageController extends Controller
                             ?>
                             <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                             <script>
-                                $(function () {
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=f65aad27-e96c-4026-9d50-ba720f6f4834&SenderId=Deblaa&message=<?php echo $texte ?>&mobileNumber=<?php echo $numero_trie2[$i]?>",
+                                $(document).ready(function () {
+                                    $(function () {
+                                        $.ajax({
+                                            type: "GET",
+                                            url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=Deblaa&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie2[$i] ?>",
+                                        });
                                     });
                                 });
                             </script>

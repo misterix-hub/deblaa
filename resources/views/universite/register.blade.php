@@ -8,7 +8,7 @@
 
         @font-face {
             font-family: comfortaa;
-            src: url(../fonts/Comfortaa-Regular.ttf);
+            src: url('{{ URL::asset('fonts/Comfortaa-Regular.ttf') }}');
         }
     </style>
 @endsection
