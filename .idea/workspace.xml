@@ -4,26 +4,7 @@
     <list default="true" id="8710b5a9-f4d6-40f8-b3c3-faecf27f2751" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/deblaa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deblaa.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Structure/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/EtudiantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/EtudiantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/FiliereController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/FiliereController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Universite/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Universite/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Filiere.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Filiere.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataTable/jquery.dataTable.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/dataTable/jquery.dataTable.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_12_10_113921_create_filieres_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_12_10_113921_create_filieres_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layout/sideBarUniversite.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/sideBarUniversite.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/structure/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/structure/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/structure/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/etudiant/liste.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/etudiant/liste.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/filiere/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/filiere/details.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/filiere/liste.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/filiere/liste.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/filiere/modifier.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/filiere/modifier.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/universite/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/universite/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../schoolManager/server.php" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +17,20 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="deblaa" />
@@ -156,7 +151,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../schoolManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ecommerce" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -234,7 +229,11 @@
       <workItem from="1584815235767" duration="5777000" />
       <workItem from="1584839623726" duration="4409000" />
       <workItem from="1584958916865" duration="9893000" />
-      <workItem from="1585120808651" duration="16079000" />
+      <workItem from="1585120808651" duration="16567000" />
+      <workItem from="1585300611315" duration="615000" />
+      <workItem from="1585556341380" duration="3300000" />
+      <workItem from="1585733763180" duration="231000" />
+      <workItem from="1585734093441" duration="1287000" />
     </task>
     <servers />
   </component>
@@ -287,11 +286,11 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="413" y="140" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.768@0.0.1366.768" timestamp="1584714663830" />
-    <state x="463" y="140" key="FileChooserDialogImpl" timestamp="1585128638713">
+    <state x="463" y="140" key="FileChooserDialogImpl" timestamp="1585556445684">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1680.1050@0.0.1366.768" timestamp="1580981384028" />
-    <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1585128638713" />
+    <state x="463" y="140" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1585556445684" />
     <state width="1286" height="176" key="GridCell.Tab.0.bottom" timestamp="1580932391166">
       <screen x="1366" y="0" width="1680" height="1050" />
     </state>
@@ -312,10 +311,10 @@
     </state>
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768/1366.0.1680.1050@0.0.1366.768" timestamp="1580903738041" />
     <state width="1286" height="176" key="GridCell.Tab.0.right/0.0.1366.768/1366.0.1680.1050@1366.0.1680.1050" timestamp="1580932391143" />
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1585120843730">
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog" timestamp="1585734198851">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768/1366.0.1680.1050@0.0.1366.768" timestamp="1581322275693" />
-    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1585120843730" />
+    <state x="379" y="209" key="com.intellij.ide.util.TipDialog/0.0.1366.768@0.0.1366.768" timestamp="1585734198851" />
   </component>
 </project>

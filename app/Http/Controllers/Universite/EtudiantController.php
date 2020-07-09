@@ -63,7 +63,7 @@ class EtudiantController extends Controller
     {
         $niveaux = Niveau::all();
         $filieres = Filiere::where('universite_id', session()->get('id'))->get();
-        $filiere_niveaux = Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get();
+        $filiere_niveaux = FiliereNiveau::where('filiere_id', $filiere->id)->get();
         $users = Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
             ->where('universite_id', session()->get('id'))
             ->where('users.id', '<>', null)
@@ -98,14 +98,16 @@ class EtudiantController extends Controller
                 'telephone.required' => 'Veuillez entrer le numero de telephone',
                 'nomComplet.required' => 'Veuillez entrer votre nom',
                 'niveau.required' => 'Veuillez entrer le niveau',
-                'filiere.required' => 'Veuillez sélectionner la filiere'
+                'filiere.required' => 'La filiere n\'a pas été renseignée'
             ]);
 
         $telephone =  substr($_POST['code_select'], 1).$request->input('telephone');
 
-        $ckech_filiere_niveau = FiliereNiveau::where('filiere_id', $request->filiere)
-                                                ->where('niveau_id', $request->niveau)
+        $ckech_filiere_niveau = FiliereNiveau::where('filiere_id', intval($request->filiere))
+                                                ->where('niveau_id', intval($request->niveau))
                                                 ->get();
+
+
         if (count($ckech_filiere_niveau) == 0) {
             return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
         } else {

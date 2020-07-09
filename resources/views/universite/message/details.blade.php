@@ -4,12 +4,12 @@
     <br /><br />
     <div class="container-fluid">
         <div class="row">
-            @foreach ($messages as $message)    
+            @foreach ($messages as $message)
                 <div class="col-12">
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <h4>
-                        <b>{{ $message->titre }}</b>    
+                        <b>{{ $message->titre }}</b>
                     </h4>
 
                     {!! $message->contenu !!}<br />
@@ -86,16 +86,16 @@
                                 @foreach ($cible_messages as $cible_message)
 
                                     @foreach ($filieres as $filiere)
-                                        @if ($filiere->id == $cible_message->filiere_id)    
+                                        @if ($filiere->id == $cible_message->filiere_id)
                                             <b> - {{ $filiere->nom }} : </b>
                                         @endif
                                     @endforeach
                                     @foreach ($niveaux as $niveau)
-                                        @if ($niveau->id == $cible_message->niveau_id)    
+                                        @if ($niveau->id == $cible_message->niveau_id)
                                             <b>{{ $niveau->nom }}</b>
                                         @endif
                                     @endforeach<br />
-        
+
                                 @endforeach
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                 <div class="modal-body">
 
                     <b class="font-weight-bold">Message lu par {{ count($users) }} personnes</b>
-                
+
                     <div class="card card-body border rounded">
 
                         <table id="example" class="table table-bordered" style="width:100%">
@@ -131,7 +131,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $user)    
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td class="text-right">+{{ $user->telephone }}</td>
@@ -141,15 +141,21 @@
                                                 <i class="icofont-check grey-text"></i>
                                             @else
 
-                                                @foreach($message_lus as $message_lu)
-                                                    @if($message_lu->telephone == $user->telephone)
-                                                        <i class="icofont-check green-text"></i>
-                                                        <i class="icofont-check green-text"></i>
-                                                    @else
-                                                        <i class="icofont-check grey-text"></i>
-                                                        <i class="icofont-check grey-text"></i>
-                                                    @endif
-                                                @endforeach
+                                                @if (count(DB::table('users')
+                                                ->join('message_lus', 'message_lus.user_id', '=', 'users.id')
+                                                ->join('message_universites', 'message_universites.id', '=', 'message_lus.message_universite_id')
+                                                ->where('message_universites.id', $id)
+                                                ->where('users.id', $user->id)
+                                                ->where('users.telephone', $user->telephone)
+                                                ->get()) == 1)
+                                                    <i class="icofont-check green-text icofont-2x"></i>
+                                                    <i class="icofont-check green-text icofont-2x"></i>
+                                                @else
+                                                    <i class="icofont-check grey-text icofont-2x"></i>
+                                                    <i class="icofont-check grey-text icofont-2x"></i>
+                                                @endif
+
+
                                             @endif
                                         </td>
                                     </tr>

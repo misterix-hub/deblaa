@@ -166,14 +166,14 @@ Route::get('universite/ etudiants/filter', 'Universite\EtudiantController@ajaxLi
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
 Route::post('universites/filieres', 'Universite\FiliereController@store')->name('uAjouterFiliere');
-Route::get('universites/filieres/{id}/details', 'Universite\FiliereController@show')->name('uDetailsFiliere');
-Route::get('universites/filieres/{id}/modifier', 'Universite\FiliereController@edit')->name('uModifierFiliere');
+Route::get('universites/filieres/{id}-{slug}/details', 'Universite\FiliereController@show')->name('uDetailsFiliere');
+Route::get('universites/filieres/{id}-{slug}/modifier', 'Universite\FiliereController@edit')->name('uModifierFiliere');
 Route::post('universites/filieres/{id}/update', 'Universite\FiliereController@update')->name('uUpdateFiliere');
 Route::get('universites/filieres/{id}/supprimer', 'Universite\FiliereController@destroy')->name('uSupprimerFiliere');
 
 Route::post('universites/etudiants', 'Universite\EtudiantController@store')->name('uAjouterEtudiant');
 Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name('uListeEtudiant');
-Route::get('universites/etudiants/ajouter/{filiere}', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
+Route::get('universites/etudiants/{filiere}-{slug}/ajouter', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
 /*Route::get('universites/etudiants/filiere-contact/{filiere}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
 Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');*/
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
@@ -182,7 +182,7 @@ Route::get('universites/messages/creer', 'Universite\MessageController@create')-
 Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageFrom');
 Route::get('universites/messages', 'Universite\MessageController@index')->name('uListeMessage');
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
-Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
+Route::get('universites/messages/{id}-{slug}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
 Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');

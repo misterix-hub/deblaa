@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class MessageController extends Controller
 {
     public function inbox() {
-        
+
         if (!session()->has('id')) {
             abort('404');
         } else {
@@ -31,7 +31,7 @@ class MessageController extends Controller
 
             return view('etudiant.inbox');
         }
-        
+
     }
 
     public function messageFecting() {
@@ -53,7 +53,7 @@ class MessageController extends Controller
                 ->join('users', 'users.filiere_id', '=', 'cible_message_universites.filiere_id')
                 ->where('users.telephone', session()->get('telephone'))
                 ->groupBy('cible_message_universites.message_universite_id')
-                ->orderByDesc('message_structures.created_at')
+                ->orderByDesc('message_universites.created_at')
                 ->get(),
 
             'universites' => Universite::all()
@@ -88,7 +88,7 @@ class MessageController extends Controller
                 ->join('users', 'users.filiere_id', '=', 'cible_message_universites.filiere_id')
                 ->where('users.telephone', session()->get('telephone'))
                 ->groupBy('cible_message_universites.message_universite_id')
-                ->orderByDesc('message_structures.created_at')
+                ->orderByDesc('message_universites.created_at')
                 ->get(),
 
             'universites' => Universite::all()

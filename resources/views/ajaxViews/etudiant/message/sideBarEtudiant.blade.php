@@ -1,7 +1,7 @@
 <div class="indigo white-text text-center pt-2 pb-2">
     <small>
-        <b>BOITE DE RÉCEPTION</b>
-        @if ((count($cible_message_universites) - count($message_lus)) > 0)    
+        <b>BOITE DE RECEPTION</b>
+        @if ((count($cible_message_universites) - count($message_lus)) > 0)
             <span class="badge badge-danger z-depth-0" style="pt-1 pb-1 border-radius: 2px;">
                 {{ count($cible_message_universites) - count($message_lus) }}
             </span>
@@ -56,13 +56,13 @@
                             @endforeach
                         </td>
                         <td width="100">
-                            <a href="#!{{ $cible_message_universite->message_universite_id }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_universite->message_universite_id }}">Voir tout le message</a>
+                            <a href="#!{{ encrypt($cible_message_universite->message_universite_id) }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_universite->message_universite_id }}">Voir tout le message</a>
                         </td>
                     </tr>
                 </table>
             </div>
     @else
-        <a href="#!{{ $cible_message_universite->message_universite_id }}" class="message-select" data-value="{{ $cible_message_universite->message_universite_id }}">
+        <a href="#!{{ encrypt($cible_message_universite->message_universite_id) }}" class="message-select" data-value="{{ $cible_message_universite->message_universite_id }}">
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
@@ -86,7 +86,7 @@
                             @endforeach
                         </td>
                         <td width="100">
-                            <a href="#!{{ $cible_message_universite->id }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_universite->id }}">Voir tout le message</a>
+                            <a href="#!{{ encrypt($cible_message_universite->id) }}" class="message-select btn btn-sm btn-success text-uppercase" data-value="{{ $cible_message_universite->id }}">Voir tout le message</a>
                         </td>
                     </tr>
                 </table>

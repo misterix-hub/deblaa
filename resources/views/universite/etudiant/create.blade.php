@@ -66,8 +66,10 @@
                         <table width="100%">
                             <tr>
                                 <td>
-                                    <label for="filiere"><b>Filière</b></label>
-                                    <select required name="filiere" id="filiere" class="form-control">
+                                    <label for="spinneret"><b>Filière</b></label>
+                                    <input type="text" name="spinneret" id="spinneret" required class="form-control" value="{{ $filiere->nom }}" readonly>
+                                    <input type="hidden" name="filiere" value="{{ $filiere->id }}">
+                                    {{-- <select required name="filiere" id="filiere" class="form-control">
                                         <option value="">Sélectionnez....</option>
                                         @forelse ($filieres as $spinneret)
                                             <option value="{{ $spinneret->id }}" {{ $spinneret->id === $filiere->id ? 'selected' : ''}}>
@@ -76,14 +78,16 @@
                                         @empty
                                             <option value="">Aucune filière</option>
                                         @endforelse
-                                    </select>
+                                    </select> --}}
                                 </td>
                                 <td>
                                     <label for="filiere"><b>Niveau</b></label>
                                     <select required name="niveau" id="niveau" class="form-control">
-                                        @forelse ($niveaux as $niveau)
-                                            <option value="{{ $niveau->id }}">
-                                                {{ $niveau->nom }}
+                                        @forelse ($filiere_niveaux as $niveau)
+                                            <option value="{{ $niveau->niveau_id }}">
+                                                @foreach (\App\Models\Niveau::all() as $item)
+                                                    {{ $niveau->niveau_id === $item->id ? $item->nom : '' }}
+                                                @endforeach
                                             </option>
                                         @empty
                                             <option value="">Aucun niveau</option>
@@ -93,7 +97,7 @@
                             </tr>
                         </table>
                         <div class="mt-3">
-                            <a href="{{ route('uDetailsFiliere', $filiere->id) }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
+                            <a href="{{ $filiere->pathDetails() }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
                             <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
                         </div>
                     </form>

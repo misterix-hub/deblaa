@@ -39,8 +39,8 @@
                         @endforeach<br /><br />
 
                         <div>
-                            <a href="{{ route('uModifierFiliere', $filiere->id) }}" class="btn btn-md btn-indigo ml-0 rounded">
-                                Modifier
+                            <a href="{{ route('uListeFiliere') }}" class="btn btn-md btn-light ml-0 rounded">
+                                Annuler
                             </a>
                             <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
                                 Mettre à jour

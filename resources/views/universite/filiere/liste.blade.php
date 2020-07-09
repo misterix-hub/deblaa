@@ -86,13 +86,13 @@
                                                 </ul>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('uCreateEtudiant', $filiere->id) }}" class="btn btn-success btn-sm">Ajouter membre</a>
+                                                <a href="{{ $filiere->path() }}" class="btn btn-success btn-sm">Ajouter membre</a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('uDetailsFiliere', $filiere->id) }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ $filiere->pathDetails() }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-plus"></i>
                                                 </a>
-                                                <a href="{{ route('uModifierFiliere', $filiere->id) }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ $filiere->pathModifier() }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-edit"></i>
                                                 </a>
                                                 <a href="{{ route('uSupprimerFiliere', $filiere->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ? Tous les étudiants de cette filière seront également supprimés.')"

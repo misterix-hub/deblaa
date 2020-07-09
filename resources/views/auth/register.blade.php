@@ -20,6 +20,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/AdminLTE.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.3/css/skins/_all-skins.min.css">
+    <link rel="shortcut icon" href="{{ URL::asset('assets/images/deblaa.png') }}" type="image/x-icon">
 
     <!-- iCheck -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
@@ -38,7 +39,7 @@
     </div>
 
     <div class="register-box-body" style="border-radius: 1rem;">
-        
+
         <div style="margin-top: 0; margin-bottom: 20px; font-size: 24px; color: #000;">
             <b>Inscription</b> -
             <span style="font-size: 18px; color: red;">accès restreint</span>

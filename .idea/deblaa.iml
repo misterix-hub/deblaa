@@ -102,5 +102,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="schoolManager" />
+    <orderEntry type="module" module-name="ecommerce" />
   </component>
 </module>

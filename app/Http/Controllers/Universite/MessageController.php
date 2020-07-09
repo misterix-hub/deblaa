@@ -31,6 +31,7 @@ class MessageController extends Controller
             return view('universite.message.liste', [
                 'niveaux' => Niveau::all(),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
@@ -396,7 +397,9 @@ class MessageController extends Controller
                     ->join('message_lus', 'message_lus.user_id', '=', 'users.id')
                     ->join('message_universites', 'message_universites.id', '=', 'message_lus.message_universite_id')
                     ->where('message_universites.id', $id)
-                    ->get()
+                    ->get(),
+
+                'id' => $id
 
 
                 /*DB::table('message_lus')

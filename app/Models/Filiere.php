@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * Class Filiere
@@ -70,5 +71,16 @@ class Filiere extends Model
         return $this->hasMany(User::class);
     }
 
+    public function path() {
+        return url("universites/etudiants/{$this->id}-" . Str::slug($this->nom) . "/ajouter");
+    }
+
+    public function pathDetails() {
+        return url("universites/filieres/{$this->id}-" . Str::slug($this->nom). "/details");
+    }
+
+    public function pathModifier() {
+        return url("universites/filieres/{$this->id}-" . Str::slug($this->nom). "/modifier");
+    }
 
 }

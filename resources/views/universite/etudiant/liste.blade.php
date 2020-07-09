@@ -12,8 +12,11 @@
 
                             <?php $send_message = 0; ?>
                             @if ($message = Session::get('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show my-4" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                     @if (session()->has('msg_tel') && session()->has('msg_pwd'))
                                         <?php $send_message = 1; ?>
                                     @endif
@@ -21,8 +24,11 @@
                             @endif
 
                             @if ($message = Session::get('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissible fade show my-4" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             @endif
                             <br />
@@ -102,6 +108,13 @@
                                 </tfoot>
                             </table>
                             <br />
+
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-light btn-md mt-5 px-5 py-3 text-dark" href="{{ route('uListeFiliere') }}">
+                                    <i class="icofont-arrow-left"></i>
+                                    Retour
+                                </a>
+                            </div>
 
                         </div>
                     </div><br /><br /><br />

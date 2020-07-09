@@ -1,10 +1,10 @@
 @extends('layout.header')
 
 @section('sideBar')
-    
+
 
     <div class="side-bar white" style="border-right: 1px solid #CCC;" id="sideBarEtudiant">
-        
+
     </div>
     <div class="asside-content font-size-14">
         <div class="top-bar pt-3 pb-3 pl-4 pr-4 border-bottom">
@@ -38,6 +38,7 @@
                     url : "{{ route('eMessageFecting') }}",
                     type : 'GET',
                     success : function(statut){
+                        console.log(statut)
                         $('#sideBarEtudiant').html(statut);
                     }
                 });
