@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * Class Filiere
@@ -19,7 +20,7 @@ class Filiere extends Model
     use SoftDeletes;
 
     public $table = 'filieres';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -30,7 +31,8 @@ class Filiere extends Model
 
     public $fillable = [
         'nom',
-        'universite_id'
+        'universite_id',
+        'acronyme'
     ];
 
     /**
@@ -41,7 +43,8 @@ class Filiere extends Model
     protected $casts = [
         'id' => 'integer',
         'nom' => 'string',
-        'universite_id' => 'integer'
+        'universite_id' => 'integer',
+        'acronyme' => 'string'
     ];
 
     /**
@@ -52,7 +55,8 @@ class Filiere extends Model
     public static $rules = [
         'nom' => 'required',
         'universite_id' => 'required',
-        'niveaux' => 'required'
+        'niveaux' => 'required',
+        'acronyme' => 'required|min:2|max:10'
     ];
 
     public function universite() {
@@ -67,5 +71,16 @@ class Filiere extends Model
         return $this->hasMany(User::class);
     }
 
-    
+    public function path() {
+        return url("universites/etudiants/{$this->id}-" . Str::slug($this->nom) . "/ajouter");
+    }
+
+    public function pathDetails() {
+        return url("universites/filieres/{$this->id}-" . Str::slug($this->nom). "/details");
+    }
+
+    public function pathModifier() {
+        return url("universites/filieres/{$this->id}-" . Str::slug($this->nom). "/modifier");
+    }
+
 }

@@ -29,7 +29,7 @@
 
         @font-face {
             font-family: comfortaa;
-            src: url(fonts/Comfortaa-Regular.ttf);
+            src: url('{{ URL::asset('fonts/Comfortaa-Regular.ttf') }}');
         }
 
         @media (max-width: 1000px) {
@@ -110,35 +110,24 @@
         </a>
 
         <div class="side-bar-item">
+            <div>
+                <a href="{{ route('uListeFiliere') }}">
+                    <div class="item d-block d-md-none">
+                        <i class="icofont-bag-alt spinnerShower"></i><br>
+                        <span class="spinnerShower" style="font-size: 8px;"><b>Filières</b></span>
+                    </div>
+                    <div class="item d-none d-md-block d-lg-none">
+                        <i class="icofont-bag-alt spinnerShower"></i><br>
+                        <span class="spinnerShower" style="font-size: 8px;"><b>Gestion de filières</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($filieres) }}</span></span>
+                    </div>
+                    <div class="item d-none d-lg-block">
+                        <i class="icofont-bag-alt spinnerShower"></i>&nbsp;
+                        <span class="spinnerShower"><b>Gestion de filières</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($filieres) }}</span></span>
+                    </div>
+                </a>
+            </div>
             <div class="accordion" id="accordionExample">
-                <div class="z-depth-0">
-                    <div id="headingOne">
-                        <a href="#!" data-toggle="collapse" data-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                            <div class="item">
-                                <i class="icofont-bag-alt"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de filières <span class="badge badge-pill badge-light z-depth-0">{{ count($filieres) }}</span></span></b>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="pl-4 pr-4">
-                            <a href="#!" data-toggle="modal" data-target="#filiereModal">
-                                <div>
-                                    <i class="icofont-plus"></i>
-                                    <span class="menu-item-sm-hide">Ajouter une filière</span>
-                                </div>
-                            </a>
-                            <a href="{{ route('uListeFiliere') }}">
-                                <div>
-                                    <i class="icofont-listine-dots"></i>
-                                    <span class="menu-item-sm-hide">Liste des filières</span>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="z-depth-0">
+                {{--<div class="z-depth-0">
                     <div id="headingTwo">
                         <a href="#!" data-toggle="collapse" data-target="#collapseTwo"
                         aria-expanded="true" aria-controls="collapseTwo">
@@ -164,29 +153,53 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div>--}}
                 <div class="z-depth-0">
                     <div id="headingThree">
                         <a href="#!" data-toggle="collapse" data-target="#collapseThree"
                         aria-expanded="true" aria-controls="collapseThree">
-                            <div class="item">
+                            <div class="item d-block d-md-none">
+                                <i class="icofont-envelope"></i><br>
+                                <span style="font-size: 8px;"><b>Messages</b></span>
+                            </div>
+                            <div class="item d-none d-md-block d-lg-none">
+                                <i class="icofont-envelope"></i><br>
+                                <span style="font-size: 8px;"><b>Gestion de messages</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span>
+                            </div>
+                            <div class="item d-none d-lg-block">
                                 <i class="icofont-envelope"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion de messages <span class="badge badge-pill badge-light z-depth-0">{{ count($messages) }}</span></span></b>
+                                <span><b>Gestion de messages</b> <span class="badge badge-pill badge-light z-depth-0">{{ count($messageCount) }}</span></span>
                             </div>
                         </a>
                     </div>
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                         <div class="pl-4 pr-4">
                             <a href="{{ route('uEnvoyerMessage') }}">
-                                <div>
-                                    <i class="icofont-plus"></i>
-                                    <span class="menu-item-sm-hide">Envoyer un message</span>
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-plus"></i><br>
+                                    <span style="font-size: 8px;">Envoyer</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-plus"></i><br>
+                                    <span style="font-size: 8px;">Envoyer un message</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-plus"></i>&nbsp;
+                                    <span>Envoyer un message</span>
                                 </div>
                             </a>
                             <a href="{{ route('uListeMessage') }}">
-                                <div>
-                                    <i class="icofont-listine-dots"></i>
-                                    <span class="menu-item-sm-hide">Liste des messages</span>
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-listine-dots spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Liste</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-listine-dots spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Liste des messages</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-listine-dots spinnerShower"></i>&nbsp;
+                                    <span class="spinnerShower">Liste des messages</span>
                                 </div>
                             </a>
                         </div>
@@ -196,9 +209,17 @@
                     <div id="headingFour">
                         <a href="#!" data-toggle="collapse" data-target="#collapseFour"
                         aria-expanded="true" aria-controls="collapseFour">
-                            <div class="item">
+                            <div class="item d-block d-md-none">
+                                <i class="icofont-ui-settings"></i><br>
+                                <span style="font-size: 8px;"><b>Compte</b></span>
+                            </div>
+                            <div class="item d-none d-md-block d-lg-none">
+                                <i class="icofont-ui-settings"></i><br>
+                                <span style="font-size: 8px;"><b>Gestion de compte</b></span>
+                            </div>
+                            <div class="item d-none d-lg-block">
                                 <i class="icofont-ui-settings"></i>&nbsp;
-                                <b><span class="menu-item-sm-hide">Gestion du compte</span></b>
+                                <span><b>Gestion de compte</b></span>
                             </div>
                         </a>
                     </div>
@@ -206,16 +227,32 @@
                         <div class="pl-4 pr-4">
                             @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
                                 <a href="{{ route('uCompte', $structure->id) }}">
-                                    <div>
-                                        <i class="icofont-user"></i>
-                                        <span class="menu-item-sm-hide">Afficher le profil</span>
+                                    <div class="d-block d-md-none">
+                                        <i class="icofont-user spinnerShower"></i><br>
+                                        <span  class="spinnerShower" style="font-size: 8px;">Profil</span>
+                                    </div>
+                                    <div class="d-none d-md-block d-lg-none">
+                                        <i class="icofont-user spinnerShower"></i><br>
+                                        <span  class="spinnerShower" style="font-size: 8px;">Afficher le profil</span>
+                                    </div>
+                                    <div class="d-none d-lg-block">
+                                        <i class="icofont-user spinnerShower"></i>&nbsp;
+                                        <span class="spinnerShower">Afficher le profil</span>
                                     </div>
                                 </a>
                             @endforeach
                             <a href="{{ route('sLogout') }}">
-                                <div>
-                                    <i class="icofont-power"></i>
-                                    <span class="menu-item-sm-hide">Déconnexion</span>
+                                <div class="d-block d-md-none"><br>
+                                    <i class="icofont-power spinnerShower"></i>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Deconnexion</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-power spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Deconnexion</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-power spinnerShower"></i>&nbsp;
+                                    <span class="spinnerShower">Deconnexion</span>
                                 </div>
                             </a>
                         </div>
@@ -228,14 +265,22 @@
                 </span><br class="menu-item-sm-hide" />
                 <div>
                     <a href="{{ route('uBilanMessage') }}">
-                        <div class="item" style="border: none;">
-                            <i class="icofont-chart-bar-graph"></i>
-                            <b><span class="menu-item-sm-hide">Bilan des messages</span></b>
+                        <div class="item d-block d-md-none" style="border: none;">
+                            <i class="icofont-chart-bar-graph spinnerShower"></i><br>
+                            <b><span class="spinnerShower" style="font-size: 8px;">Bilan</span></b>
+                        </div>
+                        <div class="item d-none d-md-block d-lg-none" style="border: none;">
+                            <i class="icofont-chart-bar-graph spinnerShower"></i>
+                            <b><span class="spinnerShower" style="font-size: 8px;">Bilan des messages</span></b>
+                        </div>
+                        <div class="item d-none d-lg-block" style="border: none;">
+                            <i class="icofont-chart-bar-graph spinnerShower"></i>
+                            <b><span class="spinnerShower">Bilan des messages</span></b>
                         </div>
                     </a>
                 </div><br />
             </div>
-            <div style="position: absolute; bottom: 15px; left: 0; right: 0;" class="pl-2 pr-2 pb-1">
+            {{--<div style="position: absolute; bottom: 15px; left: 0; right: 0;" class="pl-2 pr-2 pb-1">
                 <span class="">
                     &nbsp;<small><b><span class="menu-item-sm-hide">LIENS UTILES</span></b></small>
                 </span><br />
@@ -253,7 +298,7 @@
                         </div>
                     </a>
                 </div>
-            </div>
+            </div>--}}
         </div>
     </div>
     <div class="asside-content font-size-14">
@@ -472,7 +517,9 @@
                     <div class="modal-body font-size-14">
                         @csrf
                         <label class="" for="nom"><b>Nom de la filière</b></label>
-                        <input type="text" required name="nom" id="nom" class="form-control" placeholder="Saisir la filière ..."><br  />
+                        <input type="text" required name="nom" id="nom" class="form-control" value="{{ old('nom') }}" placeholder="Saisir la filière ..."><br  />
+                        <label for="acronyme"><b>Acronyme de la filière</b></label>
+                        <input type="text" name="acronyme" id="acronyme" class="form-control" required value="{{ old('acronyme') }}" placeholder="Exemple: MI/IRT/FDD/FASEG/etc..."><br />
                         <div class="text-right">
                             <i class="icofont-sort-alt"></i>
                             <b>Sélectionner les niveaux</b><br />
@@ -496,66 +543,7 @@
         </div>
     </form>
 
-    <form action="{{ route('uAjouterEtudiant') }}" method="post">
-        <div class="modal fade" id="etudiantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content" style="border-radius: 15px;">
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="exampleModalLabel">
-                            <i class="icofont-graduate-alt"></i>
-                            Ajouter un étudiant
-                        </h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body font-size-14">
-                        @csrf
-                        <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
-                        <input type="text" required name="nomComplet" id="nomComplet" class="form-control" placeholder="Saisir le nom complet ..."><br  />
 
-                        <label class="" for="telephone"><b>Téléphone de l'étudiant</b></label>
-                        <input type="text" required name="telephone" id="telephone" class="form-control" placeholder="exemple : +22891019245"><br  />
-
-                        <table width="100%">
-                            <tr>
-                                <td>
-                                    <label for="filiere"><b>Filière</b></label>
-                                    <select required name="filiere" id="filiere" class="form-control">
-                                        @forelse ($filieres as $filiere)
-                                            <option value="{{ $filiere->id }}">
-                                                {{ $filiere->nom }}
-                                            </option>
-                                        @empty
-                                            <option value="">Aucune filière</option>
-                                        @endforelse
-                                    </select>
-                                </td>
-                                <td>
-                                    <label for="filiere"><b>Niveau</b></label>
-                                    <select required name="niveau" id="niveau" class="form-control">
-                                        @forelse ($niveaux as $niveau)
-                                            <option value="{{ $niveau->id }}">
-                                                {{ $niveau->nom }}
-                                            </option>
-                                        @empty
-                                            <option value="">Aucun niveau</option>
-                                        @endforelse
-                                    </select>
-                                </td>
-                            </tr>
-                        </table>
-
-                    </div>
-                    <div class="modal-footer pt-2 pb-2">
-                        <button type="button" class="btn btn-white btn-md z-depth-0" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
 
 
 @endsection

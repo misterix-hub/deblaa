@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Universite;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Filiere;
 use App\Models\FiliereNiveau;
@@ -10,13 +12,16 @@ use App\Repositories\FiliereRepository;
 use App\Models\Niveau;
 use App\MessageUniversite;
 use App\User;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Str;
 
 class FiliereController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     /** @var  FiliereRepository */
     private $filiereRepository;
@@ -39,7 +44,12 @@ class FiliereController extends Controller
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -47,7 +57,7 @@ class FiliereController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -57,13 +67,27 @@ class FiliereController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response|RedirectResponse
      */
     public function store(Request $request)
     {
+        $request->validate([
+           'nom' => 'required|string',
+           'acronyme' => 'required|string|min:2|max:10'
+        ],
+            [
+                'nom.required' => 'Veuillez saisir le nom de la filière',
+                'nom.string' => 'Le nom de votre filière doit être une chaîne de caractères',
+                'acronyme.required' => 'Veuillez saisir l\'acronyme de la filière',
+                'acronyme.string' => 'l\'acronyme de votre filière doit être une chaîne de caractères',
+                'acronyme.max' => 'Acronyme trop long',
+                'acronyme.min' => 'Acronyme trop court'
+            ]);
         if (trim($request->nom) == "") {
-            return redirect(route('uListeFiliere'))->with('error', "Impossible de retourner un champs vide !");
+            return redirect(route('uListeFiliere'))->with('error', "Impossible de retourner vide le nom de la filiere !");
+        } elseif (trim($request->input('acronyme')) == "") {
+            return redirect(route('uListeFiliere'))->with('error', "Impossible de retourner vide l'acronyme de la filiere !");
         } else {
 
             $niveaux = $request->niveaux;
@@ -73,9 +97,10 @@ class FiliereController extends Controller
             } else {
                 $filiere = $this->filiereRepository->create([
                     'nom' => $request->nom,
+                    'acronyme' => Str::upper($request->input('acronyme')),
                     'universite_id' => session()->get('id')
                 ]);
-    
+
                 if (is_array($niveaux) || is_object($niveaux)){
                     foreach ($niveaux as $niveau) {
                         $filiere_niveau = FiliereNiveau::create([
@@ -84,18 +109,18 @@ class FiliereController extends Controller
                         ]);
                     }
                 }
-    
+
                 return redirect(route('uListeFiliere'))->with('success', "Filière ajoutée avec succès !");
             }
         }
-        
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response|Factory
      */
     public function show($id)
     {
@@ -110,7 +135,12 @@ class FiliereController extends Controller
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get(),
+                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
             ]);
         }
     }
@@ -119,7 +149,7 @@ class FiliereController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response|Factory
      */
     public function edit($id)
     {
@@ -131,16 +161,21 @@ class FiliereController extends Controller
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
                         ->get(),
-            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get(),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse|Redirector
      */
     public function update(Request $request, $id)
     {
@@ -155,7 +190,7 @@ class FiliereController extends Controller
             $niveaux = $request->niveaux;
 
             if(!empty($niveaux)) {
-    
+
                 if (is_array($niveaux) || is_object($niveaux)){
 
                     $del_filiereNiveau = FiliereNiveau::where('filiere_id', $id);
@@ -168,7 +203,7 @@ class FiliereController extends Controller
                         ]);
                     }
                 }
-                
+
             }
             return redirect(route('uListeFiliere'))->with('success', "Filière mise à jour avec succès !");
         }
@@ -178,7 +213,7 @@ class FiliereController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

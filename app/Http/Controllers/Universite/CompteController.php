@@ -58,7 +58,7 @@ class CompteController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
     public function edit($id)
     {
@@ -70,11 +70,16 @@ class CompteController extends Controller
                 'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                 'universite' => Universite::findOrFail($id),
                 'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                 'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
                 'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
-                        ->get()
+                        ->get(),
+                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                    ->where('universite_id', session()->get('id'))
+                    ->where('users.id', '<>', null)
+                    ->get()
             ]);
         }
 
@@ -85,7 +90,7 @@ class CompteController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -209,7 +214,12 @@ class CompteController extends Controller
             'niveaux' => Niveau::all(),
             'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
             'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
             'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->get(),
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                 ->where('universite_id', session()->get('id'))
                 ->where('users.id', '<>', null)
                 ->get(),

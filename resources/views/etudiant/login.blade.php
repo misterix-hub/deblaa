@@ -59,6 +59,17 @@
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 font-size-14">
 
+                @if($errors->any())
+                    <ul class="alert alert-danger alert-dismissible list-unstyled fade show" role="alert">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </ul>
+                @endif
+
                 @if ($message = Session::get('error'))
                     <div class="alert alert-danger">
                         {{ $message }}
@@ -77,7 +88,7 @@
                         @csrf
 
                         <label for="telephone" class="font-size-14">Numéro de téléphone</label>
-                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Saisir dans le champs ...">
+                        <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Exemple: +22891019245">
                         <div class="mt-3"></div>
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">

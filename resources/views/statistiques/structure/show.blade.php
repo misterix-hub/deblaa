@@ -216,14 +216,28 @@
                                                         {{ ($nb_dest_global * 10) - 60  }} FCFA
                                                     @endif
                                                 @else
-                                                    @if($nb_dest_global == 0)
-                                                        0 FCFA
-                                                    @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                                        {{ ($nb_dest_global * 20)  }} FCFA
-                                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                                        {{ ($nb_dest_global * 15)  }} FCFA
+
+                                                    @if($montantStructure < 0)
+
+                                                        @if($nb_dest_global == 0)
+                                                            {{0 + $montantStructure}} FCFA
+                                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                            {{ ($nb_dest_global * 20) + $montantStructure }} FCFA
+                                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                            {{ ($nb_dest_global * 15) + $montantStructure }} FCFA
+                                                        @else
+                                                            {{ ($nb_dest_global * 10) + $montantStructure }} FCFA
+                                                        @endif
                                                     @else
-                                                        {{ ($nb_dest_global * 10) }} FCFA
+                                                        @if($nb_dest_global == 0)
+                                                            0 FCFA
+                                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                            {{ ($nb_dest_global * 20) }} FCFA
+                                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                            {{ ($nb_dest_global * 15)  }} FCFA
+                                                        @else
+                                                            {{ ($nb_dest_global * 10) }} FCFA
+                                                        @endif
                                                     @endif
                                                 @endif
                                             </b>
@@ -247,14 +261,28 @@
                                                 {{ ($nb_dest_global * 10) - 60  }} FCFA
                                             @endif
                                         @else
-                                            @if($nb_dest_global == 0)
-                                                0 FCFA
-                                            @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                                {{ ($nb_dest_global * 20)  }} FCFA
-                                            @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                                {{ ($nb_dest_global * 15)  }} FCFA
+
+                                            @if($montantStructure < 0)
+
+                                                @if($nb_dest_global == 0)
+                                                    {{0 + $montantStructure}} FCFA
+                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                    {{ ($nb_dest_global * 20) + $montantStructure }} FCFA
+                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                    {{ ($nb_dest_global * 15) + $montantStructure }} FCFA
+                                                @else
+                                                    {{ ($nb_dest_global * 10) + $montantStructure }} FCFA
+                                                @endif
                                             @else
-                                                {{ ($nb_dest_global * 10) }} FCFA
+                                                @if($nb_dest_global == 0)
+                                                    0 FCFA
+                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                    {{ ($nb_dest_global * 20) }} FCFA
+                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                    {{ ($nb_dest_global * 15)  }} FCFA
+                                                @else
+                                                    {{ ($nb_dest_global * 10) }} FCFA
+                                                @endif
                                             @endif
                                         @endif
                                     </b>
@@ -269,6 +297,7 @@
                             <input type="hidden" name="structure_id" value="{{ $structure->id }}">
                             <input type="hidden" name="montant" value="
                                 @if(count(\App\FactureStructure::where('structure_id', $structure->id)->get()) == 0)
+
                                     @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
                                         {{ ($nb_dest_global * 20) - 60  }}
                                     @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
@@ -277,12 +306,25 @@
                                         {{ ($nb_dest_global * 10) - 60  }}
                                     @endif
                                 @else
-                                    @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                        {{ ($nb_dest_global * 20)  }}
-                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                        {{ ($nb_dest_global * 15)  }}
+
+                                    @if($montantStructure < 0)
+
+                                        @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                            {{ ($nb_dest_global * 20) + $montantStructure }}
+                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                            {{ ($nb_dest_global * 15) + $montantStructure }}
+                                        @else
+                                            {{ ($nb_dest_global * 10) + $montantStructure }}
+                                        @endif
                                     @else
-                                        {{ ($nb_dest_global * 10) }}
+
+                                        @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                            {{ ($nb_dest_global * 20) }}
+                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                            {{ ($nb_dest_global * 15)  }}
+                                        @else
+                                            {{ ($nb_dest_global * 10) }}
+                                        @endif
                                     @endif
                                 @endif
                                 ">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFilieresTable extends Migration
+class CreatePaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateFilieresTable extends Migration
      */
     public function up()
     {
-        Schema::create('filieres', function (Blueprint $table) {
+        Schema::create('pays', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('universite_id');
-            $table->string('nom');
-            $table->string('acronyme', 10);
-            $table->softDeletes();
+            $table->integer('code');
+            $table->string('alpha2', 2)->unique();
+            $table->string('alpha3', 3)->unique();
+            $table->string('nom_en_gb', 45);
+            $table->string('nom_fr_fr', 45);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateFilieresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filieres');
+        Schema::dropIfExists('pays');
     }
 }

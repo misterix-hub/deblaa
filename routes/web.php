@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('admin/universites', 'UniversiteController');
 
+    Route::get('admin/universites/{id}/access-pro', 'UniversiteController@giveAccessPro')->name('universites.getAccess');
+
     Route::resource('admin/filieres', 'FiliereController');
 
     Route::resource('admin/niveaux', 'NiveauController');
@@ -51,6 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin/filiereNiveaus', 'FiliereNiveauController');
 
     Route::resource('admin/structures', 'StructureController');
+
+    Route::get('admin/structures/{id}/access-pro', 'StructureController@giveAccessPro')->name('structures.getAccess');
 
     Route::resource('admin/departements', 'DepartementController');
 
@@ -61,6 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
             /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
                                         ->where('universites.id', $id)->orderByDesc('facture_universites.id')
                                         ->limit(1)->get(),*/
+            'montantUniversite' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
             'messages' => MessageUniversite::where('universite_id', $id)->get(),
             'users' => User::where('filiere_id', '<>', null)->get(),
             'cible_message_universites' => CibleMessageUniversite::all(),
@@ -76,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
             /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
                                         ->where('structures.id', $id)->orderByDesc('facture_structures.id)
                                         ->limit(1)->get(),*/
+            'montantStructure' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
             'messages' => MessageStructure::where('structure_id', $id)->get(),
             'users' => User::where('departement_id', '<>', null)->get(),
             'cible_message_structures' => CibleMessageStructure::all(),
@@ -153,23 +159,30 @@ Route::group(['middleware' => 'auth'], function () {
 
 /* UNIVERSITE */
 
+
+/*Route::get('universites/etudiants/ajouter/filiere-niveau', 'Universite\EtudiantController@ajaxContactSpinneret')->name('ajaxListContact');*/
+Route::get('universite/ etudiants/filter', 'Universite\EtudiantController@ajaxListStudent')->name('ajaxListStudent');
+
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
 Route::post('universites/filieres', 'Universite\FiliereController@store')->name('uAjouterFiliere');
-Route::get('universites/filieres/{id}/details', 'Universite\FiliereController@show')->name('uDetailsFiliere');
-Route::get('universites/filieres/{id}/modifier', 'Universite\FiliereController@edit')->name('uModifierFiliere');
+Route::get('universites/filieres/{id}-{slug}/details', 'Universite\FiliereController@show')->name('uDetailsFiliere');
+Route::get('universites/filieres/{id}-{slug}/modifier', 'Universite\FiliereController@edit')->name('uModifierFiliere');
 Route::post('universites/filieres/{id}/update', 'Universite\FiliereController@update')->name('uUpdateFiliere');
 Route::get('universites/filieres/{id}/supprimer', 'Universite\FiliereController@destroy')->name('uSupprimerFiliere');
 
 Route::post('universites/etudiants', 'Universite\EtudiantController@store')->name('uAjouterEtudiant');
 Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name('uListeEtudiant');
+Route::get('universites/etudiants/{filiere}-{slug}/ajouter', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
+/*Route::get('universites/etudiants/filiere-contact/{filiere}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
+Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');*/
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
 Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageFrom');
 Route::get('universites/messages', 'Universite\MessageController@index')->name('uListeMessage');
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
-Route::get('universites/messages/{id}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
+Route::get('universites/messages/{id}-{slug}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
 Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
 Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
@@ -200,6 +213,9 @@ Route::get('structures/groupes/{id}/modifier', 'Structure\GroupeController@edit'
 Route::post('structures/groupes/{id}/update', 'Structure\GroupeController@update')->name('sUpdateGroupe');
 Route::get('structures/groupes/{id}/supprimer', 'Structure\GroupeController@destroy')->name('sSupprimerGroupe');
 
+Route::get('structures/membres/ajouter/{departement}', 'Structure\MembreController@create')->name('sCreateMembre');
+Route::get('structures/membres/departement-contact/{departement}', 'Structure\MembreController@listContactByDepartment')->name('sListContactByDepartment');
+Route::post('structures/membres/departement-contact/insertion', 'Structure\MembreController@insertContact')->name('sInsertContact');
 Route::post('structures/membres', 'Structure\MembreController@store')->name('sAjouterMembre');
 Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
 Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');

@@ -21,7 +21,7 @@
             </td>
 	    <td width="20" class="text-right pl-2">
                 <a href="{{ route('logout') }}" id="dropdownMenuButton">
-                    <i class="icofont-sign-out white-text" style="font-size: 22px;"></i>
+                    <i class="icofont-power white-text" style="font-size: 18px;"></i>
                 </a>
             </td>
         </tr>
@@ -30,7 +30,7 @@
 
 @forelse ($cible_message_universites as $cible_message_universite)
     @if (in_array( $cible_message_universite->message_universite_id, $tab_id))
-        <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}">
+
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
@@ -42,16 +42,25 @@
                         </td>
                         <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="black-text">
-                                {{ (strlen($cible_message_universite->titre) > 35) ? substr($cible_message_universite->titre, 0, 35) . " ..." : $cible_message_universite->titre ." ..." }}
+                                {{ (strlen($cible_message_universite->titre) > 10) ? substr($cible_message_universite->titre, 0, 10) . " ..." : $cible_message_universite->titre ." ..." }}
                             </b><br />
-                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
+                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small><br><br>
+                            @foreach($universites as $universite)
+                                @if($universite->id == $cible_message_universite->universite_id)
+                                    <div class="font-weight-bold"><b>{{ $universite->sigle }}</b></div>
+                                @else
+
+                                @endif
+                            @endforeach
+                        </td>
+                        <td width="100">
+                            <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}" class="btn btn-sm btn-success text-uppercase">Voir tout le message</a>
                         </td>
                     </tr>
                 </table> 
             </div>
-        </a>
     @else
-        <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}" class="message-select">
+
             <div class="p-2 border-bottom">
                 <table width="100%">
                     <tr>
@@ -63,14 +72,23 @@
                         </td>
                         <td style="line-height: 20px;" class="pl-1 text-truncate">
                             <b class="black-text font-weight-bold">
-                                {{ $cible_message_universite->titre }}
+                                {{ (strlen($cible_message_universite->titre) > 10) ? substr($cible_message_universite->titre, 0, 10) . " ..." : $cible_message_universite->titre ." ..." }}
                             </b><br />
-                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
+                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small><br><br>
+                            @foreach($universites as $universite)
+                                @if($universite->id == $cible_message_universite->universite_id)
+                                    <div class="font-weight-bold"><b>{{ $universite->sigle }}</b></div>
+                                @else
+
+                                @endif
+                            @endforeach
+                        </td>
+                        <td width="100">
+                            <a href="{{ route('eSDetailsMessage', $cible_message_universite->message_universite_id) }}" class="message-select btn btn-sm btn-success text-uppercase">Voir tout le message</a>
                         </td>
                     </tr>
                 </table> 
             </div>
-        </a>
     @endif
 @empty
 

@@ -26,6 +26,9 @@
                         <a href="{{ route('structures.show', [$structure->id]) }}" class='btn btn-default btn-sm'><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('structures.edit', [$structure->id]) }}" class='btn btn-default btn-sm btn-info'><i class="glyphicon glyphicon-edit"></i></a>
                         {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Êtes-vous sûr(e) ?')"]) !!}
+                        @if($structure->pro == 0)
+                            <a href="{{ route('structures.getAccess', [$structure->id]) }}" class="btn btn-default btn-primary btn-sm"><i class="glyphicon glyphicon-star"></i></a>
+                        @endif
                     </div>
                     {!! Form::close() !!}
                 </td>

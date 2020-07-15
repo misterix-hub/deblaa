@@ -4,6 +4,37 @@
     <br />
     <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-10 col-md-12 col-sm-12">
+                @if($errors->any())
+                <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </ul>
+                @endif
+
+                @if($message = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                @endif
+
+            </div>
             @foreach($messages as $message)
                 <div class="col-lg-10 col-md-12 col-sm-12">
                     <h5 style="font-weight: 100;">
@@ -150,9 +181,23 @@
                             @foreach ($users as $user)
                                 <tr>
                                     <td>{{ $user->name }}</td>
-                                    <td class="text-right">{{ $user->telephone }}</td>
+                                    <td class="text-right">+{{ $user->telephone }}</td>
                                     <td class="text-center">
-                                        <i class="icofont-check green-text"></i>
+                                        @if(count($message_lus) == 0)
+                                            <i class="icofont-check grey-text"></i>
+                                            <i class="icofont-check grey-text"></i>
+                                        @else
+
+                                            @foreach($message_lus as $message_lu)
+                                                @if($message_lu->telephone == $user->telephone)
+                                                    <i class="icofont-check green-text"></i>
+                                                    <i class="icofont-check green-text"></i>
+                                                @else
+                                                    <i class="icofont-check grey-text"></i>
+                                                    <i class="icofont-check grey-text"></i>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -8,15 +8,13 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="table-responsive">
-
-
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Nom de l'université</th>
-                            <th>email</th>
-                            <th width="100" class="text-center">Action</th>
-                        </tr>
+                            <tr>
+                                <th>Nom de l'université</th>
+                                <th>email</th>
+                                <th width="100" class="text-center">Action</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <?php $tab_cible = array(); $k = 0; $z = 0; ?>

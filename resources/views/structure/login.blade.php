@@ -8,7 +8,7 @@
 
         @font-face {
             font-family: comfortaa;
-            src: url(../fonts/Comfortaa-Regular.ttf);
+            src: url('{{ URL::asset('fonts/Comfortaa-Regular.ttf') }}');
         }
     </style>
 @endsection
@@ -31,8 +31,13 @@
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
 
                     @if ($message = Session::get('error'))
-                        <div class="alert alert-danger">
-                            {{ $message }}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                                {{ $message }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
 
@@ -52,8 +57,16 @@
                         <label for="email" class="font-size-14">Email</label>
                         <input type="text" id="email" name="email" class="form-control" placeholder="Saisir dans le champs ..." value="{{ (session()->has('email')) ? session()->get('email') : '' }}">
                         <div class="mt-3"></div>
-                        <label for="password" class="font-size-14">Mot de passe</label>
-                        <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
+                        <div class="form-group">
+                            <label for="password" class="font-size-14">Mot de passe</label>
+                            <div class="input-group">
+                                <div class="input-group-append">
+                                    <div class="input-group-text firstEye py-1" style="cursor: pointer;"><i class="icofont-eye-alt"></i></div>
+                                    <div class="input-group-text secondEye py-1" style="display:none; cursor: pointer;"><i class="icofont-eye-blocked"></i></div>
+                                </div>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
+                            </div>
+                        </div>
                         <div class="mt-3"></div>
                         <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
                             Se connecter
@@ -90,3 +103,22 @@
     @include('included.footerVisitors')
 
 @endsection
+
+@section('script')
+    <script !src="">
+        $(document).ready(function () {
+            $('.firstEye').click(function () {
+                $(this).css('display', 'none');
+                $('.secondEye').css('display', 'block');
+                $('#password').attr('type', 'text')
+            });
+
+            $('.secondEye').click(function () {
+                $(this).css('display', 'none');
+                $('.firstEye').css('display', 'block');
+                $('#password').attr('type', 'password')
+            })
+        })
+    </script>
+@endsection
+

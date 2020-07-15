@@ -2,27 +2,44 @@
 
 @section('content')
     <div class="">
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
-                    
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-            
+
+                            @if($errors->any())
+                                <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
+                                </ul>
+                            @endif
+
                             <?php $send_message = 0; ?>
                             @if ($message = Session::get('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
-                                    @if (session()->has('msg_tel') || session()->has('msg_pwd'))
+                                    @if (session()->has('msg_tel') && session()->has('msg_pwd'))
                                         <?php $send_message = 1; ?>
                                     @endif
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
                                 </div>
                             @endif
 
                             @if ($message = Session::get('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                        <span aria-hidden="true">x</span>
+                                    </button>
                                 </div>
                             @endif
                             <br />
@@ -46,13 +63,25 @@
                                         @forelse($users as $user)
                                             <tr>
                                                 <td>{{ $user->name }}</td>
-                                                <td>{{ $user->telephone }}</td>
+                                                <td>+{{ $user->telephone }}</td>
                                                 <td>
-                                                    @foreach ($groupes as $groupe)
+                                                    @foreach(\App\Models\Departement::leftJoin('users', 'departements.id', 'departement_id')
+                                                        ->where('structure_id', session()->get('id'))
+                                                        ->where('users.id', '<>', null)
+                                                        ->get() as $department_user)
+                                                        @foreach ($groupes as $groupe)
+                                                            @if($user->telephone == $department_user->telephone)
+                                                                @if ($groupe->id == $department_user->departement_id)
+                                                                    {{ $groupe->nom }} |
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                    {{--@foreach ($groupes as $groupe)
                                                         @if ($groupe->id == $user->departement_id)
                                                             {{ $groupe->nom }}
                                                         @endif
-                                                    @endforeach
+                                                    @endforeach--}}
                                                 </td>
                                                 <td>{{ $user->fonction }}</td>
                                                 <td class="text-center">
@@ -79,13 +108,13 @@
                                     </tfoot>
                                 </table>
                             <br />
-                            
+
                         </div>
                     </div><br /><br /><br />
 
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 menu-item-sm-hide">
-                   
+
                     @include('included.sideBarRight')
 
                 </div>
@@ -104,12 +133,13 @@
     <script>
         $(document).ready(function() {
 	    $('#example').DataTable();
-            var send_message = "{{ $send_message }}";
-            if (send_message == 1) {
-                $.ajax ({
-                   url: "https://www.easysendsms.com/sms/bulksms-api/bulksms-api?username=debldebl2019&password=esm13343&from=Deblaa&to={{ session()->get('msg_tel') }}&text={{ session()->get('msg_pwd') }}&type=0" ,
-                   type : 'GET'
-                });
+            let send_message = "{{ $send_message }}";
+            console.log(send_message);
+            if (parseInt(send_message, 10) === 1) {
+                    $.ajax({
+                        type: "GET",
+                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                    });
             }
         });
     </script>

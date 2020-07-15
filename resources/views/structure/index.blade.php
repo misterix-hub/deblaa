@@ -8,10 +8,13 @@
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
 
                     @if($errors->any())
-                        <ul class="alert alert-danger list-unstyled mt-3">
+                        <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
                             @foreach($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">x</span>
+                            </button>
                         </ul>
                     @endif
 

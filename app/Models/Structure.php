@@ -18,7 +18,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string email
  * @property string password
  * @property string site_web
+ * @property integer message_bonus
  * @property boolean acces
+ * @property boolean pro
  */
 class Structure extends Model
 {
@@ -42,7 +44,9 @@ class Structure extends Model
         'email',
         'password',
         'site_web',
-        'acces'
+        'acces',
+        'message_bonus',
+        'pro'
     ];
 
     /**
@@ -59,7 +63,9 @@ class Structure extends Model
         'email' => 'string',
         'password' => 'string',
         'site_web' => 'string',
-        'acces' => 'boolean'
+        'acces' => 'boolean',
+        'pro' => 'boolean',
+        'message_bonus' => 'integer'
     ];
 
     /**

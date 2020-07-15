@@ -23,7 +23,12 @@ class MainController extends Controller
                         'niveaux' => Niveau::all(),
                         'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
                         'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+                        'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
                         'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                            ->where('universite_id', session()->get('id'))
+                            ->where('users.id', '<>', null)
+                            ->get(),
+                        'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
                             ->get()

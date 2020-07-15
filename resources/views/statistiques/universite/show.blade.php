@@ -209,14 +209,40 @@
                                         <td>Montant total à payer</td>
                                         <td class="text-right">
                                             <b>
-                                                @if($nb_dest_global == 0)
-                                                    0 FCFA
-                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                                    {{ ($nb_dest_global * 20) - 60  }} FCFA
-                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                                    {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                                @if(count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) == 0)
+
+                                                    @if($nb_dest_global == 0)
+                                                        0 FCFA
+                                                    @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                        {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                                    @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                        {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                                    @else
+                                                        {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                                    @endif
                                                 @else
-                                                    {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                                    @if($montantUniversite < 0)
+
+                                                        @if($nb_dest_global == 0)
+                                                            {{ 0 + $montantUniversite }} FCFA
+                                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                            {{ ($nb_dest_global * 20) + $montantUniversite  }} FCFA
+                                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                            {{ ($nb_dest_global * 15) + $montantUniversite  }} FCFA
+                                                        @else
+                                                            {{ ($nb_dest_global * 10) + $montantUniversite  }} FCFA
+                                                        @endif
+                                                    @else
+                                                        @if($nb_dest_global == 0)
+                                                            0 FCFA
+                                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                            {{ ($nb_dest_global * 20)  }} FCFA
+                                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                            {{ ($nb_dest_global * 15)  }} FCFA
+                                                        @else
+                                                            {{ ($nb_dest_global * 10) }} FCFA
+                                                        @endif
+                                                    @endif
                                                 @endif
                                             </b>
                                         </td>
@@ -228,14 +254,40 @@
 
                                 <div class="form-group" style="margin-bottom: 20px;">
                                     <b>Arrêté la présente facture à la somme de :
-                                        @if($nb_dest_global == 0)
-                                            0 FCFA
-                                        @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                            {{ ($nb_dest_global * 20) - 60  }} FCFA
-                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                            {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                        @if(count(\App\FactureStructure::where('universite_id', $universite->id)->get()) == 0)
+                                            @if($nb_dest_global == 0)
+                                                0 FCFA
+                                            @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                            @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                            @else
+                                                {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                            @endif
                                         @else
-                                            {{ ($nb_dest_global * 10) - 60  }} FCFA
+
+                                            @if($montantUniversite < 0)
+
+                                                @if($nb_dest_global == 0)
+                                                    {{ 0 + $montantUniversite }} FCFA
+                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                    {{ ($nb_dest_global * 20) + $montantUniversite  }} FCFA
+                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                    {{ ($nb_dest_global * 15) + $montantUniversite  }} FCFA
+                                                @else
+                                                    {{ ($nb_dest_global * 10) + $montantUniversite  }} FCFA
+                                                @endif
+                                            @else
+                                                @if($nb_dest_global == 0)
+                                                    0 FCFA
+                                                @elseif($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                                    {{ ($nb_dest_global * 20) }} FCFA
+                                                @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                                    {{ ($nb_dest_global * 15) }} FCFA
+                                                @else
+                                                    {{ ($nb_dest_global * 10) }} FCFA
+                                                @endif
+                                            @endif
                                         @endif
                                     </b>
                                 </div>
@@ -248,13 +300,35 @@
 
                             <input type="hidden" name="universite_id" value="{{ $universite->id }}">
                             <input type="hidden" name="montant" value="
+                                @if(count(\App\FactureUniversite::where('universite_id', $universite->id)->get()) == 0)
                                     @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
-                                        {{ ($nb_dest_global * 20) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 20) - 60  }}
                                     @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
-                                        {{ ($nb_dest_global * 15) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 15) - 60  }}
                                     @else
-                                        {{ ($nb_dest_global * 10) - 60  }} FCFA
+                                        {{ ($nb_dest_global * 10) - 60  }}
                                     @endif
+                                @else
+                                    @if($montantUniversite < 0)
+
+                                        @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                            {{ ($nb_dest_global * 20) + $montantUnviversite }}
+                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                            {{ ($nb_dest_global * 15) +$montantUniversite  }}
+                                        @else
+                                            {{ ($nb_dest_global * 10) + $montantUniversite  }}
+                                        @endif
+                                    @else
+                                        @if($nb_dest_global > 0 && $nb_dest_global <= 1000)
+                                            {{ ($nb_dest_global * 20) }}
+                                        @elseif($nb_dest_global > 1000 && $nb_dest_global <= 10000)
+                                            {{ ($nb_dest_global * 15) }}
+                                        @else
+                                            {{ ($nb_dest_global * 10) }}
+                                        @endif
+                                    @endif
+                                @endif
+
                                 ">
                             <input type="hidden" name="numero" value="{{ (count($numero_facture_structures) + count($numero_facture_universites)) + 1 }}">
                     </div>

@@ -50,6 +50,23 @@ class LoginController extends Controller
 
     public function registerProcessing(Request $request) {
 
+        $request->validate([
+            'nom' => 'required|min:1|max:100',
+            'sigle' => 'required|string|min:2|max:11',
+            'email' => 'required|email'
+        ],
+            [
+                'sigle.required' => 'Le champ du sigle est requis',
+                'sigle.string' => 'Le sigle doit être une chaîne de caractères',
+                'sigle.min' => 'Votre sigle est trop court',
+                'sigle.max' => 'Le nombre de caractères maximal est atteint',
+                'nom.required' => 'Le champ du nom est requis',
+                'nom.min' => 'Votre nom est trop court',
+                'nom.max' => 'Le nombre de caractères est atteint',
+                'email.required' => 'le champ Email est requis',
+                'email.email' => 'Adresse électronique incorrecte'
+            ]);
+
         $universites_email = Universite::where('email', $request->email)->get();
 
         if (count($universites_email) != 0) {
@@ -68,7 +85,7 @@ class LoginController extends Controller
             $universite->pro = 0;
             $universite->save();
 
-            /*$to_name = "Deblaa";
+            $to_name = "Deblaa";
 
             $to_email = $request->input('email');
             $data = array(
@@ -77,7 +94,7 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            /*\Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
             });*/

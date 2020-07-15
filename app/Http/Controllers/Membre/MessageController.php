@@ -7,7 +7,9 @@ use App\FichierMessageStructure;
 use App\Http\Controllers\Controller;
 use App\MessageLu;
 use App\MessageStructure;
+use App\Models\Structure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -34,10 +36,20 @@ class MessageController extends Controller
         return view('ajaxViews.membre.message.sideBarMembre', [
             'tab_id' => $tab_id,
             'message_lus' => $message_lus,
-            'cible_message_structures' => CibleMessageStructure::leftJoin('message_structures', 'message_structure_id', 'message_structures.id')
+            'cible_message_structures' => DB::table('cible_message_structures')
+                ->join('message_structures', 'message_structures.id', '=', 'cible_message_structures.message_structure_id')
+                ->join('users', 'users.departement_id', '=', 'cible_message_structures.departement_id')
+                ->where('users.telephone', session()->get('telephone'))
+                ->groupBy('cible_message_structures.message_structure_id')
+                ->orderByDesc('message_structures.created_at')
+                ->get(),
+
+            'structures' => Structure::all()
+
+                /*CibleMessageStructure::leftJoin('message_structures', 'message_structure_id', 'message_structures.id')
                 ->where('departement_id', session()->get('departement_id'))
                 ->orderByDesc('message_structures.created_at')
-                ->get()
+                ->get()*/
         ]);
     }
 
@@ -57,10 +69,20 @@ class MessageController extends Controller
         return view('ajaxViews.membre.message.inboxS', [
             'tab_id' => $tab_id,
             'message_lus' => $message_lus,
-            'cible_message_structures' => CibleMessageStructure::leftJoin('message_structures', 'message_structure_id', 'message_structures.id')
+            'cible_message_structures' => DB::table('cible_message_structures')
+                ->join('message_structures', 'message_structures.id', '=', 'cible_message_structures.message_structure_id')
+                ->join('users', 'users.departement_id', '=', 'cible_message_structures.departement_id')
+                ->where('users.telephone', session()->get('telephone'))
+                ->groupBy('cible_message_structures.message_structure_id')
+                ->orderByDesc('message_structures.created_at')
+                ->get(),
+
+            'structures' => Structure::all()
+
+                /*CibleMessageStructure::leftJoin('message_structures', 'message_structure_id', 'message_structures.id')
                 ->where('departement_id', session()->get('departement_id'))
                 ->orderByDesc('message_structures.created_at')
-                ->get()
+                ->get()*/
         ]);
     }
 
@@ -98,7 +120,6 @@ class MessageController extends Controller
             $message_lu->message_structure_id = $id;
             $message_lu->save();
         }
-
 
         return view('membre.detailsMessage', [
             'messages' => MessageStructure::where('id', $id)->get(),

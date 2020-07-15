@@ -9,7 +9,7 @@
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12"><br />
 
-                @foreach ($filieres as $filiere)    
+                @foreach ($filieres as $filiere)
                     <form action="{{ route('uUpdateFiliere', $filiere->id) }}" method="post">
                         @csrf
                         <label class="" for="nom"><b>Nom de la filière</b></label>
@@ -17,7 +17,7 @@
                         <b>Niveaux de la filière</b>
                         <ul>
                             @foreach ($filiere_niveaux as $filiere_niveau)
-                                @if ($filiere_niveau->filiere_id == $filiere->id)    
+                                @if ($filiere_niveau->filiere_id == $filiere->id)
                                     <li>
                                         {{ $filiere_niveau->nom }}
                                     </li>
@@ -39,13 +39,16 @@
                         @endforeach<br /><br />
 
                         <div>
+                            <a href="{{ route('uListeFiliere') }}" class="btn btn-md btn-light ml-0 rounded">
+                                Annuler
+                            </a>
                             <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
                                 Mettre à jour
                             </button>
                         </div>
                     </form>
                 @endforeach
-                
+
             </div>
         </div>
     </div>
