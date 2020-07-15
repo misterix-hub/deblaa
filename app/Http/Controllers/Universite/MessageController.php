@@ -179,7 +179,7 @@ class MessageController extends Controller
                             $(function () {
                                 $.ajax({
                                     type: "GET",
-                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie1[$i] ?>",
+                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                                 });
                             });
                         });
@@ -310,7 +310,7 @@ class MessageController extends Controller
                                 $(function () {
                                     $.ajax({
                                         type: "GET",
-                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d&SenderId=Deblaa&Message=<?= $texte ?>&MobileNumber=<?= $numero_trie2[$i] ?>",
+                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                                     });
                                 });
                             });

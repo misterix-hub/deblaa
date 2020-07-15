@@ -31,8 +31,13 @@
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
 
                     @if ($message = Session::get('error'))
-                        <div class="alert alert-danger">
-                            {{ $message }}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
+                                {{ $message }}
+
+                            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
 

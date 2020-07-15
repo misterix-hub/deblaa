@@ -31,7 +31,7 @@ class MembreController extends Controller
     public function index()
     {
         if (!session()->has('id')) {
-            abort("404");
+            return redirect(route('sLogin'))->with('error', 'Veuillez vous connecter....');
         } else {
             return view('structure.membre.liste', [
                 'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
