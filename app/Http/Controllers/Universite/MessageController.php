@@ -175,13 +175,15 @@ class MessageController extends Controller
                     ?>
                     <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                     <script>
+                        let inputs = document.querySelectorAll('input');
+
                         $(document).ready(function () {
-                            $(function () {
-                                $.ajax({
-                                    type: "GET",
-                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
-                                });
+                            $.ajax({
+                                type: "GET",
+                                url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                             });
+
+                            inputs.forEach(input => input.value = '');
                         });
                     </script>
                     <?php
@@ -192,9 +194,7 @@ class MessageController extends Controller
                 <script>
 
                     setTimeout(() => {
-                        <?php
-                            return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
-                        ?>
+                        window.location = "https://deblaa.com/universites/messages";
                     }, 5000);
 
                 </script>
@@ -306,13 +306,15 @@ class MessageController extends Controller
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
+                            let inputs = document.querySelectorAll('input');
+
                             $(document).ready(function () {
-                                $(function () {
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
-                                    });
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
                                 });
+
+                                inputs.forEach(input => input.value = '');
                             });
                         </script>
                         <?php
@@ -323,9 +325,7 @@ class MessageController extends Controller
                     <script>
 
                         setTimeout(() => {
-                            <?php
-                                return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
-                            ?>
+                            window.location = "https://deblaa.com/universites/messages";
                         }, 5000);
 
                     </script>

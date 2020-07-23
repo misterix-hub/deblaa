@@ -44,18 +44,18 @@ class LoginController extends Controller
     public function query(Request $request) {
 
         $request->validate([
-            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/'
+            'telephone' => 'required|regex:/(228)[9]([0-9]){7}/'
         ], [
             'telephone.required' => 'Le champ du téléphone est requis',
             'telephone.regex' => 'Votre numéro est incorrect'
         ]);
 
-        $telephone = substr($request->telephone, 1);
+        $telephone = $request->telephone;
 
         $etudiants = User::where('telephone', $telephone)->where('filiere_id', '<>', null)->get();
 
         if(count($etudiants) == 0) {
-            abort('404');
+            return redirect()->route('eLogin');
         } else {
             foreach ($etudiants as $etudiant) {
                 session()->put('id', $etudiant->id);

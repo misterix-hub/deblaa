@@ -190,7 +190,7 @@ class MessageController extends Controller
                 <script>
 
                     setTimeout(() => {
-                        window.location = "localhost/deblaa/structures/messages";
+                        window.location = "https://deblaa.com/structures/messages";
                     }, 5000);
 
                 </script>
@@ -289,8 +289,8 @@ class MessageController extends Controller
                                 $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $numero_trie2[$i] ; /*. "". $telephone->departement_id*/
                             }
                             ?>
-                            <!-- <script src="https://deblaa.com/mdb/js/jquery.min.js"></script> -->
-                            <script src="../../mdb/js/jquery.js"></script>
+                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                            <!-- <script src="../../mdb/js/jquery.js"></script> -->
                             <script>
                                 let inputs = document.querySelectorAll('input');
 
@@ -315,7 +315,7 @@ class MessageController extends Controller
                     ?>
                     <script>
                         setTimeout(() => {
-                            window.location = "localhost/deblaa/structures/messages";
+                            window.location = "https://deblaa.com/structures/messages";
                         }, 5000);
 
                     </script>

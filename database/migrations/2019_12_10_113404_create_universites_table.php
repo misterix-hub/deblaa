@@ -15,8 +15,8 @@ class CreateUniversitesTable extends Migration
     {
         Schema::create('universites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nom');
-            $table->string('sigle');
+            $table->string('nom')->unique();
+            $table->string('sigle')->unique();
             $table->string('logo')->nullable();
             $table->string('telephone')->nullable();
             $table->integer('message_bonus')->nullable();

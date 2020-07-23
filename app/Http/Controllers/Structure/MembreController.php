@@ -102,7 +102,9 @@ class MembreController extends Controller
         if ($request->groupe == "") {
             return back()->with('error', "Impossble d'ajouter un membre sans groupe !");
         } else {
+
             $telephone =  substr($_POST['code_select'], 1).$request->input('telephone');
+
             $check_membre = User::where('telephone', $telephone)->where('departement_id', $request->groupe)->get();
 
             if (count($check_membre) != 0) {

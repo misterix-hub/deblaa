@@ -60,18 +60,24 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('admin/statistiques/universites/show/{id}/', function ($id) {
 
-        return view('statistiques.universite.show', [
-            'universite' => Universite::findOrFail($id),
-            /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
-                                        ->where('universites.id', $id)->orderByDesc('facture_universites.id')
-                                        ->limit(1)->get(),*/
-            'montantUniversite' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
-            'messages' => MessageUniversite::where('universite_id', $id)->get(),
-            'users' => User::where('filiere_id', '<>', null)->get(),
-            'cible_message_universites' => CibleMessageUniversite::all(),
-            'numero_facture_universites' => FactureUniversite::all(),
-            'numero_facture_structures' => FactureStructure::all()
-        ]);
+        $statistique_universite = FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first();
+
+        if (is_null($statistique_universite)) {
+            return view('statistiques.universite.showNoStat');
+        } else {
+            return view('statistiques.universite.show', [
+                'universite' => Universite::findOrFail($id),
+                /*'universites' => FactureUniversite::leftJoin('universites', 'universite_id', 'universites.id')
+                                            ->where('universites.id', $id)->orderByDesc('facture_universites.id')
+                                            ->limit(1)->get(),*/
+                'montantUniversite' => FactureUniversite::where('universite_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
+                'messages' => MessageUniversite::where('universite_id', $id)->get(),
+                'users' => User::where('filiere_id', '<>', null)->get(),
+                'cible_message_universites' => CibleMessageUniversite::all(),
+                'numero_facture_universites' => FactureUniversite::all(),
+                'numero_facture_structures' => FactureStructure::all()
+            ]);
+        }
     });
 
     Route::get('admin/statistiques/structures/show/{id}/', function ($id) {

@@ -51,8 +51,8 @@ class LoginController extends Controller
     public function registerProcessing(Request $request) {
 
         $request->validate([
-            'nom' => 'required|min:1|max:100',
-            'sigle' => 'required|string|min:2|max:11',
+            'nom' => 'required|min:1|max:100|unique:universites,nom',
+            'sigle' => 'required|string|min:2|max:11|unique:universites,sigle',
             'email' => 'required|email'
         ],
             [
@@ -63,6 +63,8 @@ class LoginController extends Controller
                 'nom.required' => 'Le champ du nom est requis',
                 'nom.min' => 'Votre nom est trop court',
                 'nom.max' => 'Le nombre de caractères est atteint',
+                'nom.unique' => 'Université déjà existante, veuillez renseigner le nom de votre université',
+                'sigle.unique' => 'Ce sigle est déjà utilisé, veuillez renseigner un sigle pour votre compte université',
                 'email.required' => 'le champ Email est requis',
                 'email.email' => 'Adresse électronique incorrecte'
             ]);
@@ -94,21 +96,21 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            /*\Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
                 $message->to($to_email)
                         ->subject("Votre mot de passe de Deblaa");
-            });*/
+            });
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('uRegisterSuccess'.$password));
+            return redirect(route('uRegisterSuccess'));
         }
 
     }
 
     public function registerSuccess() {
         if(!session()->has('email')) {
-            abort('404');
+            return route('uRegister')->with('error', 'Email non renseigné');
         } else {
             return view('universite.success.register');
         }
