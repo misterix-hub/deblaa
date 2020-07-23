@@ -5,6 +5,7 @@ namespace App\Models;
 use App\User;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * Class Departement
@@ -19,7 +20,7 @@ class Departement extends Model
     use SoftDeletes;
 
     public $table = 'departements';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -62,5 +63,23 @@ class Departement extends Model
         return $this->hasMany(User::class);
     }
 
-    
+    public function pathShow() {
+        return url("structures/groupes/{$this->id}-" . Str::slug(Str::random(15) . "-" . $this->nom) . "/details");
+    }
+
+    public function pathModifier() {
+        return url("structures/groupes/{$this->id}-" . Str::slug(Str::random(15) . "-" . $this->nom) . "/modifier");
+    }
+
+    public function pathSupprimer() {
+        return url("structures/groupes/{$this->id}-" . Str::slug(Str::random(15) . "-" . $this->nom) . "/supprimer");
+    }
+
+    public function pathAddMember() {
+        return url("structures/membres/ajouter/{$this->id}-" . Str::slug(Str::random(30)));
+    }
+
+    public function pathAddMembersByList() {
+        return url("structures/membres/departement-contact/{$this->id}-" . Str::slug(Str::random(30)));
+    }
 }

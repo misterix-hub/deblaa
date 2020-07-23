@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="">
-        
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12" style="border-right: 1px solid #CCC;">
-                    
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
 
@@ -20,7 +20,7 @@
                                     </button>
                                 </ul>
                             @endif
-            
+
                             <?php $send_message = 0; ?>
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success">
@@ -47,7 +47,7 @@
                                     @forelse($messages as $message)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('sDetailsMessage', $message->id) }}">
+                                                <a href="{{ $message->pathDetails() }}">
                                                     <div class="indigo lighten-5 pt-2 pb-2 pr-3 pl-3 mb-1 mt-1 text-muted float-right"
                                                     style="border-radius: 25px;">
                                                         <b>{{ $message->titre }}</b><br />
@@ -70,13 +70,13 @@
                                 <i class="icofont-facebook-messenger"></i>
                                 <b>Envoyer un nouveau message</b>
                             </a><br /><br />
-                            
+
                         </div>
                     </div><br /><br /><br /><br />
 
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 menu-item-sm-hide">
-                    
+
                     @include('included.sideBarRight')
 
                 </div>

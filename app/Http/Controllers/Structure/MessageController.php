@@ -23,7 +23,7 @@ class MessageController extends Controller
 
     public function index() {
         if (!session()->has('id')) {
-            abort("404");
+            return redirect(route('sLogin'));
         } else {
 
             return view('structure.message.liste', [
@@ -46,7 +46,7 @@ class MessageController extends Controller
 
     public function create() {
         if (!session()->has('id')) {
-            abort('404');
+            return redirect(route('sLogin'));
         } else {
             return view('structure.message.envoyer', [
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
@@ -163,15 +163,18 @@ class MessageController extends Controller
                             $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $numero_trie1[$i] ;
                         }
                         ?>
-                        <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                        <!-- <script src="https://deblaa.com/mdb/js/jquery.min.js"></script> -->
+                        <script src="../../mdb/js/jquery.js"></script>
                         <script>
+                            let inputs = document.querySelectorAll('input');
+
                             $(document).ready(function () {
-                                $(function () {
-                                    $.ajax({
-                                        type: "GET",
-                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
-                                    })
+                                $.ajax({
+                                    type: "GET",
+                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                                 });
+
+                                inputs.forEach(input => input.value = '');
                             });
                         </script>
 
@@ -187,9 +190,7 @@ class MessageController extends Controller
                 <script>
 
                     setTimeout(() => {
-                        <?php
-                            return redirect(route('sListeMessage'))->with('success', 'Votre message a été en voyé avec succès');
-                        ?>
+                        window.location = "localhost/deblaa/structures/messages";
                     }, 5000);
 
                 </script>
@@ -288,15 +289,18 @@ class MessageController extends Controller
                                 $texte = $titre . " *** https://deblaa.com/membres/query?telephone= " . $numero_trie2[$i] ; /*. "". $telephone->departement_id*/
                             }
                             ?>
-                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                            <!-- <script src="https://deblaa.com/mdb/js/jquery.min.js"></script> -->
+                            <script src="../../mdb/js/jquery.js"></script>
                             <script>
+                                let inputs = document.querySelectorAll('input');
+
                                 $(document).ready(function () {
-                                    $(function () {
-                                        $.ajax({
-                                            type: "GET",
-                                            url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
-                                        });
+                                    $.ajax({
+                                        type: "GET",
+                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
                                     });
+
+                                    inputs.forEach(input => input.value = '');
                                 });
                             </script>
 
@@ -310,11 +314,8 @@ class MessageController extends Controller
                     //
                     ?>
                     <script>
-
                         setTimeout(() => {
-                            <?php
-                                return redirect(route('sListeMessage'))->with('success', 'Votre message a été envoyé avec succès');
-                            ?>
+                            window.location = "localhost/deblaa/structures/messages";
                         }, 5000);
 
                     </script>
@@ -347,7 +348,7 @@ class MessageController extends Controller
 
     public function details($id) {
         if(!session()->has('id')) {
-            abort('404');
+            return redirect(route('sLogin'));
         } else {
 
 
@@ -400,7 +401,7 @@ class MessageController extends Controller
 
     public function alert() {
         if( !session()->has('id')){
-            abort('404');
+            return redirect(route('sLogin'));
         } else {
             return view('structure.alert');
         }

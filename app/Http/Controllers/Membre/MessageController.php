@@ -15,7 +15,7 @@ class MessageController extends Controller
 {
     public function inbox() {
         if(!session()->has('id')) {
-            abort('404');
+            return redirect(route('mLogin'));
         } else {
 
             return view('membre.inbox');
@@ -88,7 +88,7 @@ class MessageController extends Controller
 
     public function inboxs() {
         if (!session()->has('id')) {
-            abort('404');
+            return redirect(route('mLogin'));
         } else {
             return view('membre.inboxs', [
                 'messages' => CibleMessageStructure::where('departement_id', session()->get('departement_id'))

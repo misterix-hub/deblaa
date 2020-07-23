@@ -226,7 +226,7 @@
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="text-center px-md-4">
                             @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
-                                <a href="{{ route('sCompte', $structure->id) }}">
+                                <a href="{{ route('sCompte', $structure) }}">
                                     <div class="d-block d-md-none">
                                         <i class="icofont-user spinnerShower"></i><br>
                                         <span  class="spinnerShower" style="font-size: 8px;">Profil</span>
@@ -416,7 +416,7 @@
     </form>
 
 
-    <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"
+    {{--  <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content" style="border-radius: 15px;">
@@ -579,7 +579,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>  --}}
 
 @endsection
 

@@ -89,19 +89,19 @@
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="{{ route('sListContactByDepartment', $groupe->id) }}">Mes contacts</a>
-                                                        <a class="dropdown-item" href="{{ route('sCreateMembre', $groupe->id) }}">Nouveau</a>
+                                                        <a class="dropdown-item" href="{{ $groupe->pathAddMembersByList() }}">Mes contacts</a>
+                                                        <a class="dropdown-item" href="{{ $groupe->pathAddMember() }}">Nouveau</a>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('sDetailsGroupe', $groupe->id) }}" title="Détails du groupe" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ $groupe->pathShow() }}" title="Détails du groupe" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-plus"></i>
                                                 </a>
-                                                <a href="{{ route('sModifierGroupe', $groupe->id) }}" title="Modifier le  groupe" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ $groupe->pathModifier()}}" title="Modifier le  groupe" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-edit"></i>
                                                 </a>
-                                                <a href="{{ route('sSupprimerGroupe', $groupe->id) }}" title="Supprimer le groupe" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe->nom }} ? Tous les membres de ce groupe seront également supprimés.')"
+                                                <a href="{{ $groupe->pathSupprimer() }}" title="Supprimer le groupe" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe->nom }} ? Tous les membres de ce groupe seront également supprimés.')"
                                                     class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-trash"></i>
                                                 </a>

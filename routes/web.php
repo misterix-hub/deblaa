@@ -76,18 +76,24 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('admin/statistiques/structures/show/{id}/', function ($id) {
 
-        return view('statistiques.structure.show', [
-            'structure' => Structure::findOrFail($id),
-            /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
-                                        ->where('structures.id', $id)->orderByDesc('facture_structures.id)
-                                        ->limit(1)->get(),*/
-            'montantStructure' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
-            'messages' => MessageStructure::where('structure_id', $id)->get(),
-            'users' => User::where('departement_id', '<>', null)->get(),
-            'cible_message_structures' => CibleMessageStructure::all(),
-            'numero_facture_universites' => FactureUniversite::all(),
-            'numero_facture_structures' => FactureStructure::all()
-        ]);
+        $statistique_structure = FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first();
+
+        if (is_null($statistique_structure)) {
+            return view('statistiques.structure.showNoStat');
+        } else {
+            return view('statistiques.structure.show', [
+                'structure' => Structure::findOrFail($id),
+                /*'structures' => FactureStructure::rightJoin('structures', 'structure_id', 'structures.id')
+                                            ->where('structures.id', $id)->orderByDesc('facture_structures.id)
+                                            ->limit(1)->get(),*/
+                'montantStructure' => FactureStructure::where('structure_id', $id)->orderByDesc('id')->limit(1)->get('montant')->first()->montant,
+                'messages' => MessageStructure::where('structure_id', $id)->get(),
+                'users' => User::where('departement_id', '<>', null)->get(),
+                'cible_message_structures' => CibleMessageStructure::all(),
+                'numero_facture_universites' => FactureUniversite::all(),
+                'numero_facture_structures' => FactureStructure::all()
+            ]);
+        }
     });
 
     Route::post('admin/factures/universite/regler', function(Request $request) {
@@ -161,7 +167,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 /*Route::get('universites/etudiants/ajouter/filiere-niveau', 'Universite\EtudiantController@ajaxContactSpinneret')->name('ajaxListContact');*/
-Route::get('universite/ etudiants/filter', 'Universite\EtudiantController@ajaxListStudent')->name('ajaxListStudent');
+ Route::get('universite/ etudiants/filter', 'Universite\EtudiantController@ajaxListStudent')->name('ajaxListStudent');
 
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
@@ -208,26 +214,26 @@ Route::get('universite/alerte-message', 'Universite\MessageController@alert')->n
 Route::get('structures', 'Structure\MainController@index')->name('indexStructure');
 Route::get('structures/groupes', 'Structure\GroupeController@index')->name('sListeGroupe');
 Route::post('structures/groupes', 'Structure\GroupeController@store')->name('sAjouterGroupe');
-Route::get('structures/groupes/{id}/details', 'Structure\GroupeController@show')->name('sDetailsGroupe');
-Route::get('structures/groupes/{id}/modifier', 'Structure\GroupeController@edit')->name('sModifierGroupe');
+Route::get('structures/groupes/{id}-{slug}/details', 'Structure\GroupeController@show')->name('sDetailsGroupe');
+Route::get('structures/groupes/{id}-{slug}/modifier', 'Structure\GroupeController@edit')->name('sModifierGroupe');
 Route::post('structures/groupes/{id}/update', 'Structure\GroupeController@update')->name('sUpdateGroupe');
-Route::get('structures/groupes/{id}/supprimer', 'Structure\GroupeController@destroy')->name('sSupprimerGroupe');
+Route::get('structures/groupes/{id}-{slug}/supprimer', 'Structure\GroupeController@destroy')->name('sSupprimerGroupe');
 
-Route::get('structures/membres/ajouter/{departement}', 'Structure\MembreController@create')->name('sCreateMembre');
-Route::get('structures/membres/departement-contact/{departement}', 'Structure\MembreController@listContactByDepartment')->name('sListContactByDepartment');
+Route::get('structures/membres/ajouter/{departement}-{slug}', 'Structure\MembreController@create')->name('sCreateMembre');
+Route::get('structures/membres/departement-contact/{departement}-{slug}', 'Structure\MembreController@listContactByDepartment')->name('sListContactByDepartment');
 Route::post('structures/membres/departement-contact/insertion', 'Structure\MembreController@insertContact')->name('sInsertContact');
 Route::post('structures/membres', 'Structure\MembreController@store')->name('sAjouterMembre');
 Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
-Route::get('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
+Route::delete('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
 
 Route::get('structures/messages/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
 Route::post('structures/messages/envoyer', 'Structure\MessageController@envoyer')->name('sEnvoyerMessageForm');
 Route::get('structures/messages', 'Structure\MessageController@index')->name('sListeMessage');
 Route::get('structures/messages/bilan', 'Structure\MessageController@bilan')->name('sBilanMessage');
-Route::get('structures/messages/{id}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
+Route::get('structures/messages/{id}-{slug}/details', 'Structure\MessageController@details')->name('sDetailsMessage');
 
-Route::get('structures/{id}/profil', 'Structure\CompteController@edit')->name('sCompte');
-Route::post('structures/{id}/profil/update', 'Structure\CompteController@update')->name('sCompteUpdate');
+Route::get('structures/{structure}/profil', 'Structure\CompteController@edit')->name('sCompte');
+Route::post('structures/{structure}/profil/update', 'Structure\CompteController@update')->name('sCompteUpdate');
 Route::get('structures/login', 'Structure\MainController@login')->name('sLogin');
 Route::post('structures/login/processing', 'Structure\LoginController@loginProcessing')->name('sLoginProcessing');
 
@@ -240,8 +246,8 @@ Route::get('structures/register/success', 'Structure\LoginController@registerSuc
 
 Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
-Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
-Route::get('structures/{id}/{formule}/paiements', 'Structure\CompteController@modePaiement')->name('sModePaiement');
+//Route::get('structures/demande', 'Structure\CompteController@comptePro')->name('sDemandeComptePro');
+//Route::get('structures/{id}/{formule}/paiements', 'Structure\CompteController@modePaiement')->name('sModePaiement');
 
 Route::get('structure/alerte-message', 'Structure\MessageController@alert')->name('alertStructure');
 

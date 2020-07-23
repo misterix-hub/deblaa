@@ -44,21 +44,21 @@ class LoginController extends Controller
     public function query(Request $request) {
 
         $request->validate([
-            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/'
+            'telephone' => 'required|regex:/(228)[9]([0-9]){7}/'
         ],
             [
                 'telephone.required' => 'Le champ du téléphone est requis',
                 'telephone.regex' => 'Numéro incorrect'
             ]);
 
-        $telephone = substr($request->telephone, 1);
+        $telephone = $request->telephone;
         $password = $request->password;
 
 
        $membres = User::where('telephone' , $telephone)->get();
 
         if(count($membres) == 0) {
-            abort('404');
+            return redirect(route('mLogin'));
         } else {
             foreach ($membres as $membre) {
                 session()->put('id', $membre->id);

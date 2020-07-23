@@ -35,13 +35,13 @@
                     </div>
                 @endif
 
-                <form action="{{ route('sEnvoyerMessageForm') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('sEnvoyerMessageForm') }}" method="post" enctype="multipart/form-data" id="sEnvoyerMessageForm">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <label for="titre"><b>Titre du message</b></label>
-                            <input type="text" maxLength="191"  required name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
+                            <input type="text" maxLength="191"  name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <br />
@@ -58,7 +58,7 @@
                     <label for="editor"><b>Contenu du message</b></label>
                     <textarea name="message" id="editor"></textarea><br />
 
-                    @if (count($groupes) != 0)    
+                    @if (count($groupes) != 0)
                         <input type="checkbox" class="allGroupes0" id="all">
                         <label for="all" class="font-weight-bold"><b>Envoyer à tous les membres</b></label><br /><br />
                     @endif
@@ -73,7 +73,7 @@
                         @endforeach
                     </div><br />
                     {!! (count($groupes)) == 0 ? '<span class=\'red-text\'>Impossible d\'envoyer sans ancun groupe</span>' : '' !!}<br />
-                    <button type="submit" class="btn btn-indigo upload btn-md rounded ml-0 {{ (count($groupes)) == 0 ? 'disabled' : '' }}">
+                    <button type="submit" id="submitButtonForm" class="btn btn-indigo upload btn-md rounded ml-0 {{ (count($groupes)) == 0 ? 'disabled' : '' }}">
                         Envoyer
                     </button>
 
@@ -88,11 +88,16 @@
     <script>
         CKEDITOR.replace('editor');
 
+
+
         $(document).ready(function () {
             $(".allGroupes0").change(function () {
                 $(".groupeCheckBox0").prop("checked", $(this).prop("checked"));
             });
 
+            $("#sEnvoyerMessageForm").on("submit", function () {
+                $("#submitButtonForm").attr("disabled", true);
+            });
         });
 	/* VICTOR SI TU ARRIVES ICI TU PEUX LAISSER, C'EST DEJA FAIT */
 

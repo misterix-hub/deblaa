@@ -27,7 +27,7 @@ class GroupeController extends Controller
     public function index()
     {
         if (!session()->has('id')) {
-            abort("404");
+            return redirect(route('sLogin'));
         } else {
             return view('structure.groupe.liste', [
                 'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
@@ -87,7 +87,7 @@ class GroupeController extends Controller
     public function show($id)
     {
         if (!session()->has('id')) {
-            abort("404");
+            return redirect(route('sLogin'));
         } else {
             return view('structure.groupe.details', [
                 'groupe' => Departement::findOrFail($id),
@@ -118,7 +118,7 @@ class GroupeController extends Controller
     public function edit($id)
     {
         if (!session()->has('id')) {
-            abort("404");
+            return redirect(route('sLogin'));
         } else {
             return view('structure.groupe.modifier', [
                 "groupe" => Departement::findOrFail($id),

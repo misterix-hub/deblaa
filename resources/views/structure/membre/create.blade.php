@@ -91,7 +91,7 @@
                             </tr>
                         </table>
                         <div>
-                            <a href="{{ route('sDetailsGroupe', $groupe->id) }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
+                            <a href="{{ $groupe->pathShow() }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
                             <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
                         </div>
                     </form>

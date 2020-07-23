@@ -8,6 +8,7 @@ use App\Models\Niveau;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -51,4 +52,5 @@ class User extends Authenticatable
     public function niveau() {
         return $this->belongsTo(Niveau::class);
     }
+
 }
