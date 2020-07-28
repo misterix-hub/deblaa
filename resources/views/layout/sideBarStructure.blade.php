@@ -63,6 +63,7 @@
 @endsection
 
 @section('sideBar')
+<?php  $structure = \App\Models\Structure::findOrFail(session()->get('id'))?>
     <div class="side-bar indigo lighten-5">
         <a href="{{ route('indexStructure') }}">
             <div class="indigo p-1 darken-1">
@@ -100,7 +101,7 @@
                             <b>Structure</b>
                         </td>
                         <td class="text-right menu-item-sm-hide">
-                            <a href="{{ route('sCompte', session()->get('id')) }}">
+                            <a href="{{ route('sCompte', $structure) }}">
                                 <small>Modifier</small>
                             </a>
                         </td>
@@ -225,7 +226,6 @@
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="text-center px-md-4">
-                            @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
                                 <a href="{{ route('sCompte', $structure) }}">
                                     <div class="d-block d-md-none">
                                         <i class="icofont-user spinnerShower"></i><br>
@@ -240,7 +240,6 @@
                                         <span class="spinnerShower">Afficher le profil</span>
                                     </div>
                                 </a>
-                            @endforeach
                             <a href="{{ route('sLogout') }}">
                                 <div class="d-block d-md-none"><br>
                                     <i class="icofont-power spinnerShower"></i>
@@ -312,8 +311,8 @@
                                 <i class="icofont-navigation-menu"></i>
                             </a>
                             <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
-                                <a class="dropdown-item spinnerShower" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
-                                <a class="dropdown-item spinnerShower" href="{{ route('logout') }}">Déconnexion</a>
+                                <a class="dropdown-item spinnerShower" href="{{ route('sCompte', $structure)}}">Paramètres de compte</a>
+                                <a class="dropdown-item spinnerShower" href="{{ route('sLogout') }}">Déconnexion</a>
                             </div>
                         </div>
                         <a href="{{ route('indexStructure') }}" class="spinnerShower">
@@ -363,7 +362,7 @@
         </div>
     </form>
 
-    <form action="{{ route('sAjouterMembre') }}" method="post">
+    {{--  <form action="{{ route('sAjouterMembre') }}" method="post">
         <div class="modal fade" id="etudiantModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -413,7 +412,7 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form>  --}}
 
 
     {{--  <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"

@@ -14,6 +14,8 @@ use App\MessageStructure;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class MembreController extends Controller
 {
@@ -127,7 +129,7 @@ class MembreController extends Controller
                     $user->password = $password;
                     $user->save();
 
-                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+                    return redirect(route('sListeGroupe'))->with('success', "Membre ajouté avec succès !");
 
                 } else {
                     $password = "DB" . rand(1021, 9999);
@@ -139,11 +141,12 @@ class MembreController extends Controller
                     $user->fonction = $request->role;
                     $user->departement_id = $request->groupe;
                     $user->password = bcrypt($password);
+                    $user->access_id = Str::random(15).Str::substr(Hash::make($password), 7);
                     $user->save();
                     session()->put('msg_tel', $telephone);
                     session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
 
-                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+                    return redirect(route('sListeGroupe'))->with('success', "Membre ajouté avec succès ! ".$password);
                 }
             }
         }
@@ -282,7 +285,11 @@ class MembreController extends Controller
                 /*}*/
             }
 
-            return redirect(route('sDetailsGroupe', $request->input('department')))->with('success', count($insert_contact) > 1 ? 'Les contacts sélectionnés ont bien été enregistrés dans le groupe' : 'Le contact sélectionné a bien été enregistré dans le groupe');
+            $requestNomDepartement = Departement::where('id', $request->input('department'))->first();
+            $nomDepartement = $requestNomDepartement->nom;
+
+
+            return redirect(route('sDetailsGroupe', [$request->input('department'),  Str::slug(Str::random(15) . "-" . $nomDepartement)]))->with('success', count($insert_contact) > 1 ? 'Les contacts sélectionnés ont bien été enregistrés dans le groupe' : 'Le contact sélectionné a bien été enregistré dans le groupe');
 
             /*if (count($verify_contact) != 0 && count($insert_contact) != 0) {
                 return redirect(route('sListeGroupe'))->with('warning', count($insert_contact) > 1 ? 'Les contacts qui existaient dans ce groupe ne sont plus insérés. Cependant l\'insertion des autres membres a bien été effectué' : 'Les contacts qui existaient dans ce groupe ne sont plus insérés. Cependant l\'insertion du membre a bien été effectué');

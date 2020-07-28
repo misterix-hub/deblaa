@@ -84,11 +84,11 @@
                                             </td>
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-success btn-sm">Ajouter membre</button>
+                                                    <button type="button" class="btn btn-success btn-sm" type="button" data-toggle="dropdown" id="contactDropDown" >Ajouter membre</button>
                                                     <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
-                                                    <div class="dropdown-menu">
+                                                    <div class="dropdown-menu" aria-labelledby="contactDropDown">
                                                         <a class="dropdown-item" href="{{ $groupe->pathAddMembersByList() }}">Mes contacts</a>
                                                         <a class="dropdown-item" href="{{ $groupe->pathAddMember() }}">Nouveau</a>
                                                     </div>

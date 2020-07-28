@@ -149,6 +149,7 @@ class EtudiantController extends Controller
                 $user->filiere_id = $request->filiere;
                 $user->niveau_id = $request->niveau;
                 $user->password = bcrypt($password);
+                $user->access_id = Str::random(15).Str::substr(Hash::make($password), 7);
                 $user->save();
 
                 session()->put('msg_tel', $telephone);

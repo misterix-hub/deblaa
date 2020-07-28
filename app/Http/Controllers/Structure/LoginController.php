@@ -107,7 +107,7 @@ class LoginController extends Controller
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('sRegisterSuccess'));
+            return redirect(route('sRegisterSuccess - '.$password));
         }
 
     }
@@ -126,7 +126,7 @@ class LoginController extends Controller
         session()->forget('category');
         session()->forget('message_bonus');
 
-        return redirect(route('indexVisitors'));
+        return redirect(route('sLogin'));
     }
 
 }

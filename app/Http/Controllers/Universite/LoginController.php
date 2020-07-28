@@ -117,12 +117,8 @@ class LoginController extends Controller
     }
 
     public function logout() {
-        session()->forget('id');
-        session()->forget('logo');
-        session()->forget('sigle');
-        session()->forget('category');
-        session()->forget('message_bonus');
+        session()->flush();
 
-        return redirect(route('indexVisitors'));
+        return redirect(route('uLogin'));
     }
 }

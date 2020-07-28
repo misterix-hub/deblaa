@@ -63,6 +63,7 @@
 @endsection
 
 @section('sideBar')
+<?php  $universite = \App\Models\Universite::findOrFail(session()->get('id'))?>
     <div class="side-bar indigo lighten-5">
         <a href="{{ route('indexUniversite') }}">
             <div class="indigo p-1 darken-1">
@@ -100,7 +101,7 @@
                             <b>Université</b>
                         </td>
                         <td class="text-right menu-item-sm-hide">
-                            <a href="{{ route('uCompte', session()->get('id')) }}">
+                            <a href="{{ route('uCompte', $universite)) }}">
                                 <small>Modifier</small>
                             </a>
                         </td>
@@ -225,23 +226,21 @@
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                         <div class="pl-4 pr-4">
-                            @foreach(\App\Models\Structure::where('id', session()->get('id'))->get() as $structure)
-                                <a href="{{ route('uCompte', $structure->id) }}">
-                                    <div class="d-block d-md-none">
-                                        <i class="icofont-user spinnerShower"></i><br>
-                                        <span  class="spinnerShower" style="font-size: 8px;">Profil</span>
-                                    </div>
-                                    <div class="d-none d-md-block d-lg-none">
-                                        <i class="icofont-user spinnerShower"></i><br>
-                                        <span  class="spinnerShower" style="font-size: 8px;">Afficher le profil</span>
-                                    </div>
-                                    <div class="d-none d-lg-block">
-                                        <i class="icofont-user spinnerShower"></i>&nbsp;
-                                        <span class="spinnerShower">Afficher le profil</span>
-                                    </div>
-                                </a>
-                            @endforeach
-                            <a href="{{ route('sLogout') }}">
+                            <a href="{{ route('uCompte', $universite) }}">
+                                <div class="d-block d-md-none">
+                                    <i class="icofont-user spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Profil</span>
+                                </div>
+                                <div class="d-none d-md-block d-lg-none">
+                                    <i class="icofont-user spinnerShower"></i><br>
+                                    <span  class="spinnerShower" style="font-size: 8px;">Afficher le profil</span>
+                                </div>
+                                <div class="d-none d-lg-block">
+                                    <i class="icofont-user spinnerShower"></i>&nbsp;
+                                    <span class="spinnerShower">Afficher le profil</span>
+                                </div>
+                            </a>
+                            <a href="{{ route('logout') }}">
                                 <div class="d-block d-md-none"><br>
                                     <i class="icofont-power spinnerShower"></i>
                                     <span  class="spinnerShower" style="font-size: 8px;">Deconnexion</span>
@@ -312,7 +311,7 @@
                                 <i class="icofont-navigation-menu"></i>
                             </a>
                             <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="{{ route('sCompte', session()->get('id')) }}">Paramètres de compte</a>
+                                <a class="dropdown-item" href="{{ route('sCompte', $universite) }}">Paramètres de compte</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}">Déconnexion</a>
                             </div>
                         </div>

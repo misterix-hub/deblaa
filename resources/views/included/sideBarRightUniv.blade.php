@@ -1,3 +1,4 @@
+<?php  $universite = \App\Models\Universite::findOrFail(session()->get('id'))?>
 <div class="mt-2 mb-2"></div>
 <div class="mt-2"></div>
 @if(session()->get('pro') == 0)
@@ -75,7 +76,7 @@
 
         <div class="text-center">
             <br />
-            <a href="{{ route('uCompte', session()->get('id')) }}">
+            <a href="{{ route('uCompte', $universite) }}">
                 <i class="icofont-pencil"></i>Modifier le profil
             </a>
         </div>

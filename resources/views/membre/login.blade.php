@@ -101,7 +101,7 @@
                             Mot de passe oublié ?
                         </a><hr />
 
-                        Si vous n'avez pas encore de compte, <a href="">cliquez ici</a>
+                        Si vous n'avez pas encore de compte, <a href="#">cliquez ici</a>
                         Pour vous informer de comment avoir un compte.
 
                     </form>

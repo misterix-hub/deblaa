@@ -167,10 +167,14 @@ class MessageController extends Controller
 
                 for($i = 0; $i < sizeof($numero_trie1); $i++) {
 
+                    $getNumber1 = $numero_trie1[$i];
+
+                    $getAccessId1 = User::where('telephone', $getNumber1)->whereNotNull('access_id')->first();
+
                     if ($request->fichier != "") {
-                        $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "";
+                        $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id;
                     } else {
-                        $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone= " . $numero_trie1[$i] . "";
+                        $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id;
                     }
                     ?>
                     <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
@@ -180,7 +184,7 @@ class MessageController extends Controller
                         $(document).ready(function () {
                             $.ajax({
                                 type: "GET",
-                                url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?php session()->get('sigle')?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                                url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?= session()->get('sigle') ?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                             });
 
                             inputs.forEach(input => input.value = '');
@@ -298,10 +302,14 @@ class MessageController extends Controller
 
                     for($i = 0; $i < sizeof($numero_trie2); $i++) {
 
+                        $getNumber2 = $numero_trie2[$i];
+
+                        $getAccessId2 = User::where('telephone', $getNumber2)->whereNotNull('access_id')->first();
+
                         if ($request->fichier != "") {
-                            $texte = $message_universite->titre. " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie2 . "";
+                            $texte = $message_universite->titre. " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie2 . "&keyaccess=" . $getAccessId2->access_id;
                         } else {
-                            $texte = $titre. " *** https://deblaa.com/etudiants/query?telephone= " . $numero_trie2[$i] . "";
+                            $texte = $titre. " *** https://deblaa.com/etudiants/query?telephone=" . $numero_trie2[$i] . "&keyaccess=" .  $getAccessId2->access_id ;
                         }
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>

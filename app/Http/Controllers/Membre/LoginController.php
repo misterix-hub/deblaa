@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Membre;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -44,18 +45,20 @@ class LoginController extends Controller
     public function query(Request $request) {
 
         $request->validate([
-            'telephone' => 'required|regex:/(228)[9]([0-9]){7}/'
+            'telephone' => 'required|regex:/(228)[9]([0-9]){7}/',
+            'keyaccess' => 'required'
         ],
             [
-                'telephone.required' => 'Le champ du téléphone est requis',
-                'telephone.regex' => 'Numéro incorrect'
+                'telephone.required' => 'Numéro de téléphone non renseigné',
+                'telephone.regex' => 'Numéro incorrect',
+                'keyaccess.required' => 'clé d\'accès non renseigné'
             ]);
 
         $telephone = $request->telephone;
-        $password = $request->password;
+        $keyaccess = $request->keyaccess;
 
 
-       $membres = User::where('telephone' , $telephone)->get();
+       $membres = User::where(['telephone' => $telephone, 'access_id' => $keyaccess])->get();
 
         if(count($membres) == 0) {
             return redirect(route('mLogin'));
@@ -70,5 +73,11 @@ class LoginController extends Controller
 
             return redirect(route('inboxsMembre'));
         }
+    }
+
+    public function logout() {
+        session()->flush();
+
+        return redirect(route('mLogin'));
     }
 }

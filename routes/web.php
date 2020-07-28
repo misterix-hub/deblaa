@@ -259,7 +259,7 @@ Route::get('structure/alerte-message', 'Structure\MessageController@alert')->nam
 
 /* ETUDIANT */
 
-Route::get('etudiants/query', 'Etudiant\LoginController@query');
+Route::get('etudiants/connecting-processing', 'Etudiant\LoginController@query');
 
 Route::get('etudiants/inbox', 'Etudiant\MessageController@inbox')->name('inboxEtudiant');
 Route::get('etudiants/inboxs', 'Etudiant\MessageController@inboxs')->name('inboxsEtudiant');
@@ -271,10 +271,11 @@ Route::get('etudiants/message/{id}/details', 'Etudiant\MessageController@sDetail
 
 Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');
+Route::get('etudiants/logout', 'Etudiant\LoginController@logout')->name('eLogout');
 
 /* MEMBRE */
 
-Route::get('membres/query', 'Membre\LoginController@query');
+Route::get('membres/directcnx', 'Membre\LoginController@query');
 
 Route::get('membres/inbox', 'Membre\MessageController@inbox')->name('inboxMembre');
 Route::get('membres/inboxs', 'Membre\MessageController@inboxs')->name('inboxsMembre');
@@ -286,5 +287,6 @@ Route::get('membres/message/{id}/details', 'Membre\MessageController@sDetails')-
 
 Route::get('membres/login', 'Membre\MainController@login')->name('mLogin');
 Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing')->name('mLoginProcessing');
+Route::get('membres/logout', 'Membre\LoginController@logout')->name('mLogout');
 
 
