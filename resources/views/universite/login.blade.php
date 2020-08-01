@@ -99,7 +99,7 @@
 
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script !src="">
         $(document).ready(function () {
             $('.firstEye').click(function () {

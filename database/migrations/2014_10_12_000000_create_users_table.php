@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('telephone')->nullable();
-            $table->string('fonction')->nullable();
+            $table->string('acronyme_niveau')->nullable();
             $table->unsignedInteger('departement_id')->nullable();
             $table->unsignedInteger('filiere_id')->nullable();
             $table->unsignedInteger('niveau_id')->nullable();

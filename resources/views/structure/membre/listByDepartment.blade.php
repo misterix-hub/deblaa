@@ -90,7 +90,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <div class="float-right">
+                                <div class="form-group float-right">
                                     @if ($countContact > 0)
                                             <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
                                     @endif

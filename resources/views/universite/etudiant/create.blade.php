@@ -81,23 +81,14 @@
                                     </select> --}}
                                 </td>
                                 <td>
-                                    <label for="filiere"><b>Niveau</b></label>
-                                    <select required name="niveau" id="niveau" class="form-control">
-                                        @forelse ($filiere_niveaux as $niveau)
-                                            <option value="{{ $niveau->niveau_id }}">
-                                                @foreach (\App\Models\Niveau::all() as $item)
-                                                    {{ $niveau->niveau_id === $item->id ? $item->nom : '' }}
-                                                @endforeach
-                                            </option>
-                                        @empty
-                                            <option value="">Aucun niveau</option>
-                                        @endforelse
-                                    </select>
+                                    <label for="niveau"><b>Niveau</b></label>
+                                    <input type="text" name="niveau" id="niveau" required class="form-control" value="{{ \App\Models\Niveau::where('id', $niveau)->get('nom')->first()->nom }}" readonly>
+                                    <input type="hidden" name="niveau" value="{{ $niveau }}">
                                 </td>
                             </tr>
                         </table>
                         <div class="mt-3">
-                            <a href="{{ $filiere->pathDetails() }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
+                            <a href="{{ route('uListeFiliere') }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
                             <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
                         </div>
                     </form>
@@ -116,7 +107,7 @@
     </div>
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script !src="">
         $(document).ready(function () {
             let code_select = $('.code_select');

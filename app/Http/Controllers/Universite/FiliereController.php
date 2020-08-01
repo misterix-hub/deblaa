@@ -28,30 +28,29 @@ class FiliereController extends Controller
 
     public function __construct(FiliereRepository $filiereRepo)
     {
+        $this->middleware('checkUniversiteSessionId');
         $this->filiereRepository = $filiereRepo;
     }
 
     public function index()
     {
-        if (!session()->has('id')) {
-            abort("404");
-        } else {
-            return view('universite.filiere.liste', [
-                'niveaux' => Niveau::all(),
-                'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
-                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                            ->where('universite_id', session()->get('id'))
-                            ->where('users.id', '<>', null)
-                            ->get(),
-                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                    ->where('universite_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
-                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
-            ]);
-        }
+        return view('universite.filiere.liste', [
+            'niveaux' => Niveau::all(),
+            'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+            'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+            'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->groupBy('users.telephone')
+                        ->get(),
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+        ]);
     }
 
     /**
@@ -124,25 +123,30 @@ class FiliereController extends Controller
      */
     public function show($id)
     {
-        if (!session()->has('id')) {
-            abort("404");
-        } else {
-            return view('universite.filiere.details', [
-                'niveaux' => Niveau::all(),
-                'filieres' => Filiere::where('id', $id)->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
-                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                            ->where('universite_id', session()->get('id'))
-                            ->where('users.id', '<>', null)
-                            ->get(),
-                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                    ->where('universite_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->get(),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
-                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
-            ]);
-        }
+
+        return view('universite.filiere.details', [
+            'niveaux' => Niveau::all(),
+            'filieres' => Filiere::where('id', $id)->get(),
+            'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+            'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                        ->where('universite_id', session()->get('id'))
+                        ->where('users.id', '<>', null)
+                        ->groupBy('users.telephone')
+                        ->get(),
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'usersBySpinnerets' => Filiere::join('users', 'filieres.id', 'filiere_id')
+                                    ->where('filieres.universite_id', session()->get('id'))
+                                    ->where('users.filiere_id', $id)
+                                    ->where('users.id', '<>', null)
+                                    ->orderBy('users.name')
+                                    ->get(),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
+        ]);
     }
 
     /**
@@ -160,10 +164,12 @@ class FiliereController extends Controller
             'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                         ->where('universite_id', session()->get('id'))
                         ->where('users.id', '<>', null)
+                        ->groupBy('users.telephone')
                         ->get(),
             'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                 ->where('universite_id', session()->get('id'))
                 ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
                 ->get(),
             'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
             'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get()
@@ -191,17 +197,43 @@ class FiliereController extends Controller
 
             if(!empty($niveaux)) {
 
+                //Les niveaux nouvellement selectionnés seront repertoriés dans la variable $niveaux_updated
+
+                $niveaux_updated = [];
+
                 if (is_array($niveaux) || is_object($niveaux)){
 
                     $del_filiereNiveau = FiliereNiveau::where('filiere_id', $id);
                     $del_filiereNiveau->forceDelete();
 
                     foreach ($niveaux as $niveau) {
+                        $niveaux_updated[] = intval($niveau);
                         $filiere_niveau = FiliereNiveau::create([
                             'filiere_id' => $filiere->id,
                             'niveau_id' => $niveau
                         ]);
                     }
+                }
+
+                //$niveaux_all est la variable qui repetorie tous les niveaux
+                //Cette partie pour pouvoir supprimer les étudiants après la mise à jour des niveaux de la filière
+                $niveaux_all = [1, 2, 3, 4, 5, 6];
+                foreach ($niveaux_updated as $niveau_updated) {
+                    $niveau_search = array_search($niveau_updated, $niveaux_all);
+                    $del_element = array_splice($niveaux_all, $niveau_search, 1);
+                }
+
+                foreach ($niveaux_all as $niveau) {
+                    $usersToBeDelete = User::where([
+                        ['filiere_id', '=', $filiere->id],
+                        ['niveau_id', '=', $niveau],
+                        ['id', '<>', null]
+                    ]);
+
+                    if (!is_null($usersToBeDelete)) {
+                        $usersToBeDelete->delete();
+                    }
+
                 }
 
             }
@@ -218,14 +250,49 @@ class FiliereController extends Controller
     public function destroy($id)
     {
         $filiere = Filiere::findOrFail($id);
-        $filiere->delete();
+        $filiere->forceDelete();
 
         $del_filiereNiveau = FiliereNiveau::where('filiere_id', $id);
         $del_filiereNiveau->forceDelete();
 
         $users = User::where('filiere_id', $id);
-        $users->forceDelete();
+        $users->delete();
 
         return redirect(route('uListeFiliere'))->with('success', "Filière supprimée avec succès !");
+    }
+
+    public function ajaxListSpinneret(Request $request) {
+        if ($request->data == '') {
+            abort('404');
+        } else {
+            $filiere = Filiere::where([
+                'universite_id' => session()->get('id'),
+                'id' => substr($request->data, 0, 1)
+            ])->first();
+            $niveau = substr($request->data, 1);
+
+            return view('universite.filiere.ajaxListSpinneret', compact('filiere', 'niveau'));
+        }
+
+    }
+
+    public function ajaxListStudentInShowBlade(Request $request) {
+        if (substr($request->donnees, 1) == '0') {
+            $usersBySpinnerets = Filiere::join('users', 'filieres.id', 'filiere_id')
+                ->where('filieres.universite_id', session()->get('id'))
+                ->where('users.filiere_id', substr($request->donnees, 0, 1))
+                ->where('users.id', '<>', null)
+                ->orderBy('users.name')
+                ->get();
+        } else {
+            $usersBySpinnerets = Filiere::join('users', 'filieres.id', 'filiere_id')
+                ->where('filieres.universite_id', session()->get('id'))
+                ->where('users.filiere_id', substr($request->donnees, 0, 1))
+                ->where('users.niveau_id', substr($request->donnees, 1))
+                ->where('users.id', '<>', null)
+                ->orderBy('users.name')
+                ->get();
+        }
+        return view('universite.filiere.ajaxListStudentBySpinneretShow', compact('usersBySpinnerets'));
     }
 }

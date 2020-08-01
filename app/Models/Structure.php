@@ -46,6 +46,7 @@ class Structure extends Model
         'site_web',
         'acces',
         'message_bonus',
+        'message_payer',
         'pro'
     ];
 
@@ -65,7 +66,8 @@ class Structure extends Model
         'site_web' => 'string',
         'acces' => 'boolean',
         'pro' => 'boolean',
-        'message_bonus' => 'integer'
+        'message_bonus' => 'integer',
+        'message_payer' => 'integer'
     ];
 
     /**

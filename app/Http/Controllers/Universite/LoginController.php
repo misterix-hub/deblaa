@@ -35,6 +35,7 @@ class LoginController extends Controller
                             session()->put('email', $universites_mail->email);
                             session()->put('pro', $universites_mail->pro);
                             session()->put('message_bonus', $universites_mail->message_bonus);
+                            session()->put('message_payer', $universites_mail->message_payer);
                             session()->put('category', "universite");
                         }
                         return redirect(route('indexUniversite'));
@@ -96,14 +97,14 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email)
-                        ->subject("Votre mot de passe de Deblaa");
-            });
+            // \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email)
+            //             ->subject("Votre mot de passe de Deblaa");
+            // });
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('uRegisterSuccess'));
+            return redirect(route('uRegisterSuccess - '. $password));
         }
 
     }

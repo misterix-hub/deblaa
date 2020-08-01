@@ -35,10 +35,10 @@
                     @endif
 
                     <div class="row justify-content-center">
-                        <div class="col-12 col-lg-10">
-                            <form action="" method="post">
+                        <div class="col-12 col-lg-12">
+                            <form action="{{ route('uInsertContact') }}" method="post">
                                 @csrf
-                                <div class="form-group">
+                                {{--  <div class="form-group">
                                     <label for="niveau" class="mb-2">Niveaux</label>
                                     <select name="niveau" id="niveau" class="form-control niveau_select">
                                         <option value="">Sélectionner le niveau...</option>
@@ -48,9 +48,11 @@
                                             <option value="">Aucun niveau</option>
                                         @endforelse
                                     </select>
-                                </div>
+                                </div>  --}}
                                 <div class="form-group">
                                     <input type="hidden" name="filiere" class="filiere" value="{{ $filiere->id }}">
+                                    <input type="hidden" name="niveau" class="niveau" value="{{ $niveau }}">
+                                    <input type="hidden" name="acronyme_niveau" class="acronyme_niveau" value="{{ $acronyme_niveau }}">
                                 </div>
                                 <div class="form-group">
                                     <table class="table table-hover table-responsive-sm mt-4">
@@ -65,12 +67,31 @@
                                                 <th class="font-weight-bold">Niveau</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="data">
-
+                                        <tbody>
+                                            @foreach($contacts as $contact)
+                                                @if(count(\App\User::where([
+                                                    ['acronyme_niveau', '=', $acronyme_niveau],
+                                                    ['telephone', '=', $contact->telephone]
+                                                    ])->get()) == 0)
+                                                    <tr>
+                                                        <td class="text-center"><input type="checkbox" name="student[]" id="student{{ $contact->id }}" class="contact" value="{{ $contact->telephone }}"></td>
+                                                        <td><label for="student{{ $contact->id }}">{{ $contact->name }}</label></td>
+                                                        <td><label for="student{{ $contact->id }}">{{ \App\Models\Filiere::where('id', $contact->filiere_id)->get('nom')->first()->nom }}</label></td>
+                                                        <td><label for="student{{ $contact->id }}">{{ \App\Models\Niveau::where('id', $contact->niveau_id)->get('nom')->first()->nom }}</label></td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
+                                    <div class="form-group float-right">
+                                        <a href="{{ route('uListeFiliere') }}" class="btn btn-md btn-light px-5">Retour</a>
+                                        @if (count($contacts) > 0)
+                                            <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
+                                        @endif
+                                    </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -88,14 +109,14 @@
     </div>
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script>
         $(document).ready(function () {
             $('.allContact').change(function () {
                 $('.contact').prop('checked', $(this).prop('checked'));
             });
 
-            let filiere_id = {{ $filiere->id }}
+            {{--  let filiere_id = {{ $filiere->id }}
 
             $('.niveau_select').each(function (index) {
                 $(this).change(function () {
@@ -112,7 +133,7 @@
                         }
                     })
                 })
-            })
+            })  --}}
         });
     </script>
 @endsection

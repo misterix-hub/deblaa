@@ -22,9 +22,18 @@
     <a href="{{ route('departements.index') }}"><i class="fa fa-users"></i><span>Groupes</span></a>
 </li>
 
+<li class="{{ Request::is('categorie.tickets*') ? 'active' : ''  }}">
+    <a href="{{ route('categorie.tickets.index') }}"><i class="fa fa-tasks"></i>Categories de tickets</a>
+</li>
+
+<li class="{{ Request::is('tickets*') ? 'active' : ''  }}">
+    <a href="{{ route('tickets.index') }}"><i class="fa fa-barcode"></i>Tickets</a>
+</li>
+
 <li>
     <a href="{{ url('admin/statistiques/universites') }}"><i class="fa fa-bar-chart"></i><span>Statistiques universités</span></a>
 </li>
 <li>
     <a href="{{ url('admin/statistiques/structures') }}"><i class="fa fa-bar-chart"></i><span>Statistiques structures</span></a>
 </li>
+

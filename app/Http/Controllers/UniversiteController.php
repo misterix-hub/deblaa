@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 use Response;
 
 use App\FactureUniversite;
@@ -244,6 +245,10 @@ class UniversiteController extends AppBaseController
 
             return redirect(route('universites.index'));
         }
+
+        File::delete([
+            public_path('db/logos/universite/'. $universite->logo)
+        ]);
 
         $filiereUniversites = Filiere::where('universite_id', $universite->id)->get();
 

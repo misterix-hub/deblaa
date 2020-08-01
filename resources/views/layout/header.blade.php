@@ -44,9 +44,15 @@
             $('.spinnerShower').click( function () {
                 $('#spinner').fadeIn();
             })
+            $('#example').DataTable();
+
+            $('.allNiveaux0').change(function () {
+                $('.niveauCheckBox0').prop("checked", $(this).prop("checked"));
+            });
         })
     </script>
     @yield('script')
+    @yield('scriptJs')
 
 
 

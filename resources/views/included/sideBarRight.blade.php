@@ -11,7 +11,11 @@
                 {{ session()->get('message_bonus') }}
             </h4>
             <p class="card-text">
-                Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus')) }} bonus sur votre compte.
+                @if (session()->get('pro') == 1)
+                    Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
+                @else
+                    Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.
+                @endif
             </p>
         </div>
     </div>

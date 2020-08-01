@@ -138,14 +138,15 @@
     <br />
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script>
         $(document).ready(function() {
-            $('#example').DataTable({
+            $('#example').DataTable();
+            /*$('#example').DataTable({
                 'searching': false,
                 'paging': false,
                 'info': false
-            });
+            });*/
                 let send_message = "{{ $send_message }}";
                 if (parseInt(send_message, 10) === 1) {
                     $.ajax({

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 use Response;
 
 use App\FactureStructure;
@@ -241,6 +242,10 @@ class StructureController extends AppBaseController
 
             return redirect(route('structures.index'));
         }
+
+        File::delete([
+            public_path('db/logos/structure/'. $structure->logo)
+        ]);
 
         $departement = Departement::where('structure_id', $structure->id);
 

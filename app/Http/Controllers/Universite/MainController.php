@@ -27,10 +27,12 @@ class MainController extends Controller
                         'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
+                            ->groupBy('users.telephone')
                             ->get(),
                         'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                             ->where('universite_id', session()->get('id'))
                             ->where('users.id', '<>', null)
+                            ->groupBy('users.telephone')
                             ->get()
                     ]);
                 } else {
@@ -39,7 +41,7 @@ class MainController extends Controller
                     } else {
                         return redirect(route('inboxEtudiant'));
                     }
-                    
+
                 }
             }
         }

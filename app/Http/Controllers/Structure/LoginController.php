@@ -37,6 +37,7 @@ class LoginController extends Controller
                             session()->put('sigle', $structures_mail->sigle);
                             session()->put('email', $structures_mail->email);
                             session()->put('message_bonus', $structures_mail->message_bonus);
+                            session()->put('message_payer', $structures_mail->message_payer);
                             session()->put('pro', $structures_mail->pro);
                             session()->put('category', "structure");
                         }
@@ -100,10 +101,10 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email)
-                        ->subject("Votre mot de passe de Deblaa");
-            });
+            // \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email)
+            //             ->subject("Votre mot de passe de Deblaa");
+            // });
 
             session()->put('email', $request->get('email'));
 

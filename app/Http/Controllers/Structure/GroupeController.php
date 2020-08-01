@@ -21,30 +21,28 @@ class GroupeController extends Controller
 
     public function __construct(DepartementRepository $departementRepo)
     {
+        $this->middleware('checkStructureSessionId');
         $this->departementRepository = $departementRepo;
     }
 
     public function index()
     {
-        if (!session()->has('id')) {
-            return redirect(route('sLogin'));
-        } else {
-            return view('structure.groupe.liste', [
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get(),
-                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get()
-            ]);
-        }
+
+        return view('structure.groupe.liste', [
+            'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
     }
 
     /**
@@ -86,27 +84,22 @@ class GroupeController extends Controller
      */
     public function show($id)
     {
-        if (!session()->has('id')) {
-            return redirect(route('sLogin'));
-        } else {
-            return view('structure.groupe.details', [
-                'groupe' => Departement::findOrFail($id),
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get(),
-                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get()
-            ]);
-        }
-
+        return view('structure.groupe.details', [
+            'groupe' => Departement::findOrFail($id),
+            'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
     }
 
     /**
@@ -117,26 +110,22 @@ class GroupeController extends Controller
      */
     public function edit($id)
     {
-        if (!session()->has('id')) {
-            return redirect(route('sLogin'));
-        } else {
-            return view('structure.groupe.modifier', [
-                "groupe" => Departement::findOrFail($id),
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get(),
-                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get()
-            ]);
-        }
+        return view('structure.groupe.modifier', [
+            "groupe" => Departement::findOrFail($id),
+            'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
 
     }
 

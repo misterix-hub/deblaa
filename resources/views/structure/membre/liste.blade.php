@@ -55,7 +55,6 @@
                                             <th>Nom complet</th>
                                             <th>Téléphone</th>
                                             <th>Groupe</th>
-                                            <th>Rôle</th>
                                             <th width="40" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -86,7 +85,6 @@
                                                         @endif
                                                     @endforeach--}}
                                                 </td>
-                                                <td>{{ $user->fonction }}</td>
                                                 <form action="{{ route('sSupprimerMembre', $user->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
@@ -109,7 +107,6 @@
                                             <th>Nom complet</th>
                                             <th>Téléphone</th>
                                             <th>Groupe</th>
-                                            <th>Rôle</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </tfoot>

@@ -258,6 +258,24 @@
                     </div>
                 </div>
             </div>
+            @if (session()->get('pro') == 1)
+                <div>
+                    <a href="#!" data-toggle="modal" data-target="#rechargeAccount">
+                        <div class="item d-block d-md-none">
+                            <i class="icofont-refresh"></i><br>
+                            <span class="" style="font-size: 8px;"><b>Recharger</b></span>
+                        </div>
+                        <div class="item d-none d-md-block d-lg-none">
+                            <i class="icofont-refresh"></i><br>
+                            <span class="" style="font-size: 8px;"><b>Recharger mon compte</b></span>
+                        </div>
+                        <div class="item d-none d-lg-block">
+                            <i class="icofont-refresh"></i>&nbsp;
+                            <span class=""><b>Recharger mon compte</b></span>
+                        </div>
+                    </a>
+                </div>
+            @endif
             <div class="pl-2 pr-2">
                 <span class="menu-item-sm-hide">
                     &nbsp;<small><b><span>STATISTIQUES</span></b></small>
@@ -306,19 +324,28 @@
                 <tr>
                     <td>
                         <div class="btn-group" role="group">
-                            <a href="{{ route('sLogout') }}" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                            <a href="#!" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                                 <i class="icofont-navigation-menu"></i>
                             </a>
                             <div class="dropdown-menu font-size-14" aria-labelledby="dropdownId">
                                 <a class="dropdown-item spinnerShower" href="{{ route('sCompte', $structure)}}">Paramètres de compte</a>
+                                @if (session()->get('pro') == 1)
+                                    <a class="dropdown-item" href="#!" data-toggle="modal" data-target="#rechargeAccount">Recharger mon compte</a>
+                                @endif
                                 <a class="dropdown-item spinnerShower" href="{{ route('sLogout') }}">Déconnexion</a>
                             </div>
                         </div>
-                        <a href="{{ route('indexStructure') }}" class="spinnerShower">
+                        <a href="#!" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                             <small><b>PANNEAU DE CONFIGURATION</b></small>
                         </a>
                     </td>
+                    @if (session()->get('pro') == 1)
+                        <td class="float-right">
+                            <a class="btn btn-sm px-2 btn-primary py-1" href="#!" data-toggle="modal" data-target="#rechargeAccount"><span class="icofont-refresh"></span> Recharger mon compte</a>
+                        </td>
+                    @endif
                     <td class="text-right">
                         <a href="{{ URL::asset('logout') }}" title="Se déconnecter" class="btn btn-danger p-0 rounded m-0 z-depth-0"
                         style="width: 22px; height: 22px; line-height: 22px;">
@@ -413,6 +440,34 @@
             </div>
         </div>
     </form>  --}}
+
+    <!-- Modal de recharge de compte -->
+        <form action="{{ route('codeTicket') }}" method="post">
+            <div class="modal fade" id="rechargeAccount" tabindex="-1" role="dialog" aria-labelledby="rechargeAccountLabel"
+            aria-hidden="true">
+
+            <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    @csrf
+
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="rechargeAccountTitle"><span class="icofont-credit-card"></span> Recharge</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" name="ticket_code" autocomplete="off" id="ticket_code" class="form-control" placeholder="Tapez le code de votre ticket ici...">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Fermer</button>
+                            <button type="submit" class="btn btn-success btn-sm">Valider</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
 
     {{--  <div class="modal fade" id="compteProModal" tabindex="-1" role="dialog" aria-labelledby="compteProModalLabel"

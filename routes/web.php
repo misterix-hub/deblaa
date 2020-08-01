@@ -36,7 +36,9 @@ Route::get('/', function () {
 })->name('indexVisitors');
 Route::post('contact', 'ContactController@sendMessageByUser')->name('messageSendByUsers');
 
-Auth::routes();
+Route::group(['prefix' => 'admin'], function () {
+    Auth::routes();
+});
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -167,13 +169,28 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('demandes', 'DemandeController@indexDemandes')->name('indexDemandes');
     Route::post('demandes/structure-accord-processing/{id}', 'DemandeController@accordStructureProcessing')->name('accordStructureProcessing');
     Route::post('demandes/universite-accord-processing/{id}', 'DemandeController@accordUniversiteProcessing')->name('accordUniversiteProcessing');
+
+    /*CODE DE TICKET*/
+    Route::get('admin/code-ticket/liste', 'TicketController@index')->name('tickets.index');
+    Route::get('admin/code-ticket/create', 'TicketController@create')->name('tickets.create');
+    Route::post('admin/code-ticket/store-perso-processing', 'TicketController@storePerso')->name('tickets.storePerso');
+    Route::post('admin/code-ticket/store-pro-processing', 'TicketController@storePro')->name('tickets.storePro');
+    Route::post('admin/code-ticket/store-promax-processing', 'TicketController@storeProMax')->name('tickets.storeProMax');
+    Route::delete('admin/code-ticket/onDeleting', 'TicketController@destroy')->name('tickets.destroy');
+
+    /*CATEGORIE CODE TICKET */
+    Route::get('admin/categorie-ticket/liste', 'CategorieTicketController@index')->name('categorie.tickets.index');
+    Route::get('admin/categorie-ticket/create', 'CategorieTicketController@create')->name('categorie.tickets.create');
+    Route::post('admin/categorie-ticket/store-processing', 'CategorieTicketController@store')->name('categorie.tickets.store');
+    Route::delete('admin/categorie-ticket/onDeleting', 'CategorieTicketController@destroy')->name('categorie.tickets.destroy');
 });
+
 
 /* UNIVERSITE */
 
-
 /*Route::get('universites/etudiants/ajouter/filiere-niveau', 'Universite\EtudiantController@ajaxContactSpinneret')->name('ajaxListContact');*/
- Route::get('universite/ etudiants/filter', 'Universite\EtudiantController@ajaxListStudent')->name('ajaxListStudent');
+Route::get('universite/etudiants/filter', 'Universite\EtudiantController@ajaxListStudent')->name('ajaxListStudent');
+Route::get('universites/filieres/filter', 'Universite\FiliereController@ajaxListSpinneret')->name('ajaxListSpinneret');
 
 Route::get('universites', 'Universite\MainController@index')->name('indexUniversite');
 Route::get('universites/filieres', 'Universite\FiliereController@index')->name('uListeFiliere');
@@ -181,13 +198,14 @@ Route::post('universites/filieres', 'Universite\FiliereController@store')->name(
 Route::get('universites/filieres/{id}-{slug}/details', 'Universite\FiliereController@show')->name('uDetailsFiliere');
 Route::get('universites/filieres/{id}-{slug}/modifier', 'Universite\FiliereController@edit')->name('uModifierFiliere');
 Route::post('universites/filieres/{id}/update', 'Universite\FiliereController@update')->name('uUpdateFiliere');
-Route::get('universites/filieres/{id}/supprimer', 'Universite\FiliereController@destroy')->name('uSupprimerFiliere');
+Route::get('universites/filieres/{id}{slug}/supprimer', 'Universite\FiliereController@destroy')->name('uSupprimerFiliere');
+Route::get('universites/filieres/details/filterStudent', 'Universite\FiliereController@ajaxListStudentInShowBlade')->name('ajaxListStudentInShowBlade');
 
 Route::post('universites/etudiants', 'Universite\EtudiantController@store')->name('uAjouterEtudiant');
 Route::get('universites/etudiants', 'Universite\EtudiantController@index')->name('uListeEtudiant');
-Route::get('universites/etudiants/{filiere}-{slug}/ajouter', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
-/*Route::get('universites/etudiants/filiere-contact/{filiere}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
-Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');*/
+Route::get('universites/etudiants/{filiere}{slug}{niveau}/ajouter', 'Universite\EtudiantController@create')->name('uCreateEtudiant');
+Route::get('universites/etudiants/filiere-contact/{filiere}{slug}{niveau}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
+Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
@@ -196,8 +214,8 @@ Route::get('universites/messages', 'Universite\MessageController@index')->name('
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
 Route::get('universites/messages/{id}-{slug}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
 
-Route::get('universites/{id}/profil', 'Universite\CompteController@edit')->name('uCompte');
-Route::post('universites/{id}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
+Route::get('universites/{universite}/profil', 'Universite\CompteController@edit')->name('uCompte');
+Route::post('universites/{universite}/profil/update', 'Universite\CompteController@update')->name('uCompteUpdate');
 Route::get('universites/login', 'Universite\MainController@login')->name('uLogin');
 
 Route::get('universites/reset-password', 'Universite\ResetPasswordController@checkEmailView')->name('uResetPassword');
@@ -214,6 +232,8 @@ Route::get('universites/demande', 'Universite\CompteController@comptePro')->name
 Route::get('universites/{id}/{formule}/paiements', 'Universite\CompteController@modePaiement')->name('uModePaiement');
 
 Route::get('universite/alerte-message', 'Universite\MessageController@alert')->name('alertUniversite');
+
+
 
 /* STRUCTURE */
 
@@ -257,6 +277,7 @@ Route::get('logout', 'Structure\LoginController@logout')->name('sLogout');
 
 Route::get('structure/alerte-message', 'Structure\MessageController@alert')->name('alertStructure');
 
+
 /* ETUDIANT */
 
 Route::get('etudiants/connecting-processing', 'Etudiant\LoginController@query');
@@ -288,5 +309,8 @@ Route::get('membres/message/{id}/details', 'Membre\MessageController@sDetails')-
 Route::get('membres/login', 'Membre\MainController@login')->name('mLogin');
 Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing')->name('mLoginProcessing');
 Route::get('membres/logout', 'Membre\LoginController@logout')->name('mLogout');
+
+/*RECHARGE DE COMPTE*/
+Route::post('recharge-compte/processing####', 'TicketController@verifyCodeTicket')->name('codeTicket');
 
 

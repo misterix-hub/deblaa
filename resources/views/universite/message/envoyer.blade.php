@@ -90,7 +90,7 @@
     </div><br /><br /><br />
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script>
         CKEDITOR.replace('editor');
 

@@ -51,42 +51,53 @@
                             </div>
                             <h3><i class="icofont-listine-dots"></i> Liste des filières</h3>
 
-                            <table class="table table-hover table-bordered table-sm table-responsive-sm" width="100%">
+                            <?php $firstNiveau=0; ?>
+
+                            <table class="table table-hover table-bordered table-sm table-responsive-sm">
                                 <thead>
                                     <tr>
-                                        <th>
+                                        <th width="250">
                                             <b>Nom de la filière</b>
                                         </th>
-                                        <th width="200">
+                                        <th width="250">
                                             <b>Niveaux</b>
                                         </th>
                                         <th width="250">
                                             <b>Opération</b>
                                         </th>
-                                        <th class="text-center" width="120">
+                                        <th class="text-center" width="250">
                                             <b>Action</b>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @forelse($filieres as $filiere)
+                                        @foreach (\App\Models\FiliereNiveau::where('filiere_id', $filiere->id)->get() as $item)
+                                            <?php $firstNiveau = $item->niveau_id; ?>
+                                            @break
+                                        @endforeach
                                         <tr>
                                             <td>
                                                 <b>{{ $filiere->nom }}</b>
                                             </td>
                                             <td>
-                                                <ul class="m-0">
-                                                    @foreach ($filiere_niveaux as $filiere_niveau)
-                                                        @if ($filiere_niveau->filiere_id == $filiere->id)
-                                                            <li>
-                                                                {{ $filiere_niveau->nom }}
-                                                            </li>
-                                                        @endif
+                                                <select name="niveau" id="niveau" class="form-control niveau">
+                                                    @foreach (\App\Models\FiliereNiveau::where('filiere_id', $filiere->id)->get() as $item)
+                                                        <option value="{{ $filiere->id.$item->niveau_id }}"> {{ \App\Models\Niveau::where('id', $item->niveau_id)->get('nom')->first()->nom }}</option>
                                                     @endforeach
-                                                </ul>
+                                                </select>
                                             </td>
-                                            <td class="text-center">
-                                                <a href="{{ $filiere->path() }}" class="btn btn-success btn-sm">Ajouter membre</a>
+                                            <td class="text-center spinneretData">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-success btn-sm" type="button" data-toggle="dropdown" id="contactDropDown" >Ajouter étudiant</button>
+                                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="contactDropDown">
+                                                        <a class="dropdown-item" href="{{ $filiere->pathAddStudentsByList($firstNiveau) }}">Mes contacts</a>
+                                                        <a class="dropdown-item" href="{{ $filiere->pathAddStudent($firstNiveau) }}">Nouveau</a>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td class="text-center">
                                                 <a href="{{ $filiere->pathDetails() }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
@@ -95,7 +106,7 @@
                                                 <a href="{{ $filiere->pathModifier() }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-edit"></i>
                                                 </a>
-                                                <a href="{{ route('uSupprimerFiliere', $filiere->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ? Tous les étudiants de cette filière seront également supprimés.')"
+                                                <a href="{{ $filiere->pathSupprimer() }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ? Tous les étudiants de cette filière seront également supprimés.')"
                                                     class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-trash"></i>
                                                 </a>
@@ -111,16 +122,16 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>
+                                        <th width="250">
                                             <b>Nom de la filière</b>
                                         </th>
-                                        <th width="200">
+                                        <th width="250">
                                             <b>Niveaux</b>
                                         </th>
                                         <th width="250">
                                             <b>Opération</b>
                                         </th>
-                                        <th class="text-center" width="120">
+                                        <th class="text-center" width="250">
                                             <b>Action</b>
                                         </th>
                                     </tr>
@@ -144,4 +155,23 @@
 
     </div>
 
+@endsection
+
+@section('scriptJs')
+    <script>
+        $(document).ready(function () {
+            $('.niveau').change(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ route('ajaxListSpinneret') }}',
+                    data: {
+                        'data': $(this).val()
+                    },
+                    success: function(status) {
+                        $('.spinneretData').html(status);
+                    }
+                })
+            })
+        });
+    </script>
 @endsection
