@@ -27,7 +27,7 @@ class Universite extends Model
     use SoftDeletes;
 
     public $table = 'universites';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -46,6 +46,7 @@ class Universite extends Model
         'site_web',
         'acces',
         'message_bonus',
+        'message_payer',
         'pro'
     ];
 
@@ -65,7 +66,8 @@ class Universite extends Model
         'site_web' => 'string',
         'acces' => 'boolean',
         'pro' => 'boolean',
-        'message_bonus' => 'integer'
+        'message_bonus' => 'integer',
+        'message_payer' => 'integer'
     ];
 
     /**
@@ -90,6 +92,10 @@ class Universite extends Model
         ][$attribute];
     }
 
+    public function getRouteKeyName() {
+        return 'nom';
+    }
+
     public function filieres() {
         return $this->hasMany(Filiere::class);
     }
@@ -98,5 +104,5 @@ class Universite extends Model
         return $this->hasMany(DemandeUniversite::class);
     }
 
-    
+
 }

@@ -8,6 +8,7 @@ use App\Models\Niveau;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'telephone',  'fonction', 'departement_id', 'filiere_id', 'niveau_id'
+        'name', 'email', 'password', 'telephone',  'fonction', 'departement_id', 'filiere_id', 'niveau_id', 'acronyme_niveau'
     ];
 
     /**
@@ -51,4 +52,5 @@ class User extends Authenticatable
     public function niveau() {
         return $this->belongsTo(Niveau::class);
     }
+
 }

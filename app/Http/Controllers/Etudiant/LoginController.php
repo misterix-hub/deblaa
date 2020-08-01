@@ -44,18 +44,21 @@ class LoginController extends Controller
     public function query(Request $request) {
 
         $request->validate([
-            'telephone' => 'required|regex:/(\+228)[9]([0-9]){7}/'
+            'telephone' => 'required|regex:/(228)[9]([0-9]){7}/',
+            'keyaccess' => 'required'
         ], [
             'telephone.required' => 'Le champ du téléphone est requis',
-            'telephone.regex' => 'Votre numéro est incorrect'
+            'telephone.regex' => 'Votre numéro est incorrect',
+            'keyaccess.required' => 'clé d\'accès non renseigné'
         ]);
 
-        $telephone = substr($request->telephone, 1);
+        $telephone = $request->telephone;
+        $keyaccess = $request->keyaccess;
 
-        $etudiants = User::where('telephone', $telephone)->where('filiere_id', '<>', null)->get();
+        $etudiants = User::where('filiere_id', '<>', null)->where('telephone', $telephone)->where('access_id', $keyaccess)->get();
 
         if(count($etudiants) == 0) {
-            abort('404');
+            return redirect()->route('eLogin');
         } else {
             foreach ($etudiants as $etudiant) {
                 session()->put('id', $etudiant->id);
@@ -68,5 +71,11 @@ class LoginController extends Controller
 
             return redirect(route('inboxEtudiant'));
         }
+    }
+
+    public function logout() {
+        session()->flush();
+
+        return redirect(route('eLogin'));
     }
 }

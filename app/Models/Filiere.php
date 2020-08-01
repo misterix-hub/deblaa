@@ -71,8 +71,12 @@ class Filiere extends Model
         return $this->hasMany(User::class);
     }
 
-    public function path() {
-        return url("universites/etudiants/{$this->id}-" . Str::slug($this->nom) . "/ajouter");
+    public function pathAddStudent($niveau) {
+        return url("universites/etudiants/{$this->id}" . Str::slug($this->nom.Str::random(5)) . $niveau . "/ajouter");
+    }
+
+    public function pathAddStudentsByList($niveau) {
+        return url("universites/etudiants/filiere-contact/{$this->id}" . Str::slug($this->nom . Str::random(10)) . $niveau);
     }
 
     public function pathDetails() {
@@ -81,6 +85,10 @@ class Filiere extends Model
 
     public function pathModifier() {
         return url("universites/filieres/{$this->id}-" . Str::slug($this->nom). "/modifier");
+    }
+
+    public function pathSupprimer() {
+        return url("universites/filieres/{$this->id}" . Str::slug($this->nom) . "/supprimer");
     }
 
 }

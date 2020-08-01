@@ -165,7 +165,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <b class="font-weight-bold">Message lu par {{ count($users) }} personnes</b>
+                    <b class="font-weight-bold">Message lu par {{ count($message_lus) . " " . \Illuminate\Support\Str::plural('personne', count($message_lus)) }}</b>
 
                     <div class="card card-body border rounded">
 

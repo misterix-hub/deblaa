@@ -35,6 +35,7 @@ class LoginController extends Controller
                             session()->put('email', $universites_mail->email);
                             session()->put('pro', $universites_mail->pro);
                             session()->put('message_bonus', $universites_mail->message_bonus);
+                            session()->put('message_payer', $universites_mail->message_payer);
                             session()->put('category', "universite");
                         }
                         return redirect(route('indexUniversite'));
@@ -51,8 +52,8 @@ class LoginController extends Controller
     public function registerProcessing(Request $request) {
 
         $request->validate([
-            'nom' => 'required|min:1|max:100',
-            'sigle' => 'required|string|min:2|max:11',
+            'nom' => 'required|min:1|max:100|unique:universites,nom',
+            'sigle' => 'required|string|min:2|max:11|unique:universites,sigle',
             'email' => 'required|email'
         ],
             [
@@ -63,6 +64,8 @@ class LoginController extends Controller
                 'nom.required' => 'Le champ du nom est requis',
                 'nom.min' => 'Votre nom est trop court',
                 'nom.max' => 'Le nombre de caractères est atteint',
+                'nom.unique' => 'Université déjà existante, veuillez renseigner le nom de votre université',
+                'sigle.unique' => 'Ce sigle est déjà utilisé, veuillez renseigner un sigle pour votre compte université',
                 'email.required' => 'le champ Email est requis',
                 'email.email' => 'Adresse électronique incorrecte'
             ]);
@@ -94,33 +97,29 @@ class LoginController extends Controller
                 'motDePasse' => $password
             );
 
-            /*\Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email)
-                        ->subject("Votre mot de passe de Deblaa");
-            });*/
+            // \Mail::send('mails.universite', $data, function ($message) use ($to_name, $to_email) {
+            //     $message->to($to_email)
+            //             ->subject("Votre mot de passe de Deblaa");
+            // });
 
             session()->put('email', $request->get('email'));
 
-            return redirect(route('uRegisterSuccess'.$password));
+            return redirect(route('uRegisterSuccess - '. $password));
         }
 
     }
 
     public function registerSuccess() {
         if(!session()->has('email')) {
-            abort('404');
+            return route('uRegister')->with('error', 'Email non renseigné');
         } else {
             return view('universite.success.register');
         }
     }
 
     public function logout() {
-        session()->forget('id');
-        session()->forget('logo');
-        session()->forget('sigle');
-        session()->forget('category');
-        session()->forget('message_bonus');
+        session()->flush();
 
-        return redirect(route('indexVisitors'));
+        return redirect(route('uLogin'));
     }
 }

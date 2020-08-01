@@ -16,7 +16,7 @@
                         </a>
                     </td>
                     <td class="text-right">
-                        <a href="{{ route('logout') }}" class="red-text">
+                        <a href="{{ route('eLogout') }}" class="red-text">
                             <i class="icofont-ui-power"></i>
                         </a>
                     </td>

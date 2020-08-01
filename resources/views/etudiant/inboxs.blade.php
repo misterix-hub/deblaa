@@ -10,7 +10,7 @@
 @endsection
 
 
-@section('script')
+@section('scriptJs')
     <script>
         $(document).ready(function () {
             setInterval(() => {

@@ -19,25 +19,71 @@
                     <i class="icofont icofont-exclamation-tringle"></i> Opération non autorisée !
                 </h2>
 
-                <div class="text-center">
-                    <p>
-                        <strong>
-                            Vous avez épuisé le nombre de messages de bonus que vous aviez.
-                            Il est à présent impossible d'effectuer cette action.
-                            Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
-                        </strong>
-                    </p>
+                @if (Session::get('message_alert') == 0)
+                    <div class="text-center">
+                        <p>
+                            <strong>
+                                Vous avez épuisé le nombre de messages d'essai que vous aviez.
+                                Il est à présent impossible d'effectuer cette action.
+                                Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
+                            </strong>
+                        </p>
 
-                    <h3 class="text-center">
-                        <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
-                    </h3><br /><br />
+                        <h3 class="text-center">
+                            <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
+                        </h3><br /><br />
 
-                    <a href="{{ route('indexUniversite') }}" class="btn btn-indigo btn-md rounded">
-                        Retour à l'accueil
-                    </a>
-                </div>
+                        <a href="{{ route('indexUniversite') }}" class="btn btn-indigo btn-md rounded">
+                            Retour à l'accueil
+                        </a>
+                    </div>
+                @else
+                    <div class="text-center">
+                        <p>
+                            <strong>
+                                Vous avez épuisé le nombre de messages MMS que vous aviez.
+                                Veuillez recharger votre compte pour pouvoir envoyer de messages.
+                            </strong>
+                        </p>
+
+                        <button type="button" class="btn btn-md rounded btn-primary" data-toggle="modal" data-target="RechargeCompte">Recharger mon compte</button>
+
+                        <a href="{{ route('indexUniversite') }}" class="btn btn-indigo btn-md rounded">
+                            Retour à l'accueil
+                        </a>
+                    </div>
+                @endif
                 <br /><br /><br /><br /><br /><br /><br />
             </div>
+
+            <!-- Modal de recharge de compte -->
+            <form action="{{ route('codeTicket') }}" method="post">
+                <div class="modal fade" id="rechargeCompte" tabindex="-1" role="dialog" aria-labelledby="rechargeCompteLabel"
+                aria-hidden="true">
+
+                <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        @csrf
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="rechargeCompteTitle"><span class="icofont-credit-card"></span> Recharge</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" name="ticket_code" autocomplete="off" id="ticket_code" class="form-control" placeholder="Tapez le code de votre ticket ici...">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Fermer</button>
+                                <button type="submit" class="btn btn-success btn-sm">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
 
             <div class="col-12 text-center font-size-14 border-top"><br />
                 <strong>Deblaa &copy; 2019 | Tous droits reservés</strong><br>

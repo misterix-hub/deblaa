@@ -63,6 +63,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkMessageBonusStructure' => \App\Http\Middleware\checkMessageBonusStructure::class,
         'checkMessageBonusUniversite' => \App\Http\Middleware\checkMessageBonusUniversite::class,
+        'checkUniversiteSessionId' => \App\Http\Middleware\checkUniversiteSessionId::class,
+        'checkStructureSessionId' => \App\Http\Middleware\checkStructureSessionId::class,
     ];
 
     /**

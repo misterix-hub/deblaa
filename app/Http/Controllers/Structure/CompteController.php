@@ -12,6 +12,9 @@ use App\DemandeStructure;
 
 class CompteController extends Controller
 {
+    public function __construct() {
+        return $this->middleware('checkStructureSessionId');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -60,28 +63,24 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
-    public function edit($id)
+    public function edit(Structure $structure)
     {
-        if (!session()->has('id')) {
-            abort('404');
-        } else {
-            return view('structure.compte.profil', [
-                'structure' => Structure::findOrFail($id),
-                'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get(),
-                'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get()
-            ]);
-        }
+        return view('structure.compte.profil', [
+            'structure' => Structure::findOrFail($structure->id),
+            'groupes' => Departement::where('structure_id', session()->get('id'))->get(),
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'users' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get(),
+            'userCount' => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
     }
 
     /**
@@ -91,13 +90,23 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Structure $structure)
     {
+        $request->validate([
+            'nom' => 'required',
+            'sigle' => 'required'
+        ],
+        [
+            'nom.required' => 'Veuillez renseigner le nom de votre structure...',
+            'sigle.required' => 'Veuillez renseigner le sigle de votre structure...',
+        ]
+    );
+
         if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "") {
             return back()->with('error', 'Modification invalide, veuillez ne laisser aucun champ vide !');
         } else {
 
-            $compte = Structure::findOrFail($id);
+            $compte = Structure::findOrFail($structure->id);
             $compte->sigle = $request->input('sigle');
             $compte->nom = $request->input('nom');
             $compte->email = $request->input('email');
@@ -107,7 +116,7 @@ class CompteController extends Controller
             $compte->save();
 
             if ($_FILES["logo"]["name"] != "") {
-                $compte = Structure::findOrFail($id);
+                $compte = Structure::findOrFail($structure->id);
 
                 $target_dir = "db/logos/structure/";
                 $file_name = time() . "_" . basename($_FILES["logo"]["name"]);

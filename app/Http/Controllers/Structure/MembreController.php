@@ -14,13 +14,16 @@ use App\MessageStructure;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class MembreController extends Controller
 {
 
     public function __construct()
     {
-        return $this->middleware('checkMessageBonusStructure')->only('store');
+        $this->middleware('checkStructureSessionId');
+        $this->middleware('checkMessageBonusStructure')->only('store');
     }
 
     /**
@@ -30,25 +33,21 @@ class MembreController extends Controller
      */
     public function index()
     {
-        if (!session()->has('id')) {
-            return redirect(route('sLogin'))->with('error', 'Veuillez vous connecter....');
-        } else {
-            return view('structure.membre.liste', [
-                'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
-                "groupes" => Departement::where('structure_id', session()->get('id'))->get(),
-                "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                                        ->where('structure_id', session()->get('id'))
-                                        ->where('users.id', '<>', null)
-                                        ->groupBy('users.telephone')
-                                        ->get(),
-                "userCount" => Departement::leftJoin('users', 'departements.id', 'departement_id')
-                    ->where('structure_id', session()->get('id'))
-                    ->where('users.id', '<>', null)
-                    ->groupBy('users.telephone')
-                    ->get()
-            ]);
-        }
+        return view('structure.membre.liste', [
+            'messages' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            'messageCount' => MessageStructure::where('structure_id', session()->get('id'))->get(),
+            "groupes" => Departement::where('structure_id', session()->get('id'))->get(),
+            "users" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                                    ->where('structure_id', session()->get('id'))
+                                    ->where('users.id', '<>', null)
+                                    ->groupBy('users.telephone')
+                                    ->get(),
+            "userCount" => Departement::leftJoin('users', 'departements.id', 'departement_id')
+                ->where('structure_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
     }
 
     /**
@@ -88,21 +87,21 @@ class MembreController extends Controller
         $request->validate([
             'telephone' => 'required',
             'nomComplet' => 'required',
-            'role' => 'required',
             'groupe' => 'required',
             'pays' => 'required'
         ],
             [
                 'telephone.required' => 'Veuillez entrer le numero de telephone',
                 'nomComplet.required' => 'Veuillez entrer votre nom',
-                'role.required' => 'Veuillez entrer le rôle',
                 'groupe.required' => 'Veuillez sélectionner le groupe',
                 'pays.required' => 'Veuillez choisir un pays'
             ]);
         if ($request->groupe == "") {
             return back()->with('error', "Impossble d'ajouter un membre sans groupe !");
         } else {
+
             $telephone =  substr($_POST['code_select'], 1).$request->input('telephone');
+
             $check_membre = User::where('telephone', $telephone)->where('departement_id', $request->groupe)->get();
 
             if (count($check_membre) != 0) {
@@ -120,12 +119,11 @@ class MembreController extends Controller
                     $user = new User;
                     $user->name = $request->nomComplet;
                     $user->telephone = $telephone;
-                    $user->fonction = $request->role;
                     $user->departement_id = $request->groupe;
                     $user->password = $password;
                     $user->save();
 
-                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !");
+                    return redirect(route('sListeGroupe'))->with('success', "Membre ajouté avec succès !");
 
                 } else {
                     $password = "DB" . rand(1021, 9999);
@@ -134,14 +132,14 @@ class MembreController extends Controller
                     $user->name = $request->nomComplet;
                     $user->email = $_POST['code_select']. $request->input('telephone') . time()  . "@example.com";
                     $user->telephone = $telephone;
-                    $user->fonction = $request->role;
                     $user->departement_id = $request->groupe;
                     $user->password = bcrypt($password);
+                    $user->access_id = Str::random(15).Str::substr(Hash::make($password), 7);
                     $user->save();
                     session()->put('msg_tel', $telephone);
                     session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
 
-                    return redirect(route('sListeMembre'))->with('success', "Membre ajouté avec succès !".$password);
+                    return redirect(route('sListeGroupe'))->with('success', "Membre ajouté avec succès ! ".$password);
                 }
             }
         }
@@ -265,13 +263,11 @@ class MembreController extends Controller
 
                     foreach ($contact as $item) {
                         $name = $item->name;
-                        $fonction = $item->fonction;
                         $password = $item->password;
                         break;
                     }
                     User::create([
                         'name' => $name,
-                        'fonction' => $fonction,
                         'password' => $password,
                         'departement_id' => $request->input('department'),
                         'telephone' => $membre
@@ -280,7 +276,11 @@ class MembreController extends Controller
                 /*}*/
             }
 
-            return redirect(route('sDetailsGroupe', $request->input('department')))->with('success', count($insert_contact) > 1 ? 'Les contacts sélectionnés ont bien été enregistrés dans le groupe' : 'Le contact sélectionné a bien été enregistré dans le groupe');
+            $requestNomDepartement = Departement::where('id', $request->input('department'))->first();
+            $nomDepartement = $requestNomDepartement->nom;
+
+
+            return redirect(route('sDetailsGroupe', [$request->input('department'),  Str::slug(Str::random(15) . "-" . $nomDepartement)]))->with('success', count($insert_contact) > 1 ? 'Les contacts sélectionnés ont bien été enregistrés dans le groupe' : 'Le contact sélectionné a bien été enregistré dans le groupe');
 
             /*if (count($verify_contact) != 0 && count($insert_contact) != 0) {
                 return redirect(route('sListeGroupe'))->with('warning', count($insert_contact) > 1 ? 'Les contacts qui existaient dans ce groupe ne sont plus insérés. Cependant l\'insertion des autres membres a bien été effectué' : 'Les contacts qui existaient dans ce groupe ne sont plus insérés. Cependant l\'insertion du membre a bien été effectué');

@@ -15,7 +15,7 @@
                             <li>{{ $error }}</li>
                         @endforeach
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </ul>
                 @endif
@@ -31,7 +31,7 @@
                         {{ $message }}
                     </div>
                 @endif
-                <form action="{{ route('sCompteUpdate', $structure->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('sCompteUpdate', $structure) }}" method="post" enctype="multipart/form-data">
 
                     @csrf
 

@@ -48,13 +48,16 @@
                         </div>
                     </form>
                 @endforeach
-
+                <div class="text-muted text-justify mt-4" style="font-size: 0.8rem;">
+                    <strong>NB:</strong><em>Si vous faites des mises à jour pour les niveaux de la filière et qu'il y avait un niveau qui n'a plus été sélectionné,
+                    les étudiants étant dans le niveau de la filière seront supprimés.</em>
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
-@section('script')
+@section('scriptJs')
     <script>
         $(document).ready(function() {
             $('.allNiveaux1').change(function () {

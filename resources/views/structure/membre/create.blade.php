@@ -45,9 +45,21 @@
 
                     <form action="{{ route('sAjouterMembre') }}" method="post">
                         @csrf
-                        <label class="" for="nomComplet"><b>Nom du membre</b></label>
-                        <input type="text" name="nomComplet" id="nomComplet" class="form-control" value="{{ old('nomComplet') }}" placeholder="Saisir le nom complet ..."><br  />
-
+                        <div class="form-group">
+                            <label for="groupe"><b>Groupe</b></label>
+                            <select name="groupe" id="groupe" class="form-control">
+                                <option value="">Sélectionnez ...</option>
+                                @foreach(\App\Models\Departement::where('structure_id', session()->get('id'))->get() as $groupe)
+                                    <option value="{{ $groupe->id }}" {{ $groupe->id === $departement->id ? 'selected' : '' }}>
+                                        {{ $groupe->nom }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="" for="nomComplet"><b>Nom du membre</b></label>
+                            <input type="text" name="nomComplet" id="nomComplet" class="form-control" value="{{ old('nomComplet') }}" placeholder="Saisir le nom complet ..."><br  />
+                        </div>
                         <div class="form-row">
                             <div class="col-12 col-md-6">
                                 <label for="pays"><b>Pays</b></label>
@@ -70,28 +82,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <table width="100%" class="mb-4">
-                            <tr>
-                                <td>
-                                    <label for="groupe"><b>Groupe</b></label>
-                                    <select name="groupe" id="groupe" class="form-control">
-                                        <option value="">Sélectionnez ...</option>
-                                        @foreach(\App\Models\Departement::where('structure_id', session()->get('id'))->get() as $groupe)
-                                            <option value="{{ $groupe->id }}" {{ $groupe->id === $departement->id ? 'selected' : '' }}>
-                                                {{ $groupe->nom }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <label for="role"><b>Rôle</b></label>
-                                    <input type="text" name="role" id="role" value="{{ old('role') }}" class="form-control" placeholder="Saisir le rôle ....">
-                                </td>
-                            </tr>
-                        </table>
                         <div>
-                            <a href="{{ route('sDetailsGroupe', $groupe->id) }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
+                            <a href="{{ $groupe->pathShow() }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
                             <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
                         </div>
                     </form>

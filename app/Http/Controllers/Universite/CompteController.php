@@ -12,6 +12,11 @@ use App\MessageUniversite;
 
 class CompteController extends Controller
 {
+
+    public function __construct() {
+        return $this->middleware('checkUniversiteSessionId');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -60,29 +65,26 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response|\Illuminate\Contracts\View\Factory
      */
-    public function edit($id)
+    public function edit(Universite $universite)
     {
-        if (!session()->has('id')) {
-            abort('404');
-        } else {
-            return view('universite.compte.profil', [
-                'niveaux' => Niveau::all(),
-                'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-                'universite' => Universite::findOrFail($id),
-                'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
-                'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
-                'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
-                'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
-                        ->where('universite_id', session()->get('id'))
-                        ->where('users.id', '<>', null)
-                        ->get(),
-                'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+        return view('universite.compte.profil', [
+            'niveaux' => Niveau::all(),
+            'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
+            'universite' => Universite::findOrFail($id),
+            'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
+            'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
+            'users' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
                     ->where('universite_id', session()->get('id'))
                     ->where('users.id', '<>', null)
-                    ->get()
-            ]);
-        }
-
+                    ->groupBy('users.telephone')
+                    ->get(),
+            'userCount' => Filiere::leftJoin('users', 'filieres.id', 'filiere_id')
+                ->where('universite_id', session()->get('id'))
+                ->where('users.id', '<>', null)
+                ->groupBy('users.telephone')
+                ->get()
+        ]);
     }
 
     /**
@@ -92,7 +94,7 @@ class CompteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Universite $universite)
     {
         if (trim($request->input('sigle')) == "" || trim($request->input('nom')) == "") {
             return back()->with('error', 'Modification invalide, veuillez ne laisser aucun champ vide !');

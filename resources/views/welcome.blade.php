@@ -335,10 +335,10 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card orange card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    0 - 1 000 sms
+                    300 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">20 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">10 000 F CFA</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -386,10 +386,10 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card blue card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    1 001 - 10 000 sms
+                    1 200 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">15 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">50 000 F CFA</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>
@@ -437,10 +437,10 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
             <div class="card green card-body">
                 <h6 class="font-weight-bold text-center comfortaa">
-                    10 001 et plus
+                    3 000 sms
                 </h6>
                 <div class="text-center comfortaa">
-                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">10 F CFA par sms</h5>
+                    <h5 class="font-weight-bold white-text border-1 z-depth-2 p-3">100 000 F CFA</h5>
                 </div>
                 <div class="text-center mt-2">
                     <i class="icofont-thin-down white-text icofont-2x"></i>

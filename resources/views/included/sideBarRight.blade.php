@@ -1,3 +1,4 @@
+<?php  $structure = \App\Models\Structure::findOrFail(session()->get('id'))?>
 <div class="mt-2 mb-2"></div>
 <div class="mt-2"></div>
 @if(session()->get('pro') == 0)
@@ -10,7 +11,11 @@
                 {{ session()->get('message_bonus') }}
             </h4>
             <p class="card-text">
-                Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus')) }} bonus sur votre compte.
+                @if (session()->get('pro') == 1)
+                    Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
+                @else
+                    Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.
+                @endif
             </p>
         </div>
     </div>
@@ -75,7 +80,7 @@
 
         <div class="text-center">
             <br />
-            <a href="{{ route('sCompte', session()->get('id')) }}">
+            <a href="{{ route('sCompte', $structure) }}">
                 <i class="icofont-pencil"></i>Modifier le profil
             </a>
         </div>

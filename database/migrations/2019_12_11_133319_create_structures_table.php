@@ -15,11 +15,12 @@ class CreateStructuresTable extends Migration
     {
         Schema::create('structures', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nom');
-            $table->string('sigle');
+            $table->string('nom')->unique();
+            $table->string('sigle')->unique();
             $table->string('logo')->nullable();
             $table->string('telephone')->nullable();
             $table->integer('message_bonus')->nullable();
+            $table->integer('message_payer')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('site_web')->nullable();

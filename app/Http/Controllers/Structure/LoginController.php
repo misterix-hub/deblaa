@@ -37,6 +37,7 @@ class LoginController extends Controller
                             session()->put('sigle', $structures_mail->sigle);
                             session()->put('email', $structures_mail->email);
                             session()->put('message_bonus', $structures_mail->message_bonus);
+                            session()->put('message_payer', $structures_mail->message_payer);
                             session()->put('pro', $structures_mail->pro);
                             session()->put('category', "structure");
                         }
@@ -71,9 +72,12 @@ class LoginController extends Controller
         ]);
 
         $structures_email = Structure::where('email', $request->email)->get();
+        $structures_nom = Structure::where('nom', $request->input('nom'))->get();
 
         if (count($structures_email) != 0) {
             return back()->with('error', "Email dejà utilisé !");
+        } else if (count($structures_nom) != 0) {
+            return redirect()->back()->with('error', "Structure déjà existante. Veuillez changer le nom de votre structure");
         } else {
 
             $password = "DB".rand(1021, 9999);
@@ -88,14 +92,14 @@ class LoginController extends Controller
             $structure->pro = 0;
             $structure->save();
 
-            // $to_name = "Deblaa";
+            $to_name = "Deblaa";
 
-            // $to_email = $request->input('email');
-            // $data = array(
-            //     'nom' => $request->input('sigle'),
-            //     'email' => $request->input('email'),
-            //     'motDePasse' => $password
-            // );
+            $to_email = $request->input('email');
+            $data = array(
+                'nom' => $request->input('sigle'),
+                'email' => $request->input('email'),
+                'motDePasse' => $password
+            );
 
             // \Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
             //     $message->to($to_email)
@@ -123,7 +127,7 @@ class LoginController extends Controller
         session()->forget('category');
         session()->forget('message_bonus');
 
-        return redirect(route('indexVisitors'));
+        return redirect(route('sLogin'));
     }
 
 }

@@ -16,7 +16,7 @@
                                         <li>{{ $error }}</li>
                                     @endforeach
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </ul>
                             @endif
@@ -29,7 +29,7 @@
                                         <?php $send_message = 1; ?>
                                     @endif
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @endif
@@ -38,7 +38,7 @@
                                 <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                                        <span aria-hidden="true">x</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                             @endif
@@ -49,13 +49,12 @@
                             </h6>
 
                             <br />
-                                <table id="example" class="table table-stripped table-responsive">
+                                <table id="example" class="table table-striped table-responsive-sm">
                                     <thead>
                                         <tr>
                                             <th>Nom complet</th>
                                             <th>Téléphone</th>
                                             <th>Groupe</th>
-                                            <th>Rôle</th>
                                             <th width="40" class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -72,7 +71,10 @@
                                                         @foreach ($groupes as $groupe)
                                                             @if($user->telephone == $department_user->telephone)
                                                                 @if ($groupe->id == $department_user->departement_id)
-                                                                    {{ $groupe->nom }} |
+                                                                    {{ $groupe->nom }}
+                                                                    @if(count($groupes) > 1)
+                                                                        |
+                                                                    @endif
                                                                 @endif
                                                             @endif
                                                         @endforeach
@@ -83,13 +85,16 @@
                                                         @endif
                                                     @endforeach--}}
                                                 </td>
-                                                <td>{{ $user->fonction }}</td>
-                                                <td class="text-center">
-                                                    <a href="{{ route('sSupprimerMembre', $user->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $user->name }} ?')"
-                                                        class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
-                                                        <i class="icofont-trash"></i>
-                                                    </a>
-                                                </td>
+                                                <form action="{{ route('sSupprimerMembre', $user->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <td class="text-center">
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $user->name }} ?')">
+                                                            <i class="icofont-trash"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </form>
                                             </tr>
                                         @empty
                                         <tr>
@@ -102,7 +107,6 @@
                                             <th>Nom complet</th>
                                             <th>Téléphone</th>
                                             <th>Groupe</th>
-                                            <th>Rôle</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </tfoot>
@@ -134,7 +138,6 @@
         $(document).ready(function() {
 	    $('#example').DataTable();
             let send_message = "{{ $send_message }}";
-            console.log(send_message);
             if (parseInt(send_message, 10) === 1) {
                     $.ajax({
                         type: "GET",

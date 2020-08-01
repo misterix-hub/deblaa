@@ -27,7 +27,7 @@ class Structure extends Model
     use SoftDeletes;
 
     public $table = 'structures';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -46,6 +46,7 @@ class Structure extends Model
         'site_web',
         'acces',
         'message_bonus',
+        'message_payer',
         'pro'
     ];
 
@@ -65,7 +66,8 @@ class Structure extends Model
         'site_web' => 'string',
         'acces' => 'boolean',
         'pro' => 'boolean',
-        'message_bonus' => 'integer'
+        'message_bonus' => 'integer',
+        'message_payer' => 'integer'
     ];
 
     /**
@@ -82,6 +84,10 @@ class Structure extends Model
         'acces' => 'required'
     ];
 
+    public function getRouteKeyName() {
+        return 'nom';
+    }
+
     public function getAccesAttribute($attribute) {
         return [
             0 => 'Banni',
@@ -97,5 +103,5 @@ class Structure extends Model
         return $this->hasMany(DemandeStructure::class);
     }
 
-    
+
 }

@@ -40,8 +40,8 @@
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ route('sListContactByDepartment', $groupe->id) }}">Mes contacts</a>
-                        <a class="dropdown-item" href="{{ route('sCreateMembre', $groupe->id) }}">Nouveau</a>
+                        <a class="dropdown-item" href="{{ $groupe->pathAddMembersByList() }}">Mes contacts</a>
+                        <a class="dropdown-item" href="{{ $groupe->pathAddMember() }}">Nouveau</a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                     </table>
                 <br><br>
                 <div>
-                    <a href="{{ route('sModifierGroupe', $groupe->id) }}" class="btn btn-md btn-indigo ml-0 rounded">
+                    <a href="{{ $groupe->pathModifier() }}" class="btn btn-md btn-indigo ml-0 rounded">
                         Modifier
                     </a>
                     <a href="{{ route('sListeGroupe') }}" class="btn btn-md btn-light rounded">

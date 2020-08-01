@@ -24,7 +24,10 @@ class UniversiteRepository extends BaseRepository
         'email',
         'password',
         'site_web',
-        'acces'
+        'acces',
+        'pro',
+        'message_bonus',
+        'message_payer'
     ];
 
     /**

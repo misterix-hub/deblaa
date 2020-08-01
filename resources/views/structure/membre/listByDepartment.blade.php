@@ -43,49 +43,70 @@
                         </ul>
                     @endif
 
+
+                    <?php $countContact = 0; ?>
+                    @foreach ($contacts as $contact)
+                        @if(count(\App\Models\Departement::leftJoin('users', 'departements.id', 'departement_id')
+                            ->where('structure_id', session()->get('id'))
+                            ->where('users.departement_id', $departement->id)
+                            ->where('users.telephone', $contact->telephone)
+                            ->where('users.id', '<>', null)
+                            ->get()) == 0)
+                            <?php $countContact++ ?>
+                        @endif
+                    @endforeach
+
                     <div class="row justify-content-center">
-                        <div class="col-12 col-lg-10">
+                        <div class="col-12 col-lg-12">
                             <form action="{{ route('sInsertContact') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="department" value="{{ $departement->id }}">
                                 <table class="table table-hover table-responsive-sm mb-4">
-                                    <thead class="bg-light">
-                                        <tr>
-                                            <th class="text-center">
-                                                @if(count($contacts) != 0)
+
+                                    @if ($countContact > 0)
+                                        <thead class="bg-light">
+                                            <tr>
+                                                <th class="text-center">
                                                     <input type="checkbox" id="all" class="allContact">
                                                     <label for="all" class="font-weight-bold">Tout</label>
-                                                @endif
-                                            </th>
-                                            <th class="font-weight-bold">Nom</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    @forelse($contacts as $contact)
-
-                                        @if(count(\App\Models\Departement::leftJoin('users', 'departements.id', 'departement_id')
-                                                ->where('structure_id', session()->get('id'))
-                                                ->where('users.departement_id', $departement->id)
-                                                ->where('users.telephone', $contact->telephone)
-                                                ->where('users.id', '<>', null)
-                                                ->get()) == 0)
-                                            <tr>
-                                                <td class="text-center"><input type="checkbox" name="membre[]" id="membre{{ $contact->id }}" class="contact" value="{{ $contact->telephone }}"></td>
-                                                <td><label for="membre{{ $contact->id }}">{{ $contact->name }}</label></td>
+                                                </th>
+                                                <th class="font-weight-bold">Nom</th>
                                             </tr>
-                                        @endif
-                                    @empty
-                                        <tr>
-                                            <td colspan="2" class="text-center">Aucun membre inscrit</td>
-                                        </tr>
-                                    @endforelse
+                                        </thead>
+                                    @endif
+                                    <tbody>
+                                        @foreach($contacts as $contact)
+                                            @if(count(\App\Models\Departement::leftJoin('users', 'departements.id', 'departement_id')
+                                                    ->where('structure_id', session()->get('id'))
+                                                    ->where('users.departement_id', $departement->id)
+                                                    ->where('users.telephone', $contact->telephone)
+                                                    ->where('users.id', '<>', null)
+                                                    ->get()) == 0)
+                                                <tr>
+                                                    <td class="text-center"><input type="checkbox" name="membre[]" id="membre{{ $contact->id }}" class="contact" value="{{ $contact->telephone }}"></td>
+                                                    <td><label for="membre{{ $contact->id }}">{{ $contact->name }}</label></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
                                     </tbody>
                                 </table>
-                                <div class="float-right">
-                                    <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
-                                    <a href="{{ route('sDetailsGroupe', $departement->id) }}" class="btn btn-light btn-md px-5">Retour</a>
+                                <div class="form-group float-right">
+                                    @if ($countContact > 0)
+                                            <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
+                                    @endif
                                 </div>
                             </form>
+                                @if (count($users) == 0)
+                                    <div class="jumbotron text-center font-weight-bold ">
+                                        <h5>Aucun membre enregistré préalablement...</h5>
+                                    </div>
+                                @endif
+                                @if ($countContact == 0)
+                                    <div class="jumbotron text-center font-weight-bold ">
+                                        <h5>Plus de membres disponible à enregistrer pour ce département...</h5>
+                                    </div>
+                                @endif
+                                <a href="{{ route('sListeGroupe') }}" class="btn btn-light btn-md px-5 float-right">Retour</a>
                         </div>
                     </div>
 
