@@ -3,10 +3,10 @@
 @section('alertMessage')
 
     <nav class="navbar navbar-expand-sm navbar-dark indigo">
-        <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
+        <a href="{{ route('indexStructure') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
             <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
         </a>
-        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexVisitors') }}">
+        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexStructure') }}">
             Deblaa - Structure
         </a>
     </nav>
@@ -33,7 +33,7 @@
                             <a href="tel:+22891019245">0022891019245</a> / <a href="tel:+22897531717">0022897531717</a>
                         </h3><br /><br />
 
-                        <a href="{{ route('indexUniversite') }}" class="btn btn-indigo btn-md rounded">
+                        <a href="{{ route('indexStructure') }}" class="btn btn-indigo btn-md rounded">
                             Retour à l'accueil
                         </a>
                     </div>
@@ -48,7 +48,7 @@
 
                         <button type="button" class="btn btn-md rounded btn-primary" data-toggle="modal" data-target="RechargeCompte">Recharger mon compte</button>
 
-                        <a href="{{ route('indexUniversite') }}" class="btn btn-indigo btn-md rounded">
+                        <a href="{{ route('indexStructure') }}" class="btn btn-indigo btn-md rounded">
                             Retour à l'accueil
                         </a>
                     </div>

@@ -38,13 +38,13 @@
                     </div>
                 @endif
 
-                <form action="{{ route('sUpdateGroupe', $groupe->id) }}" method="post">
+                <form action="{{ route('sUpdateGroupe', $groupe->id) }}" method="post" id="sUpdateGroupeForm">
                     @csrf
                     <label class="" for="nom"><b>Nom du groupe</b></label>
                     <input type="text" name="nom" id="nom" value="{{ $groupe->nom }}" class="form-control" placeholder="Saisir le groupe ...">
 
                     <div class="mt-2">
-                        <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
+                        <button type="submit" class="btn btn-md btn-indigo ml-0 rounded" id="sUpdateGroupeButton">
                             Mettre à jour
                         </button>
                     </div>
@@ -53,4 +53,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('#sUpdateGroupeForm').on('submit', function() {
+                $('#sUpdateGroupeButton').attr('disabled', true);
+            });
+        });
+    </script>
 @endsection

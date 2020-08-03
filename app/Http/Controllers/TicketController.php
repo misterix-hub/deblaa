@@ -48,7 +48,7 @@ class TicketController extends Controller
 
         Ticket::create([
             'categorie_ticket_id' => $request->input('categorie_id'),
-            'code' => "TDB" . random_int(100000000, 999999998)
+            'code' => "TDB" . random_int(1000000, 9999998)
         ]);
 
         return redirect()->back()->with('success', 'Ticket Perso enregsitré avec succès');
@@ -62,7 +62,7 @@ class TicketController extends Controller
 
         Ticket::create([
             'categorie_ticket_id' => $request->input('categorie_id'),
-            'code' => "TDB" . random_int(100000000, 999999998)
+            'code' => "TDB" . random_int(1000000, 9999998)
         ]);
 
         return redirect()->back()->with('success', 'Ticket Pro enregsitré avec succès');
@@ -76,7 +76,7 @@ class TicketController extends Controller
 
         Ticket::create([
             'categorie_ticket_id' => $request->input('categorie_id'),
-            'code' => "TDB" . random_int(100000000, 999999998)
+            'code' => "TDB" . random_int(1000000, 9999998)
         ]);
 
         return redirect()->back()->with('success', 'Ticket Pro Max enregsitré avec succès');
@@ -135,10 +135,10 @@ class TicketController extends Controller
             abort('401');
         } else {
             if (session()->get('pro') == 0) {
-                abort('404');
+                dd('noPro');
             } else {
                 if (!session()->has('category')) {
-                abort('404');
+                dd('noCategory');
             } else {
                 if (session()->get('category') == 'etudiant') {
                     return redirect()->route('inboxEtudiant');
@@ -148,47 +148,50 @@ class TicketController extends Controller
                     } else {
 
                         $request->validate([
-                            'ticket' => 'required'
+                            'ticket_code' => 'required'
                         ],
                         [
-                            'ticket.required' => 'Opération non validée. votre code ticket n\'est pas renseigné'
+                            'ticket_code.required' => 'Opération non validée. votre code ticket n\'est pas renseigné'
                         ]);
 
-                        $ticket_exist = Ticket::where('code', $request->input('ticket'))->get('categorie_ticket_id')->first()->categorie_ticket_id;
 
-                        if (count($ticket_exist) == 0) {
+                        $ticket_exists = Ticket::where('code', $request->input('ticket_code'))->first();
+
+                        if ($ticket_exists == null) {
                             return redirect()->back()->with('error', 'Opération non validée. Votre code ticket est invalide');
                         } else {
-                            $sms = CategorieTicket::where('id', $ticket_exist)->get('nombre_sms')->first()->nombre_sms;
-                            $montant = CategorieTicket::where('id', $ticket_exist)->get('montant')->first()->montant;
-                            $ticket_deleted = Ticket::where('code', $request->input('ticket'))->delete();
+
+                            $mms = CategorieTicket::where('id', $ticket_exists->categorie_ticket_id)->get('nombre_mms')->first()->nombre_mms;
+                            $montant = CategorieTicket::where('id', $ticket_exists->categorie_ticket_id)->get('montant')->first()->montant;
+                            $ticket_deleted = Ticket::where('code', $request->input('ticket_code'))->delete();
+
                             if (session()->get('category') == 'structure') {
-                                $structures = Structure::where('id', session()->get('id'))->first();
-                                foreach ($structures as $structure) {
+                                $structure = Structure::where('id', session()->get('id'))->first();
+
                                     $struc_message = $structure->message_payer;
-                                    $total_struc_message = intval($struc_message) + intval($sms);
+                                    $total_struc_message = intval($struc_message) + intval($mms);
                                     $structure->update([
                                         'message_payer' => $total_struc_message
                                     ]);
-                                }
-                                session()->put('message_payer', $total_struct_message);
+                                session()->put('message_payer', $total_struc_message);
                             } else {
-                                $universites = Universite::where('id', session()->get('id'))->first();
-                                foreach ($universites as $universite) {
+                                $universite = Universite::where('id', session()->get('id'))->first();
+
                                     $univ_message = $universite->message_payer;
-                                    $total_univ_message = intval($univ_message) + intval($sms);
+                                    $total_univ_message = intval($univ_message) + intval($mms);
                                     $universite->update([
                                         'message_payer' => $total_univ_message
                                     ]);
+                                    session()->put('message_payer', $total_univ_message);
                                 }
-                                session()->put('message_payer', $total_univ_message);
+                                return redirect()->back()->with('success', 'Opération validée. vous avez fait une recharge de ' . $montant . ' FCFA soit ' . $mms . ' MMS');
                             }
-                            return redirect()->back()->with('success', 'Opération validée. vous avez fait une recharge de ' . $montant . ' soit ' . $sms . ' MMS');
+
                         }
                     }
                 }
             }
-            }
+
 
         }
     }

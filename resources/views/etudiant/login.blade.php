@@ -1,7 +1,7 @@
 @extends('layout.header')
 
 @section('connexion')
-    
+
     <div class="div indigo">
         <div class="container">
             <div class="row">
@@ -84,7 +84,7 @@
                         </h5>
                     </div><br />
 
-                    <form action="{{ route('eLoginProcessing') }}" method="post">
+                    <form action="{{ route('eLoginProcessing') }}" method="post" id="eLoginProcessingForm">
                         @csrf
 
                         <label for="telephone" class="font-size-14">Numéro de téléphone</label>
@@ -93,7 +93,7 @@
                         <label for="password" class="font-size-14">Mot de passe</label>
                         <input type="password" id="password" name="password" class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0">
+                        <button type="submit" class="btn btn-md btn-primary float-right rounded mr-0" id="eLoginProcessingButton">
                             Se connecter
                         </button><br /><br />
 
@@ -108,9 +108,17 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
-                
+
             </div>
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    $(document).ready(function() {
+        $('#eLoginProcessingForm').on('submit', function() {
+            $('#eLoginProcessingButton').attr('disabled', true);
+        });
+    });
 @endsection

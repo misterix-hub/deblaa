@@ -36,7 +36,7 @@
 
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-12">
-                            <form action="{{ route('uInsertContact') }}" method="post">
+                            <form action="{{ route('uInsertContact') }}" method="post" id="uInsertContactForm">
                                 @csrf
                                 {{--  <div class="form-group">
                                     <label for="niveau" class="mb-2">Niveaux</label>
@@ -87,7 +87,7 @@
                                     <div class="form-group float-right">
                                         <a href="{{ route('uListeFiliere') }}" class="btn btn-md btn-light px-5">Retour</a>
                                         @if (count($contacts) > 0)
-                                            <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
+                                            <button type="submit" class="btn btn-success btn-md px-5" id="uInserContactButton">Valider</button>
                                         @endif
                                     </div>
                             </form>
@@ -114,6 +114,10 @@
         $(document).ready(function () {
             $('.allContact').change(function () {
                 $('.contact').prop('checked', $(this).prop('checked'));
+            });
+
+            $('#uInsertContactForm').on('submit', function() {
+                $('#uInsertContactButton').attr('disabled', true);
             });
 
             {{--  let filiere_id = {{ $filiere->id }}

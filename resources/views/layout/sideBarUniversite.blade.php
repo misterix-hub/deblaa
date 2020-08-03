@@ -530,7 +530,7 @@
 
 
         <!-- Modal de recharge de compte -->
-        <form action="{{ route('codeTicket') }}" method="post">
+        <form action="{{ route('codeTicketUser') }}" method="post" id="uCodeTicketUserForm">
             <div class="modal fade" id="rechargeAccount" tabindex="-1" role="dialog" aria-labelledby="rechargeAccountLabel"
             aria-hidden="true">
 
@@ -550,7 +550,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light btn-sm" data-dismiss="modal">Fermer</button>
-                            <button type="submit" class="btn btn-success btn-sm">Valider</button>
+                            <button type="submit" class="btn btn-success btn-sm" id="uCodeTicketUserButton">Valider</button>
                         </div>
                     </div>
                 </div>
@@ -559,7 +559,7 @@
 
 
 
-    <form action="{{ route('uAjouterFiliere') }}" method="post">
+    <form action="{{ route('uAjouterFiliere') }}" method="post" id="uAjouterFiliereForm">
         <div class="modal fade" id="filiereModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -595,7 +595,7 @@
                     </div>
                     <div class="modal-footer pt-2 pb-2">
                         <button type="button" class="btn btn-white btn-md z-depth-0" data-dismiss="modal">Fermer</button>
-                        <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
+                        <button type="submit" class="btn btn-indigo btn-md" id="uAjouterFiliereButton">Ajouter</button>
                     </div>
                 </div>
             </div>
@@ -616,6 +616,14 @@
 
             $('.allNiveaux0').change(function () {
                 $('.niveauCheckBox0').prop("checked", $(this).prop("checked"));
+            });
+
+            $('#uAjouterFiliereForm').on('submit', function() {
+                $('#uAjouterFiliereButton').attr('disabled', true);
+            });
+
+            $('#uCodeTicketUserForm').on('submit', function() {
+                $('#uCodeTicketUserButton').attr('disabled', true);
             });
         });
     </script>

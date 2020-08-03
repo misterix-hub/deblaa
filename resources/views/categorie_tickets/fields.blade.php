@@ -1,13 +1,13 @@
 <div class="form-group col-sm-12">
-    <input type="text" name="nom" id="nom" placeholder="nom de la catégorie" value="{{ old('nom') }}">
+    <input type="text" name="nom" id="nom" placeholder="nom de la catégorie" value="{{ old('nom') }}" class="form-control">
 </div>
 
 <div class="form-group col-sm-6">
-    <input type="text" name="montant" id="montant" placeholder="Saisir le montant" value="{{ old('montant') }}">
+    <input type="text" name="montant" id="montant" placeholder="Saisir le montant" value="{{ old('montant') }}" class="form-control">
 </div>
 
 <div class="form-group col-sm-6">
-    <input type="text" name="nombre_mms" id="nombre_mms" placeholder="Saisir le nombre de mms" value="{{ old('nombre_mms') }}">
+    <input type="text" name="nombre_mms" id="nombre_mms" placeholder="Saisir le nombre de mms" value="{{ old('nombre_mms') }}" class="form-control">
 </div>
 
 <div class="form-group">

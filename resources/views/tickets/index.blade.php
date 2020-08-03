@@ -10,7 +10,25 @@
     <div class="content">
         <div class="clearfix"></div>
 
-        @include('flash::message')
+        @if (Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        @if (Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                {{ Session::get('error') }}
+                <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+
+        {{--  @include('flash::message')  --}}
 
         <div class="clearfix"></div>
         <div class="box box-primary">

@@ -51,7 +51,7 @@
                         Connexion à un compte
                     </h5>
 
-                    <form action="{{ route('sLoginProcessing') }}" method="post">
+                    <form action="{{ route('sLoginProcessing') }}" method="post" id="sLoginProcessingForm">
                         @csrf
 
                         <label for="email" class="font-size-14">Email</label>
@@ -68,15 +68,15 @@
                             </div>
                         </div>
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower sLoginProcessing">
                             Se connecter
                         </button><br />
 
-                        <a href="{{ route('sResetPassword') }}">
+                        <a href="{{ route('sResetPassword') }}" class="sLoginProcessingButton">
                             <b>Mot de passe oublié ?</b>
                         </a><hr />
 
-                        <b>Pas encore de compe ? <a href="{{ route('sRegister') }}">Créer un compte</a></b>
+                        <b>Pas encore de compe ? <a href="{{ route('sRegister') }}" class="sLoginProcessingButton">Créer un compte</a></b>
                     </form><br />
                 </div><br /><br />
 
@@ -93,7 +93,7 @@
                     Si vous n'avez pas encore de compte, n'attendez pas plus longtemps pour vous inscrire.
                     C'est gratuit et en plus ça prend moins de 2 minutes.
                 </h5>
-                <a href="{{ route('sRegister') }}" class="float-right mr-0 btn btn-lg btn-orange rounded">
+                <a href="{{ route('sRegister') }}" class="float-right mr-0 btn btn-lg btn-orange rounded sLoginProcessingButton">
                     Créer un compte
                 </a>
             </div>
@@ -118,6 +118,10 @@
                 $('.firstEye').css('display', 'block');
                 $('#password').attr('type', 'password')
             })
+
+            $('#sLoginProcessingForm').on('submit', function() {
+                $('.sLoginProcessingButton').attr('disabled', true);
+            });
         })
     </script>
 @endsection

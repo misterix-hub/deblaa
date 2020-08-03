@@ -86,6 +86,7 @@ class LoginController extends Controller
             $structure->nom = $request->nom;
             $structure->sigle = $request->sigle;
             $structure->message_bonus = 3;
+            $structure->message_payer = 0;
             $structure->email = $request->email;
             $structure->password = bcrypt($password);
             $structure->acces = 1;

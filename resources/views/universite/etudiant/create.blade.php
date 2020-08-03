@@ -34,7 +34,7 @@
                         </ul>
                     @endif
 
-                    <form action="{{ route('uAjouterEtudiant') }}" method="post">
+                    <form action="{{ route('uAjouterEtudiant') }}" method="post" id="uAjouterEtudiantForm">
 
                         @csrf
                         <label class="" for="nomComplet"><b>Nom de l'étudiant</b></label>
@@ -89,7 +89,7 @@
                         </table>
                         <div class="mt-3">
                             <a href="{{ route('uListeFiliere') }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
-                            <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
+                            <button type="submit" class="btn btn-indigo btn-md" id="uAjouterEtudiantButton">Ajouter</button>
                         </div>
                     </form>
                 </div>
@@ -118,6 +118,10 @@
                 });
                 code_select.text('+' + $(this).val());
                 code_select.val('+' + $(this).val());
+            });
+
+            $('#uAjouterEtudiantForm').on('submit', function() {
+                $('#uAjouterEtudiantButton').attr('disabled', true);
             });
         });
     </script>

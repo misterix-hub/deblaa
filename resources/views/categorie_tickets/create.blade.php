@@ -11,7 +11,8 @@
         <div class="box box-primary">
             <div class="box-body">
                 <div class="row">
-                    <form action="{{ route('categorie.tickets.index') }}" method="post">
+                    <form action="{{ route('categorie.tickets.store') }}" method="post">
+                        @csrf
                         @include('categorie_tickets.fields')
                     </form>
                 </div>

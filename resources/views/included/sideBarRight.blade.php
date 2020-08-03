@@ -1,25 +1,28 @@
 <?php  $structure = \App\Models\Structure::findOrFail(session()->get('id'))?>
 <div class="mt-2 mb-2"></div>
 <div class="mt-2"></div>
-@if(session()->get('pro') == 0)
-    <div class="card border-warning font-size-14">
-        <div class="card-header">
-            Messages en réserve
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title text-center">
-                {{ session()->get('message_bonus') }}
-            </h4>
-            <p class="card-text">
-                @if (session()->get('pro') == 1)
-                    Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
-                @else
-                    Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.
-                @endif
-            </p>
-        </div>
+<div class="card border-warning font-size-14">
+    <div class="card-header">
+        Messages en réserve
     </div>
-@endif
+    <div class="card-body text-center">
+        <h4 class="card-title text-center">
+            @if (session()->get('pro') == 0)
+                {{ session()->get('message_bonus') }}
+            @else
+                {{ session()->get('message_payer') }}
+            @endif
+        </h4>
+        <p class="card-text">
+            @if (session()->get('pro') == 0)
+                Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
+            @else
+                Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.
+            @endif
+        </p>
+    </div>
+</div>
+
 <br />
 
 <div class="card border-primary">

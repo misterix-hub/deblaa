@@ -8,10 +8,14 @@
         </div>
         <div class="card-body text-center">
             <h4 class="card-title text-center">
+            @if (session()->get('pro') == 0)
                 {{ session()->get('message_bonus') }}
+            @else
+                {{ session()->get('message_payer') }}
+            @endif
             </h4>
             <p class="card-text">
-                @if (session()->get('pro') == 1)
+                @if (session()->get('pro') == 0)
                     Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
                 @else
                     Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.

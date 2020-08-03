@@ -3,10 +3,10 @@
 @section('alertMessage')
 
     <nav class="navbar navbar-expand-sm navbar-dark indigo">
-        <a href="{{ route('indexVisitors') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
+        <a href="{{ route('indexUniversite') }}" class="comfortaa" style="margin-left: -10px; margin-right: 10px;">
             <img src="{{ URL::asset('assets/images/deblaa.png') }}" width="50" alt="logo">
         </a>
-        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexVisitors') }}">
+        <a class="navbar-brand comfortaa cyan-text font-weight-bold" href="{{ route('indexUniversite') }}">
             Deblaa - Universite
         </a>
     </nav>

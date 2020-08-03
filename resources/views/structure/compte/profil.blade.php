@@ -31,7 +31,7 @@
                         {{ $message }}
                     </div>
                 @endif
-                <form action="{{ route('sCompteUpdate', $structure) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('sCompteUpdate', $structure) }}" method="post" enctype="multipart/form-data" id="sCompteUpdateForm">
 
                     @csrf
 
@@ -70,11 +70,19 @@
 
 
                     <!-- Sign up button -->
-                    <button class="btn btn-indigo btn-md ml-0 rounded pl-3 pr-3" type="submit">Mettre à jour</button>
+                    <button class="btn btn-indigo btn-md ml-0 rounded pl-3 pr-3" type="submit" id="sCompteUpdateButton">Mettre à jour</button>
 
                 </form>
 
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    $(document).ready(function() {
+        $('#sCompteUpdateForm').on('submit', function() {
+            $('#sCompteUpdateButton').attr('disabled', true);
+        });
+    });
 @endsection

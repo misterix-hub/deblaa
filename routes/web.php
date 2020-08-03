@@ -36,9 +36,9 @@ Route::get('/', function () {
 })->name('indexVisitors');
 Route::post('contact', 'ContactController@sendMessageByUser')->name('messageSendByUsers');
 
-Route::group(['prefix' => 'admin'], function () {
-    Auth::routes();
-});
+
+Auth::routes();
+
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -176,13 +176,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('admin/code-ticket/store-perso-processing', 'TicketController@storePerso')->name('tickets.storePerso');
     Route::post('admin/code-ticket/store-pro-processing', 'TicketController@storePro')->name('tickets.storePro');
     Route::post('admin/code-ticket/store-promax-processing', 'TicketController@storeProMax')->name('tickets.storeProMax');
-    Route::delete('admin/code-ticket/onDeleting', 'TicketController@destroy')->name('tickets.destroy');
+    Route::delete('admin/code-ticket/{ticket}/onDeleting', 'TicketController@destroy')->name('tickets.destroy');
 
     /*CATEGORIE CODE TICKET */
     Route::get('admin/categorie-ticket/liste', 'CategorieTicketController@index')->name('categorie.tickets.index');
     Route::get('admin/categorie-ticket/create', 'CategorieTicketController@create')->name('categorie.tickets.create');
     Route::post('admin/categorie-ticket/store-processing', 'CategorieTicketController@store')->name('categorie.tickets.store');
-    Route::delete('admin/categorie-ticket/onDeleting', 'CategorieTicketController@destroy')->name('categorie.tickets.destroy');
+    Route::delete('admin/categorie-ticket/{ticket}/onDeleting', 'CategorieTicketController@destroy')->name('categorie.tickets.destroy');
 });
 
 
@@ -209,7 +209,7 @@ Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\Etudi
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
-Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageFrom');
+Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageForm');
 Route::get('universites/messages', 'Universite\MessageController@index')->name('uListeMessage');
 Route::get('universites/messages/bilan', 'Universite\MessageController@bilan')->name('uBilanMessage');
 Route::get('universites/messages/{id}-{slug}/details', 'Universite\MessageController@details')->name('uDetailsMessage');
@@ -311,6 +311,6 @@ Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing'
 Route::get('membres/logout', 'Membre\LoginController@logout')->name('mLogout');
 
 /*RECHARGE DE COMPTE*/
-Route::post('recharge-compte/processing####', 'TicketController@verifyCodeTicket')->name('codeTicket');
+Route::post('recharge-compte/processing', 'TicketController@verifyCodeTicket')->name('codeTicketUser');
 
 

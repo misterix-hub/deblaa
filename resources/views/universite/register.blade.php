@@ -51,7 +51,7 @@
                         Création de compte
                     </h5>
 
-                    <form action="{{ route('uRegisterProcessing') }}" method="post">
+                    <form action="{{ route('uRegisterProcessing') }}" method="post" class="uRegisterProcessingForm">
                         @csrf
 
                         <label for="nom" class="font-size-14"><b>Nom de l'université</b></label>
@@ -64,13 +64,13 @@
                         <label for="email" class="font-size-14"><b>Email</b></label>
                         <input type="text" id="email" name="email" required maxlength="50"  class="form-control" placeholder="Saisir dans le champs ...">
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower uRegisterProcessingButton">
                             S'incrire
                         </button><br />
 
 
 
-                        <b>Déjà membre ? <a href="{{ route('uLogin') }}">Connectez-vous</a></b>
+                        <b>Déjà membre ? <a href="{{ route('uLogin') }}" class="uRegisterProcessingButton">Connectez-vous</a></b>
                     </form><br />
                 </div><br />
 
@@ -111,6 +111,10 @@
                 if ( parseInt(minlength) > sigle ) {
                     alert('Votre sigle doit avoir au moins deux caractères');
                 }
+            });
+
+            $('#uRegisterProcessingForm').on('submit', function() {
+                $('.RegisterProcessingButton').attr('disabled', true);
             });
         })
     </script>

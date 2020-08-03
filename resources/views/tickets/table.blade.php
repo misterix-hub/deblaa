@@ -10,11 +10,12 @@
         <tbody>
         @forelse($tickets as $ticket)
             <tr>
-                <td>{{ $ticket->categorie->nom }}</td>
+                <td>{{ \App\CategorieTicket::where('id', $ticket->categorie_ticket_id)->get('nom')->first()->nom }}</td>
                 <td>{{ $ticket->code }}</td>
                 <td width="150" class="text-center">
                     {!! Form::open(['route' => ['tickets.destroy', $ticket->id], 'method' => 'delete']) !!}
-                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Êtes-vous sûr(e) ?')"]) !!}
+                        @csrf
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i> Supprimer', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm', 'onclick' => "return confirm('Êtes-vous sûr(e) ?')"]) !!}
                     {!! Form::close() !!}
                 </td>
             </tr>

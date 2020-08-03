@@ -20,7 +20,7 @@
                         {{ $message }}
                     </div>
                 @endif
-                <form action="{{ route('uCompteUpdate', $universite->id) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('uCompteUpdate', $universite->id) }}" method="post" enctype="multipart/form-data" id="uCompteUpdateForm">
 
                     @csrf
 
@@ -59,11 +59,19 @@
 
 
                     <!-- Sign up button -->
-                    <button class="btn btn-indigo btn-md ml-0" type="submit">Mettre à jour</button>
+                    <button class="btn btn-indigo btn-md ml-0" type="submit" id="uCompteUpdateButton">Mettre à jour</button>
 
                 </form>
 
             </div>
         </div>
     </div>
+@endsection
+
+@section('scriptJs')
+    $(document).ready(function() {
+        $('#uCompteUpdateForm').on('submit', function() {
+            $('#uCompteUpdateButton').attr('disabled', true);
+        });
+    });
 @endsection

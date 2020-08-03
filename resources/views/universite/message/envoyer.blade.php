@@ -17,7 +17,7 @@
             </div>
             <div class="col-12"><br />
 
-                <form action="{{ route('uEnvoyerMessageFrom') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('uEnvoyerMessageForm') }}" method="post" enctype="multipart/form-data" id="uEnvoyerMessageForm">
                     @csrf
 
                     <div class="row">
@@ -79,7 +79,7 @@
                         <input type="hidden" name="index" value="{{ $i }}">
                     </div><br />
                     {!! (count($filieres)) == 0 ? '<span class=\'red-text\'>Impossible d\'envoyer sans ancune filière</span>' : '' !!}<br />
-                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0 {{ (count($filieres)) == 0 ? 'disabled' : '' }}">
+                    <button type="submit" class="btn btn-indigo btn-md rounded ml-0 {{ (count($filieres)) == 0 ? 'disabled' : '' }}" id="uEnvoyerMessageButton">
                         Envoyer
                     </button>
 
@@ -100,6 +100,9 @@
             });
         });
 
+        $('#uEnvoyerMessageForm').on('submit', function() {
+            $('#uEnvoyerMessageButton').attr('disabled', true);
+        });
 	 /* VICTOR SI TU ARRIVES ICI TU PEUX LAISSER, C'EST DEJA FAIT */
 
         $('#titre').keyup(function(){

@@ -403,7 +403,7 @@ class MessageController extends Controller
         $message_payer = session()->get('message_payer');
 
         if (($pro == 0 && $message_bonus == 0) || ($pro == 1 && $message_payer == 0)) {
-            return view('universite.alert');
+            return view('structure.alert');
         } else {
             abort('404');
         }

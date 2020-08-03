@@ -43,7 +43,7 @@
                         </ul>
                     @endif
 
-                    <form action="{{ route('sAjouterMembre') }}" method="post">
+                    <form action="{{ route('sAjouterMembre') }}" method="post" id="sAjouterMembreForm">
                         @csrf
                         <div class="form-group">
                             <label for="groupe"><b>Groupe</b></label>
@@ -84,7 +84,7 @@
                         </div>
                         <div>
                             <a href="{{ $groupe->pathShow() }}" class="btn btn-light btn-md z-depth-0">Fermer</a>
-                            <button type="submit" class="btn btn-indigo btn-md">Ajouter</button>
+                            <button type="submit" class="btn btn-indigo btn-md" id="sAddMemberButton">Ajouter</button>
                         </div>
                     </form>
                 </div>
@@ -112,6 +112,10 @@
                });
                code_select.text('+' + $(this).val());
                code_select.val('+' + $(this).val());
+           });
+
+           $('#sAjouterMembreForm').on('submit', function() {
+               $('#sAddMemberButton').attr('disabled', true);
            });
         });
     </script>

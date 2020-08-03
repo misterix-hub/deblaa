@@ -106,7 +106,7 @@
                                             <i class="icofont icofont-exclamation-tringle"></i> ALERTE <i class="icofont icofont-exclamation-tringle"></i><br>
                                         </h4>
                                         <p class="card-text black-text" style="text-align: justify;">
-                                            {{ session()->get('sigle') }}, Vous avez épuisé le nombre de messages de bonus que vous aviez.
+                                            {{ session()->get('sigle') }}, Vous avez épuisé le nombre de messages d'essai que vous aviez.
                                             Il est à présent impossible d'envoyer des messages ou d'ajouter des membres.
                                             Passez en compte professionnel illimité pour résoudre ce problème en nous contactant.
 

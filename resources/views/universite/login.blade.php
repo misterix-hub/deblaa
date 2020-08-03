@@ -46,7 +46,7 @@
                         Connexion à un compte
                     </h5>
 
-                    <form action="{{ route('uLoginProcessing') }}" method="post">
+                    <form action="{{ route('uLoginProcessing') }}" method="post" id="uLoginProcessingForm">
                         @csrf
 
                         <label for="email" class="font-size-14">Email</label>
@@ -63,15 +63,15 @@
                             </div>
                         </div>
                         <div class="mt-3"></div>
-                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower">
+                        <button type="submit" class="btn btn-md btn-indigo float-right rounded mr-0 spinnerShower uLoginrProcessingButton">
                             Se connecter
                         </button><br />
 
-                        <a href="{{ route('uResetPassword') }}">
+                        <a href="{{ route('uResetPassword') }}" class="uLoginProcessingButton">
                             <b>Mot de passe oublié ?</b>
                         </a><hr />
 
-                        <b>Pas encore de compe ? <a href="{{ route('uRegister') }}">Créer un compte</a></b>
+                        <b>Pas encore de compe ? <a href="{{ route('uRegister') }}" class="uLoginProcessingButton">Créer un compte</a></b>
                     </form><br />
                 </div><br /><br />
 
@@ -88,7 +88,7 @@
                     Si vous n'avez pas encore de compte, n'attendez pas plus longtemps pour vous inscrire.
                     C'est gratuit et en plus ça prend moins de 2 minutes.
                 </h5>
-                <a href="{{ route('uRegister') }}" class="float-right mr-0 btn btn-lg btn-orange rounded">
+                <a href="{{ route('uRegister') }}" class="float-right mr-0 btn btn-lg btn-orange rounded uLoginProcessingButton">
                     Créer un compte
                 </a>
             </div>
@@ -112,7 +112,11 @@
                 $(this).css('display', 'none');
                 $('.firstEye').css('display', 'block');
                 $('#password').attr('type', 'password')
-            })
+            });
+
+            $('#LoginProcessingForm').on('submit', function() {
+                $('.uLoginProcessingButton').attr('disabled', true);
+            });
         })
     </script>
 @endsection

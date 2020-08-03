@@ -10,7 +10,7 @@
             <div class="col-lg-6 col-md-12 col-sm-12"><br />
 
                 @foreach ($filieres as $filiere)
-                    <form action="{{ route('uUpdateFiliere', $filiere->id) }}" method="post">
+                    <form action="{{ route('uUpdateFiliere', $filiere->id) }}" method="post" id="uUpdateFiliereForm">
                         @csrf
                         <label class="" for="nom"><b>Nom de la filière</b></label>
                         <input type="text" name="nom" id="nom" class="form-control" value="{{ $filiere->nom }}"><br  />
@@ -42,7 +42,7 @@
                             <a href="{{ route('uListeFiliere') }}" class="btn btn-md btn-light ml-0 rounded">
                                 Annuler
                             </a>
-                            <button type="submit" class="btn btn-md btn-indigo ml-0 rounded">
+                            <button type="submit" class="btn btn-md btn-indigo ml-0 rounded" id="uUpdateFiliereButton">
                                 Mettre à jour
                             </button>
                         </div>
@@ -62,6 +62,10 @@
         $(document).ready(function() {
             $('.allNiveaux1').change(function () {
                 $('.niveauCheckBox1').prop("checked", $(this).prop("checked"));
+            });
+
+            $('#uUpdateFiliereForm').on('submit', function() {
+                $('#uUpdateFiliereButton').attr('disabled', true);
             });
         });
     </script>

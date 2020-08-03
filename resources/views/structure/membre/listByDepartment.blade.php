@@ -58,7 +58,7 @@
 
                     <div class="row justify-content-center">
                         <div class="col-12 col-lg-12">
-                            <form action="{{ route('sInsertContact') }}" method="post">
+                            <form action="{{ route('sInsertContact') }}" method="post" id="sInsertContactForm">
                                 @csrf
                                 <input type="hidden" name="department" value="{{ $departement->id }}">
                                 <table class="table table-hover table-responsive-sm mb-4">
@@ -92,7 +92,7 @@
                                 </table>
                                 <div class="form-group float-right">
                                     @if ($countContact > 0)
-                                            <button type="submit" class="btn btn-success btn-md px-5">Valider</button>
+                                            <button type="submit" class="btn btn-success btn-md px-5" id="sInsertContactButton">Valider</button>
                                     @endif
                                 </div>
                             </form>
@@ -131,6 +131,10 @@
            $('.allContact').change(function () {
                 $('.contact').prop('checked', $(this).prop('checked'));
            });
+
+           $('#sInserContactForm').on('submit', function() {
+               $('#sInsertContactButton').attr('disabled', true);
+           })
         });
     </script>
 @endsection
