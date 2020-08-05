@@ -343,11 +343,11 @@
                     </td>
                     @if (session()->get('pro') == 1)
                         <td class="float-right">
-                            <a class="btn btn-sm px-2 btn-primary py-1" href="#!" data-toggle="modal" data-target="#rechargeAccount"><span class="icofont-refresh"></span> Recharger mon compte</a>
+                            <a class="btn btn-sm px-2 btn-success py-1" href="#!" data-toggle="modal" data-target="#rechargeAccount"><span class="icofont-refresh"></span> Recharger mon compte</a>
                         </td>
                     @endif
                     <td class="text-right">
-                        <a href="{{ URL::asset('logout') }}" title="Se déconnecter" class="btn btn-danger p-0 rounded m-0 z-depth-0"
+                        <a href="{{ route('sLogout') }}" title="Se déconnecter" class="btn btn-danger p-0 rounded m-0 z-depth-0"
                         style="width: 22px; height: 22px; line-height: 22px;">
                             <i class="icofont-power spinnerShower"></i>
                         </a>

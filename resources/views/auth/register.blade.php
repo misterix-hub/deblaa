@@ -48,6 +48,23 @@
         <form method="post" action="{{ url('/register') }}">
             @csrf
 
+            <div class="form-group has-feedback{{ $errors->has('role') ? ' has-error' : '' }}">
+                <label for="name">Role</label>
+                <select name="role" id="role" class="form-control">
+                    <option value="">Sélectionnez un rôle</option>
+                    @foreach($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach
+                </select>
+                <i class="fa fa-shield form-control-feedback"></i>
+
+                @if ($errors->has('role'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('role') }}</strong>
+                    </span>
+                @endif
+            </div>
+
             <div class="form-group has-feedback{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name">Nom complet</label>
                 <input type="text" style="border-radius: 3px;" class="form-control" name="name" id="name" value="{{ old('name') }}" placeholder="Nom complet">

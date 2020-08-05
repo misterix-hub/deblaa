@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'checkMessageBonusUniversite' => \App\Http\Middleware\checkMessageBonusUniversite::class,
         'checkUniversiteSessionId' => \App\Http\Middleware\checkUniversiteSessionId::class,
         'checkStructureSessionId' => \App\Http\Middleware\checkStructureSessionId::class,
+        'checkSuperAdmin' => \App\Http\Middleware\checkSuperAdmin::class,
     ];
 
     /**

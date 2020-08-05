@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('departement_id')->nullable();
             $table->unsignedInteger('filiere_id')->nullable();
             $table->unsignedInteger('niveau_id')->nullable();
+            $table->unsignedInteger('role_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('access_id')->unique()->nullable();

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Administration' => $baseDir . '/app/Administration.php',
     'App\\BilanMessageStructure' => $baseDir . '/app/BilanMessageStructure.php',
     'App\\BilanMessageUniversite' => $baseDir . '/app/BilanMessageUniversite.php',
     'App\\CategorieTicket' => $baseDir . '/app/CategorieTicket.php',
@@ -20,6 +21,7 @@ return array(
     'App\\FichierMessageStructure' => $baseDir . '/app/FichierMessageStructure.php',
     'App\\FichierMessageUniversite' => $baseDir . '/app/FichierMessageUniversite.php',
     'App\\Filiere' => $baseDir . '/app/Filiere.php',
+    'App\\Http\\Controllers\\AdministrationController' => $baseDir . '/app/Http/Controllers/AdministrationController.php',
     'App\\Http\\Controllers\\AppBaseController' => $baseDir . '/app/Http/Controllers/AppBaseController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -51,6 +53,7 @@ return array(
     'App\\Http\\Controllers\\Structure\\MembreController' => $baseDir . '/app/Http/Controllers/Structure/MembreController.php',
     'App\\Http\\Controllers\\Structure\\MessageController' => $baseDir . '/app/Http/Controllers/Structure/MessageController.php',
     'App\\Http\\Controllers\\Structure\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Structure/ResetPasswordController.php',
+    'App\\Http\\Controllers\\TicketController' => $baseDir . '/app/Http/Controllers/TicketController.php',
     'App\\Http\\Controllers\\UniversiteController' => $baseDir . '/app/Http/Controllers/UniversiteController.php',
     'App\\Http\\Controllers\\Universite\\CompteController' => $baseDir . '/app/Http/Controllers/Universite/CompteController.php',
     'App\\Http\\Controllers\\Universite\\EtudiantController' => $baseDir . '/app/Http/Controllers/Universite/EtudiantController.php',
@@ -106,6 +109,7 @@ return array(
     'App\\Repositories\\NiveauRepository' => $baseDir . '/app/Repositories/NiveauRepository.php',
     'App\\Repositories\\StructureRepository' => $baseDir . '/app/Repositories/StructureRepository.php',
     'App\\Repositories\\UniversiteRepository' => $baseDir . '/app/Repositories/UniversiteRepository.php',
+    'App\\Role' => $baseDir . '/app/Role.php',
     'App\\Ticket' => $baseDir . '/app/Ticket.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',

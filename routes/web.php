@@ -183,6 +183,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('admin/categorie-ticket/create', 'CategorieTicketController@create')->name('categorie.tickets.create');
     Route::post('admin/categorie-ticket/store-processing', 'CategorieTicketController@store')->name('categorie.tickets.store');
     Route::delete('admin/categorie-ticket/{ticket}/onDeleting', 'CategorieTicketController@destroy')->name('categorie.tickets.destroy');
+
+    Route::group(['prefix' => 'admin'], function() {
+        Route::get('roles', 'Auth\RoleController@index')->name('roles.index');
+        Route::get('roles/create', 'Auth\RoleController@create')->name('roles.create');
+        Route::post('roles/store-processing', 'Auth\RoleController@store')->name('roles.store');
+    });
 });
 
 

@@ -447,6 +447,7 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
     );
 
     public static $classMap = array (
+        'App\\Administration' => __DIR__ . '/../..' . '/app/Administration.php',
         'App\\BilanMessageStructure' => __DIR__ . '/../..' . '/app/BilanMessageStructure.php',
         'App\\BilanMessageUniversite' => __DIR__ . '/../..' . '/app/BilanMessageUniversite.php',
         'App\\CategorieTicket' => __DIR__ . '/../..' . '/app/CategorieTicket.php',
@@ -461,6 +462,7 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\FichierMessageStructure' => __DIR__ . '/../..' . '/app/FichierMessageStructure.php',
         'App\\FichierMessageUniversite' => __DIR__ . '/../..' . '/app/FichierMessageUniversite.php',
         'App\\Filiere' => __DIR__ . '/../..' . '/app/Filiere.php',
+        'App\\Http\\Controllers\\AdministrationController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdministrationController.php',
         'App\\Http\\Controllers\\AppBaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/AppBaseController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -492,6 +494,7 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\Http\\Controllers\\Structure\\MembreController' => __DIR__ . '/../..' . '/app/Http/Controllers/Structure/MembreController.php',
         'App\\Http\\Controllers\\Structure\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Structure/MessageController.php',
         'App\\Http\\Controllers\\Structure\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Structure/ResetPasswordController.php',
+        'App\\Http\\Controllers\\TicketController' => __DIR__ . '/../..' . '/app/Http/Controllers/TicketController.php',
         'App\\Http\\Controllers\\UniversiteController' => __DIR__ . '/../..' . '/app/Http/Controllers/UniversiteController.php',
         'App\\Http\\Controllers\\Universite\\CompteController' => __DIR__ . '/../..' . '/app/Http/Controllers/Universite/CompteController.php',
         'App\\Http\\Controllers\\Universite\\EtudiantController' => __DIR__ . '/../..' . '/app/Http/Controllers/Universite/EtudiantController.php',
@@ -547,6 +550,7 @@ class ComposerStaticInit2a46385b8a11aecae77773c085438cdb
         'App\\Repositories\\NiveauRepository' => __DIR__ . '/../..' . '/app/Repositories/NiveauRepository.php',
         'App\\Repositories\\StructureRepository' => __DIR__ . '/../..' . '/app/Repositories/StructureRepository.php',
         'App\\Repositories\\UniversiteRepository' => __DIR__ . '/../..' . '/app/Repositories/UniversiteRepository.php',
+        'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Ticket' => __DIR__ . '/../..' . '/app/Ticket.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use App\Role;
 
 class User extends Authenticatable
 {
@@ -20,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'telephone',  'fonction', 'departement_id', 'filiere_id', 'niveau_id', 'acronyme_niveau'
+        'name', 'email', 'password', 'telephone',  'fonction', 'departement_id', 'filiere_id', 'niveau_id', 'acronyme_niveau', 'role_id'
     ];
 
     /**
@@ -51,6 +52,10 @@ class User extends Authenticatable
 
     public function niveau() {
         return $this->belongsTo(Niveau::class);
+    }
+
+    public function role() {
+        return $this->belongsTo(Role::class);
     }
 
 }
