@@ -5,22 +5,28 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h3><i class="icofont-university"></i> Profil {{ $universite->sigle }}</h3>
+                <h3><i class="icofont-university"></i> {{ $universite->sigle }}</h3>
             </div>
             <div class="col-lg-10 col-md-12 col-sm-12"><br />
 
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
                 @if ($message = Session::get('error'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
-                <form action="{{ route('uCompteUpdate', $universite->id) }}" method="post" enctype="multipart/form-data" id="uCompteUpdateForm">
+                <form action="{{ route('uCompteUpdate', $universite) }}" method="post" enctype="multipart/form-data" id="uCompteUpdateForm">
 
                     @csrf
 
@@ -36,8 +42,8 @@
                     </div>
 
                     <div class="form-row mb-4">
-                        <div class="col">
-                            <label for="email" class="disabled">Adresse électronique</label>
+                        <div class="col-8">
+                            <label for="email" class="disabled">Email</label>
                             <input type="email" id="email" readonly name="email" class="form-control" value="{{ $universite->email }}">
                         </div>
                         <div class="col">
@@ -69,9 +75,10 @@
 @endsection
 
 @section('scriptJs')
-    $(document).ready(function() {
-        $('#uCompteUpdateForm').on('submit', function() {
-            $('#uCompteUpdateButton').attr('disabled', true);
+    <script> $(document).ready(function() {
+        $("#uCompteUpdateForm").on("submit", function() {
+            $("#uCompteUpdateButton").attr("disabled", true)
         });
-    });
+    });</script>
+   
 @endsection

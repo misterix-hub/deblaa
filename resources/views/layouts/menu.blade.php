@@ -33,6 +33,10 @@
             <a href="{{ route('tickets.index') }}"><i class="fa fa-barcode"></i>Tickets</a>
         </li>
 
+        <li class="{{ Request::is('roles*') ? 'active' : ''  }}">
+            <a href="{{ route('roles.index') }}"><i class="fa fa-shield"></i>Rôles</a>
+        </li>
+
         <li>
             <a href="{{ url('admin/statistiques/universites') }}"><i class="fa fa-bar-chart"></i><span>Statistiques universités</span></a>
         </li>

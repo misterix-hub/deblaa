@@ -31,14 +31,20 @@
                 <div style="border-left: 4px solid #CCC;" class="pl-4">
 
                     @if ($message = Session::get('error'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-danger alert-dismissible fade show mt-3">
                             {{ $message }}
+                            <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
 
                     @if ($messageReset = Session::get('successReset'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissible fade show mt-3">
                             {{ $messageReset }}
+                            <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
 

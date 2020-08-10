@@ -21,21 +21,29 @@
                     <div class="row menu-item-sm-show">
                         <div class="col-12">
                             <div class="mt-2"></div>
-                            @if(session()->get('pro') == 0)
+                            
                                 <div class="card border-warning font-size-14">
                                     <div class="card-header">
                                         Messages en réserve
                                     </div>
                                     <div class="card-body text-center">
                                         <h4 class="card-title text-center">
-                                            {{ session()->get('message_bonus') }}
+                                            @if (session()->get('pro') == 0)
+                                                {{ session()->get('message_bonus') }}
+                                            @else
+                                                {{ session()->get('message_payer') }}
+                                            @endif
                                         </h4>
                                         <p class="card-text">
-                                            Il vous reste {{ session()->get('message_bonus') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_bonus')) }} bonus sur votre compte.
+                                            @if (session()->get('pro') == 0)
+                                                Il vous reste {{ session()->get('message_bonus') }} essais de messages sur votre compte.
+                                            @else
+                                                Il vous reste {{ session()->get('message_payer') }} {{ \Illuminate\Support\Str::plural('message', session()->get('message_payer')) }} sur votre compte.
+                                            @endif
                                         </p>
                                     </div>
                                 </div>
-                            @endif<br />
+                           <br />
                         </div>
                     </div>
 

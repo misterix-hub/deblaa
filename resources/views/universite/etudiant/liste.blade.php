@@ -17,9 +17,7 @@
                                     <button type="button" class="close" aria-label="close" data-dismiss="alert">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
-                                    @if (session()->has('msg_tel') && session()->has('msg_pwd'))
-                                        <?php $send_message = 1; ?>
-                                    @endif
+                                    
                                 </div>
                             @endif
 
@@ -40,14 +38,23 @@
                             <br />
 
                             <div class="row">
-                                <div class="col-12 col-md-4 offset-md-8 mb-3 mb-md-0">
-                                    <label for="filter"><b>Trier :</b></label>
+                                <div class="col-12 col-md-4 mb-3 mb-2">
+                                    <label for="filter"><b>Trier :</b></label><br>
                                     <select name="filter" id="filter" class="form-control filter">
                                         <option value="">Tout</option>
                                         @foreach ($filieres as $filiere)
                                             @foreach ($fil_nivos as $fil_nivo)
                                                 @if($filiere->id === $fil_nivo->filiere_id)
-                                                    <option value="{{ $filiere->id . $fil_nivo->niveau_id }}"> {{ $filiere->acronyme ." ". $fil_nivo->niveau_id }} </option>
+                                                    @switch($fil_nivo->niveau_id)
+                                                        @case(7)
+                                                            <option value="{{ $filiere->id . $fil_nivo->niveau_id }}"> {{ $filiere->acronyme ." BTS1"}} </option>
+                                                            @break
+                                                        @case(8)
+                                                            <option value="{{ $filiere->id . $fil_nivo->niveau_id }}"> {{ $filiere->acronyme ." BTS2"}} </option>
+                                                            @break
+                                                        @default
+                                                            <option value="{{ $filiere->id . $fil_nivo->niveau_id }}"> {{ $filiere->acronyme ." " . $fil_nivo->niveau_id }} </option>
+                                                    @endswitch
                                                 @endif
                                             @endforeach
                                         @endforeach
@@ -85,7 +92,7 @@
                                                 @endforeach
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('uSupprimerEtudiant', $user->id) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $user->name }} ?')" class="red-text">
+                                                <a href="{{ route('uSupprimerEtudiant', $user->telephone) }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $user->name }} ?')" class="red-text">
                                                     <i class="icofont-trash"></i>
                                                     Supprimer
                                                 </a>
@@ -151,7 +158,7 @@
                 if (parseInt(send_message, 10) === 1) {
                     $.ajax({
                         type: "GET",
-                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                     });
                 }
 

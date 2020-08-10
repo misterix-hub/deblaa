@@ -22,12 +22,28 @@
                                 </ul>
                             @endif
 
+                            <?php $send_message = 0; ?>
                             @if($message = Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
                                     <button type="button" class="close" aria-label="close" data-dismiss="alert">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
+                                </div>
+                            @endif
+
+                            @if($message = Session::get('successStudent'))
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                    {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @if (session()->has('msg_tel') && session()->has('msg_pwd'))
+                                        <?php $send_message = 1;
+                                            session()->pull('msg_tel');
+                                            session()->pull('msg_pwd');
+                                         ?>
+                                    @endif
                                 </div>
                             @endif
 
@@ -53,19 +69,19 @@
 
                             <?php $firstNiveau=0; ?>
 
-                            <table class="table table-hover table-bordered table-sm table-responsive-sm">
+                            <table class="table table-hover table-bordered table-responsive-sm table-sm">
                                 <thead>
                                     <tr>
-                                        <th width="250">
+                                        <th>
                                             <b>Nom de la filière</b>
                                         </th>
-                                        <th width="250">
+                                        <th style="width: 300px;">
                                             <b>Niveaux</b>
                                         </th>
-                                        <th width="250">
+                                        <th>
                                             <b>Opération</b>
                                         </th>
-                                        <th class="text-center" width="250">
+                                        <th class="text-center">
                                             <b>Action</b>
                                         </th>
                                     </tr>
@@ -80,36 +96,36 @@
                                             <td>
                                                 <b>{{ $filiere->nom }}</b>
                                             </td>
-                                            <td>
-                                                <select name="niveau" id="niveau" class="form-control niveau">
+                                            <td class="justify-content-center">
+                                                <select name="niveau" id="niveau" class="form-control niveau" style="width: 12rem;">
                                                     @foreach (\App\Models\FiliereNiveau::where('filiere_id', $filiere->id)->get() as $item)
                                                         <option value="{{ $filiere->id.$item->niveau_id }}"> {{ \App\Models\Niveau::where('id', $item->niveau_id)->get('nom')->first()->nom }}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
                                             <td class="text-center spinneretData">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-success btn-sm" type="button" data-toggle="dropdown" id="contactDropDown" >Ajouter étudiant</button>
-                                                    <button type="button" class="btn btn-success btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span class="sr-only">Toggle Dropdown</span>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="contactDropDown">
-                                                        <a class="dropdown-item" href="{{ $filiere->pathAddStudentsByList($firstNiveau) }}">Mes contacts</a>
-                                                        <a class="dropdown-item" href="{{ $filiere->pathAddStudent($firstNiveau) }}">Nouveau</a>
-                                                    </div>
+                                                
+                                                <a href="#!" class="btn btn-success btn-sm px-1"  style="width:10rem;" type="button" data-toggle="dropdown" id="contactDropDown" >Ajouter étudiant</a>
+                                                <div class="dropdown-menu" aria-labelledby="contactDropDown">
+                                                    <a class="dropdown-item" href="{{ $filiere->pathAddStudentsByList($firstNiveau) }}">Mes contacts</a>
+                                                    <a class="dropdown-item" href="{{ $filiere->pathAddStudent($firstNiveau) }}">Nouveau</a>
                                                 </div>
+                                                
                                             </td>
-                                            <td class="text-center">
-                                                <a href="{{ $filiere->pathDetails() }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2">
-                                                    <i class="icofont-plus"></i>
-                                                </a>
-                                                <a href="{{ $filiere->pathModifier() }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2">
-                                                    <i class="icofont-edit"></i>
-                                                </a>
-                                                <a href="{{ $filiere->pathSupprimer() }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ? Tous les étudiants de cette filière seront également supprimés.')"
-                                                    class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
-                                                    <i class="icofont-trash"></i>
-                                                </a>
+                                            <td class="text-center" style="width: 6rem;">
+                                                <div class="btn-group">
+                                                    <a href="{{ $filiere->pathDetails() }}" class="btn btn-sm btn-outline-grey rounded z-depth-0 pl-2 pr-2 mr-2">
+                                                        <i class="icofont-plus"></i>
+                                                    </a>
+                                                    <a href="{{ $filiere->pathModifier() }}" class="btn btn-sm btn-outline-blue rounded z-depth-0 pl-2 pr-2 mr-2 ">
+                                                        <i class="icofont-edit"></i>
+                                                    </a>
+                                                    <a href="{{ $filiere->pathSupprimer() }}" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $filiere->nom }} ? Tous les étudiants de cette filière seront également supprimés.')"
+                                                        class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2">
+                                                        <i class="icofont-trash"></i>
+                                                    </a>
+                                                </div>
+                                               
                                             </td>
                                         </tr>
                                     @empty
@@ -122,16 +138,16 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th width="250">
+                                        <th>
                                             <b>Nom de la filière</b>
                                         </th>
-                                        <th width="250">
+                                        <th>
                                             <b>Niveaux</b>
                                         </th>
-                                        <th width="250">
+                                        <th>
                                             <b>Opération</b>
                                         </th>
-                                        <th class="text-center" width="250">
+                                        <th class="text-center">
                                             <b>Action</b>
                                         </th>
                                     </tr>
@@ -160,6 +176,13 @@
 @section('scriptJs')
     <script>
         $(document).ready(function () {
+            let send_message = "{{ $send_message }}";
+                if (parseInt(send_message, 10) === 1) {
+                    $.ajax({
+                        type: "GET",
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                    });
+                }
             $('.niveau').change(function () {
                 $.ajax({
                     type: 'GET',
@@ -174,4 +197,5 @@
             })
         });
     </script>
+    <?php $send_message = 0; ?>
 @endsection

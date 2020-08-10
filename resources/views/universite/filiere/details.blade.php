@@ -33,6 +33,34 @@
                 @endforeach
             </div>
             <div class="col-lg-7 col-md-12 col-sm-12">
+                @if($errors->any())
+                    <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </ul>
+                @endif
+
+                @if($message = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <p class="text-center jumbotron p-0" style="font-size: 2rem;">Liste des étudiants</p>
                 <div class="mb-3">
                     <p class="text-muted"><em>sélectionner pour trier les étudiants</em></p>
@@ -41,7 +69,7 @@
                         @foreach ($filiere_niveaux as $filiere_niveau)
                                 @if ($filiere_niveau->filiere_id == $filiere->id)
                                     <option value="{{ $filiere->id.$filiere_niveau->id }}">
-                                        <b>{{ $filiere->acronyme.$filiere_niveau->id }}</b>
+                                        <b>{{ $filiere_niveau->nom }}</b>
                                     </option>
                                 @endif
                             @endforeach
@@ -53,6 +81,7 @@
                             <th class="font-weight-bold">Nom</th>
                             <th class="font-weight-bold">Telephone</th>
                             <th class="font-weight-bold">Niveau</th>
+                            <th class="font-weight-bold">Action</th>
                         </tr>
                     </thead>
                     <tbody class="data">
@@ -69,10 +98,19 @@
                                         @endforeach
                                     </b>
                                 </td>
+                                <form action="{{ route('uDeleteStudentBySpinneret', [$userBySpinneret->telephone, $filiere->id, $userBySpinneret->niveau_id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $userBySpinneret->name }} dans cette filière ?')">
+                                                <i class="icofont-trash"></i> Suprrimer
+                                            </button>
+                                        </td>
+                                    </form>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center">Aucun étudiant dans cette filière</td>
+                                <td colspan="4" class="text-center">Aucun étudiant dans cette filière</td>
                             </tr>
                         @endforelse
                     </tbody>

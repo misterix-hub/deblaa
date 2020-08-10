@@ -114,7 +114,7 @@ class EtudiantController extends Controller
 
 
         if (count($ckech_filiere_niveau) == 0) {
-            return redirect(route('uListeEtudiant'))->with('error', "Filière et niveau non conformes");
+            return redirect(route('uListeFiliere'))->with('error', "Filière et niveau non conformes");
         } else {
 
             // $verify_students = User::where('telephone', $telephone)
@@ -131,21 +131,50 @@ class EtudiantController extends Controller
 
             if (count($emails) != 0) {
 
-                foreach ($emails as $email) {
-                    $password = $email->password;
-                    break;
+                $checkEtudiant = User::where([
+                    ['telephone', '=', $telephone],
+                    ['filiere_id', '=', $request->filiere],
+                    ['niveau_id', '=', $request->niveau],
+                    ['acronyme_niveau', '=', $filiere_nom . $request->niveau]
+                ])->get();
+
+                if (count($checkEtudiant) != 0) {
+                    $acronyme = $filiere_nom . $request->niveau;
+                    return redirect()->back()->with('error', 'Cet étudiant existe déjà dans la filière ' . $acronyme);
+                } else {
+                    foreach ($emails as $email) {
+                        $password = $email->password;
+                        $access_id = $email->access_id;
+                        break;
+                    }
+
+                    $user = new User;
+                    $user->name = $request->nomComplet;
+                    $user->telephone = $telephone;
+                    $user->filiere_id = $request->filiere;
+                    $user->niveau_id = $request->niveau;
+                    switch ($request->niveau) {
+                        case '7':
+                            $user->acronyme_niveau = $filiere_nom . " BTS1";
+                            break;
+
+                        case '8':
+                            $user->acronyme_niveau = $filiere_nom . " BTS2";
+                            break;
+
+                        default:
+                            $user->acronyme_niveau = $filiere_nom . $request->niveau;
+                            break;
+                    }
+
+                    $user->access_id = $access_id;
+                    
+                    $user->password = $password;
+                    $user->save();
+
+                    return redirect(route('uListeFiliere'))->with('success', "L'étudiant est enregistré avec succès !");
                 }
-
-                $user = new User;
-                $user->name = $request->nomComplet;
-                $user->telephone = $telephone;
-                $user->filiere_id = $request->filiere;
-                $user->niveau_id = $request->niveau;
-                $user->acronyme_niveau = $filiere_nom . $request->niveau;
-                $user->password = $password;
-                $user->save();
-
-                return redirect(route('uListeFiliere'))->with('success', "L'étudiant est enregistré avec succès !");
+               
             } else {
                 $password = "DB" . rand(1021, 9999);
 
@@ -155,7 +184,19 @@ class EtudiantController extends Controller
                 $user->telephone = $telephone;
                 $user->filiere_id = $request->filiere;
                 $user->niveau_id = $request->niveau;
-                $user->acronyme_niveau = $filiere_nom . $request->niveau;
+                switch ($request->niveau) {
+                        case '7':
+                            $user->acronyme_niveau = $filiere_nom . " BTS1";
+                            break;
+
+                        case '8':
+                            $user->acronyme_niveau = $filiere_nom . " BTS2";
+                            break;
+
+                        default:
+                            $user->acronyme_niveau = $filiere_nom . $request->niveau;
+                            break;
+                    }
                 $user->password = bcrypt($password);
                 $user->access_id = Str::random(15).Str::substr(Hash::make($password), 7);
                 $user->save();
@@ -163,7 +204,7 @@ class EtudiantController extends Controller
                 session()->put('msg_tel', $telephone);
                 session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Déblaa est crée et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS.  Connectez-vous ici: https://deblaa.com/etudiants/login");
 
-                return redirect(route('uListeFiliere'))->with('success', "L'étudiant est enregistré avec succès !".$password);
+                return redirect(route('uListeFiliere'))->with('successStudent', "L'étudiant est enregistré avec succès !");
             }
 
 
@@ -213,9 +254,48 @@ class EtudiantController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect(route('uListeEtudiant'))->with('success', "Étudiant supprimé avec succès !");
+        $studentQuery = Filiere::join('users', 'filieres.id', 'filiere_id')
+                    ->where([
+                        ['filieres.universite_id', '=', session()->get('id')],
+                        ['users.telephone', '=', $id]
+                    ])->get('users.*');
+        
+        if (count($studentQuery) != 0) {
+            foreach ($studentQuery as $item) {
+
+                $studentDelete = User::findOrFail($item->id);
+
+                $studentDelete->delete();
+
+                return redirect(route('uListeEtudiant'))->with('success', "Étudiant supprimé avec succès !");
+            }
+        } else {
+            return redirect()->back()->with('error', 'La suppression de l\'étudiant a rencontré un problème');
+        }
+
+    }
+
+    public function destroyBySpinneret($tel, $fil, $niv) {
+
+        $findTheStudent = Filiere::join('users', 'filieres.id', 'filiere_id')
+                                    ->where([
+                                        ['filieres.universite_id', '=', session()->get('id')],
+                                        ['users.filiere_id', '=', $fil],
+                                        ['users.niveau_id', '=', $niv],
+                                        ['users.telephone', '=', $tel]
+                                    ])->firstOrFail('users.id');
+
+        if ($findTheStudent->id != null) {
+
+            $studentToBeDeleted = User::findOrFail($findTheStudent->id);
+
+            $studentToBeDeleted->delete();
+
+            return redirect()->back()->with('success', 'L\'étudiant a été supprimé avec succès dans cette filière');
+        } else {
+            return redirect()->back()->with('error', 'La suppression de l\'étudiant a rencontré un problème'); 
+        }
+                                
     }
 
     public function ajaxListStudent(Request $request) {
@@ -261,7 +341,20 @@ class EtudiantController extends Controller
         $niveau = intval($niveau);
 
         $filiere_acronyme = Filiere::where('id', $filiere->id)->get('acronyme')->first()->acronyme;
-        $acronyme_niveau = $filiere_acronyme . $niveau;
+        switch ($niveau) {
+            case '7':
+                $acronyme_niveau = $filiere_acronyme . " BTS1";
+                break;
+
+            case '8':
+                $acronyme_niveau = $filiere_acronyme . " BTS2";
+                break;
+                
+            default:
+                $acronyme_niveau = $filiere_acronyme . $niveau;
+                break;
+        }
+        
 
         $niveaux = Niveau::all();
         $filieres = Filiere::where('universite_id', session()->get('id'))->get();
@@ -325,13 +418,16 @@ class EtudiantController extends Controller
             $insert_contact = [];
 
             foreach ($students as $student) {
-                //$check_membre = User::where(['telephone' => $membre, 'departement_id' => $request->input('department')])->get();
+                $check_etudiant = User::where([
+                    ['telephone', '=', $student],
+                    ['filiere_id', '=', $request->input('filiere')],
+                    ['niveau_id', '=', $request->input('niveau')],
+                    ['acronyme_niveau', '=', $request->input('acronyme_niveau')]
+                ])->get();
 
-               /* if (count($check_membre) != 0) {
-                    foreach ($check_membre as $item) {
-                        $verify_contact[] = $item->telephone;
-                    }
-                } else {*/
+                if (count($check_etudiant) != 0) {
+                    
+                } else {
                     $contact = User::where('telephone', $student)->get();
 
                     foreach ($contact as $item) {
@@ -350,7 +446,7 @@ class EtudiantController extends Controller
                         'telephone' => $student
                     ]);
                     $insert_contact[] = $student;
-                /*}*/
+                }
             }
 
             //$requestNomDepartement = Departement::where('id', $request->input('department'))->first();

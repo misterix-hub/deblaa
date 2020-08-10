@@ -21,14 +21,20 @@
                 @endif
 
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
                 @if ($message = Session::get('error'))
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
                 <form action="{{ route('sCompteUpdate', $structure) }}" method="post" enctype="multipart/form-data" id="sCompteUpdateForm">
@@ -80,9 +86,10 @@
 @endsection
 
 @section('script')
-    $(document).ready(function() {
+    <script>$(document).ready(function() {
         $('#sCompteUpdateForm').on('submit', function() {
             $('#sCompteUpdateButton').attr('disabled', true);
         });
-    });
+    });</script>
+    
 @endsection

@@ -17,7 +17,11 @@ class LoginController extends Controller
             'telephone.regex' => 'Votre numéro est incorrect'
         ]);
 
-        $etudiant_telephones = User::where('telephone', substr($request->telephone, 1))->get();
+        $etudiant_telephones = User::where([
+            ['telephone', '=', substr($request->telephone, 1)],
+            ['filiere_id', '<>', null],
+            ['niveau', '<>', null]
+        ])->get();
 
         if (count($etudiant_telephones) == 0) {
             return back()->with('error', "Numéro de téléphone incorrecte !");
@@ -25,15 +29,22 @@ class LoginController extends Controller
             foreach ($etudiant_telephones as $etudiant_telephone) {
                 $telephone = $etudiant_telephone->telephone;
                 $password = $etudiant_telephone->password;
-                session()->put('id', $etudiant_telephone->id);
-                session()->put('nom_complet', $etudiant_telephone->name);
-                session()->put('filiere_id', $etudiant_telephone->filiere_id);
-                session()->put('niveau_id', $etudiant_telephone->niveau_id);
-                session()->put('telephone', $telephone);
-                session()->put('category', "etudiant");
+                $id = $etudiant_telephone->id;
+                $name = $etudiant_telephone->name;
+                $filiere_id = $etudiant_telephone->filiere_id;
+                $niveau_id = $etudiant_telephone->niveau_id;
+                break;
+
             }
 
             if (\Hash::check($request->password, $password)) {
+                session()->put('id', $id);
+                session()->put('nom_complet', $name);
+                session()->put('filiere_id', $filiere_id);
+                session()->put('niveau_id', $niveau_id);
+                session()->put('telephone', $telephone);
+                session()->put('category', "etudiant");
+
                 return redirect(route('inboxEtudiant'));
             } else {
                 return back()->with('error', "Mot de passe incorrect !");

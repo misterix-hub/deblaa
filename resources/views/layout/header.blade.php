@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="{{ URL::asset('dataTable/dataTable.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('mdb/css/style.css') }}">
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/deblaa.png') }}" type="image/x-icon">
+    <style>
+        .comfortaa {
+            font-family: comfortaa;
+        }
+    
+        @font-face {
+            font-family: comfortaa;
+            src: url(fonts/Comfortaa-Regular.ttf);
+        }
+    </style>
     @yield('css')
     <title>Deblaa</title>
 </head>

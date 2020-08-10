@@ -30,6 +30,23 @@
                                 </div>
                             @endif
 
+                            <?php $send_message = 0; ?>
+                            @if($message = Session::get('successMember'))
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                    {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @if(session()->has('msg_tel') && session()->has('msg_pwd'))
+                                        <?php
+                                            $send_message = 1;
+                                            session()->pull('msg_tel');
+                                            session()->pull('msg_pwd');
+                                         ?>
+                                    @endif
+                                </div>
+                            @endif
+
                             @if($message = Session::get('warning'))
                                 <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
@@ -146,4 +163,19 @@
         </div>
 
     </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function () {
+            let send_message = "{{ $send_message }}";
+            if (parseInt(send_message, 10) === 1) {
+                    $.ajax({
+                        type: "GET",
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                    });
+            }
+        })
+    </script>
+    <?php $send_message = 0; ?>
 @endsection

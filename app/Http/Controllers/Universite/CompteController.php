@@ -70,7 +70,7 @@ class CompteController extends Controller
         return view('universite.compte.profil', [
             'niveaux' => Niveau::all(),
             'filieres' => Filiere::where('universite_id', session()->get('id'))->get(),
-            'universite' => Universite::findOrFail($id),
+            'universite' => Universite::findOrFail($universite->id),
             'messages' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
             'messageCount' => MessageUniversite::where('universite_id', session()->get('id'))->get(),
             'filiere_niveaux' => Niveau::leftJoin("filiere_niveaux", "niveaux.id", "niveau_id")->get(),
@@ -100,7 +100,7 @@ class CompteController extends Controller
             return back()->with('error', 'Modification invalide, veuillez ne laisser aucun champ vide !');
         } else {
 
-            $compte = Universite::findOrFail($id);
+            $compte = Universite::findOrFail($universite->id);
             $compte->sigle = $request->input('sigle');
             $compte->nom = $request->input('nom');
             $compte->email = $request->input('email');
@@ -110,7 +110,7 @@ class CompteController extends Controller
             $compte->save();
 
             if ($_FILES["logo"]["name"] != "") {
-                $compte = Universite::findOrFail($id);
+                $compte = Universite::findOrFail($universite->id);
 
                 $target_dir = "db/logos/universite/";
                 $file_name = time() . "_" . basename($_FILES["logo"]["name"]);

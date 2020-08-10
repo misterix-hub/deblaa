@@ -42,8 +42,11 @@
                     @endif
 
                     @if ($messageReset = Session::get('successReset'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ $messageReset }}
+                            <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
 

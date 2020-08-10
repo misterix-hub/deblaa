@@ -81,7 +81,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('sCompte', session()->get('id')) }}">
+        <a href="{{ route('sCompte', $structure) }}">
             <div class="logo p-2 indigo lighten-4 black-text">
                 <table width="100%">
                     <tr>

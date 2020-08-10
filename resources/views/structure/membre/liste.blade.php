@@ -25,9 +25,7 @@
                             @if ($message = Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
-                                    @if (session()->has('msg_tel') && session()->has('msg_pwd'))
-                                        <?php $send_message = 1; ?>
-                                    @endif
+
                                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -85,7 +83,7 @@
                                                         @endif
                                                     @endforeach--}}
                                                 </td>
-                                                <form action="{{ route('sSupprimerMembre', $user->id) }}" method="post">
+                                                <form action="{{ route('sSupprimerMembre', $user->telephone) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <td class="text-center">
@@ -141,7 +139,7 @@
             if (parseInt(send_message, 10) === 1) {
                     $.ajax({
                         type: "GET",
-                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message={{ session()->get('msg_pwd') }}&MobileNumbers={{ session()->get('msg_tel') }}&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                     });
             }
         });

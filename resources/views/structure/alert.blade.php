@@ -14,6 +14,34 @@
         <div class="row">
             <div class="col-lg-2 col-md-12 col-sm-12"></div>
             <div class="col-lg-8 col-md-12 col-sm-12">
+            @if($errors->any())
+                    <ul class="alert alert-danger list-unstyled mt-3 alert-dismissible fade show" role="alert">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </ul>
+                @endif
+
+                @if($message = Session::get('success'))
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+                @if($message = Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <br /><br /><br /><br />
                 <h2 class="text-danger text-center">
                     <i class="icofont icofont-exclamation-tringle"></i> Opération non autorisée !
@@ -46,7 +74,7 @@
                             </strong>
                         </p>
 
-                        <button type="button" class="btn btn-md rounded btn-primary" data-toggle="modal" data-target="RechargeCompte">Recharger mon compte</button>
+                        <a href="#!" class="btn btn-md rounded btn-primary" data-toggle="modal" data-target="#rechargeCompte">Recharger mon compte</a>
 
                         <a href="{{ route('indexStructure') }}" class="btn btn-indigo btn-md rounded">
                             Retour à l'accueil
@@ -57,7 +85,7 @@
             </div>
 
             <!-- Modal de recharge de compte -->
-            <form action="{{ route('codeTicket') }}" method="post">
+            <form action="{{ route('codeTicketUser') }}" method="post">
                 <div class="modal fade" id="rechargeCompte" tabindex="-1" role="dialog" aria-labelledby="rechargeCompteLabel"
                 aria-hidden="true">
 

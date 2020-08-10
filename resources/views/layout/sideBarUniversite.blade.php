@@ -81,7 +81,7 @@
                 </div>
             </div>
         </a>
-        <a href="{{ route('uCompte', session()->get('id')) }}">
+        <a href="{{ route('uCompte', $universite) }}">
             <div class="logo p-2 indigo lighten-4 black-text">
                 <table width="100%">
                     <tr>
@@ -263,15 +263,15 @@
                     <a href="#!" data-toggle="modal" data-target="#rechargeAccount">
                         <div class="item d-block d-md-none">
                             <i class="icofont-refresh"></i><br>
-                            <span class="spinnerShower" style="font-size: 8px;"><b>Recharger</b></span>
+                            <span  style="font-size: 8px;"><b>Recharger</b></span>
                         </div>
                         <div class="item d-none d-md-block d-lg-none">
                             <i class="icofont-refresh"></i><br>
-                            <span class="spinnerShower" style="font-size: 8px;"><b>Recharger mon compte</b></span>
+                            <span style="font-size: 8px;"><b>Recharger mon compte</b></span>
                         </div>
                         <div class="item d-none d-lg-block">
                             <i class="icofont-refresh"></i>&nbsp;
-                            <span class="spinnerShower"><b>Recharger mon compte</b></span>
+                            <span><b>Recharger mon compte</b></span>
                         </div>
                     </a>
                 </div>

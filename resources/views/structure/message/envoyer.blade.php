@@ -18,20 +18,26 @@
                             <li>{{ $error }}</li>
                         @endforeach
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </ul>
                 @endif
 
                 @if($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        {!! $message !!}
+                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
                 @if($message = Session::get('error'))
-                    <div class="alert alert-danger">
-                        {!! $message !!}
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                        {{ $message }}
+                        <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 @endif
 
@@ -40,7 +46,7 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12">
-                            <label for="titre"><b>Titre du message</b></label>
+                            <label for="titre"><b>Idée générale <small class="text-muted">caratère max : 190</small></b></label>
                             <input type="text" maxLength="191"  name="titre" id="titre" placeholder="Saisir le titre ici" class="form-control"><br />
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12">

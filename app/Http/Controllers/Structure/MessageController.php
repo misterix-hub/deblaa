@@ -86,6 +86,12 @@ class MessageController extends Controller
                     return back()->with('error', 'Sélectionnez au moins un groupe, Votre message n\'a aucun destinataire');
                 } else {
 
+                    $structure = Structure::findOrFail(session()->get('id'));
+                    $structure->message_payer = $structure->message_payer - $dest;
+                    $structure->save();
+
+                    session()->put('message_payer', $structure->message_payer);
+
                     $message_structure = new MessageStructure();
                     $message_structure->structure_id = session()->get('id');
                     $message_structure->titre = $request->titre;
@@ -160,21 +166,18 @@ class MessageController extends Controller
                             if ($request->fichier != "") {
                                 $texte = $titre . " *** ". $totalFichier." fichier(s)  associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/membres/query?telephone=" .  $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id ;
                             } else {
-                                $texte = $titre . " *** https://deblaa.com/membres/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId2->access_id ;
+                                $texte = $titre . " *** https://deblaa.com/membres/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id ;
                             }
                             ?>
-                            <!-- <script src="https://deblaa.com/mdb/js/jquery.min.js"></script> -->
-                            <script src="../../mdb/js/jquery.js"></script>
+                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                            <!-- <script src="../../mdb/js/jquery.js"></script> -->
                             <script>
-                                let inputs = document.querySelectorAll('input');
 
                                 $(document).ready(function () {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?= session()->get('sigle') ?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=<?= session()->get('sigle') ?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                                     });
-
-                                    inputs.forEach(input => input.value = '');
                                 });
                             </script>
 
@@ -183,7 +186,7 @@ class MessageController extends Controller
                         }
                     }
 
-                    echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                    echo "<h4>En cours d'envoi ... Patientez </h4> !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                     echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
                     //
                     ?>
@@ -294,18 +297,15 @@ class MessageController extends Controller
                                 $texte = $titre . " *** https://deblaa.com/membres/query?telephone=" . $numero_trie2[$i] . "&keyaccess=" .  $getAccessId2->access_id ; /*. "". $telephone->departement_id*/
                             }
                             ?>
-                            <!-- <script src="https://deblaa.com/mdb/js/jquery.min.js"></script> -->
-                            <script src="../../mdb/js/jquery.js"></script>
+                            <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
+                            <!-- <script src="../../mdb/js/jquery.js"></script> -->
                             <script>
-                                let inputs = document.querySelectorAll('input');
 
                                 $(document).ready(function () {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
+                                        url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
                                     });
-
-                                    inputs.forEach(input => input.value = '');
                                 });
                             </script>
 
@@ -314,7 +314,7 @@ class MessageController extends Controller
                         }
                     }
 
-                    echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                    echo "<h4>En cours d'envoi ... Patientez</h4> !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                     echo "<div><center><img src='localhost/deblaa/assets/images/gif2.gif' width='150' /></center></div>"
                     //
                     ?>
@@ -379,7 +379,9 @@ class MessageController extends Controller
                 ->where('structure_id', session()->get('id'))
                 ->where('users.id', '<>', null)
                 ->groupBy('users.telephone')
-                ->get()
+                ->get(),
+
+            'id' => $id
 
                 /*DB::table('message_lus')
                                 ->join('message_structures', 'message_structures.id', '=', 'message_lus.message_structure_id')

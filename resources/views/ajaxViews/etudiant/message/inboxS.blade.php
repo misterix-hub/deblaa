@@ -42,12 +42,16 @@
                         </td>
                         <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="black-text">
-                                {{ (strlen($cible_message_universite->titre) > 10) ? substr($cible_message_universite->titre, 0, 10) . " ..." : $cible_message_universite->titre ." ..." }}
+                                @if (strlen($cible_message_universite->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_universite->titre, 0, 10) . "..."}}
+                                @else
+                                    {{ $cible_message_universite->titre }}
+                                @endif
                             </b><br />
-                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small><br><br>
+                            <small class="text-muted">{{ $cible_message_universite->created_at }}</small>
                             @foreach($universites as $universite)
                                 @if($universite->id == $cible_message_universite->universite_id)
-                                    <div class="font-weight-bold"><b>{{ $universite->sigle }}</b></div>
+                                    <span class="font-weight-bold"><b>{{ $universite->sigle }}</b></span>
                                 @else
 
                                 @endif
@@ -72,7 +76,11 @@
                         </td>
                         <td style="line-height: 20px;" class="pl-1 text-truncate">
                             <b class="black-text font-weight-bold">
-                                {{ (strlen($cible_message_universite->titre) > 10) ? substr($cible_message_universite->titre, 0, 10) . " ..." : $cible_message_universite->titre ." ..." }}
+                                @if (strlen($cible_message_universite->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_universite->titre, 0, 10) . "..."}}
+                                @else
+                                    {{ $cible_message_universite->titre }}
+                                @endif
                             </b><br />
                             <small class="text-muted">{{ $cible_message_universite->created_at }}</small><br><br>
                             @foreach($universites as $universite)

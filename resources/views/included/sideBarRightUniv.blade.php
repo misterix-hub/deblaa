@@ -1,7 +1,7 @@
 <?php  $universite = \App\Models\Universite::findOrFail(session()->get('id'))?>
 <div class="mt-2 mb-2"></div>
 <div class="mt-2"></div>
-@if(session()->get('pro') == 0)
+
     <div class="card border-warning font-size-14">
         <div class="card-header">
             Messages en réserve
@@ -23,7 +23,7 @@
             </p>
         </div>
     </div>
-@endif
+
 <br />
 
 <div class="card border-primary">

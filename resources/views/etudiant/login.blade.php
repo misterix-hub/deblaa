@@ -116,9 +116,12 @@
 @endsection
 
 @section('script')
-    $(document).ready(function() {
-        $('#eLoginProcessingForm').on('submit', function() {
-            $('#eLoginProcessingButton').attr('disabled', true);
+    <script>
+        $(document).ready(function() {
+            $('#eLoginProcessingForm').on('submit', function() {
+                $('#eLoginProcessingButton').attr('disabled', true);
+            });
         });
-    });
+    </script>
+    
 @endsection

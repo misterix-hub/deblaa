@@ -54,11 +54,28 @@
 
                 <b>Membres</b> : <br>
                     <table class="table table-sm table-striped table-bordered">
-                        @foreach(\App\User::where('departement_id', $groupe->id)->orderByDesc('id')->get() as $groupe_nom)
+                        <thead>
                             <tr>
-                                <td class="text-uppercase font-weight-bold">{{ $groupe_nom->name }}</td>
+                                <th>Noms et Prénoms</th>
+                                <th width="100">Action</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach(\App\User::where('departement_id', $groupe->id)->orderByDesc('id')->get() as $groupe_nom)
+                                <tr>
+                                    <td class="text-uppercase font-weight-bold">{{ $groupe_nom->name }}</td>
+                                    <form action="{{ route('sDeleteMemberByDepartment', [$groupe_nom->telephone, $groupe->id]) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded z-depth-0 pl-2 pr-2" onclick="return confirm('Êtes-vous sur(e) de vouloir supprimer {{ $groupe_nom->name }} dans ce groupe ?')">
+                                                <i class="icofont-trash"></i> Suprrimer
+                                            </button>
+                                        </td>
+                                    </form>
+                                </tr>
+                            @endforeach
+                        </tbody> 
                     </table>
                 <br><br>
                 <div>

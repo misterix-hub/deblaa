@@ -7,13 +7,14 @@ use App\CategorieTicket;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use \App\Models\Structure;
-use App\Model\Universite;
+use App\Models\Universite;
+use Flash;
 
 class TicketController extends Controller
 {
 
     public function __construct() {
-        $this->middleware('checkSuperAdmin');
+        $this->middleware('checkSuperAdmin')->except('verifyCodeTicket');
     }
 
     /**
@@ -55,7 +56,8 @@ class TicketController extends Controller
             'code' => "TDB" . random_int(1000000, 9999998)
         ]);
 
-        return redirect()->back()->with('success', 'Ticket Perso enregsitré avec succès');
+        Flash::success('Ticket Perso enregsitré avec succès');
+        return redirect()->back();
     }
 
     public function storePro(Request $request)
@@ -69,7 +71,8 @@ class TicketController extends Controller
             'code' => "TDB" . random_int(1000000, 9999998)
         ]);
 
-        return redirect()->back()->with('success', 'Ticket Pro enregsitré avec succès');
+        Flash::success('Ticket Pro enregsitré avec succès');
+        return redirect()->back();
     }
 
     public function storeProMax(Request $request)
@@ -82,8 +85,9 @@ class TicketController extends Controller
             'categorie_ticket_id' => $request->input('categorie_id'),
             'code' => "TDB" . random_int(1000000, 9999998)
         ]);
-
-        return redirect()->back()->with('success', 'Ticket Pro Max enregsitré avec succès');
+        
+        Flash::success('Ticket Pro Max enregsitré avec succès');
+        return redirect()->back();
     }
 
     /**
@@ -139,10 +143,10 @@ class TicketController extends Controller
             abort('401');
         } else {
             if (session()->get('pro') == 0) {
-                dd('noPro');
+                abort('403');
             } else {
                 if (!session()->has('category')) {
-                dd('noCategory');
+                abort('403');
             } else {
                 if (session()->get('category') == 'etudiant') {
                     return redirect()->route('inboxEtudiant');
@@ -159,7 +163,10 @@ class TicketController extends Controller
                         ]);
 
 
-                        $ticket_exists = Ticket::where('code', $request->input('ticket_code'))->first();
+                        $ticket_exists = Ticket::where([
+                            ['code', '=', $request->input('ticket_code')],
+                            ['deleted_at', '=', null]
+                        ])->first();
 
                         if ($ticket_exists == null) {
                             return redirect()->back()->with('error', 'Opération non validée. Votre code ticket est invalide');

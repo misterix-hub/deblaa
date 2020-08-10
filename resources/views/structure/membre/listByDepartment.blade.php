@@ -96,15 +96,20 @@
                                     @endif
                                 </div>
                             </form>
+                                <?php $usersNull = 0; ?>
                                 @if (count($users) == 0)
                                     <div class="jumbotron text-center font-weight-bold ">
                                         <h5>Aucun membre enregistré préalablement...</h5>
                                     </div>
+                                    <?php $usersNull = 1; ?>
                                 @endif
-                                @if ($countContact == 0)
-                                    <div class="jumbotron text-center font-weight-bold ">
-                                        <h5>Plus de membres disponible à enregistrer pour ce département...</h5>
-                                    </div>
+
+                                @if ($usersNull == 0)
+                                    @if ($countContact == 0)
+                                        <div class="jumbotron text-center font-weight-bold ">
+                                            <h5>Plus de membres disponible à enregistrer pour ce département...</h5>
+                                        </div>
+                                    @endif
                                 @endif
                                 <a href="{{ route('sListeGroupe') }}" class="btn btn-light btn-md px-5 float-right">Retour</a>
                         </div>

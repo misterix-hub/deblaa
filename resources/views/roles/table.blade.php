@@ -8,7 +8,7 @@
         <tbody>
         @forelse($roles as $role)
             <tr>
-                <td>{{ $role->nom }}</td>
+                <td>{{ $role->name }}</td>
             </tr>
         @empty
             <tr>

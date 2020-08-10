@@ -113,6 +113,7 @@ class MembreController extends Controller
 
                     foreach ($emails as $email) {
                         $password = $email->password;
+                        $access = $email->access_id;
                         break;
                     }
 
@@ -120,6 +121,7 @@ class MembreController extends Controller
                     $user->name = $request->nomComplet;
                     $user->telephone = $telephone;
                     $user->departement_id = $request->groupe;
+                    $user->access_id = $access;
                     $user->password = $password;
                     $user->save();
 
@@ -139,7 +141,7 @@ class MembreController extends Controller
                     session()->put('msg_tel', $telephone);
                     session()->put('msg_pwd', "Chèr (e) " . $request->nomComplet . ", votre compte Deblaa est créé et voici votre mot de passe : " . $password . ". Ce compte vous permettra désormais de recevoir des fichiers multimedia (images, vidéos ...) et documents (word, pdf ...) par SMS. Connectez-vous ici: https://deblaa.com/membres/login");
 
-                    return redirect(route('sListeGroupe'))->with('success', "Membre ajouté avec succès ! ".$password);
+                    return redirect(route('sListeGroupe'))->with('successMember', "Membre ajouté avec succès ! ");
                 }
             }
         }
@@ -187,9 +189,46 @@ class MembreController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect(route('sListeMembre'))->with('success', "Membre supprimé avec succès !");
+        $memberFind = Departement::rightJoin('users', 'departements.id', 'departement_id')
+                            ->where([
+                                ['departements.structure_id', '=', session()->get('id')],
+                                ['users.telephone', '=', $id]
+                            ])->get('users.*');
+
+        if (count($memberFind) != 0) {
+            foreach ($memberFind as $item) {
+
+                $memberDelete = User::findOrFail($item->id);
+
+                $memberDelete->delete();
+
+                return redirect(route('sListeMembre'))->with('success', "Membre supprimé avec succès !");
+            }
+        } else {
+            return redirect()->back()->with('error', 'La suppression du membre a rencontré un problème');
+        }
+    }
+
+    public function destroyByDepartment($tel, $dept)
+    {
+        $findTheMember = Departement::join('users', 'departements.id', 'departement_id')
+                                    ->where([
+                                        ['departements.structure_id', '=', session()->get('id')],
+                                        ['users.departement_id', '=', $dept],
+                                        ['users.telephone', '=', $tel]
+                                    ])->firstOrFail('users.id');
+                                
+        if ($findTheMember->id != null) {
+
+            $memberToBeDeleted = User::findOrFail($findTheMember->id);
+
+            $memberToBeDeleted->delete();
+
+            return redirect()->back()->with('success', 'Le membre a été supprimé avec succès dans ce groupe');
+        } else {
+            return redirect()->back()->with('error', 'La suppression du membre a rencontré un problème');
+        }
+                                        
     }
 
 
@@ -252,28 +291,29 @@ class MembreController extends Controller
             $insert_contact = [];
 
             foreach ($membres as $membre) {
-                //$check_membre = User::where(['telephone' => $membre, 'departement_id' => $request->input('department')])->get();
+                $check_membre = User::where(['telephone' => $membre, 'departement_id' => $request->input('department')])->get();
 
-               /* if (count($check_membre) != 0) {
-                    foreach ($check_membre as $item) {
-                        $verify_contact[] = $item->telephone;
-                    }
-                } else {*/
+                if (count($check_membre) != 0) {
+                    
+                } else {
                     $contact = User::where('telephone', $membre)->get();
+
 
                     foreach ($contact as $item) {
                         $name = $item->name;
                         $password = $item->password;
+                        $accessKey = $item->access_id;
                         break;
                     }
                     User::create([
                         'name' => $name,
                         'password' => $password,
+                        'access_id' => $accessKey,
                         'departement_id' => $request->input('department'),
                         'telephone' => $membre
                     ]);
                     $insert_contact[] = $membre;
-                /*}*/
+                }
             }
 
             $requestNomDepartement = Departement::where('id', $request->input('department'))->first();

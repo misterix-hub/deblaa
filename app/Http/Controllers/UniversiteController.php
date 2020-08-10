@@ -70,20 +70,7 @@ class UniversiteController extends AppBaseController
 
         $password = "DB".rand(1021, 9999);
 
-        $target_dir = "db/logos/universite/";
-
-        $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
-
-        $target_file = $target_dir . $file_name;
-        $FileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
-
-        if($FileType != "jpg" && $FileType != "jpeg" && $FileType != "png") {
-
-            Flash::error('Le type de fichier n\'est pas pris en charge');
-
-            return back();
-
-        } else {
+        
 
             $universite = $this->universiteRepository->create([
                 'nom' => $request->input('nom'),
@@ -91,12 +78,38 @@ class UniversiteController extends AppBaseController
                 'email' => $request->input('email'),
                 'password' => bcrypt($password),
                 'message_bonus' => 3,
+                'message_payer' => 0,
                 'acces' => $request->input('acces'),
                 'sigle' => $request->input('sigle'),
                 'site_web' => $request->input('site_web'),
                 'logo' => $file_name,
                 'pro' => 0
             ]);
+
+            if($_FILES["logo"]["name"] != "") {
+
+                $target_dir = "db/logos/universite/";
+
+                $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+
+                $target_file = $target_dir . $file_name;
+
+                $FileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
+
+                if($FileType != "jpg" && $FileType != "jpeg" && $FileType != "png") {
+
+                    Flash::error('Le type de fichier n\'est pas pris en charge');
+        
+                    return back();
+        
+                } else {
+                    $this->universiteRepository->update([
+                        'logo' => $file_name
+                    ]);
+
+                    move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
+                }
+            }
 
             $to_name = "Deblaa";
 
@@ -115,8 +128,6 @@ class UniversiteController extends AppBaseController
 
             Flash::success('Université ajoutée avec succès.');
 
-            move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
-
             /*$facture_universite = new FactureUniversite;
             $facture_universite->universite_id = $universite->id;
             $facture_universite->montant = "0";
@@ -124,7 +135,7 @@ class UniversiteController extends AppBaseController
             $facture_universite->save();*/
 
             return redirect(route('universites.index'));
-        }
+        
     }
 
     /**
@@ -282,8 +293,10 @@ class UniversiteController extends AppBaseController
                 return redirect(route('universites.index'));
             }
 
+            $updateMessagePayer = $universite->message_bonus + $universite->message_payer;
 
             $accessPro = $this->universiteRepository->update([
+                'message_payer' => $updateMessagePayer,
                 'message_bonus' => 0,
                 'pro' => 1
             ], $id);

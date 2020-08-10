@@ -89,7 +89,7 @@ class MessageController extends Controller
 
         $dest = sizeof(array_unique($numero));
 
-        if(session()->has('pro') == 1) {
+        if(session()->get('pro') == 1) {
 
             if ($dest > session()->get('message_payer')) {
                 return back()->with('error', "Le nombre de destinataires dépasse le nombre de messages que vous avez");
@@ -98,7 +98,13 @@ class MessageController extends Controller
                     return back()->with('error', 'Votre message n\'a aucun destinataire');
                 } else {
 
-                    $message_universite = new MessageUNiversite;
+                    $universite = Universite::findOrFail(session()->get('id'));
+                    $universite->message_payer = $universite->message_payer - $dest;
+                    $universite->save();
+
+                    session()->put('message_payer', $universite->message_payer);
+
+                    $message_universite = new MessageUniversite;
                     $message_universite->universite_id = session()->get('id');
                     $message_universite->titre = $request->titre;
                     $message_universite->contenu = $request->message;
@@ -178,29 +184,24 @@ class MessageController extends Controller
                         if ($request->fichier != "") {
                             $texte = $message_universite->titre . " *** ". $totalFichier." fichier(s) associé(s) à ce message. Vérifiez dans votre boite Deblaa. https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id;
                         } else {
-                            $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id;
+                            $texte = $titre . " *** https://deblaa.com/etudiants/query?telephone=" . $numero_trie1[$i] . "&keyaccess=" .  $getAccessId1->access_id;                         
                         }
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
-                            let inputs = document.querySelectorAll('input');
-
                             $(document).ready(function () {
                                 $.ajax({
                                     type: "GET",
-                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=<?= session()->get('sigle') ?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
+                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=<?= session()->get('sigle') ?>&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie1[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d",
                                 });
-
-                                inputs.forEach(input => input.value = '');
                             });
                         </script>
                         <?php
                     }
-                    echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                    echo "<h2>En cours d'envoi ... Patientez</h2> !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                     echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
                     ?>
-                    <script>
-
+                    <script>  
                         setTimeout(() => {
                             window.location = "https://deblaa.com/universites/messages";
                         }, 5000);
@@ -209,7 +210,6 @@ class MessageController extends Controller
                     <?php
 
                     //return redirect(route('uListeMessage'))->with('success', "Message envoyé avec succès !");
-
 
                 }
             }
@@ -234,7 +234,7 @@ class MessageController extends Controller
 
                     session()->put('message_bonus', $universite->message_bonus);
 
-                    $message_universite = new MessageUNiversite;
+                    $message_universite = new MessageUniversite;
                     $message_universite->universite_id = session()->get('id');
                     $message_universite->titre = $request->titre;
                     $message_universite->contenu = $request->message;
@@ -320,20 +320,17 @@ class MessageController extends Controller
                         ?>
                         <script src="https://deblaa.com/mdb/js/jquery.min.js"></script>
                         <script>
-                            let inputs = document.querySelectorAll('input');
-
                             $(document).ready(function () {
                                 $.ajax({
                                     type: "GET",
-                                    url: "http://dashboard.smszedekaa.com:6005/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
+                                    url: "https://api.smszedekaa.com/api/v2/SendSMS?SenderId=Deblaa&Message=<?= $texte ?>&MobileNumbers=<?= $numero_trie2[$i] ?>&ApiKey=yAYu1Q7C9FKy/1dOOBSHvpcrTldsEHGHtM2NjcuF4iU=&ClientId=4460f3b0-3a6a-49f4-8cce-d5900b86723d"
                                 });
 
-                                inputs.forEach(input => input.value = '');
                             });
                         </script>
                         <?php
                     }
-                    echo "En cours d'envoi ... Patientez !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
+                    echo "<h2>En cours d'envoi ... Patientez</h2> !<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />";
                     echo "<div><center><img src='https://deblaa.com/assets/images/gif2.gif' width='150' /></center></div>"
                     ?>
                     <script>
@@ -344,6 +341,8 @@ class MessageController extends Controller
 
                     </script>
                     <?php
+
+                    //return redirect(route('uListeMessage'))->with('success', 'Message envoyé avec succès');
 
                 }
 

@@ -44,7 +44,11 @@
                         </td>
                         <td style="line-height: 15px;" class="pl-1 text-truncate">
                             <b class="font-weight-bold black-text">
-                                {{ $cible_message_universite->titre }}
+                                @if (strlen($cible_message_universite->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_universite->titre, 0, 10) . "..."}}
+                                @else
+                                    {{ $cible_message_universite->titre }}
+                                @endif
                             </b><br />
                             <small>{{ $cible_message_universite->created_at }}</small><br><br>
                             @foreach($universites as $universite)
@@ -74,7 +78,11 @@
                         </td>
                         <td style="line-height: 20px;" class="pl-1 text-truncate">
                             <b class="font-weight-bold black-text">
-                                {{ $cible_message_universite->titre }}
+                                @if (strlen($cible_message_universite->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_universite->titre, 0, 10) . "..."}}
+                                @else
+                                    {{ $cible_message_universite->titre }}
+                                @endif
                             </b><br />
                             <small>{{ $cible_message_universite->created_at }}</small><br><br>
                             @foreach($universites as $universite)

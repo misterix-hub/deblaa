@@ -69,62 +69,67 @@ class StructureController extends AppBaseController
 
        // $structure = $this->structureRepository->create($input);
 
-        $target_dir = "db/logos/structure/";
+        $structure = $this->structureRepository->create([
+            'nom' => $request->input('nom'),
+            'sigle' => $request->input('sigle'),
+            'telephone' => $request->input('telephone'),
+            'message_bonus' => 3,
+            'message_payer' => 0,
+            'email' => $request->input('email'),
+            'password' => bcrypt($password),
+            'site_web' => $request->input('site_web'),
+            'acces' => $request->input('acces'),
+            'pro' => 0
+        ]);
 
-        $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
+        if($_FILES["logo"]["name"] != '') {
 
-        $target_file = $target_dir . $file_name;
-        $fileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
+            $target_dir = "db/logos/structure/";
 
-        if($fileType != 'jpg' && $fileType != 'jpeg'  && $fileType != 'png'){
+            $file_name = time() . "_" . basename($_FILES["logo"]["name"]);
 
-            Flash::error('Le type n\'est pas pris en charge !');
-            return back();
+            $target_file = $target_dir . $file_name;
+            $fileType = strtolower(pathinfo(basename($_FILES["logo"]["name"]), PATHINFO_EXTENSION));
+            
+            if($fileType != 'jpg' && $fileType != 'jpeg'  && $fileType != 'png'){
 
-        } else {
+                Flash::error('Le type n\'est pas pris en charge !');
+                return back();
+    
+            } else {
+                $this->structureRepository->update([
+                    'logo' => $file_name
+                ]);
 
-            $structure = $this->structureRepository->create([
-                'nom' => $request->input('nom'),
-                'sigle' => $request->input('sigle'),
-                'logo' => $file_name,
-                'telephone' => $request->input('telephone'),
-                'message_bonus' => 3,
-                'email' => $request->input('email'),
-                'password' => bcrypt($password),
-                'site_web' => $request->input('site_web'),
-                'acces' => $request->input('acces'),
-                'pro' => 0
-            ]);
-
-
-
-            $to_name = "Deblaa";
-
-            $to_email = $request->input('email');
-            $data = array(
-                'nom' => $request->input('sigle'),
-                'email' => $request->input('email'),
-                'motDePasse' => $password
-            );
-
-            Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
-                $message->to($to_email)
-                        ->subject("Votre mot de passe de Deblaa");
-            });
-
-            Flash::success('Structure ajoutée avec succès.');
-
-            move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
-
-            /*$facture_structure = new FactureStructure;
-            $facture_structure->structure_id = $structure->id;
-            $facture_structure->montant = "0";
-            $facture_structure->date = now();
-            $facture_structure->save();*/
-
-            return redirect(route('structures.index'));
-
+                move_uploaded_file($_FILES["logo"]["tmp_name"], $target_file);
+            }
         }
+
+
+
+        $to_name = "Deblaa";
+
+        $to_email = $request->input('email');
+        $data = array(
+            'nom' => $request->input('sigle'),
+            'email' => $request->input('email'),
+            'motDePasse' => $password
+        );
+
+        Mail::send('mails.structure', $data, function ($message) use ($to_name, $to_email) {
+            $message->to($to_email)
+                    ->subject("Votre mot de passe de Deblaa");
+        });
+
+        Flash::success('Structure ajoutée avec succès.');
+
+        /*$facture_structure = new FactureStructure;
+        $facture_structure->structure_id = $structure->id;
+        $facture_structure->montant = "0";
+        $facture_structure->date = now();
+        $facture_structure->save();*/
+
+        return redirect(route('structures.index'));
 
     }
 
@@ -275,7 +280,10 @@ class StructureController extends AppBaseController
                 return redirect(route('structures.index'));
             }
 
+            $updateMesagePayer = $structure->message_bonus + $structure->message_payer;
+
             $accessPro = $this->structureRepository->update([
+                'message_payer' => $updateMesagePayer,
                 'message_bonus' => 0,
                 'pro' => 1
             ], $id);

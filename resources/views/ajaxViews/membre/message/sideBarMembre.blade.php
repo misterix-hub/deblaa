@@ -46,7 +46,11 @@
                     <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
 
                         <b class=" black-text">
-                            {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
+                            @if (strlen($cible_message_structure->titre) > 10)
+                                {{ \Illuminate\Support\Str::substr($cible_message_structure->titre, 0, 10) . " ..." }}
+                            @else
+                                {{ $cible_message_structure->titre }}
+                            @endif
                         </b><br />
                         <small>{{ $cible_message_structure->created_at }}</small><br><br>
                         @foreach($structures as $structure)
@@ -77,7 +81,11 @@
                         <td style="line-height: 15px;" class="pl-1 pt-1 text-truncate">
 
                             <b class="font-weight-bold black-text">
-                                {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
+                                @if (strlen($cible_message_structure->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_structure->titre, 0, 10) . " ..." }}
+                                @else
+                                    {{ $cible_message_structure->titre }}
+                                @endif
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small><br><br>
                             @foreach($structures as $structure)

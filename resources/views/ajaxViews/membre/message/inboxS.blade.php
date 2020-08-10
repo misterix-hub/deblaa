@@ -29,7 +29,7 @@
 </div>
 
 @forelse ($cible_message_structures as $cible_message_structure)
-    @if (in_array( $cible_message_structure->message_structure_id, $tab_id))
+    @if (in_array($cible_message_structure->message_structure_id, $tab_id))
 
         <div class="pt-2 pb-2 pr-2 pl-2 border-bottom">
             <table width="100%">
@@ -44,7 +44,11 @@
                     <td style="line-height: 15px;" class="pl-1 pt-1">
                         <a href="{{ route('mSDetailsMessage', $cible_message_structure->message_structure_id) }}">
                             <b class="black-text">
-                                {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
+                                @if (strlen($cible_message_structure->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_structure->titre, 0, 10) . " ..." }}
+                                @else
+                                    {{ $cible_message_structure->titre }}
+                                @endif
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small><br><br>
                             @foreach($structures as $structure)
@@ -77,7 +81,11 @@
                     <td style="line-height: 15px;" class="pl-1 pt-1">
                         <a href="{{ route('mSDetailsMessage', $cible_message_structure->message_structure_id) }}">
                             <b class="black-text font-weight-bold">
-                                {{ (strlen($cible_message_structure->titre) > 10) ? substr($cible_message_structure->titre, 0, 10) . " ..." : $cible_message_structure->titre . " ..." }}
+                            @if (strlen($cible_message_structure->titre) > 10)
+                                    {{ \Illuminate\Support\Str::substr($cible_message_structure->titre, 0, 10) . " ..." }}
+                                @else
+                                    {{ $cible_message_structure->titre . " ..." }}
+                                @endif
                             </b><br />
                             <small>{{ $cible_message_structure->created_at }}</small><br><br>
                             @foreach($structures as $structure)

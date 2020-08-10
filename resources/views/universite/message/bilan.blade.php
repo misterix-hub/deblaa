@@ -11,20 +11,26 @@
                         <div class="col-lg-12 col-md-12 col-sm-12">
 
                             @if ($message = Session::get('error'))
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             @endif
 
                             @if ($message = Session::get('success'))
-                                <div class="alert alert-success">
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                                     {{ $message }}
+                                    <button type="button" class="close" aria-label="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
                             @endif
                             <br />
                             <h6>
                                 <i class="icofont-listine-dots"></i>
-                                <b>Liste des membres</b>
+                                <b>Liste des messages</b>
                             </h6>
 
                             <table class="table table-bordered table-sm" style="width:100%">
@@ -32,7 +38,7 @@
                                     <tr>
                                         <th width="150">Date d'envoi</th>
                                         <th>Message</th>
-                                        <th>Dest.</th>
+                                        <th>Destinataires</th>
                                         <th width="60" class="text-center">Action</th>
                                     </tr>
                                 </thead>
@@ -40,12 +46,12 @@
                                     @forelse($bilan_messages as $bilan_message)
                                         <tr>
                                             <td>
-                                                <small>{{ $bilan_message->created_at }}</small>
+                                                <small>{{ $bilan_message->created_at }}</small>s
                                             </td>
                                             <td>{{ $bilan_message->titre }}</td>
                                             <td class="text-right">{{ $bilan_message->nb_destinataire }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('uDetailsMessage', $bilan_message->id) }}" class="btn btn-sm btn-outline-grey m-0 rounded z-depth-0 pl-2 pr-2">
+                                                <a href="{{ route('uDetailsMessage', [$bilan_message->message_universite_id, \Illuminate\Support\Str::slug($bilan_message->titre)]) }}" class="btn btn-sm btn-outline-grey m-0 rounded z-depth-0 pl-2 pr-2">
                                                     <i class="icofont-plus"></i>
                                                 </a>
                                             </td>
@@ -60,7 +66,7 @@
                                     <tr>
                                         <th>Date d'envoi</th>
                                         <th>Message</th>
-                                        <th>Dest.</th>
+                                        <th>Destinataires</th>
                                         <th width="60" class="text-center">Action</th>
                                     </tr>
                                 </tfoot>

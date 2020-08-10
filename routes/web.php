@@ -35,6 +35,9 @@ Route::get('/', function () {
 
 })->name('indexVisitors');
 Route::post('contact', 'ContactController@sendMessageByUser')->name('messageSendByUsers');
+Route::get('about', 'VisitorController@about')->name('visitors.about');
+Route::get('tarifications', 'VisitorController@tarification')->name('visitors.tarification');
+Route::get('contacts', 'VisitorController@contact')->name('visitors.contact');
 
 
 Auth::routes();
@@ -213,6 +216,7 @@ Route::get('universites/etudiants/{filiere}{slug}{niveau}/ajouter', 'Universite\
 Route::get('universites/etudiants/filiere-contact/{filiere}{slug}{niveau}', 'Universite\EtudiantController@listContactBySpinneret')->name('uListContactBySpinneret');
 Route::post('universites/etudiants/filiere-contact/insertion', 'Universite\EtudiantController@insertContact')->name('uInsertContact');
 Route::get('universites/etudiants/{id}/supprimer', 'Universite\EtudiantController@destroy')->name('uSupprimerEtudiant');
+Route::delete('universites/etudiants/{tel}{fil}/{niv}/suppression', 'Universite\EtudiantController@destroyBySpinneret')->name('uDeleteStudentBySpinneret');
 
 Route::get('universites/messages/creer', 'Universite\MessageController@create')->name('uEnvoyerMessage');
 Route::post('universite/message/envoyer', 'Universite\MessageController@envoyer')->name('uEnvoyerMessageForm');
@@ -232,7 +236,7 @@ Route::get('universites/register', 'Universite\MainController@register')->name('
 Route::post('universites/register', 'Universite\LoginController@registerProcessing')->name('uRegisterProcessing');
 Route::get('universites/register/success', 'Universite\LoginController@registerSuccess')->name('uRegisterSuccess');
 
-Route::get('logout', 'Universite\LoginController@logout')->name('logout');
+Route::get('deconnexion', 'Universite\LoginController@logout')->name('logout');
 
 Route::get('universites/demande', 'Universite\CompteController@comptePro')->name('uDemandeComptePro');
 Route::get('universites/{id}/{formule}/paiements', 'Universite\CompteController@modePaiement')->name('uModePaiement');
@@ -257,6 +261,7 @@ Route::post('structures/membres/departement-contact/insertion', 'Structure\Membr
 Route::post('structures/membres', 'Structure\MembreController@store')->name('sAjouterMembre');
 Route::get('structures/membres', 'Structure\MembreController@index')->name('sListeMembre');
 Route::delete('structures/membres/{id}/supprimer', 'Structure\MembreController@destroy')->name('sSupprimerMembre');
+Route::delete('structures/membres/{tel}/{dept}/suppresion', 'Structure\MembreController@destroyByDepartment')->name('sDeleteMemberByDepartment');
 
 Route::get('structures/messages/creer', 'Structure\MessageController@create')->name('sEnvoyerMessage');
 Route::post('structures/messages/envoyer', 'Structure\MessageController@envoyer')->name('sEnvoyerMessageForm');
@@ -298,7 +303,7 @@ Route::get('etudiants/message/{id}/details', 'Etudiant\MessageController@sDetail
 
 Route::get('etudiants/login', 'Etudiant\MainController@login')->name('eLogin');
 Route::post('etudiants/login/processing', 'Etudiant\LoginController@loginProcessing')->name('eLoginProcessing');
-Route::get('etudiants/logout', 'Etudiant\LoginController@logout')->name('eLogout');
+Route::get('etudiants/deconnexion', 'Etudiant\LoginController@logout')->name('eLogout');
 
 /* MEMBRE */
 
@@ -314,7 +319,7 @@ Route::get('membres/message/{id}/details', 'Membre\MessageController@sDetails')-
 
 Route::get('membres/login', 'Membre\MainController@login')->name('mLogin');
 Route::post('membres/login/processing', 'Membre\LoginController@loginProcessing')->name('mLoginProcessing');
-Route::get('membres/logout', 'Membre\LoginController@logout')->name('mLogout');
+Route::get('membres/deconnexion', 'Membre\LoginController@logout')->name('mLogout');
 
 /*RECHARGE DE COMPTE*/
 Route::post('recharge-compte/processing', 'TicketController@verifyCodeTicket')->name('codeTicketUser');

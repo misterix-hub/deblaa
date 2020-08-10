@@ -11,7 +11,7 @@
                     <li>{{ $error }}</li>
                     @endforeach
                     <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">x</span>
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </ul>
                 @endif
@@ -20,7 +20,7 @@
                     <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 @endif
@@ -29,7 +29,7 @@
                     <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
                         {{ $message }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                            <span aria-hidden="true">x</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                 @endif
@@ -188,15 +188,19 @@
                                             <i class="icofont-check grey-text"></i>
                                         @else
 
-                                            @foreach($message_lus as $message_lu)
-                                                @if($message_lu->telephone == $user->telephone)
-                                                    <i class="icofont-check green-text"></i>
-                                                    <i class="icofont-check green-text"></i>
-                                                @else
-                                                    <i class="icofont-check grey-text"></i>
-                                                    <i class="icofont-check grey-text"></i>
-                                                @endif
-                                            @endforeach
+                                            @if (count(DB::table('users')
+                                            ->join('message_lus', 'message_lus.user_id', '=', 'users.id')
+                                            ->join('message_structures', 'message_structures.id', '=', 'message_lus.message_structure_id')
+                                            ->where('message_structures.id', $id)
+                                            ->where('users.id', $user->id)
+                                            ->where('users.telephone', $user->telephone)
+                                            ->get()) == 1)
+                                                <i class="icofont-check green-text icofont-2x"></i>
+                                                <i class="icofont-check green-text icofont-2x"></i>
+                                            @else
+                                                <i class="icofont-check grey-text icofont-2x"></i>
+                                                <i class="icofont-check grey-text icofont-2x"></i>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

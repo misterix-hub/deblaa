@@ -17,6 +17,7 @@ class CreateTicketsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('categorie_ticket_id');
             $table->string('code', 30)->unique();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Role;
+use Flash;
 
 class RoleController extends Controller
 {
@@ -16,7 +17,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('roles.index');
+        return view('roles.index', compact('roles'));
     }
 
     /**
@@ -38,14 +39,14 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required'
+            'role' => 'required'
         ],
         [
-            'name.required' => 'Veuillez renseigner le nom de votre rôle'
+            'role.required' => 'Veuillez renseigner le nom de votre rôle'
         ]);
 
         Role::create([
-            'name' => $request->input('name')
+            'name' => $request->input('role')
         ]);
 
         Flash::success('Le rôle a été enregistré avec succès');
